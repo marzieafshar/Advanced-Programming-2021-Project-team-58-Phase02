@@ -14,7 +14,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         MonsterCard.addMonster();
 //        TrapAndSpellCard.addTrapAndSpell();
-        Parent root = FXMLLoader.load(getClass().getResource("Shop.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("WelcomeMenu.fxml"));
         primaryStage.setTitle("Shop");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

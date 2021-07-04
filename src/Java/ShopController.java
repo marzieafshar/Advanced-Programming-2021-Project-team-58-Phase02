@@ -8,6 +8,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -15,6 +18,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -59,6 +63,10 @@ public class ShopController implements Initializable {
     private Image image;
     private MyListener myListener;
     public Player player;
+    private Parent root;
+    private Stage stage;
+    private Scene scene;
+
 
     private ArrayList<Card> allCards = Card.getAllCards();
 
@@ -96,6 +104,7 @@ public class ShopController implements Initializable {
                     column = 0;
                     row++;
                 }
+//                anchorPane.setCursor();
                 grid.add(anchorPane, column++, row);
 
                 GridPane.setMargin(anchorPane, new Insets(10));
@@ -147,5 +156,12 @@ public class ShopController implements Initializable {
         if(Card.getCardByName(cardName) != null){
             setChosenCard(Card.getCardByName(cardName));
         }
+    }
+
+    public void backToMainMenu(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MainMenu.fxml")));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
     }
 }
