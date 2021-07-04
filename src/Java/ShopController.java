@@ -141,4 +141,11 @@ public class ShopController implements Initializable {
 //        alert.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("Images/Bitron.jpg"))));
         alert.showAndWait();
     }
+
+    public void search (ActionEvent e){
+        String cardName = searchBox.getText();
+        if(Card.getCardByName(cardName) != null){
+            setChosenCard(Card.getCardByName(cardName));
+        }
+    }
 }

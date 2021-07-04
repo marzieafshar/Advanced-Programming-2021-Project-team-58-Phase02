@@ -155,17 +155,17 @@ public class MonsterCard extends Card {
                         "your hand.", Attribute.LIGHT, 2050, 2500, 7900,"Images/SkullGuardian.jpg"));
         allMonsterCards.add(new MonsterCard("Slot Machine", "Normal", "Machine", 7,
                 "The machine's ability is said to vary according to its slot results.",
-                Attribute.DARK, 2000, 2300, 7500,"Images/ARA.jpg"));
+                Attribute.DARK, 2000, 2300, 7500,"Images/SlotMachine.jpg"));
         allMonsterCards.add(new MonsterCard("Haniwa", "Normal", "Rock", 2,
                 "An earthen figure that protects the tomb of an ancient ruler.",
-                Attribute.EARTH, 500, 500, 600,"Images/ARA.jpg"));
+                Attribute.EARTH, 500, 500, 600,"Images/Haniwa.jpg"));
         allMonsterCards.add(new MonsterCard("Man-Eater Bug", "Effect", "Insect", 2,
                 "FLIP: Target 1 monster on the field; destroy that target.",
-                Attribute.EARTH, 450, 600, 600,"Images/ARA.jpg"));
+                Attribute.EARTH, 450, 600, 600,"Images/ManEaterBug.jpg"));
         allMonsterCards.add(new MonsterCard("Gate Guardian", "Effect", "Warrior", 11,
                 "Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by " +
                         "Tributing 1 \"Sanga of the Thunder\", \"Kazejin\", and \"Suijin\".",
-                Attribute.DARK, 3750, 3400, 20000,"Images/ARA.jpg"));
+                Attribute.DARK, 3750, 3400, 20000,"Images/GateGuardian.jpg"));
         allMonsterCards.add(new MonsterCard("Scanner", "Effect", "Machine", 1,
                 "Once per turn, you can select 1 of your opponent's monsters that is removed from play. Until " +
                         "the End Phase, this card's name is treated as the selected monster's name, and this card has " +
@@ -178,63 +178,63 @@ public class MonsterCard extends Card {
         allMonsterCards.add(new MonsterCard("Marshmallon", "Effect", "Fairy", 3,
                 "Cannot be destroyed by battle. After damage calculation, if this card was attacked, and was " +
                         "face-down at the start of the Damage Step: The attacking player takes 1000 damage.",
-                Attribute.LIGHT, 300, 500, 700,"Images/ARA.jpg"));
+                Attribute.LIGHT, 300, 500, 700,"Images/Marshmallon.jpg"));
         allMonsterCards.add(new MonsterCard("Beast King Barbaros", "Effect", "Beast-Warrior", 8,
                 "You can Normal Summon/Set this card without Tributing, but its original ATK becomes 1900. You" +
                         " can Tribute 3 monsters to Tribute Summon (but not Set) this card. If Summoned this way: " +
                         "Destroy all cards your opponent controls.",
-                Attribute.EARTH, 3000, 1200, 9200,"Images/ARA.jpg"));
+                Attribute.EARTH, 3000, 1200, 9200,"Images/BeastKingBarbaros.jpg"));
         allMonsterCards.add(new MonsterCard("Texchanger", "Effect", "Cyberse", 1,
                 "Once per turn, when your monster is targeted for an attack: You can negate that attack, then " +
                         "Special Summon 1 Cyberse Normal Monster from your hand, Deck, or GY.",
-                Attribute.DARK, 100, 100, 200,"Images/ARA.jpg"));
+                Attribute.DARK, 100, 100, 200,"Images/Texchanger.jpg"));
         allMonsterCards.add(new MonsterCard("Leotron", "Normal", "Cyberse", 4,
                 "A territorial electronic monster that guards its own domain.",
-                Attribute.EARTH, 2000, 0, 2500,"Images/ARA.jpg"));
+                Attribute.EARTH, 2000, 0, 2500,"Images/Leotron.jpg"));
         allMonsterCards.add(new MonsterCard("The Calculator", "Effect", "Thunder", 2,
                 "The ATK of this card is the combined Levels of all face-up monsters you control x 300.",
-                Attribute.LIGHT, 0, 0, 8000,"Images/ARA.jpg"));
+                Attribute.LIGHT, 0, 0, 8000,"Images/TheCalculator.jpg"));
         allMonsterCards.add(new MonsterCard("Alexandrite Dragon", "Normal", "Dragon", 4,
                 "Many of the czars' lost jewels can be found in the scales of this priceless dragon. Its " +
                         "creator remains a mystery, along with how they acquired the imperial treasures. But whosoever " +
                         "finds this dragon has hit the jackpot... whether they know it or not.",
-                Attribute.LIGHT, 2000, 100, 2600,"Images/ARA.jpg"));
+                Attribute.LIGHT, 2000, 100, 2600,"Images/AlexandriteDragon.jpg"));
         allMonsterCards.add(new MonsterCard("Mirage Dragon", "Effect", "Dragon", 4,
                 "Your opponent cannot activate Trap Cards during the Battle Phase.",
-                Attribute.LIGHT, 1600, 600, 2500,"Images/ARA.jpg"));
+                Attribute.LIGHT, 1600, 600, 2500,"Images/MirageDragon.jpg"));
         allMonsterCards.add(new MonsterCard("Herald of Creation", "Effect", "Spellcaster", 4,
                 "Once per turn: You can discard 1 card, then target 1 Level 7 or higher monster in your " +
                         "Graveyard; add that target to your hand.",
-                Attribute.LIGHT, 1800, 600, 2700,"Images/ARA.jpg"));
+                Attribute.LIGHT, 1800, 600, 2700,"Images/HeraldOfCreation.jpg"));
         allMonsterCards.add(new MonsterCard("Exploder Dragon", "Effect", "Dragon", 3,
                 "If this card is destroyed by battle and sent to the Graveyard: Destroy the monster that " +
                         "destroyed it. Neither player takes any battle damage from attacks involving this attacking card.",
-                Attribute.EARTH, 1000, 0, 1000,"Images/ARA.jpg"));
+                Attribute.EARTH, 1000, 0, 1000,"Images/ExploderDragon.jpg"));
         allMonsterCards.add(new MonsterCard("Warrior Dai Grepher", "Normal", "Warrior", 4,
                 "The warrior who can manipulate dragons. Nobody knows his mysterious past.",
-                Attribute.EARTH, 1700, 1600, 3400,"Images/ARA.jpg"));
+                Attribute.EARTH, 1700, 1600, 3400,"Images/WarriorDaiGrepher.jpg"));
         allMonsterCards.add(new MonsterCard("Dark Blade", "Normal", "Warrior", 4,
                 "They say he is a dragon-manipulating warrior from the dark world. His attack is tremendous, " +
                         "using his great swords with vicious power.",
-                Attribute.DARK, 1800, 1500, 3500,"Images/ARA.jpg"));
+                Attribute.DARK, 1800, 1500, 3500,"Images/DarkBlade.jpg"));
         allMonsterCards.add(new MonsterCard("Wattaildragon", "Normal", "Dragon", 6,
                 "\"Capable of indefinite flight. Attacks by wrapping its body with electricity and ramming into opponents.\n" +
                         "IMPORTANT: Capturing the \"\"Wattaildragon\"\" is forbidden by the Ancient Rules and is a Level 6 " +
                         "offense, the minimum sentence for which is imprisonment for no less than 2500 heliocycles.\"",
-                Attribute.LIGHT, 2500, 1000, 5800,"Images/ARA.jpg"));
+                Attribute.LIGHT, 2500, 1000, 5800,"Images/Wattaildragon.jpg"));
         allMonsterCards.add(new MonsterCard("Terratiger, the Empowered Warrior", "Effect", "Warrior", 4,
                 "When this card is Normal Summoned: You can Special Summon 1 Level 4 or lower Normal Monster " +
-                        "from your hand in Defense Position.", Attribute.EARTH, 1800, 1200, 3200,"Images/ARA.jpg"));
+                        "from your hand in Defense Position.", Attribute.EARTH, 1800, 1200, 3200,"Images/Terratiger.jpg"));
         allMonsterCards.add(new MonsterCard("The Tricky", "Effect", "Spellcaster", 5,
                 "You can Special Summon this card (from your hand) by discarding 1 card.",
-                Attribute.WIND, 2000, 1200, 4300,"Images/ARA.jpg"));
+                Attribute.WIND, 2000, 1200, 4300,"Images/TheTricky.jpg"));
         allMonsterCards.add(new MonsterCard("Spiral Serpent", "Normal", "Sea Serpent", 8,
                 "When huge whirlpools lay cities asunder, it is the hunger of this sea serpent at work. No one" +
                         " has ever escaped its dreaded Spiral Wave to accurately describe the terror they experienced.",
-                Attribute.WATER, 2900, 2900, 11700,"Images/ARA.jpg"));
+                Attribute.WATER, 2900, 2900, 11700,"Images/SpiralSerpent.jpg"));
         allMonsterCards.add(new MonsterCard("Command Knight", "Effect", "Warrior", 4,
                 "All Warrior-Type monsters you control gain 400 ATK. If you control another monster, monsters " +
                         "your opponent controls cannot target this card for an attack.",
-                Attribute.FIRE, 1000, 1000, 2100,"Images/ARA.jpg"));
+                Attribute.FIRE, 1000, 1000, 2100,"Images/CommandKnight.jpg"));
     }
 }
