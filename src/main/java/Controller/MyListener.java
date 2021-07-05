@@ -2,6 +2,8 @@ package Controller;
 
 import Model.Card;
 
+import java.util.Objects;
+
 public interface MyListener {
-    public void onClickListener(Card card);
+    public void onClickListener(Object object);
 }

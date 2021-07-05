@@ -1,10 +1,15 @@
 package Controller;
 
+import Model.Card;
+import Model.Deck;
 import Model.Player;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.event.*;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.*;
 
 import java.util.*;
@@ -15,6 +20,7 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 
 public class Controller {
+    public ImageView testImageView;
     private Parent root;
     private Stage stage;
     private Scene scene;
@@ -183,6 +189,49 @@ public class Controller {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+    }
+
+    public void goToDeckMenu(ActionEvent event) throws IOException {
+        Deck deck1 = new Deck("first");
+        Deck deck2 = new Deck("second");
+        Deck deck3 = new Deck("third");
+
+        deck1.addCardToMainDeck(Card.getCardByName("Silver Fang"));
+        deck1.addCardToMainDeck(Card.getCardByName("Silver Fang"));
+        deck1.addCardToMainDeck(Card.getCardByName("Silver Fang"));
+        deck1.addCardToMainDeck(Card.getCardByName("Suijin"));
+        deck1.addCardToMainDeck(Card.getCardByName("Suijin"));
+        deck1.addCardToMainDeck(Card.getCardByName("Wattkid"));
+        deck1.addCardToMainDeck(Card.getCardByName("Wattkid"));
+
+        deck2.addCardToMainDeck(Card.getCardByName("Battle OX"));
+        deck2.addCardToMainDeck(Card.getCardByName("Battle OX"));
+        deck2.addCardToMainDeck(Card.getCardByName("Battle OX"));
+        deck2.addCardToMainDeck(Card.getCardByName("Suijin"));
+        deck2.addCardToMainDeck(Card.getCardByName("Axe Raider"));
+        deck2.addCardToMainDeck(Card.getCardByName("Bitron"));
+        deck2.addCardToMainDeck(Card.getCardByName("Wattkid"));
+
+        deck3.addCardToMainDeck(Card.getCardByName("Silver Fang"));
+        deck3.addCardToMainDeck(Card.getCardByName("Yomi Ship"));
+        deck3.addCardToMainDeck(Card.getCardByName("Silver Fang"));
+        deck3.addCardToMainDeck(Card.getCardByName("Fireyarou"));
+        deck3.addCardToMainDeck(Card.getCardByName("Suijin"));
+        deck3.addCardToMainDeck(Card.getCardByName("Command Knight"));
+        deck3.addCardToMainDeck(Card.getCardByName("Wattkid"));
+
+        getLoggedInPlayer().getDecks().add(deck1);
+        getLoggedInPlayer().getDecks().add(deck2);
+        getLoggedInPlayer().getDecks().add(deck3);
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/DeckMenu.fxml")));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+    }
+
+    public void show(MouseEvent event){
+        Image image = new Image(getClass().getResourceAsStream(Card.getCardByName("Silver Fang").getImageSrc()));
+        testImageView.setImage(image);
     }
 
 }

@@ -15,6 +15,7 @@ public abstract class Card implements Comparable<Card> {
         setCardDescription(cardDescription);
         setPrice(price);
         setImageSrc(imageSrc);
+        allCards.add(this);
     }
 
     private void setImageSrc(String imageSrc) {

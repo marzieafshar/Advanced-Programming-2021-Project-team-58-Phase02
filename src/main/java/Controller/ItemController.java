@@ -6,6 +6,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
+import java.util.Objects;
+
 public class ItemController {
     @FXML
     private ImageView cardPicture;
@@ -19,7 +21,7 @@ public class ItemController {
     public void setItem(Card card,MyListener myListener) {
         this.card = card;
         this.myListener = myListener;
-        Image image = new Image((getClass().getResource(card.getImageSrc())).toExternalForm());
+        Image image = new Image(getClass().getResourceAsStream(card.getImageSrc()));
         cardPicture.setImage(image);
     }
 

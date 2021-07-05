@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DeckMenuController">
    <children>
       <BorderPane prefHeight="426.0" prefWidth="768.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <bottom>
@@ -34,14 +34,21 @@
                <children>
                   <AnchorPane prefHeight="394.0" prefWidth="513.0">
                      <children>
-                        <GridPane fx:id="grid" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="0.0" prefWidth="3.0">
+                        <GridPane fx:id="gridDeckCards" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="0.0" prefWidth="3.0">
                            <rowConstraints>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" />
                            </rowConstraints>
                         </GridPane>
                      </children>
                   </AnchorPane>
-                  <ScrollPane prefHeight="394.0" prefWidth="50.0" />
+                  <ScrollPane prefHeight="394.0" prefWidth="81.0">
+                     <content>
+                        <GridPane fx:id="gridDecks" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="0.0" prefWidth="3.0">
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                           </rowConstraints>
+                        </GridPane>
+                     </content></ScrollPane>
                </children>
             </HBox>
          </center>
@@ -52,7 +59,7 @@
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
                            <image>
-                              <Image url="@Images/Icon/pngfind.com-back-arrow-png-1999892.png" />
+                              <Image url="@../../../../../testShop/src/main/resources/Images/Icon/pngfind.com-back-arrow-png-1999892.png" />
                            </image>
                         </ImageView>
                         <Label alignment="CENTER" prefHeight="48.0" prefWidth="156.0" text="Deck Menu" textAlignment="CENTER">
@@ -69,7 +76,7 @@
                         <HBox prefHeight="11.0" prefWidth="250.0" />
                         <ImageView fx:id="selectedCardImage" fitHeight="244.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
                            <image>
-                              <Image url="@Bitron.jpg" />
+                              <Image url="@../../../../../testShop/src/main/resources/Images/Bitron.jpg" />
                            </image>
                            <VBox.margin>
                               <Insets />

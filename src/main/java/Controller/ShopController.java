@@ -76,8 +76,8 @@ public class ShopController implements Initializable {
             setChosenCard(Card.getAllCards().get(0));
             myListener = new MyListener() {
                 @Override
-                public void onClickListener(Card card) {
-                    setChosenCard(card);
+                public void onClickListener(Object object) {
+                    setChosenCard((Card) object);
                 }
             };
             grid.setMinHeight(Region.USE_COMPUTED_SIZE);
@@ -89,6 +89,7 @@ public class ShopController implements Initializable {
             grid.setMaxWidth(Region.USE_PREF_SIZE);
             int column = 0;
             int row = 1;
+            System.out.println(Card.getAllCards());
             for (int i = 0; i < Card.getAllCards().size(); i++) {
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader();
@@ -115,7 +116,7 @@ public class ShopController implements Initializable {
     public void setChosenCard(Card card) {
         selectedCardName.setText(card.getCardName());
         selectedCardPrice.setText(String.valueOf(card.getPrice()));
-        image = new Image(getClass().getResourceAsStream(Objects.requireNonNull(card.getImageSrc())));
+        image = new Image(getClass().getResourceAsStream(card.getImageSrc()));
         selectedCardImage.setImage(image);
     }
 
