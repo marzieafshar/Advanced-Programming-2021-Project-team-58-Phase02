@@ -9,13 +9,14 @@ public abstract class Card implements Comparable<Card> {
     private int price;
     protected static ArrayList<Card> allCards = new ArrayList<Card>();
     private String imageSrc;
+    private String folder = "/Images/";
 
     public Card(String cardName, String cardDescription, int price, String imageSrc) {
         setCardName(cardName);
         setCardDescription(cardDescription);
         setPrice(price);
-        setImageSrc(imageSrc);
-        allCards.add(this);
+
+        setImageSrc(folder + imageSrc);
     }
 
     private void setImageSrc(String imageSrc) {

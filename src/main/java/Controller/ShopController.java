@@ -70,6 +70,7 @@ public class ShopController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        System.out.println(Card.getAllCards().size());
         if (Card.getAllCards().size() > 0) {
             player = new Player("Marzie", "Marzie", "Marzie");
             setPlayerMoney();
@@ -121,7 +122,7 @@ public class ShopController implements Initializable {
     }
 
     public void setPlayerMoney() {
-
+        playerMoney.setText(String.valueOf(player.getMoney()));
     }
 
     public void buyCard(ActionEvent actionEvent) {
