@@ -23,4 +23,5 @@
 }
 .welcome-menu-background{
     -fx-background-image: url("testssd.jpg");
+    -fx-background-size: stretch;
 }
