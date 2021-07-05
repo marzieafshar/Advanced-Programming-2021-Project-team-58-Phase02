@@ -16,7 +16,7 @@ public class MonsterCard extends Card {
 
     public MonsterCard(String cardName, String cardTypeOfMonsters, String monsterType, int cardLevel,
                        String description, Attribute cardAttribute, int attack, int defense, int price, String imgSrc) {
-        super(cardName, description, price, imgSrc);
+        super(cardName, description, price, "Monster/" + imgSrc);
         allCards.add(this);
         setMonsterType(monsterType);
         setCardLevel(cardLevel);

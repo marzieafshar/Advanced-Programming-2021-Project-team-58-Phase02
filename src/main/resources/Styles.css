@@ -18,3 +18,9 @@
 .top-bar {
     -fx-background-color: burlywood;
 }
+.deckmenu-background{
+    -fx-background-color: #DEB887;
+}
+.welcome-menu-background{
+    -fx-background-image: url("testssd.jpg");
+}

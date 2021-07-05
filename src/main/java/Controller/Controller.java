@@ -195,30 +195,30 @@ public class Controller {
         Deck deck1 = new Deck("first");
         Deck deck2 = new Deck("second");
         Deck deck3 = new Deck("third");
-
-        deck1.addCardToMainDeck(Card.getCardByName("Silver Fang"));
-        deck1.addCardToMainDeck(Card.getCardByName("Silver Fang"));
-        deck1.addCardToMainDeck(Card.getCardByName("Silver Fang"));
-        deck1.addCardToMainDeck(Card.getCardByName("Suijin"));
-        deck1.addCardToMainDeck(Card.getCardByName("Suijin"));
-        deck1.addCardToMainDeck(Card.getCardByName("Wattkid"));
-        deck1.addCardToMainDeck(Card.getCardByName("Wattkid"));
-
-        deck2.addCardToMainDeck(Card.getCardByName("Battle OX"));
-        deck2.addCardToMainDeck(Card.getCardByName("Battle OX"));
-        deck2.addCardToMainDeck(Card.getCardByName("Battle OX"));
+        for (int i = 0; i < 7; i++) {
+            deck1.addCardToMainDeck(Card.getCardByName("Trap Hole"));
+            deck1.addCardToMainDeck(Card.getCardByName("Trap Hole"));
+            deck1.addCardToMainDeck(Card.getCardByName("Silver Fang"));
+            deck1.addCardToMainDeck(Card.getCardByName("Suijin"));
+            deck1.addCardToMainDeck(Card.getCardByName("Suijin"));
+            deck1.addCardToMainDeck(Card.getCardByName("Raigeki"));
+            deck1.addCardToMainDeck(Card.getCardByName("Wattkid"));
+        }
+        deck2.addCardToMainDeck(Card.getCardByName("Raigeki"));
+        deck2.addCardToMainDeck(Card.getCardByName("Raigeki"));
+        deck2.addCardToMainDeck(Card.getCardByName("Raigeki"));
         deck2.addCardToMainDeck(Card.getCardByName("Suijin"));
         deck2.addCardToMainDeck(Card.getCardByName("Axe Raider"));
         deck2.addCardToMainDeck(Card.getCardByName("Bitron"));
-        deck2.addCardToMainDeck(Card.getCardByName("Wattkid"));
+        deck2.addCardToMainDeck(Card.getCardByName("Dark Hole"));
 
         deck3.addCardToMainDeck(Card.getCardByName("Silver Fang"));
         deck3.addCardToMainDeck(Card.getCardByName("Yomi Ship"));
-        deck3.addCardToMainDeck(Card.getCardByName("Silver Fang"));
+        deck3.addCardToMainDeck(Card.getCardByName("Dark Hole"));
         deck3.addCardToMainDeck(Card.getCardByName("Fireyarou"));
         deck3.addCardToMainDeck(Card.getCardByName("Suijin"));
         deck3.addCardToMainDeck(Card.getCardByName("Command Knight"));
-        deck3.addCardToMainDeck(Card.getCardByName("Wattkid"));
+        deck3.addCardToMainDeck(Card.getCardByName("Dark Hole"));
 
         getLoggedInPlayer().getDecks().add(deck1);
         getLoggedInPlayer().getDecks().add(deck2);
@@ -227,11 +227,6 @@ public class Controller {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
-    }
-
-    public void show(MouseEvent event){
-        Image image = new Image(getClass().getResourceAsStream(Card.getCardByName("Silver Fang").getImageSrc()));
-        testImageView.setImage(image);
     }
 
 }

@@ -60,7 +60,7 @@ public class ShopController implements Initializable {
 
     private Image image;
     private MyListener myListener;
-    public Player player;
+    public Player player = Controller.getLoggedInPlayer();
     private Parent root;
     private Stage stage;
     private Scene scene;
@@ -72,7 +72,6 @@ public class ShopController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println(Card.getAllCards().size());
         if (Card.getAllCards().size() > 0) {
-            player = new Player("Marzie", "Marzie", "Marzie");
             setPlayerMoney();
             setChosenCard(Card.getAllCards().get(0));
             myListener = new MyListener() {

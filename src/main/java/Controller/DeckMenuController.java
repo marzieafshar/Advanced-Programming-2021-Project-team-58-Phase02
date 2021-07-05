@@ -27,6 +27,7 @@ public class DeckMenuController implements Initializable {
     public GridPane gridDecks;
     public GridPane gridDeckCards;
     public ImageView selectedCardImage;
+    public GridPane gridPlayerCards;
     private MyListener myListener;
     private Player logInPlayer;
 
@@ -36,6 +37,33 @@ public class DeckMenuController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.logInPlayer = Controller.getLoggedInPlayer();
+        if(logInPlayer.getAllCards().size() > 0){
+            MyListener listenerAllCards = new MyListener() {
+                @Override
+                public void onClickListener(Object object) {
+                    setSelectedCardImage((Card) object);
+                }
+            };
+            int column = 0;
+            for (int i = 0; i < logInPlayer.getAllCards().size(); i++) {
+                try {
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    fxmlLoader.setLocation(getClass().getResource("/deckItems.fxml"));
+                    AnchorPane anchorPane = fxmlLoader.load();
+
+                    DeckCardsController deckCardsController = fxmlLoader.getController();
+                    deckCardsController.setCard(logInPlayer.getAllCards().get(i),listenerAllCards);
+
+                    gridPlayerCards.add(anchorPane , column , 1);
+                    column++;
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+
+
+        }
         if(logInPlayer.getDecks().size() > 0) {
             myListener = new MyListener() {
                 @Override
@@ -48,6 +76,7 @@ public class DeckMenuController implements Initializable {
 
             for (int i = 0; i < logInPlayer.getDecks().size(); i++) {
                 try {
+                    System.out.println(logInPlayer.getDecks().get(i).getMainDeck().size());
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     fxmlLoader.setLocation(getClass().getResource("/deckIcons.fxml"));
                     AnchorPane anchorPane = fxmlLoader.load();
