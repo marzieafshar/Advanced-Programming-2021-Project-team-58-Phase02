@@ -37,6 +37,7 @@ public class DeckMenuController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.logInPlayer = Controller.getLoggedInPlayer();
+
         if(logInPlayer.getAllCards().size() > 0){
             MyListener listenerAllCards = new MyListener() {
                 @Override
@@ -73,10 +74,8 @@ public class DeckMenuController implements Initializable {
             };
             int row = 1;
 
-
             for (int i = 0; i < logInPlayer.getDecks().size(); i++) {
                 try {
-                    System.out.println(logInPlayer.getDecks().get(i).getMainDeck().size());
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     fxmlLoader.setLocation(getClass().getResource("/deckIcons.fxml"));
                     AnchorPane anchorPane = fxmlLoader.load();
@@ -98,31 +97,36 @@ public class DeckMenuController implements Initializable {
         this.selectedDeck = selectedDeck;
         int row = 1;
         int column = 0;
-        for (int i = 0; i < selectedDeck.getMainDeckSize(); i++) {
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/deckItems.fxml"));
-                AnchorPane anchorPane = fxmlLoader.load();
+        if(selectedDeck.getMainDeckSize() > 0) {
+            for (int i = 0; i < selectedDeck.getMainDeckSize(); i++) {
+                try {
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    fxmlLoader.setLocation(getClass().getResource("/deckItems.fxml"));
+                    AnchorPane anchorPane = fxmlLoader.load();
 
-                DeckCardsController deckCardsController = fxmlLoader.getController();
-                MyListener myListenerSelectedCard = new MyListener() {
-                    @Override
-                    public void onClickListener(Object object) {
-                        setSelectedCardImage((Card) object);
-                    }
-                };
-                deckCardsController.setCard(selectedDeck.getMainDeck().get(i), myListenerSelectedCard);
+                    DeckCardsController deckCardsController = fxmlLoader.getController();
+                    MyListener myListenerSelectedCard = new MyListener() {
+                        @Override
+                        public void onClickListener(Object object) {
+                            setSelectedCardImage((Card) object);
+                        }
+                    };
+                    deckCardsController.setCard(selectedDeck.getMainDeck().get(i), myListenerSelectedCard);
 //                anchorPane.setCursor();
-                if(column == 12){
-                    column = 0;
-                    row++;
-                }
-                gridDeckCards.add(anchorPane, column++, row);
+                    if (column == 12) {
+                        column = 0;
+                        row++;
+                    }
+                    gridDeckCards.add(anchorPane, column++, row);
 
-                GridPane.setMargin(anchorPane, new Insets(5));
-            } catch (IOException e) {
-                e.printStackTrace();
+                    GridPane.setMargin(anchorPane, new Insets(5));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
+        }
+        else{
+            gridDeckCards.getChildren().clear();
         }
     }
 
@@ -164,6 +168,21 @@ public class DeckMenuController implements Initializable {
         selectedCardImage.setImage(image);
         setSelectedCard(card);
 
+    }
+
+    public void createNewDeck(MouseEvent event){
+        try {
+            Stage thisStage = (Stage) selectedCardImage.getScene().getWindow();
+                CreateDeckController.setDeckMenuStage(thisStage);
+            Parent root = FXMLLoader.load(getClass().getResource("/PopupCreateDeck.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

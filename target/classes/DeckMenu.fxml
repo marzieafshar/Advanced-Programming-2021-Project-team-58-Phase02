@@ -53,7 +53,7 @@
                               </GridPane>
                            </content>
                         </ScrollPane>
-                        <ImageView fitHeight="64.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="64.0" fitWidth="67.0" onMousePressed="#createNewDeck" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@Images/icon/fdssdf.png" />
                            </image>
