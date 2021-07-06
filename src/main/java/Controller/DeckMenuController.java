@@ -51,11 +51,11 @@ public class DeckMenuController implements Initializable {
             for (int i = 0; i < logInPlayer.getAllCards().size(); i++) {
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader();
-                    fxmlLoader.setLocation(getClass().getResource("/deckItems.fxml"));
+                    fxmlLoader.setLocation(getClass().getResource("/PlayerCards.fxml"));
                     AnchorPane anchorPane = fxmlLoader.load();
 
-                    DeckCardsController deckCardsController = fxmlLoader.getController();
-                    deckCardsController.setCard(logInPlayer.getAllCards().get(i),listenerAllCards);
+                    PlayerCardsController playerCardsController = fxmlLoader.getController();
+                    playerCardsController.setCard(logInPlayer.getAllCards().get(i),listenerAllCards);
 
                     gridPlayerCards.add(anchorPane , column , 1);
                     column++;

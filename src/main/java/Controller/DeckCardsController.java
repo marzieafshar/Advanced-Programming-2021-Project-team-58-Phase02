@@ -20,10 +20,7 @@ public class DeckCardsController {
 
     @FXML
     public void handleDragDetection(MouseEvent event) {
-        Dragboard db = source.startDragAndDrop(TransferMode.ANY);
-        ClipboardContent cb = new ClipboardContent();
-        cb.putString(card.getCardName());
-        db.setContent(cb);
+
     }
 
     public void setCard(Card card , MyListener myListener){

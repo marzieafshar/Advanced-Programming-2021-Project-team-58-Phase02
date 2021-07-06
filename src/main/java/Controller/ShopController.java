@@ -70,7 +70,6 @@ public class ShopController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println(Card.getAllCards().size());
         if (Card.getAllCards().size() > 0) {
             setPlayerMoney();
             setChosenCard(Card.getAllCards().get(0));
@@ -89,7 +88,6 @@ public class ShopController implements Initializable {
             grid.setMaxWidth(Region.USE_PREF_SIZE);
             int column = 0;
             int row = 1;
-            System.out.println(Card.getAllCards());
             for (int i = 0; i < Card.getAllCards().size(); i++) {
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader();
