@@ -35,6 +35,15 @@
                <children>
                   <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onDragDropped="#handleCardDropDeckCards" onDragOver="#handleDragOverDeckCards" prefHeight="394.0" prefWidth="513.0" styleClass="deckmenu-background" stylesheets="@Styles.css" HBox.hgrow="ALWAYS">
                      <children>
+                        <HBox alignment="CENTER" layoutY="362.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="42.0" prefWidth="477.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#activateDeck" prefHeight="34.0" prefWidth="129.0" styleClass="search-button" stylesheets="@Styles.css" text="Activate Deck">
+                                 <font>
+                                    <Font name="Century Gothic Bold" size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
                         <GridPane fx:id="gridDeckCards" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="0.0" prefWidth="3.0">
                            <rowConstraints>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" />

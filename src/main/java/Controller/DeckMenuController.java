@@ -236,4 +236,11 @@ public class DeckMenuController implements Initializable {
         showDeckCards(selectedDeck);
     }
 
+    public void activateDeck(ActionEvent event){
+        logInPlayer.setActiveDeck(selectedDeck);
+        addDecksToMenu();
+    }
+
+
+
 }
