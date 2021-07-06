@@ -1,18 +1,29 @@
 package Controller;
 
 import Model.Card;
+import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.*;
+import javafx.scene.layout.AnchorPane;
 
 public class DeckCardsController {
 
     public ImageView cardImage;
+    public AnchorPane source;
     private MyListener myListener;
     private Card card;
 
     public void click(MouseEvent mouseEvent) {
         myListener.onClickListener(card);
+    }
+
+    @FXML
+    public void handleDragDetection(MouseEvent event) {
+        Dragboard db = source.startDragAndDrop(TransferMode.ANY);
+        ClipboardContent cb = new ClipboardContent();
+        cb.putString(card.getCardName());
+        db.setContent(cb);
     }
 
     public void setCard(Card card , MyListener myListener){

@@ -11,7 +11,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -72,6 +74,11 @@ public class DeckMenuController implements Initializable {
 
     public void setSelectedDeck(Deck selectedDeck) {
         this.selectedDeck = selectedDeck;
+        showDeckCards(selectedDeck);
+    }
+
+    public void showDeckCards(Deck selectedDeck){
+        gridDeckCards.getChildren().clear();
         int row = 1;
         int column = 0;
         if(selectedDeck.getMainDeckSize() > 0) {
@@ -188,5 +195,20 @@ public class DeckMenuController implements Initializable {
             }
         }
     }
+
+    public void handleDragOver(DragEvent event){
+        if(event.getDragboard().hasString()){
+            event.acceptTransferModes(TransferMode.ANY);
+        }
+    }
+
+    public void handleTextDrop(DragEvent event){
+        String cardName = event.getDragboard().getString();
+        if(selectedDeck != null){
+            selectedDeck.addCardToMainDeck(Card.getCardByName(cardName));
+            showDeckCards(selectedDeck);
+        }
+    }
+
 
 }
