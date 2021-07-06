@@ -7,26 +7,46 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 
+import java.util.ArrayList;
+
 public class DeckCardsController {
 
+    private static AnchorPane selected;
     public ImageView cardImage;
     public AnchorPane source;
     private MyListener myListener;
     private Card card;
+    private int index;
 
+    @FXML
     public void click(MouseEvent mouseEvent) {
         myListener.onClickListener(card);
     }
 
-    @FXML
-    public void handleDragDetection(MouseEvent event) {
-
+    public static AnchorPane getSelected() {
+        return selected;
     }
 
-    public void setCard(Card card , MyListener myListener){
+    public int getIndex() {
+        return index;
+    }
+
+    @FXML
+    public void handleDragDetectionDeckCards(MouseEvent event) {
+        selected = (AnchorPane) event.getSource();
+        Dragboard db = source.startDragAndDrop(TransferMode.ANY);
+        ClipboardContent cb = new ClipboardContent();
+        cb.putString( "Deck" + index);
+        db.setContent(cb);
+    }
+
+    public void setCard(Card card , MyListener myListener , int index){
         this.card = card;
+        this.index = index;
         Image image = new Image(getClass().getResourceAsStream(card.getImageSrc()));
         cardImage.setImage(image);
         this.myListener = myListener;
     }
+
+
 }

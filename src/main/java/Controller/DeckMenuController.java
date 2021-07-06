@@ -39,35 +39,10 @@ public class DeckMenuController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.logInPlayer = Controller.getLoggedInPlayer();
-
-        if(logInPlayer.getAllCards().size() > 0){
-            MyListener listenerAllCards = new MyListener() {
-                @Override
-                public void onClickListener(Object object) {
-                    setSelectedCardImage((Card) object);
-                }
-            };
-            int column = 0;
-            for (int i = 0; i < logInPlayer.getAllCards().size(); i++) {
-                try {
-                    FXMLLoader fxmlLoader = new FXMLLoader();
-                    fxmlLoader.setLocation(getClass().getResource("/PlayerCards.fxml"));
-                    AnchorPane anchorPane = fxmlLoader.load();
-
-                    PlayerCardsController playerCardsController = fxmlLoader.getController();
-                    playerCardsController.setCard(logInPlayer.getAllCards().get(i),listenerAllCards);
-
-                    gridPlayerCards.add(anchorPane , column , 1);
-                    column++;
-                }
-                catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-
-
+        if (logInPlayer.getAllCards().size() > 0) {
+            showPlayerCards();
         }
-        if(logInPlayer.getDecks().size() > 0) {
+        if (logInPlayer.getDecks().size() > 0) {
             addDecksToMenu();
         }
     }
@@ -77,11 +52,37 @@ public class DeckMenuController implements Initializable {
         showDeckCards(selectedDeck);
     }
 
-    public void showDeckCards(Deck selectedDeck){
+    public void showPlayerCards() {
+        gridPlayerCards.getChildren().clear();
+        MyListener listenerAllCards = new MyListener() {
+            @Override
+            public void onClickListener(Object object) {
+                setSelectedCardImage((Card) object);
+            }
+        };
+        int column = 0;
+        for (int i = 0; i < logInPlayer.getAllCards().size(); i++) {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("/PlayerCards.fxml"));
+                AnchorPane anchorPane = fxmlLoader.load();
+
+                PlayerCardsController playerCardsController = fxmlLoader.getController();
+                playerCardsController.setCard(logInPlayer.getAllCards().get(i), listenerAllCards , i);
+
+                gridPlayerCards.add(anchorPane, column, 1);
+                column++;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void showDeckCards(Deck selectedDeck) {
         gridDeckCards.getChildren().clear();
         int row = 1;
         int column = 0;
-        if(selectedDeck.getMainDeckSize() > 0) {
+        if (selectedDeck.getMainDeckSize() > 0) {
             for (int i = 0; i < selectedDeck.getMainDeckSize(); i++) {
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader();
@@ -95,7 +96,7 @@ public class DeckMenuController implements Initializable {
                             setSelectedCardImage((Card) object);
                         }
                     };
-                    deckCardsController.setCard(selectedDeck.getMainDeck().get(i), myListenerSelectedCard);
+                    deckCardsController.setCard(selectedDeck.getMainDeck().get(i), myListenerSelectedCard , i);
 //                anchorPane.setCursor();
                     if (column == 12) {
                         column = 0;
@@ -108,8 +109,7 @@ public class DeckMenuController implements Initializable {
                     e.printStackTrace();
                 }
             }
-        }
-        else{
+        } else {
             gridDeckCards.getChildren().clear();
         }
     }
@@ -122,7 +122,7 @@ public class DeckMenuController implements Initializable {
     }
 
     public void showInfo(ActionEvent actionEvent) {
-        if(selectedCard != null) {
+        if (selectedCard != null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText(selectedCard.getCardName());
             alert.setTitle("Information");
@@ -147,14 +147,14 @@ public class DeckMenuController implements Initializable {
         this.selectedCard = selectedCard;
     }
 
-    public void setSelectedCardImage(Card card){
+    public void setSelectedCardImage(Card card) {
         Image image = new Image(card.getImageSrc());
         selectedCardImage.setImage(image);
         setSelectedCard(card);
 
     }
 
-    public void createNewDeck(MouseEvent event){
+    public void createNewDeck(MouseEvent event) {
         try {
             Stage thisStage = (Stage) selectedCardImage.getScene().getWindow();
             CreateDeckController.setDeckMenuStage(thisStage);
@@ -170,11 +170,11 @@ public class DeckMenuController implements Initializable {
         }
     }
 
-    public void addDecksToMenu(){
+    public void addDecksToMenu() {
         myListener = new MyListener() {
             @Override
             public void onClickListener(Object object) {
-                setSelectedDeck((Deck)object);
+                setSelectedDeck((Deck) object);
             }
         };
         int row = 1;
@@ -196,19 +196,44 @@ public class DeckMenuController implements Initializable {
         }
     }
 
-    public void handleDragOver(DragEvent event){
-        if(event.getDragboard().hasString()){
-            event.acceptTransferModes(TransferMode.ANY);
+    public void handleDragOverDeckCards(DragEvent event) {
+        if (event.getDragboard().hasString()) {
+            if (event.getDragboard().getString().startsWith("player"))
+                event.acceptTransferModes(TransferMode.ANY);
         }
     }
 
-    public void handleTextDrop(DragEvent event){
-        String cardName = event.getDragboard().getString();
-        if(selectedDeck != null){
-            selectedDeck.addCardToMainDeck(Card.getCardByName(cardName));
+    public void handleCardDropDeckCards(DragEvent event) {
+        String message = event.getDragboard().getString();
+        System.out.println(message);
+        int index = Integer.parseInt(message.substring(6));
+        if (selectedDeck != null) {
+            selectedDeck.addCardToMainDeck(logInPlayer.getAllCards().get(index));
+            System.out.println("before : " + gridPlayerCards.getChildren().size());
+            gridPlayerCards.getChildren().remove(index);
+            System.out.println("after : " + gridPlayerCards.getChildren().size());
+            logInPlayer.getAllCards().remove(index);
+            showPlayerCards();
             showDeckCards(selectedDeck);
         }
     }
 
+    public void handleDragOverPlayerCards(DragEvent event) {
+        if (event.getDragboard().hasString()) {
+            if (event.getDragboard().getString().startsWith("Deck"))
+                event.acceptTransferModes(TransferMode.ANY);
+        }
+    }
+
+    public void handleDragDropPlayerCards(DragEvent event) {
+        String message = event.getDragboard().getString();
+        System.out.println(message);
+        int index = Integer.parseInt(message.substring(4));
+        logInPlayer.getAllCards().add(selectedDeck.getMainDeck().get(index));
+        gridDeckCards.getChildren().remove(index);
+        selectedDeck.getMainDeck().remove(index);
+        showPlayerCards();
+        showDeckCards(selectedDeck);
+    }
 
 }
