@@ -16,11 +16,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="768.0" styleClass="scroll-pane" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DeckMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="768.0" styleClass="scroll-pane" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DeckMenuController">
    <children>
-      <BorderPane prefHeight="426.0" prefWidth="768.0" styleClass="scroll-pane" stylesheets="@Styles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane prefHeight="426.0" prefWidth="768.0" styleClass="scroll-pane" stylesheets="@../Styles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <bottom>
-            <ScrollPane onDragDropped="#handleDragDropPlayerCards" onDragOver="#handleDragOverPlayerCards" prefHeight="86.0" prefWidth="518.0" styleClass="right-bar" stylesheets="@Styles.css" BorderPane.alignment="CENTER">
+            <ScrollPane onDragDropped="#handleDragDropPlayerCards" onDragOver="#handleDragOverPlayerCards" prefHeight="86.0" prefWidth="518.0" styleClass="right-bar" stylesheets="@../Styles.css" BorderPane.alignment="CENTER">
                <content>
                   <GridPane fx:id="gridPlayerCards" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="0.0" prefWidth="3.0">
                      <rowConstraints>
@@ -33,11 +33,11 @@
          <center>
             <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onDragDropped="#handleCardDropDeckCards" onDragOver="#handleDragOverDeckCards" prefHeight="394.0" prefWidth="513.0" styleClass="deckmenu-background" stylesheets="@Styles.css" HBox.hgrow="ALWAYS">
+                  <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onDragDropped="#handleCardDropDeckCards" onDragOver="#handleDragOverDeckCards" prefHeight="394.0" prefWidth="513.0" styleClass="deckmenu-background" stylesheets="@../Styles.css" HBox.hgrow="ALWAYS">
                      <children>
                         <HBox alignment="CENTER" layoutY="362.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="42.0" prefWidth="477.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#activateDeck" prefHeight="34.0" prefWidth="129.0" styleClass="search-button" stylesheets="@Styles.css" text="Activate Deck">
+                              <Button mnemonicParsing="false" onAction="#activateDeck" prefHeight="34.0" prefWidth="129.0" styleClass="search-button" stylesheets="@../Styles.css" text="Activate Deck">
                                  <font>
                                     <Font name="Century Gothic Bold" size="14.0" />
                                  </font>
@@ -53,7 +53,7 @@
                   </AnchorPane>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="394.0" prefWidth="81.0" stylesheets="@Styles.css" VBox.vgrow="ALWAYS">
+                        <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="394.0" prefWidth="81.0" stylesheets="@../Styles.css" VBox.vgrow="ALWAYS">
                            <content>
                               <GridPane fx:id="gridDecks" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="0.0" prefWidth="3.0">
                                  <rowConstraints>
@@ -79,7 +79,7 @@
             </HBox>
          </center>
          <left>
-            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="396.0" prefWidth="209.0" styleClass="right-bar" stylesheets="@Styles.css" BorderPane.alignment="CENTER">
+            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="396.0" prefWidth="209.0" styleClass="right-bar" stylesheets="@../Styles.css" BorderPane.alignment="CENTER">
                <children>
                   <HBox alignment="CENTER" prefHeight="60.0" prefWidth="250.0">
                      <children>
@@ -102,7 +102,7 @@
                         <HBox prefHeight="11.0" prefWidth="250.0" />
                         <ImageView fx:id="selectedCardImage" fitHeight="244.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
                            <image>
-                              <Image url="@Images/Monster/Unknown.jpg" />
+                              <Image url="@../Images/Monster/Unknown.jpg" />
                            </image>
                            <VBox.margin>
                               <Insets />

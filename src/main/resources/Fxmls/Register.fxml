@@ -6,10 +6,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="Register-background" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Controller">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="Register-background" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Controller">
     <children>
         <Button layoutX="14.0" layoutY="355.0" mnemonicParsing="false" onAction="#backToWelcomeMenu" text="Back" />
-        <Button layoutX="84.0" layoutY="298.0" mnemonicParsing="false" onAction="#Register" styleClass="register-button" stylesheets="@Styles.css" text="Register">
+        <Button layoutX="84.0" layoutY="298.0" mnemonicParsing="false" onAction="#Register" styleClass="register-button" stylesheets="@../Styles.css" text="Register">
          <font>
             <Font size="18.0" />
          </font></Button>

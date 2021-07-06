@@ -15,7 +15,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
@@ -55,7 +54,7 @@ public class ProfileController implements Initializable {
 
     @FXML
     void backToMainMenu(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/MainMenu.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/MainMenu.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
     }
@@ -65,6 +64,7 @@ public class ProfileController implements Initializable {
         String newNickName = nicknameChangeField.getText();
         if (nicknameChangeField == null) return;
         Controller.getLoggedInPlayer().setNickname(newNickName);
+        nicknameChangeField.setPromptText("Your nickname: "+Controller.getLoggedInPlayer().getNickname());
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("Nickname Changed Successfully !");
         alert.showAndWait();
@@ -87,49 +87,43 @@ public class ProfileController implements Initializable {
         }
     }
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setUserInfo();
-        myListener = new MyListener() {
-            @Override
-            public void onClickListener(Object object) {
-                setPlayerImage((Image) object);
-            }
-        };
+        myListener = object -> setPlayerImage((Image) object);
         showAllAvatars();
     }
 
     private void showAllAvatars() {
         int column = 0;
-        int row = 0;
+        int row = 1;
+
+        gridPane.setMinHeight(Region.USE_COMPUTED_SIZE);
+        gridPane.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        gridPane.setMaxHeight(Region.USE_PREF_SIZE);
+
+        gridPane.setMinWidth(Region.USE_COMPUTED_SIZE);
+        gridPane.setPrefWidth(Region.USE_COMPUTED_SIZE);
+        gridPane.setMaxWidth(Region.USE_PREF_SIZE);
+
         for (int i = 0; i < 35; i++) {
             try {
-                gridPane.setMinHeight(Region.USE_COMPUTED_SIZE);
-                gridPane.setPrefHeight(Region.USE_COMPUTED_SIZE);
-                gridPane.setMaxHeight(Region.USE_PREF_SIZE);
-
-                gridPane.setMinWidth(Region.USE_COMPUTED_SIZE);
-                gridPane.setPrefWidth(Region.USE_COMPUTED_SIZE);
-                gridPane.setMaxWidth(Region.USE_PREF_SIZE);
-
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/Avatars.fxml"));
+                fxmlLoader.setLocation(getClass().getResource("/Fxmls/Avatars.fxml"));
                 AnchorPane anchorPane = fxmlLoader.load();
 
-                String str = "/Images/Characters/Chara001.dds" + i + ".png";
                 AvatarsController avatarsController = fxmlLoader.getController();
+
+                String str = "/Images/Characters/Chara001.dds" + i + ".png";
                 avatarsController.setImage( new Image(getClass().getResourceAsStream(str)), myListener);
                 if (column == 7) {
                     column = 0;
                     row++;
                 }
+                gridPane.add(anchorPane, column++, row);
 
-                gridPane.add(anchorPane , column++ , row);
-
-                GridPane.setMargin(anchorPane, new Insets(2));
-            }
-            catch (Exception e){
+                GridPane.setMargin(anchorPane, new Insets(5));
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -138,6 +132,7 @@ public class ProfileController implements Initializable {
     private void setPlayerImage(Image image) {
         Player player = Controller.getLoggedInPlayer();
         player.setImage(image);
+        itemImage.setImage(player.getImage());
     }
 
     private void setUserInfo() {

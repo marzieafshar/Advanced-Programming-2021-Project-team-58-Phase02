@@ -24,7 +24,7 @@ public class Main extends Application {
                 e.printStackTrace();
             }
         }
-        Parent root = FXMLLoader.load(getClass().getResource("/WelcomeMenu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Fxmls/WelcomeMenu.fxml"));
         primaryStage.setTitle("Shop");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

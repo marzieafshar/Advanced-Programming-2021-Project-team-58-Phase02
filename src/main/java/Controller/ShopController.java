@@ -91,7 +91,7 @@ public class ShopController implements Initializable {
             for (int i = 0; i < Card.getAllCards().size(); i++) {
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader();
-                    fxmlLoader.setLocation(getClass().getResource("/Items.fxml"));
+                    fxmlLoader.setLocation(getClass().getResource("/Fxmls/Items.fxml"));
                     AnchorPane anchorPane = fxmlLoader.load();
 
                     ItemController ItemController = fxmlLoader.getController();
@@ -156,7 +156,7 @@ public class ShopController implements Initializable {
     }
 
     public void backToMainMenu(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/MainMenu.fxml")));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/MainMenu.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

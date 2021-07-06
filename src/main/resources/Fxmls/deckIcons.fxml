@@ -10,7 +10,7 @@
    <children>
       <ImageView fx:id="deckIcon" fitHeight="72.0" fitWidth="48.0" layoutX="-6.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
-            <Image url="@Images/Monster/deckPacks.jpg" />
+            <Image url="@../Images/Monster/deckPacks.jpg" />
          </image>
       </ImageView>
       <Label fx:id="deckName" layoutY="49.0" prefHeight="14.0" prefWidth="49.0" text="Label" textAlignment="CENTER">

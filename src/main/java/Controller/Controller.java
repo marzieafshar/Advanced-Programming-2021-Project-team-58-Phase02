@@ -7,9 +7,7 @@ import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.event.*;
 import javafx.fxml.FXML;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.*;
 
 import java.util.*;
@@ -35,12 +33,6 @@ public class Controller {
     private TextField nicknameRegisterField;
     @FXML
     private TextField passwordRegisterField;
-    @FXML
-    private TextField passwordChangeField;
-    @FXML
-    private TextField repeatPasswordChangeField;
-    @FXML
-    private TextField nicknameChangeField;
 
     private static Player loggedInPlayer;
 
@@ -53,25 +45,25 @@ public class Controller {
     }
 
     public void switchToLoginMenu(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Login.fxml")));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Login.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
     }
     public void switchToRegisterMenu(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Register.fxml")));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Register.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
     }
     public void goToScoreBoard(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Scoreboard.fxml")));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Scoreboard.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
     }
     public void goToProfileMenu(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Profile.fxml")));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Profile.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -96,7 +88,7 @@ public class Controller {
                     setLoggedInPlayer(Player.getPlayerByUsername(username));
                     alert3.setContentText("user logged in successfully!");
                     alert3.show();
-                    root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/MainMenu.fxml")));
+                    root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/MainMenu.fxml")));
                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     scene = new Scene(root);
                     stage.setScene(scene);
@@ -105,7 +97,7 @@ public class Controller {
         }
     }
     public void backToWelcomeMenu(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/WelcomeMenu.fxml")));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/WelcomeMenu.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -137,7 +129,7 @@ public class Controller {
                     }
                     alert3.setContentText("user created successfully!");
                     alert3.show();
-                    root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Login.fxml")));
+                    root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Login.fxml")));
                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     scene = new Scene(root);
                     stage.setScene(scene);
@@ -149,43 +141,14 @@ public class Controller {
         System.exit(0);
     }
     public void LogOut(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Login.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-    }
-    public void nicknameChange(ActionEvent event) {
-        String newNickName = nicknameChangeField.getText();
-        if (nicknameChangeField == null) return;
-        getLoggedInPlayer().setNickname(newNickName);
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("Nickname Changed Successfully !");
-        alert.showAndWait();
-    }
-    public void passwordChange(ActionEvent event) {
-        String newPassword1 = passwordChangeField.getText();
-        String newPassword2 = repeatPasswordChangeField.getText();
-        if (newPassword2 == null || newPassword1 == null) return;
-        else if (!newPassword1.equals(newPassword2)) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Password didn't match !");
-            alert.showAndWait();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            getLoggedInPlayer().setPassword(newPassword1);
-            alert.setContentText("Password Changed Successfully !");
-            alert.showAndWait();
-        }
-    }
-    public void BackToMainMenu(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/MainMenu.fxml")));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Login.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
     }
 
     public void goToShop(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Shop.fxml")));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Shop.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -223,8 +186,15 @@ public class Controller {
         getLoggedInPlayer().getDecks().add(deck1);
         getLoggedInPlayer().getDecks().add(deck2);
         getLoggedInPlayer().getDecks().add(deck3);
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/DeckMenu.fxml")));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/DeckMenu.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+    }
+
+    public void startANewGame(ActionEvent actionEvent) throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Game.fxml")));
+        stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
     }

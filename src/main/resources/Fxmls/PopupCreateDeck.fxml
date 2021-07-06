@@ -6,7 +6,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="74.0" prefWidth="286.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CreateDeckController">
    <children>
-      <TextField fx:id="deckNameTextfield" layoutX="11.0" layoutY="25.0" prefHeight="25.0" prefWidth="226.0" promptText="enter deck name" styleClass="search-box" stylesheets="@Styles.css" />
-      <Button layoutX="223.0" layoutY="25.0" mnemonicParsing="false" onAction="#createNewDeck" styleClass="search-button" stylesheets="@Styles.css" text="Button" />
+      <TextField fx:id="deckNameTextfield" layoutX="11.0" layoutY="25.0" prefHeight="25.0" prefWidth="226.0" promptText="enter deck name" styleClass="search-box" stylesheets="@../Styles.css" />
+      <Button layoutX="223.0" layoutY="25.0" mnemonicParsing="false" onAction="#createNewDeck" styleClass="search-button" stylesheets="@../Styles.css" text="Button" />
    </children>
 </AnchorPane>

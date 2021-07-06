@@ -18,11 +18,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ShopController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ShopController">
    <children>
       <BorderPane prefHeight="426.0" prefWidth="768.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
-            <VBox maxWidth="1.7976931348623157E308" prefHeight="463.0" prefWidth="250.0" styleClass="right-bar" stylesheets="@Styles.css" BorderPane.alignment="CENTER">
+            <VBox maxWidth="1.7976931348623157E308" prefHeight="463.0" prefWidth="250.0" styleClass="right-bar" stylesheets="@../Styles.css" BorderPane.alignment="CENTER">
                <children>
                   <HBox alignment="CENTER" prefHeight="60.0" prefWidth="250.0">
                      <children>
@@ -60,7 +60,7 @@
                         <HBox prefHeight="11.0" prefWidth="250.0" />
                         <ImageView fx:id="selectedCardImage" fitHeight="244.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
                            <image>
-                              <Image url="@../../../../../testShop/src/main/resources/Images/Bitron.jpg" />
+                              <Image url="@../Images/Monster/Bitron.jpg" />
                            </image>
                            <VBox.margin>
                               <Insets />
@@ -155,9 +155,9 @@
             </VBox>
          </left>
          <center>
-            <VBox prefHeight="200.0" prefWidth="100.0" stylesheets="@Styles.css" BorderPane.alignment="CENTER">
+            <VBox prefHeight="200.0" prefWidth="100.0" stylesheets="@../Styles.css" BorderPane.alignment="CENTER">
                <children>
-                  <HBox alignment="CENTER" prefHeight="48.0" prefWidth="518.0" styleClass="top-bar" stylesheets="@Styles.css">
+                  <HBox alignment="CENTER" prefHeight="48.0" prefWidth="518.0" styleClass="top-bar" stylesheets="@../Styles.css">
                      <children>
                         <Label prefHeight="34.0" prefWidth="65.0" text="Shop" textAlignment="CENTER">
                            <font>
@@ -166,7 +166,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="518.0" styleClass="top-bar" stylesheets="@Styles.css">
+                  <HBox alignment="CENTER_LEFT" prefHeight="19.0" prefWidth="518.0" styleClass="top-bar" stylesheets="@../Styles.css">
                      <children>
                         <Label text="Your Money:">
                            <font>

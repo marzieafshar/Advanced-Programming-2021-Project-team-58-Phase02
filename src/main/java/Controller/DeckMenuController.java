@@ -64,7 +64,7 @@ public class DeckMenuController implements Initializable {
         for (int i = 0; i < logInPlayer.getAllCards().size(); i++) {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/PlayerCards.fxml"));
+                fxmlLoader.setLocation(getClass().getResource("/Fxmls/PlayerCards.fxml"));
                 AnchorPane anchorPane = fxmlLoader.load();
 
                 PlayerCardsController playerCardsController = fxmlLoader.getController();
@@ -86,7 +86,7 @@ public class DeckMenuController implements Initializable {
             for (int i = 0; i < selectedDeck.getMainDeckSize(); i++) {
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader();
-                    fxmlLoader.setLocation(getClass().getResource("/deckItems.fxml"));
+                    fxmlLoader.setLocation(getClass().getResource("/Fxmls/deckItems.fxml"));
                     AnchorPane anchorPane = fxmlLoader.load();
 
                     DeckCardsController deckCardsController = fxmlLoader.getController();
@@ -115,7 +115,7 @@ public class DeckMenuController implements Initializable {
     }
 
     public void back(MouseEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/MainMenu.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/MainMenu.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -159,7 +159,7 @@ public class DeckMenuController implements Initializable {
             Stage thisStage = (Stage) selectedCardImage.getScene().getWindow();
             CreateDeckController.setDeckMenuStage(thisStage);
             CreateDeckController.setDeckMenuController(this);
-            Parent root = FXMLLoader.load(getClass().getResource("/PopupCreateDeck.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/Fxmls/PopupCreateDeck.fxml"));
             FXMLLoader fxmlLoader = new FXMLLoader();
             Stage stage = new Stage();
             Scene scene = new Scene(root);
@@ -181,7 +181,7 @@ public class DeckMenuController implements Initializable {
         for (int i = 0; i < logInPlayer.getDecks().size(); i++) {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/deckIcons.fxml"));
+                fxmlLoader.setLocation(getClass().getResource("/Fxmls/deckIcons.fxml"));
                 AnchorPane anchorPane = fxmlLoader.load();
 
                 DeckIconController deckIconController = fxmlLoader.getController();
