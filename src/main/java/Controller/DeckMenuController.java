@@ -66,30 +66,7 @@ public class DeckMenuController implements Initializable {
 
         }
         if(logInPlayer.getDecks().size() > 0) {
-            myListener = new MyListener() {
-                @Override
-                public void onClickListener(Object object) {
-                    setSelectedDeck((Deck)object);
-                }
-            };
-            int row = 1;
-
-            for (int i = 0; i < logInPlayer.getDecks().size(); i++) {
-                try {
-                    FXMLLoader fxmlLoader = new FXMLLoader();
-                    fxmlLoader.setLocation(getClass().getResource("/deckIcons.fxml"));
-                    AnchorPane anchorPane = fxmlLoader.load();
-
-                    DeckIconController deckIconController = fxmlLoader.getController();
-                    deckIconController.setDeckLabel(logInPlayer.getDecks().get(i), myListener);
-//                anchorPane.setCursor();
-                    gridDecks.add(anchorPane, 0, row);
-                    row++;
-                    GridPane.setMargin(anchorPane, new Insets(5));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            addDecksToMenu();
         }
     }
 
@@ -173,7 +150,8 @@ public class DeckMenuController implements Initializable {
     public void createNewDeck(MouseEvent event){
         try {
             Stage thisStage = (Stage) selectedCardImage.getScene().getWindow();
-                CreateDeckController.setDeckMenuStage(thisStage);
+            CreateDeckController.setDeckMenuStage(thisStage);
+            CreateDeckController.setDeckMenuController(this);
             Parent root = FXMLLoader.load(getClass().getResource("/PopupCreateDeck.fxml"));
             FXMLLoader fxmlLoader = new FXMLLoader();
             Stage stage = new Stage();
@@ -182,6 +160,32 @@ public class DeckMenuController implements Initializable {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void addDecksToMenu(){
+        myListener = new MyListener() {
+            @Override
+            public void onClickListener(Object object) {
+                setSelectedDeck((Deck)object);
+            }
+        };
+        int row = 1;
+        for (int i = 0; i < logInPlayer.getDecks().size(); i++) {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("/deckIcons.fxml"));
+                AnchorPane anchorPane = fxmlLoader.load();
+
+                DeckIconController deckIconController = fxmlLoader.getController();
+                deckIconController.setDeckLabel(logInPlayer.getDecks().get(i), myListener);
+//                anchorPane.setCursor();
+                gridDecks.add(anchorPane, 0, row);
+                row++;
+                GridPane.setMargin(anchorPane, new Insets(5));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

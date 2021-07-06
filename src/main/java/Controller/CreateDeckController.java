@@ -23,6 +23,11 @@ public class CreateDeckController {
     private Player player = Controller.getLoggedInPlayer();
     private Stage stage;
     private static Stage deckMenuStage;
+    private static DeckMenuController deckMenuController;
+
+    public static void setDeckMenuController(DeckMenuController deckMenuController) {
+        CreateDeckController.deckMenuController = deckMenuController;
+    }
 
     public static void setDeckMenuStage(Stage deckMenuStage) {
         CreateDeckController.deckMenuStage = deckMenuStage;
@@ -45,14 +50,15 @@ public class CreateDeckController {
             player.getDecks().add(deck);
             stage = (Stage) deckNameTextfield.getScene().getWindow();
             stage.close();
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("/DeckMenu.fxml"));
-                Scene scene = new Scene(root);
-                deckMenuStage.setScene(scene);
-//                deckMenuStage.setMaximized(true);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            deckMenuController.addDecksToMenu();
+//            try {
+//                Parent root = FXMLLoader.load(getClass().getResource("/DeckMenu.fxml"));
+//                Scene scene = new Scene(root);
+//                deckMenuStage.setScene(scene);
+////                deckMenuStage.setMaximized(true);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
 
         }
     }
