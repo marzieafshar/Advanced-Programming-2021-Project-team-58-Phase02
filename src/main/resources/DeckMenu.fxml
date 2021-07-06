@@ -33,7 +33,7 @@
          <center>
             <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="394.0" prefWidth="513.0" styleClass="deckmenu-background" stylesheets="@Styles.css" HBox.hgrow="ALWAYS">
+                  <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onDragDropped="#handleTextDrop" onDragOver="#handleDragOver" prefHeight="394.0" prefWidth="513.0" styleClass="deckmenu-background" stylesheets="@Styles.css" HBox.hgrow="ALWAYS">
                      <children>
                         <GridPane fx:id="gridDeckCards" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="0.0" prefWidth="3.0">
                            <rowConstraints>

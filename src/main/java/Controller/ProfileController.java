@@ -9,15 +9,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-import javafx.scene.image.Image;
 
-
-import java.awt.*;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
@@ -65,7 +61,7 @@ public class ProfileController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Image image = new Image(getClass().getResourceAsStream("Images/Monster/Bitron.jpg"));
+        Image image = new Image(getClass().getResourceAsStream("/Images/Monster/Bitron.jpg"));
         myCircle.setFill(new ImagePattern(image));
 
     }

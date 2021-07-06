@@ -51,15 +51,6 @@ public class CreateDeckController {
             stage = (Stage) deckNameTextfield.getScene().getWindow();
             stage.close();
             deckMenuController.addDecksToMenu();
-//            try {
-//                Parent root = FXMLLoader.load(getClass().getResource("/DeckMenu.fxml"));
-//                Scene scene = new Scene(root);
-//                deckMenuStage.setScene(scene);
-////                deckMenuStage.setMaximized(true);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-
         }
     }
 }

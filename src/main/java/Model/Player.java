@@ -8,6 +8,8 @@ public class Player {
     private String password;
     private String nickname;
     private Deck activeDeck;
+    private int winMatches;
+    private int loseMatches;
     private int score;
     private int LP;
     private int money;
@@ -44,8 +46,24 @@ public class Player {
     }
 
     public Player() {
-
     }
+
+    public int getLoseMatches() {
+        return loseMatches;
+    }
+
+    public int getWinMatches() {
+        return winMatches;
+    }
+
+    public void increaseLoseMatches(){
+        loseMatches++;
+    }
+
+    public void increaseWinMatches(){
+        winMatches++;
+    }
+
 
     public void setBoard(Board board) {
         this.board = board;
