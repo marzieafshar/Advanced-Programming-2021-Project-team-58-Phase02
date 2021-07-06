@@ -14,11 +14,15 @@ public class PlayerCardsController {
 
     private MyListener myListener;
     private Card card;
+    private int index;
     @FXML
     private AnchorPane source;
-
     @FXML
     private ImageView cardImage;
+
+    public int getIndex() {
+        return index;
+    }
 
     @FXML
     void click(MouseEvent event) {
@@ -26,15 +30,16 @@ public class PlayerCardsController {
     }
 
     @FXML
-    void handleDragDetection(MouseEvent event) {
+    void handleDragDetectionPlayerCards(MouseEvent event) {
         Dragboard db = source.startDragAndDrop(TransferMode.ANY);
         ClipboardContent cb = new ClipboardContent();
-        cb.putString(card.getCardName());
+        cb.putString( "player" + index);
         db.setContent(cb);
     }
 
-    public void setCard(Card card, MyListener myListener) {
+    public void setCard(Card card, MyListener myListener , int index) {
         this.card = card;
+        this.index = index;
         Image image = new Image(getClass().getResourceAsStream(card.getImageSrc()));
         cardImage.setImage(image);
         this.myListener = myListener;

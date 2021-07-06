@@ -190,7 +190,7 @@
                      <children>
                         <ScrollPane fx:id="scroll" cache="true" cacheHint="SCALE" fitToHeight="true" fitToWidth="true" prefHeight="398.0" prefWidth="498.0" HBox.hgrow="ALWAYS">
                            <content>
-                              <GridPane fx:id="grid" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="0.0" prefWidth="3.0">
+                              <GridPane fx:id="grid" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="0.0" prefWidth="3.0">
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" />
                                  </rowConstraints>
