@@ -35,12 +35,6 @@ public class Controller {
     private TextField nicknameRegisterField;
     @FXML
     private TextField passwordRegisterField;
-    @FXML
-    private TextField passwordChangeField;
-    @FXML
-    private TextField repeatPasswordChangeField;
-    @FXML
-    private TextField nicknameChangeField;
 
     private static Player loggedInPlayer;
 
@@ -58,24 +52,28 @@ public class Controller {
         scene = new Scene(root);
         stage.setScene(scene);
     }
+
     public void switchToRegisterMenu(ActionEvent event) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Register.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
     }
+
     public void goToScoreBoard(ActionEvent event) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Scoreboard.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
     }
+
     public void goToProfileMenu(ActionEvent event) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Profile.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
     }
+
     public void Login(ActionEvent event) throws IOException {
         String username = usernameLoginField.getText();
         String password = passwordLoginField.getText();
@@ -104,12 +102,14 @@ public class Controller {
             }
         }
     }
+
     public void backToWelcomeMenu(ActionEvent event) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/WelcomeMenu.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
     }
+
     public void Register(ActionEvent event) throws IOException {
         String username = usernameRegisterField.getText();
         String password = passwordRegisterField.getText();
@@ -145,38 +145,18 @@ public class Controller {
             }
         }
     }
+
     public void Exit(ActionEvent event) {
         System.exit(0);
     }
+
     public void LogOut(ActionEvent event) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Login.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
     }
-    public void nicknameChange(ActionEvent event) {
-        String newNickName = nicknameChangeField.getText();
-        if (nicknameChangeField == null) return;
-        getLoggedInPlayer().setNickname(newNickName);
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("Nickname Changed Successfully !");
-        alert.showAndWait();
-    }
-    public void passwordChange(ActionEvent event) {
-        String newPassword1 = passwordChangeField.getText();
-        String newPassword2 = repeatPasswordChangeField.getText();
-        if (newPassword2 == null || newPassword1 == null) return;
-        else if (!newPassword1.equals(newPassword2)) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Password didn't match !");
-            alert.showAndWait();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            getLoggedInPlayer().setPassword(newPassword1);
-            alert.setContentText("Password Changed Successfully !");
-            alert.showAndWait();
-        }
-    }
+
     public void BackToMainMenu(ActionEvent event) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/MainMenu.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

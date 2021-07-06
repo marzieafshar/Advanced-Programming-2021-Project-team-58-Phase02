@@ -9,6 +9,11 @@
     <version>1.0-SNAPSHOT</version>
     <dependencies>
         <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>11</version>
+        </dependency>
+        <dependency>
             <groupId>com.gilecode.yagson</groupId>
             <artifactId>yagson</artifactId>
             <version>0.5.1</version>
