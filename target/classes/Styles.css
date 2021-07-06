@@ -2,26 +2,47 @@
     -fx-background-color: antiquewhite;
     -fx-background-radius: 100;
 }
+
 .transparent {
-    -fx-background-color: rgba(0,0,0,0);
+    -fx-background-color: rgba(0, 0, 0, 0);
 }
-.search-button{
+
+.search-button {
     -fx-background-color: coral;
     -fx-background-radius: 80;
 }
-.right-bar{
-    -fx-background-color: lightgoldenrodyellow ;
+
+.right-bar {
+    -fx-background-color: lightgoldenrodyellow;
 }
+
 .shadow {
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0.0, 0.0, 10.0);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 10, 0.0, 0.0, 10.0);
 }
+
 .top-bar {
     -fx-background-color: burlywood;
 }
-.deckmenu-background{
+
+.deckmenu-background {
     -fx-background-color: #DEB887;
 }
-.welcome-menu-background{
+
+.welcome-menu-background {
     -fx-background-image: url("testssd.jpg");
     -fx-background-size: stretch;
+}
+
+.menu-button {
+    -fx-background-color: black;
+    -fx-background-radius: 80;
+}
+
+.Register-background {
+    -fx-background-image: url("4oDqkW.jpg");
+    -fx-background-size: stretch;
+}
+.register-button {
+    -fx-background-color: rgb(140,0,0);
+    -fx-background-radius: 80;
 }

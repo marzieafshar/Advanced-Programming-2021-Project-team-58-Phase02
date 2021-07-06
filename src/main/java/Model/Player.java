@@ -1,5 +1,7 @@
 package Model;
 
+import javafx.scene.image.Image;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -19,6 +21,7 @@ public class Player {
     private LinkedList<Deck> decks = new LinkedList<Deck>();  //These are NOT the deck that is being used in the game
     private ArrayList<Card> hand = new ArrayList<Card>();
     private static ArrayList<Player> allPlayers = new ArrayList<Player>();
+    private Image image;
 
     public static void setAllPlayers(ArrayList<Player> players) {
         allPlayers = players;
@@ -41,6 +44,8 @@ public class Player {
         setPassword(password);
         setNickname(nickname);
         setMoney(1000000);
+
+        setImage(new Image(getClass().getResourceAsStream("/Images/Characters/Chara001.dds1.png")));
         this.board = new Board();
         allPlayers.add(this);
     }
@@ -75,6 +80,10 @@ public class Player {
 
     public String getUsername() {
         return this.username;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     public void setPassword(String password) {
@@ -208,4 +217,7 @@ public class Player {
         this.allCards.remove(card);
     }
 
+    public Image getImage() {
+        return this.image;
+    }
 }
