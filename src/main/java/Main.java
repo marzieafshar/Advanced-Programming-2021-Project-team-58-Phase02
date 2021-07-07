@@ -24,7 +24,7 @@ public class Main extends Application {
                 e.printStackTrace();
             }
         }
-        Parent root = FXMLLoader.load(getClass().getResource("/Fxmls/WelcomeMenu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Fxmls/Game.fxml"));
         primaryStage.setTitle("Yu-Gi-Oh");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

@@ -42,7 +42,48 @@
     -fx-background-image: url("Images/Background/4oDqkW.jpg");
     -fx-background-size: stretch;
 }
+
 .register-button {
-    -fx-background-color: rgb(140,0,0);
+    -fx-background-color: rgb(140, 0, 0);
     -fx-background-radius: 80;
+}
+
+.login-background {
+    -fx-background-image: url("Images/Background/LoginMenuBackground.jpg");
+    -fx-background-size: stretch;
+}
+
+.login-field {
+    -fx-text-fill: white;
+    -fx-background-color: #2E4053;
+    -fx-background-radius: 80;
+    -fx-border-color: black;
+    -fx-border-radius: 80;
+}
+
+.login-button {
+    -fx-background-color: #2ECC71;
+    -fx-border-color: black;
+    -fx-border-radius: 80;
+    -fx-background-radius: 80;
+}
+
+.back-button {
+    -fx-background-color: #273746;
+    -fx-border-color: black;
+    -fx-border-radius: 80;
+    -fx-background-radius: 80;
+}
+
+.mainMenu-background {
+    -fx-background-image: url("Images/Background/GUI_T_TowerBg2.dds.png");
+    -fx-background-size: stretch;
+}
+
+.mainMenu-Choose {
+    -fx-background-radius: 30;
+    -fx-background-color: rgba(255, 255, 255, 0.3);
+    -fx-effect: dropshadow(gaussian, red, 50, 0, 0, 0);
+    -fx-border-color: black;
+    -fx-border-radius: 30;
 }
