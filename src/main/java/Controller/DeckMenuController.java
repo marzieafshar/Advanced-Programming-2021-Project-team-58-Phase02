@@ -86,7 +86,7 @@ public class DeckMenuController implements Initializable {
             for (int i = 0; i < selectedDeck.getMainDeckSize(); i++) {
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader();
-                    fxmlLoader.setLocation(getClass().getResource("/Fxmls/deckItems.fxml"));
+                    fxmlLoader.setLocation(getClass().getResource("/Fxmls/DeckItems.fxml"));
                     AnchorPane anchorPane = fxmlLoader.load();
 
                     DeckCardsController deckCardsController = fxmlLoader.getController();
@@ -181,7 +181,7 @@ public class DeckMenuController implements Initializable {
         for (int i = 0; i < logInPlayer.getDecks().size(); i++) {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/Fxmls/deckIcons.fxml"));
+                fxmlLoader.setLocation(getClass().getResource("/Fxmls/DeckIcons.fxml"));
                 AnchorPane anchorPane = fxmlLoader.load();
 
                 DeckIconController deckIconController = fxmlLoader.getController();

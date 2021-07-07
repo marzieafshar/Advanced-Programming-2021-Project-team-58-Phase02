@@ -83,8 +83,9 @@
 .mainMenu-Choose {
     -fx-background-radius: 30;
     -fx-background-color: rgba(255, 255, 255, 0.3);
-    -fx-effect: dropshadow(gaussian, red, 50, 0, 0, 0);
-    -fx-border-color: black;
+    -fx-effect: dropshadow(gaussian, red, 10, 0, 0, 0);
+    -fx-border-color: white;
+    -fx-border-width: 2;
     -fx-border-radius: 30;
 }
 
@@ -92,9 +93,18 @@
     -fx-background-image: url("Images/Background/fie_dark.bmp");
 }
 
-
-
 .red-bar {
     -fx-control-inner-background: black;
     -fx-accent: red;
+}
+
+.separator {
+    -fx-border-color: black;
+    -fx-background-color: black;
+    -fx-border-width: 1;
+}
+
+.duelMenu-background {
+    -fx-background-image: url("Images/Background/duelMenu.png");
+    -fx-background-size: stretch;
 }

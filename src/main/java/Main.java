@@ -18,13 +18,13 @@ public class Main extends Application {
         TrapAndSpellCard.addTrapAndSpell();
         File file = new File("Players.txt");
         if(file.length() != 0) {
-            try {
-                jsonSaveAndLoad.load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                jsonSaveAndLoad.load();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
         }
-        Parent root = FXMLLoader.load(getClass().getResource("/Fxmls/Game.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Fxmls/WelcomeMenu.fxml"));
         primaryStage.setTitle("Yu-Gi-Oh");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

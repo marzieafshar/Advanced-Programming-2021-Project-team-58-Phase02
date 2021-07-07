@@ -107,11 +107,11 @@ public class Controller {
                 } else {
                     Alert alert3 = new Alert(Alert.AlertType.INFORMATION);
                     new Player(username, password, nickname);
-                    try {
-                        jsonSaveAndLoad.save();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+//                    try {
+//                        jsonSaveAndLoad.save();
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
                     alert3.setContentText("user created successfully!");
                     alert3.show();
                     root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Login.fxml")));

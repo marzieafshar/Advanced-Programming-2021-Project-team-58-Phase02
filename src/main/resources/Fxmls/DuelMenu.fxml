@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="497.0" prefWidth="758.0" styleClass="duelMenu-background" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="52.0" prefWidth="758.0">
+               <children>
+                  <Label prefHeight="47.0" prefWidth="210.0" text="Match Status" textFill="#dab654">
+                     <font>
+                        <Font name="Kristen ITC" size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="65.0" prefWidth="758.0">
+               <children>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="65.0" prefWidth="647.0">
+                     <children>
+                        <Label text="Number Of Rounds:">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Berlin Sans FB Demi Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label text="3">
+                           <HBox.margin>
+                              <Insets left="30.0" right="50.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Berlin Sans FB Demi Bold" size="25.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="65.0" prefWidth="643.0">
+                     <children>
+                        <Label text="Rounds Played So Far:">
+                           <HBox.margin>
+                              <Insets left="50.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Berlin Sans FB Demi Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label text="1">
+                           <HBox.margin>
+                              <Insets left="30.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Berlin Sans FB Demi Bold" size="25.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="59.0" prefWidth="758.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="379.0">
+                     <children>
+                        <ImageView fitHeight="95.0" fitWidth="79.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/Characters/Chara001.dds0.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="40.0" right="75.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label prefHeight="29.0" prefWidth="83.0" text="Player1">
+                           <font>
+                              <Font name="Berlin Sans FB Demi Bold" size="25.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="75.0" prefWidth="49.0">
+                     <children>
+                        <Separator blendMode="MULTIPLY" prefWidth="200.0" stylesheets="@../Styles.css" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="382.0">
+                     <children>
+                        <Label prefHeight="29.0" prefWidth="98.0" text="Player2">
+                           <font>
+                              <Font name="Berlin Sans FB Demi Bold" size="25.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="101.0" fitWidth="77.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/Characters/Chara001.dds17.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="75.0" right="40.0" />
+                           </HBox.margin>
+                        </ImageView>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="34.0" prefWidth="758.0">
+               <children>
+                  <Separator prefHeight="3.0" prefWidth="681.0" stylesheets="@../Styles.css" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="47.0" prefWidth="758.0">
+               <children>
+                  <Label prefHeight="29.0" prefWidth="12.0" text="1">
+                     <font>
+                        <Font name="Berlin Sans FB Demi Bold" size="25.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="29.0" prefWidth="43.0" text="Score">
+                     <font>
+                        <Font name="Berlin Sans FB Demi Bold" size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="170.0" right="170.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label prefHeight="29.0" prefWidth="15.0" text="0">
+                     <font>
+                        <Font name="Berlin Sans FB Demi Bold" size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="44.0" prefWidth="758.0">
+               <children>
+                  <Label prefHeight="29.0" prefWidth="60.0" text="3400">
+                     <font>
+                        <Font name="Berlin Sans FB Demi Bold" size="25.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="29.0" prefWidth="61.0" text="Max LP">
+                     <font>
+                        <Font name="Berlin Sans FB Demi Bold" size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="160.0" right="160.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label prefHeight="29.0" prefWidth="60.0" text="0">
+                     <font>
+                        <Font name="Berlin Sans FB Demi Bold" size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="184.0" prefWidth="758.0" />
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
