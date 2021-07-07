@@ -46,3 +46,14 @@
     -fx-background-color: rgb(140,0,0);
     -fx-background-radius: 80;
 }
+.login-background{
+    -fx-background-image: url("Images/Background/6qK0NS.jpg");
+    -fx-background-size: stretch;
+}
+.login-button {
+    -fx-text-fill: white;
+    -fx-background-color: #2E4053;
+    -fx-background-radius: 80;
+    -fx-border-color: black;
+    -fx-border-radius: 80;
+}
