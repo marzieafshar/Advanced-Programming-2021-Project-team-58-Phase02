@@ -50,10 +50,22 @@
     -fx-background-image: url("Images/Background/6qK0NS.jpg");
     -fx-background-size: stretch;
 }
-.login-button {
+.login-field {
     -fx-text-fill: white;
     -fx-background-color: #2E4053;
     -fx-background-radius: 80;
     -fx-border-color: black;
     -fx-border-radius: 80;
+}
+.login-button{
+    -fx-background-color: #2ECC71;
+    -fx-border-color: black;
+    -fx-border-radius: 80;
+    -fx-background-radius: 80;
+}
+.back-button{
+    -fx-background-color: #273746;
+    -fx-border-color: black;
+    -fx-border-radius: 80;
+    -fx-background-radius: 80;
 }
