@@ -5,42 +5,42 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="302.0" prefWidth="600.0" styleClass="mainMenu-background" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Controller">
+<AnchorPane prefHeight="315.0" prefWidth="260.0" styleClass="mainMenu-background" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Controller">
     <children>
-        <Button layoutX="10.0" layoutY="335.0" mnemonicParsing="false" onAction="#LogOut" text="Log out" />
-        <Button alignment="CENTER" layoutX="234.0" layoutY="68.0" mnemonicParsing="false" onAction="#startANewGame" prefHeight="24.0" prefWidth="120.0" styleClass="mainMenu-Choose" text="New Game">
+        <Button layoutX="2.0" layoutY="279.0" mnemonicParsing="false" onAction="#LogOut" styleClass="mainMenu-Choose" text="Log out" />
+        <Button alignment="CENTER" layoutX="136.0" layoutY="70.0" mnemonicParsing="false" onAction="#startANewGame" prefHeight="41.0" prefWidth="124.0" styleClass="mainMenu-Choose" text="New Game">
             <font>
                 <Font size="18.0" />
             </font>
         </Button>
-        <Button alignment="CENTER" layoutX="190.0" layoutY="116.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="202.0" styleClass="mainMenu-Choose" text="New Game (Multi-Player)">
+        <Button alignment="CENTER" layoutX="94.0" layoutY="111.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="208.0" styleClass="mainMenu-Choose" text="New Game (Multi-Player)">
             <font>
                 <Font size="16.0" />
             </font>
         </Button>
-        <Button alignment="CENTER" layoutX="233.0" layoutY="162.0" mnemonicParsing="false" onAction="#goToScoreBoard" prefHeight="28.0" prefWidth="122.0" styleClass="mainMenu-Choose" text="Score Board">
+        <Button alignment="CENTER" layoutX="135.0" layoutY="150.0" mnemonicParsing="false" onAction="#goToScoreBoard" prefHeight="41.0" prefWidth="125.0" styleClass="mainMenu-Choose" text="Score Board">
             <font>
                 <Font size="18.0" />
             </font>
         </Button>
-        <Button alignment="CENTER" layoutX="233.0" layoutY="208.0" mnemonicParsing="false" onAction="#goToDeckMenu" prefHeight="39.0" prefWidth="122.0" styleClass="mainMenu-Choose" text="Deck Menu">
+        <Button alignment="CENTER" layoutX="135.0" layoutY="191.0" mnemonicParsing="false" onAction="#goToDeckMenu" prefHeight="41.0" prefWidth="126.0" styleClass="mainMenu-Choose" text="Deck Menu">
             <font>
                 <Font size="18.0" />
             </font>
         </Button>
-        <Button alignment="CENTER" layoutX="232.0" layoutY="253.0" mnemonicParsing="false" onAction="#goToProfileMenu" prefHeight="39.0" prefWidth="126.0" styleClass="mainMenu-Choose" text="Profile Menu">
+        <Button alignment="CENTER" layoutX="133.0" layoutY="232.0" mnemonicParsing="false" onAction="#goToProfileMenu" prefHeight="41.0" prefWidth="130.0" styleClass="mainMenu-Choose" text="Profile Menu">
             <font>
                 <Font size="18.0" />
             </font>
         </Button>
-        <Label alignment="CENTER" layoutX="194.0" layoutY="8.0" prefHeight="35.0" prefWidth="205.0" text="Main Menu" textFill="WHITE">
+        <Label alignment="CENTER" layoutX="3.0" layoutY="8.0" prefHeight="40.0" prefWidth="386.0" text="Main Menu" textFill="WHITE">
             <font>
-                <Font name="System Bold" size="28.0" />
+                <Font name="Kristen ITC" size="23.0" />
             </font>
         </Label>
-      <Button alignment="CENTER" layoutX="231.0" layoutY="299.0" mnemonicParsing="false" onAction="#goToShop" prefHeight="39.0" prefWidth="127.0" styleClass="mainMenu-Choose" text="Shop">
+      <Button alignment="CENTER" layoutX="162.0" layoutY="273.0" mnemonicParsing="false" onAction="#goToShop" prefHeight="39.0" prefWidth="65.0" styleClass="mainMenu-Choose" text="Shop">
          <font>
-            <Font size="18.0" />
+            <Font size="16.0" />
          </font>
       </Button>
     </children>
