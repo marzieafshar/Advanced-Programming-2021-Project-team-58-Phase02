@@ -56,24 +56,12 @@ public class Controller {
         scene = new Scene(root);
         stage.setScene(scene);
     }
-    public void goToScoreBoard(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Scoreboard.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-    }
-    public void goToProfileMenu(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Profile.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-    }
+
     public void Login(ActionEvent event) throws IOException {
         String username = usernameLoginField.getText();
         String password = passwordLoginField.getText();
-        if (username == null) return;
-        else if (password == null) return;
-        else if (Player.getPlayerByUsername(username) == null) {
+        if (username.equals("")||password.equals("")) return;
+        if (Player.getPlayerByUsername(username) == null) {
             Alert alert1 = new Alert(Alert.AlertType.ERROR);
             alert1.setContentText("Username and password didn't match!");
             alert1.show();
@@ -106,10 +94,7 @@ public class Controller {
         String username = usernameRegisterField.getText();
         String password = passwordRegisterField.getText();
         String nickname = nicknameRegisterField.getText();
-        if (username == null) return;
-        else if (nickname == null) return;
-        else if (password == null) return;
-        else {
+        if (username.equals("")||nickname.equals("")||password.equals("")) return;
             if (Player.getPlayerByUsername(username) != null) {
                 Alert alert1 = new Alert(Alert.AlertType.ERROR);
                 alert1.setContentText("user with username " + username + " already exists");
@@ -135,68 +120,10 @@ public class Controller {
                     stage.setScene(scene);
                 }
             }
-        }
+
     }
     public void Exit(ActionEvent event) {
         System.exit(0);
-    }
-    public void LogOut(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Login.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-    }
-
-    public void goToShop(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Shop.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-    }
-
-    public void goToDeckMenu(ActionEvent event) throws IOException {
-        Deck deck1 = new Deck("first");
-        Deck deck2 = new Deck("second");
-        Deck deck3 = new Deck("third");
-        for (int i = 0; i < 7; i++) {
-            deck1.addCardToMainDeck(Card.getCardByName("Trap Hole"));
-            deck1.addCardToMainDeck(Card.getCardByName("Trap Hole"));
-            deck1.addCardToMainDeck(Card.getCardByName("Silver Fang"));
-            deck1.addCardToMainDeck(Card.getCardByName("Suijin"));
-            deck1.addCardToMainDeck(Card.getCardByName("Suijin"));
-            deck1.addCardToMainDeck(Card.getCardByName("Raigeki"));
-            deck1.addCardToMainDeck(Card.getCardByName("Wattkid"));
-        }
-        deck2.addCardToMainDeck(Card.getCardByName("Raigeki"));
-        deck2.addCardToMainDeck(Card.getCardByName("Raigeki"));
-        deck2.addCardToMainDeck(Card.getCardByName("Raigeki"));
-        deck2.addCardToMainDeck(Card.getCardByName("Suijin"));
-        deck2.addCardToMainDeck(Card.getCardByName("Axe Raider"));
-        deck2.addCardToMainDeck(Card.getCardByName("Bitron"));
-        deck2.addCardToMainDeck(Card.getCardByName("Dark Hole"));
-
-        deck3.addCardToMainDeck(Card.getCardByName("Silver Fang"));
-        deck3.addCardToMainDeck(Card.getCardByName("Yomi Ship"));
-        deck3.addCardToMainDeck(Card.getCardByName("Dark Hole"));
-        deck3.addCardToMainDeck(Card.getCardByName("Fireyarou"));
-        deck3.addCardToMainDeck(Card.getCardByName("Suijin"));
-        deck3.addCardToMainDeck(Card.getCardByName("Command Knight"));
-        deck3.addCardToMainDeck(Card.getCardByName("Dark Hole"));
-
-        getLoggedInPlayer().getDecks().add(deck1);
-        getLoggedInPlayer().getDecks().add(deck2);
-        getLoggedInPlayer().getDecks().add(deck3);
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/DeckMenu.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-    }
-
-    public void startANewGame(ActionEvent actionEvent) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Game.fxml")));
-        stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
     }
 
 }

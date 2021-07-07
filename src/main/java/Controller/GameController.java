@@ -1,39 +1,31 @@
 package Controller;
 
-import com.sun.javafx.iio.gif.GIFImageLoader2;
-import javafx.animation.Timeline;
-import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 //import sun.jvm.hotspot.runtime.Threads;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Objects;
+import java.util.Random;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
 
-public class GameController {
+public class GameController implements Initializable {
     @FXML
     private ImageView imageView;
     @FXML
     private AnchorPane anchorPane;
+
+    private CoinAnimation1 animation1;
+    private CoinAnimation1 animation2;
+    private CoinAnimation1 animation3;
+    private CoinAnimation1 animation4;
 
     Stage stage;
     int index = 0;
@@ -42,41 +34,39 @@ public class GameController {
         this.stage = stage;
     }
 
-//    @Override
-//    public void initialize(URL url, ResourceBundle resourceBundle) {
-//        for (int i = 0; i < 1000000000; i++) {
-//            String str = "/Images/Characters/Chara001.dds" + i % 35 + ".png";
-//            Image image = new Image(getClass().getResourceAsStream(str));
-//            imageView.setImage(image);
-
-//            if (i % 100000000 == 0) {
-//                System.out.println(i/100000000);
-//                String str = "/Images/Characters/Chara001.dds" + i/100000000 + ".png";
-//                Image image = new Image(getClass().getResourceAsStream(str));
-//                imageView.setImage(image);
-//                try {
-//                    Thread.sleep(2000);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            try {
-//                Thread.sleep(1000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
-
-
-//        Timer myTimer = new Timer();
-//        myTimer.schedule(new TimerTask(){
-//
-//            @Override
-//            public void run() {
-//               loadNextScene();
-//            }
-//        }, 10000);
-//        loadNextScene();
-//    }
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        animation1 = new CoinAnimation1(imageView);
+        animation2 = new CoinAnimation1(imageView);
+        animation3 = new CoinAnimation1(imageView);
+        animation4 = new CoinAnimation1(imageView);
+        animation1.play();
+        animation1.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                animation2.play();
+            }
+        });
+        animation2.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                animation3.play();
+            }
+        });
+        animation3.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                animation4.play();
+            }
+        });
+        animation4.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                imageView.setImage(null);
+                heartOrStar();
+            }
+        });
+    }
 
     private void loadNextScene() {
         AnchorPane pane = null;
@@ -88,10 +78,18 @@ public class GameController {
         anchorPane.getChildren().setAll(pane);
     }
 
-    public void loadImages(ActionEvent event) {
-        String str = "/Images/Characters/Chara001.dds" + index + ".png";
-        Image image = new Image(getClass().getResourceAsStream(str));
-        imageView.setImage(image);
-        index++;
+    public void heartOrStar() {
+        Random rand = new Random();
+        int a = rand.nextInt(2);
+        if(a == 1) {
+            String str = "/Images/Coin/0.png";
+            Image image = new Image(getClass().getResourceAsStream(str));
+            imageView.setImage(image);
+        }
+        else {
+            String str = "/Images/Coin/Silver_21.png";
+            Image image = new Image(getClass().getResourceAsStream(str));
+            imageView.setImage(image);
+        }
     }
 }
