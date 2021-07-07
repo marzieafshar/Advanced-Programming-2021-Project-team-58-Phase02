@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="768.0" styleClass="scroll-pane" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DeckMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="768.0" styleClass="scroll-pane" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DeckMenuController">
    <children>
       <BorderPane prefHeight="426.0" prefWidth="768.0" styleClass="scroll-pane" stylesheets="@../Styles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <bottom>
@@ -64,7 +64,7 @@
                         </ScrollPane>
                         <ImageView fitHeight="64.0" fitWidth="67.0" onMousePressed="#createNewDeck" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@Images/icon/fdssdf.png" />
+                              <Image url="@../Images/Icon/fdssdf.png" />
                            </image>
                            <cursor>
                               <Cursor fx:constant="HAND" />
@@ -85,7 +85,7 @@
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="44.0" onMousePressed="#back" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
                            <image>
-                              <Image url="@Images/icon/pngfind.com-back-arrow-png-1999892.png" />
+                              <Image url="@../Images/Icon/pngfind.com-back-arrow-png-1999892.png" />
                            </image>
                         </ImageView>
                         <Label alignment="CENTER" prefHeight="48.0" prefWidth="156.0" text="Deck Menu" textAlignment="CENTER">
