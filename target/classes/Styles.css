@@ -108,3 +108,8 @@
     -fx-background-image: url("Images/Background/duelMenu.png");
     -fx-background-size: stretch;
 }
+
+.FlipCoin-background {
+    -fx-background-image: url("Images/Background/coinBackground.jpg");
+    -fx-background-size: stretch;
+}

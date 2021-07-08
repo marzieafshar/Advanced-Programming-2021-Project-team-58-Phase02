@@ -53,7 +53,7 @@ public class DuelFieldController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        game = new Game(,);//get player from other controllers
+        game = new Game(FlipCoinController.getWinner(),FlipCoinController.getLoser());
         game.startOfGameSettings(FlipCoinController.getWinner(), turnOfPlayerLP, oppositionLP);
         game.setController(this);
         game.run();

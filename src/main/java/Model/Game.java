@@ -366,8 +366,8 @@ public class Game {
     }
 
     public void setPlayersLp(Label turnLabel , Label oppositionLabel) {
-        player.setLP(8000);
-        player2.setLP(8000);
+        player.setLP(7000);
+        player2.setLP(7000);
         turnLabel.setText(String.valueOf(turnOfPlayer.getLP()));
         oppositionLabel.setText(String.valueOf(getOpposition().getLP()));
     }

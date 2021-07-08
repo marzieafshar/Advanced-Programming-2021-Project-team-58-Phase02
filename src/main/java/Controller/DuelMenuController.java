@@ -110,9 +110,9 @@ public class DuelMenuController implements Initializable {
     }
 
     public void handleRound() {
-        if (numOfCurrentRound == 1) {
+        if (numOfCurrentRound == 0) {
             nextRoundButton.setText("start game");
-            editDeckButton.setDisable(false);
+//            editDeckButton.setDisable();
             player1SetsWin = 0;
             player2SetsWin = 0;
             LPsPlayer1.clear();
