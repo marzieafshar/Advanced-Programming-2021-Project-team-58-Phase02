@@ -8,22 +8,22 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="Register-background" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Controller">
     <children>
-        <Button layoutX="14.0" layoutY="355.0" mnemonicParsing="false" onAction="#backToWelcomeMenu" text="Back" />
+        <Button layoutX="14.0" layoutY="355.0" mnemonicParsing="false" onAction="#backToWelcomeMenu" styleClass="register-button" text="Back" />
         <Button layoutX="84.0" layoutY="298.0" mnemonicParsing="false" onAction="#Register" styleClass="register-button" stylesheets="@../Styles.css" text="Register">
          <font>
             <Font size="18.0" />
          </font></Button>
-        <TextField fx:id="usernameRegisterField" layoutX="40.0" layoutY="85.0" prefHeight="39.0" prefWidth="177.0" promptText="Username">
+        <TextField fx:id="usernameRegisterField" layoutX="40.0" layoutY="85.0" prefHeight="39.0" prefWidth="177.0" promptText="Username" styleClass="register-button">
             <font>
                 <Font size="18.0" />
             </font>
         </TextField>
-        <TextField fx:id="nicknameRegisterField" layoutX="40.0" layoutY="161.0" prefHeight="39.0" prefWidth="177.0" promptText="Nickname">
+        <TextField fx:id="nicknameRegisterField" layoutX="40.0" layoutY="161.0" prefHeight="39.0" prefWidth="177.0" promptText="Nickname" styleClass="register-button">
             <font>
                 <Font size="18.0" />
             </font>
         </TextField>
-        <TextField fx:id="passwordRegisterField" layoutX="40.0" layoutY="231.0" prefHeight="39.0" prefWidth="177.0" promptText="Password">
+        <TextField fx:id="passwordRegisterField" layoutX="40.0" layoutY="231.0" prefHeight="39.0" prefWidth="177.0" promptText="Password" styleClass="register-button">
             <font>
                 <Font size="18.0" />
             </font>

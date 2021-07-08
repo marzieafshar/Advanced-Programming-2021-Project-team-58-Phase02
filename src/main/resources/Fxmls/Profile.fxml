@@ -17,9 +17,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ProfileController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="800.0" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ProfileController">
    <children>
-      <BorderPane layoutX="-2.0" prefHeight="494.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane layoutX="-2.0" prefHeight="494.0" prefWidth="800.0" styleClass="profile-background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
             <HBox alignment="CENTER" prefHeight="52.0" prefWidth="800.0" BorderPane.alignment="CENTER">
                <children>
@@ -71,7 +71,7 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="41.0" prefWidth="335.0">
                            <children>
-                              <Label prefHeight="31.0" prefWidth="222.0" text="User information" textAlignment="CENTER" textFill="#582cda">
+                              <Label prefHeight="31.0" prefWidth="227.0" text="User information" textAlignment="CENTER">
                                  <font>
                                     <Font name="Bodoni MT Black" size="25.0" />
                                  </font>
@@ -80,29 +80,12 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="30.0" prefWidth="335.0">
                            <children>
-                              <Label minWidth="-Infinity" text="Username:">
+                              <Label minWidth="-Infinity" prefHeight="19.0" prefWidth="99.0" text="Username:" textFill="#31f248">
                                  <font>
                                     <Font name="Berlin Sans FB Demi Bold" size="16.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="username" prefHeight="19.0" prefWidth="56.0" text="Marzie">
-                                 <font>
-                                    <Font name="Berlin Sans FB Demi Bold" size="16.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets left="10.0" />
-                                 </HBox.margin>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="33.0" prefWidth="335.0">
-                           <children>
-                              <Label text="Score:">
-                                 <font>
-                                    <Font name="Berlin Sans FB Demi Bold" size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="userScore" text="10000">
+                              <Label fx:id="username" prefHeight="19.0" prefWidth="56.0" text="Marzie" textFill="WHITE">
                                  <font>
                                     <Font name="Berlin Sans FB Demi Bold" size="16.0" />
                                  </font>
@@ -112,19 +95,14 @@
                               </Label>
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" prefHeight="31.0" prefWidth="335.0">
+                        <HBox alignment="CENTER" prefHeight="28.0" prefWidth="335.0">
                            <children>
-                              <Label>
+                              <Label prefHeight="19.0" prefWidth="106.0" text="Score:" textFill="#31f248">
                                  <font>
                                     <Font name="Berlin Sans FB Demi Bold" size="16.0" />
                                  </font>
                               </Label>
-                              <Label text="Money:">
-                                 <font>
-                                    <Font name="Berlin Sans FB Demi Bold" size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="userMoney" text="1000000">
+                              <Label fx:id="userScore" text="10000" textFill="WHITE">
                                  <font>
                                     <Font name="Berlin Sans FB Demi Bold" size="16.0" />
                                  </font>
@@ -141,34 +119,12 @@
                                     <Font name="Berlin Sans FB Demi Bold" size="16.0" />
                                  </font>
                               </Label>
-                              <Label text="Number Of Decks:">
+                              <Label prefHeight="19.0" prefWidth="86.0" text="Money:" textFill="#31f248">
                                  <font>
                                     <Font name="Berlin Sans FB Demi Bold" size="16.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="userNumOfDecks" text="5">
-                                 <font>
-                                    <Font name="Berlin Sans FB Demi Bold" size="16.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets left="10.0" />
-                                 </HBox.margin>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="31.0" prefWidth="335.0">
-                           <children>
-                              <Label>
-                                 <font>
-                                    <Font name="Berlin Sans FB Demi Bold" size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label text="Active Deck:">
-                                 <font>
-                                    <Font name="Berlin Sans FB Demi Bold" size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="userActiveDeckName" text="My Deck">
+                              <Label fx:id="userMoney" text="1000000" textFill="WHITE">
                                  <font>
                                     <Font name="Berlin Sans FB Demi Bold" size="16.0" />
                                  </font>
@@ -185,12 +141,12 @@
                                     <Font name="Berlin Sans FB Demi Bold" size="16.0" />
                                  </font>
                               </Label>
-                              <Label text="Number Of Wins:">
+                              <Label prefHeight="19.0" prefWidth="141.0" text="Number Of Decks:" textFill="#31f248">
                                  <font>
                                     <Font name="Berlin Sans FB Demi Bold" size="16.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="userNumOfWins" text="9">
+                              <Label fx:id="userNumOfDecks" text="5" textFill="WHITE">
                                  <font>
                                     <Font name="Berlin Sans FB Demi Bold" size="16.0" />
                                  </font>
@@ -207,12 +163,56 @@
                                     <Font name="Berlin Sans FB Demi Bold" size="16.0" />
                                  </font>
                               </Label>
-                              <Label text="Number Of Losses:">
+                              <Label text="Active Deck:" textFill="#31f248">
                                  <font>
                                     <Font name="Berlin Sans FB Demi Bold" size="16.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="userNumOfLosses" text="6">
+                              <Label fx:id="userActiveDeckName" text="My Deck" textFill="WHITE">
+                                 <font>
+                                    <Font name="Berlin Sans FB Demi Bold" size="16.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="31.0" prefWidth="335.0">
+                           <children>
+                              <Label>
+                                 <font>
+                                    <Font name="Berlin Sans FB Demi Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label prefHeight="19.0" prefWidth="141.0" text="Number Of Wins:" textFill="#31f248">
+                                 <font>
+                                    <Font name="Berlin Sans FB Demi Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="userNumOfWins" text="9" textFill="WHITE">
+                                 <font>
+                                    <Font name="Berlin Sans FB Demi Bold" size="16.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="31.0" prefWidth="335.0">
+                           <children>
+                              <Label>
+                                 <font>
+                                    <Font name="Berlin Sans FB Demi Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label prefHeight="19.0" prefWidth="142.0" text="Number Of Losses:" textFill="#31f248">
+                                 <font>
+                                    <Font name="Berlin Sans FB Demi Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="userNumOfLosses" text="6" textFill="WHITE">
                                  <font>
                                     <Font name="Berlin Sans FB Demi Bold" size="16.0" />
                                  </font>
@@ -227,7 +227,7 @@
                               <Insets />
                            </opaqueInsets>
                            <children>
-                              <PasswordField fx:id="passwordChangeField" prefHeight="16.0" prefWidth="121.0" promptText="New Password">
+                              <PasswordField fx:id="passwordChangeField" prefHeight="29.0" prefWidth="194.0" promptText="New Password:" styleClass="profile-textField">
                                  <HBox.margin>
                                     <Insets left="50.0" />
                                  </HBox.margin>
@@ -239,7 +239,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="335.0">
                            <children>
-                              <PasswordField fx:id="repeatPasswordChangeField" prefHeight="17.0" prefWidth="188.0" promptText="Repeat New Password">
+                              <PasswordField fx:id="repeatPasswordChangeField" prefHeight="17.0" prefWidth="195.0" promptText="Repeat New Password:" styleClass="profile-textField">
                                  <font>
                                     <Font name="Berlin Sans FB Demi Bold" size="15.0" />
                                  </font>
@@ -249,7 +249,7 @@
                               </PasswordField>
                               <ImageView fitHeight="27.0" fitWidth="27.0" onMousePressed="#passwordChange" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../Images/Icon/clipart289176.png" />
+                                    <Image url="@../Images/icon/clipart289176.png" />
                                  </image>
                                  <HBox.margin>
                                     <Insets left="20.0" />
@@ -262,7 +262,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="335.0">
                            <children>
-                              <TextField fx:id="nicknameChangeField" prefHeight="27.0" prefWidth="248.0" promptText="Your Nickname: ">
+                              <TextField fx:id="nicknameChangeField" prefHeight="27.0" prefWidth="248.0" promptText="Your Nickname: " styleClass="profile-textField">
                                  <font>
                                     <Font name="Berlin Sans FB Demi Bold" size="15.0" />
                                  </font>
@@ -272,7 +272,7 @@
                               </TextField>
                               <ImageView fitHeight="27.0" fitWidth="27.0" onMousePressed="#nicknameChange" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../Images/Icon/clipart289176.png" />
+                                    <Image url="@../Images/icon/clipart289176.png" />
                                  </image>
                                  <HBox.margin>
                                     <Insets left="10.0" />
@@ -282,9 +282,9 @@
                         </HBox>
                         <HBox alignment="BOTTOM_LEFT" prefHeight="26.0" prefWidth="335.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#backToMainMenu" prefHeight="28.0" prefWidth="55.0" text="Back">
+                              <Button mnemonicParsing="false" onAction="#backToMainMenu" prefHeight="35.0" prefWidth="87.0" styleClass="profile-backButton" text="Back">
                                  <font>
-                                    <Font name="Book Antiqua" size="15.0" />
+                                    <Font name="Rockwell Extra Bold" size="14.0" />
                                  </font>
                                  <HBox.margin>
                                     <Insets bottom="10.0" left="10.0" />

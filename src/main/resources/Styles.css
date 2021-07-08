@@ -37,6 +37,7 @@
     -fx-background-color: black;
     -fx-background-radius: 80;
 }
+
 .Register-background {
     -fx-background-image: url("Images/Background/4oDqkW.jpg");
     -fx-background-size: stretch;
@@ -45,6 +46,9 @@
 .register-button {
     -fx-background-color: rgb(140, 0, 0);
     -fx-background-radius: 80;
+    -fx-text-fill: white;
+    -fx-border-color: white;
+    -fx-border-radius: 80;
 }
 
 .login-background {
@@ -107,8 +111,20 @@
     -fx-background-image: url("Images/Background/duelMenu.png");
     -fx-background-size: stretch;
 }
-
-.FlipCoin-background {
-    -fx-background-image: url("Images/Background/coinBackground.jpg");
+.profile-background{
+    -fx-background-image: url("Images/Background/50061.png");
     -fx-background-size: stretch;
+}
+.profile-textField{
+    -fx-background-color: #273746;
+    -fx-border-color: black;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-text-fill: white;
+}
+.profile-backButton{
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-radius: 40;
+    -fx-background-radius: 40;
 }
