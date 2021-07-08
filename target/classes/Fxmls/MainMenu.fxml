@@ -1,48 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="315.0" prefWidth="260.0" styleClass="mainMenu-background" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Controller">
-    <children>
-        <Button layoutX="2.0" layoutY="279.0" mnemonicParsing="false" onAction="#LogOut" styleClass="mainMenu-Choose" text="Log out" />
-        <Button alignment="CENTER" layoutX="136.0" layoutY="70.0" mnemonicParsing="false" onAction="#startANewGame" prefHeight="41.0" prefWidth="124.0" styleClass="mainMenu-Choose" text="New Game">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Button>
-        <Button alignment="CENTER" layoutX="94.0" layoutY="111.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="208.0" styleClass="mainMenu-Choose" text="New Game (Multi-Player)">
-            <font>
-                <Font size="16.0" />
-            </font>
-        </Button>
-        <Button alignment="CENTER" layoutX="135.0" layoutY="150.0" mnemonicParsing="false" onAction="#goToScoreBoard" prefHeight="41.0" prefWidth="125.0" styleClass="mainMenu-Choose" text="Score Board">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Button>
-        <Button alignment="CENTER" layoutX="135.0" layoutY="191.0" mnemonicParsing="false" onAction="#goToDeckMenu" prefHeight="41.0" prefWidth="126.0" styleClass="mainMenu-Choose" text="Deck Menu">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Button>
-        <Button alignment="CENTER" layoutX="133.0" layoutY="232.0" mnemonicParsing="false" onAction="#goToProfileMenu" prefHeight="41.0" prefWidth="130.0" styleClass="mainMenu-Choose" text="Profile Menu">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Button>
-        <Label alignment="CENTER" layoutX="3.0" layoutY="8.0" prefHeight="40.0" prefWidth="386.0" text="Main Menu" textFill="WHITE">
-            <font>
-                <Font name="Kristen ITC" size="23.0" />
-            </font>
-        </Label>
-      <Button alignment="CENTER" layoutX="162.0" layoutY="273.0" mnemonicParsing="false" onAction="#goToShop" prefHeight="39.0" prefWidth="65.0" styleClass="mainMenu-Choose" text="Shop">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Button>
-      <Button layoutX="35.0" layoutY="48.0" mnemonicParsing="false" onAction="#startANewGame" text="Button" />
-    </children>
-</AnchorPane>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="mainMenu-background" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuController">
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="139.0" prefWidth="600.0">
+               <children>
+                  <Label styleClass="main-menu-text" text="Main Menu" textFill="WHITE">
+                     <font>
+                        <Font name="Kristen ITC" size="31.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#startANewGame" styleClass="mainMenu-Choose" text="New Game">
+                     <font>
+                        <Font name="Berlin Sans FB Demi Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" styleClass="mainMenu-Choose" text="Multi-player Game">
+                     <font>
+                        <Font name="Berlin Sans FB Demi Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#goToScoreBoard" styleClass="mainMenu-Choose" text="Scoreboard">
+                     <font>
+                        <Font name="Berlin Sans FB Demi Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#goToProfileMenu" styleClass="mainMenu-Choose" text="Profile Menu">
+                     <font>
+                        <Font name="Berlin Sans FB Demi Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#goToShop" styleClass="mainMenu-Choose" text="Shop">
+                     <font>
+                        <Font name="Berlin Sans FB Demi Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#goToDeckMenu" styleClass="mainMenu-Choose" text="Deck Menu">
+                     <font>
+                        <Font name="Berlin Sans FB Demi Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" styleClass="mainMenu-Choose" text="Card Creator">
+                     <font>
+                        <Font name="Berlin Sans FB Demi Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="BASELINE_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="134.0" prefWidth="600.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#logout" styleClass="mainMenu-Choose" text="Logout">
+                     <HBox.margin>
+                        <Insets bottom="20.0" left="20.0" top="20.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="Berlin Sans FB Demi Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

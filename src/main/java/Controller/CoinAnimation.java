@@ -5,11 +5,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
-public class CoinAnimation1 extends Transition {
+public class CoinAnimation extends Transition {
 
     private ImageView imageView;
 
-    public CoinAnimation1(ImageView imageView) {
+    public CoinAnimation(ImageView imageView) {
         this.imageView = imageView;
         setCycleDuration(Duration.millis(1000));
     }

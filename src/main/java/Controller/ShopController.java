@@ -156,6 +156,7 @@ public class ShopController implements Initializable {
     }
 
     public void backToMainMenu(ActionEvent event) throws IOException {
+        JsonSaveAndLoad.save();
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/MainMenu.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);

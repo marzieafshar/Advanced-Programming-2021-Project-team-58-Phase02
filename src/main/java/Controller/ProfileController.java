@@ -54,6 +54,7 @@ public class ProfileController implements Initializable {
 
     @FXML
     void backToMainMenu(ActionEvent event) throws IOException {
+        JsonSaveAndLoad.save();
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/MainMenu.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));

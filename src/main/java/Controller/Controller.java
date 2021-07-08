@@ -1,7 +1,5 @@
 package Controller;
 
-import Model.Card;
-import Model.Deck;
 import Model.Player;
 import javafx.scene.*;
 import javafx.scene.control.*;
@@ -107,11 +105,11 @@ public class Controller {
                 } else {
                     Alert alert3 = new Alert(Alert.AlertType.INFORMATION);
                     new Player(username, password, nickname);
-//                    try {
-//                        jsonSaveAndLoad.save();
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
+                    try {
+                        JsonSaveAndLoad.save();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     alert3.setContentText("user created successfully!");
                     alert3.show();
                     root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Login.fxml")));

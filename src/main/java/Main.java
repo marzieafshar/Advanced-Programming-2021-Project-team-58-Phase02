@@ -1,4 +1,4 @@
-import Controller.jsonSaveAndLoad;
+import Controller.JsonSaveAndLoad;
 import Model.MonsterCard;
 import Model.TrapAndSpellCard;
 import javafx.application.Application;
@@ -18,11 +18,11 @@ public class Main extends Application {
         TrapAndSpellCard.addTrapAndSpell();
         File file = new File("Players.txt");
         if(file.length() != 0) {
-//            try {
-//                jsonSaveAndLoad.load();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
+            try {
+                JsonSaveAndLoad.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         Parent root = FXMLLoader.load(getClass().getResource("/Fxmls/WelcomeMenu.fxml"));
         primaryStage.setTitle("Yu-Gi-Oh");

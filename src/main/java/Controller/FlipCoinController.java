@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Player;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -16,16 +17,18 @@ import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
 
-public class GameController implements Initializable {
+public class FlipCoinController implements Initializable {
     @FXML
     private ImageView imageView;
     @FXML
     private AnchorPane anchorPane;
 
-    private CoinAnimation1 animation1;
-    private CoinAnimation1 animation2;
-    private CoinAnimation1 animation3;
-    private CoinAnimation1 animation4;
+    private static Player winner;//check it later! (static)
+
+    private CoinAnimation animation1;
+    private CoinAnimation animation2;
+    private CoinAnimation animation3;
+    private CoinAnimation animation4;
 
     Stage stage;
     int index = 0;
@@ -34,12 +37,16 @@ public class GameController implements Initializable {
         this.stage = stage;
     }
 
+    public static Player getWinner() {
+        return winner;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        animation1 = new CoinAnimation1(imageView);
-        animation2 = new CoinAnimation1(imageView);
-        animation3 = new CoinAnimation1(imageView);
-        animation4 = new CoinAnimation1(imageView);
+        animation1 = new CoinAnimation(imageView);
+        animation2 = new CoinAnimation(imageView);
+        animation3 = new CoinAnimation(imageView);
+        animation4 = new CoinAnimation(imageView);
         animation1.play();
         animation1.setOnFinished(new EventHandler<ActionEvent>() {
             @Override
@@ -82,11 +89,13 @@ public class GameController implements Initializable {
         Random rand = new Random();
         int a = rand.nextInt(2);
         if(a == 1) {
+            winner = Controller.getLoggedInPlayer();
             String str = "/Images/Coin/0.png";
             Image image = new Image(getClass().getResourceAsStream(str));
             imageView.setImage(image);
         }
         else {
+
             String str = "/Images/Coin/Silver_21.png";
             Image image = new Image(getClass().getResourceAsStream(str));
             imageView.setImage(image);

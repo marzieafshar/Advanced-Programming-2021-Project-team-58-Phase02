@@ -19,7 +19,6 @@ public class MainMenuController {
     private Stage stage;
     private Scene scene;
 
-
     public void startANewGame(ActionEvent actionEvent) throws Exception {
 
         Player loggedInPlayer = Controller.getLoggedInPlayer();
@@ -35,8 +34,11 @@ public class MainMenuController {
         } else {
             root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/SetOpponent.fxml")));
             stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            SetOpponentController.setMainMenuStage(stage);
+            Stage stageSetOpponent = new Stage();
             scene = new Scene(root);
-            stage.setScene(scene);
+            stageSetOpponent.setScene(scene);
+            stageSetOpponent.show();
         }
     }
 

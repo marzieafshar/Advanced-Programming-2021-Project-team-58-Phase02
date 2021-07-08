@@ -24,7 +24,9 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class DeckMenuController implements Initializable {
-
+    private Parent root;
+    private Stage stage;
+    private Scene scene;
 
     public GridPane gridDecks;
     public GridPane gridDeckCards;
@@ -35,6 +37,15 @@ public class DeckMenuController implements Initializable {
 
     private Deck selectedDeck;
     private Card selectedCard;
+    private static boolean isGameStarted;
+
+    public static void setIsGameStarted(boolean isGameStarted) {
+        DeckMenuController.isGameStarted = isGameStarted;
+    }
+
+    public static boolean getIsGameStarted(){
+        return isGameStarted;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -115,10 +126,31 @@ public class DeckMenuController implements Initializable {
     }
 
     public void back(MouseEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/MainMenu.fxml")));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
+        JsonSaveAndLoad.save();
+        if(isGameStarted){
+            if (logInPlayer.getActiveDeck() == null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("You don't have any active deck!");
+                alert.showAndWait();
+            } else if (!logInPlayer.getActiveDeck().isValid()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Your active deck is not valid!");
+                alert.showAndWait();
+            }
+            else {
+                setIsGameStarted(false);
+                root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/DuelMenu.fxml")));
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+            }
+        }
+        else {
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/MainMenu.fxml")));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+        }
     }
 
     public void showInfo(ActionEvent actionEvent) {

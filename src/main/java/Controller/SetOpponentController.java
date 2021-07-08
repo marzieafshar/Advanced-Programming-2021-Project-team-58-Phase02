@@ -31,8 +31,17 @@ public class SetOpponentController implements Initializable {
     @FXML
     private Label ErrorLabel;
 
+    @FXML
+    private ComboBox<String> comboBox;
+
     private static String roundChoice;
     private static Player player2;
+
+    private static Stage mainMenuStage;
+
+    public static void setMainMenuStage(Stage menuStage) {
+        mainMenuStage = menuStage;
+    }
 
     public static void setPlayer2(Player player2) {
         SetOpponentController.player2 = player2;
@@ -50,9 +59,6 @@ public class SetOpponentController implements Initializable {
         return Integer.parseInt(roundChoice);
     }
 
-    @FXML
-    private ComboBox<String> comboBox;
-
     public void checkOpponent(ActionEvent event) throws IOException {
         String opponentName = opponentUsername.getText();
          if (!Player.getAllPlayers().contains(Player.getPlayerByUsername(opponentName)))
@@ -65,11 +71,14 @@ public class SetOpponentController implements Initializable {
                 ErrorLabel.setText("Your opponent's active deck is not valid!");
             else if (roundChoice == null)
                  ErrorLabel.setText("Please choose a round number!");
+            else if(opponentName.equals(Controller.getLoggedInPlayer().getUsername()))
+                ErrorLabel.setText("You can't play with yourself!");
             else {
                 root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/DuelMenu.fxml")));
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
-                stage.setScene(scene);
+                stage.close();
+                mainMenuStage.setScene(scene);
             }
         }
     }
