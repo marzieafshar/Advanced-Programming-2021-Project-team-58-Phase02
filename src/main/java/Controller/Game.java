@@ -37,6 +37,7 @@ public class Game implements Initializable {
     public GridPane gridHandCardsOpponent;
     public GridPane gridPanePhaseIcons;
     public Text infoTextArea;
+    public Text errorText;
     private Card selectedCardGraphic;
 
     @FXML
@@ -251,6 +252,7 @@ public class Game implements Initializable {
     public void endPhase(ActionEvent event) {
         changeTurnOfPlayer();
         showWhichPlayersTurn();
+        isAnyCardSummoned = false;
     }
 
     public void mainPhase() {
@@ -572,19 +574,19 @@ public class Game implements Initializable {
     public boolean summonMonsterOnBoard() {
         boolean isTributeSucceeds = false;
         if ((selectedCardHand == null) && (selectedPosition == null)) {
-            System.out.println("no card is selected yet");
+            errorText.setText("no card is selected yet");
             return false;
         } else if (selectedCardHand == null || !(selectedCardHand instanceof MonsterCard)) {
-            System.out.println("you can’t summon this card");
+            errorText.setText("you can’t summon this card");
             return false;
         } else if (!this.phase.equals(Phase.MAIN)) {
-            System.out.println("action not allowed in this phase");
+            errorText.setText("action not allowed in this phase");
             return false;
         } else if (turnOfPlayer.getBoard().isMonsterZoneFull()) {
-            System.out.println("monster card zone is full");
+            errorText.setText("monster card zone is full");
             return false;
         } else if (this.isAnyCardSummoned) {
-            System.out.println("you already summoned/set on this turn");
+            errorText.setText("you already summoned/set on this turn");
             return true;
         } else {
             if (((MonsterCard) selectedCardHand).getCardLevel() < 5)
@@ -592,21 +594,19 @@ public class Game implements Initializable {
             else {
                 if (((MonsterCard) selectedCardHand).getCardLevel() < 7) {
                     if (turnOfPlayer.getBoard().cardsInMonsterZone() == 0) {
-                        System.out.println("there are not enough cards for tribute");
+                        errorText.setText("there are not enough cards for tribute");
                         return false;
                     } else {
-                        isTributeSucceeds = tribute(1);
-                        if (isTributeSucceeds) return lastStepForSummon();
-                        else return false;
+                        tribute(1);
+                        return lastStepForSummon();
                     }
                 } else {
                     if (turnOfPlayer.getBoard().cardsInMonsterZone() < 2) {
-                        System.out.println("there are not enough cards for tribute");
+                        errorText.setText("there are not enough cards for tribute");
                         return false;
                     } else {
-                        isTributeSucceeds = tribute(2);
-                        if (isTributeSucceeds) return lastStepForSummon();
-                        else return false;
+                        tribute(2);
+                        return lastStepForSummon();
                     }
                 }
             }
@@ -618,43 +618,24 @@ public class Game implements Initializable {
         turnOfPlayer.getBoard().getMonsterCards().get(i).setStatus(StatusOfPosition.OFFENSIVE_OCCUPIED);
         turnOfPlayer.getBoard().getMonsterCards().get(i).setCard(selectedCardHand);
         turnOfPlayer.getHand().remove(selectedCardHand);
-        System.out.println("summoned successfully");
-
+        showHandCards();
+        errorText.setText("summoned successfully");
         selectedCardHandNulling();
         selectedPositionNulling();
         return true;
     }
 
-    private boolean tribute(int numberOfCards) {
+    private void tribute(int numberOfCards) {
         int numOfCardsTributed = 0;
-
-//        if (!(turnOfPlayer instanceof AIClass)) {
-        while (numOfCardsTributed != numberOfCards) {
-            System.out.println("Please enter the index of the monster that you want to tribute");
-            String a = scanner.nextLine();
-            int b = 0;
-            try {
-                b = convertIndex(Integer.parseInt(a));
-            } catch (Exception e) {
-                System.out.println("Please enter an integer");
-                continue;
-            }
-            Position position = turnOfPlayer.getBoard().getMonsterCards().get(b);
-            if (position.getStatus().equals(StatusOfPosition.EMPTY)) {
-                System.out.println("there no monsters one this address");
+        errorText.setText("Please choose " + (numberOfCards - numOfCardsTributed) + " monsters for tribute");
+        if (selectedPosition != null) {
+            if (turnOfPlayer.getBoard().getMonsterCards().contains(selectedPosition)) {
+                sendToGraveyard(selectedPosition, turnOfPlayer);
+                selectedPositionNulling();
             } else {
-                sendToGraveyard(position, turnOfPlayer);
-                numOfCardsTributed++;
+                errorText.setText("you can't tribute this card");
             }
         }
-//        } else {
-//            for (int i = 0; i < numberOfCards; i++) {
-//                int index = turnOfPlayer.getBoard().getMinimumAttackPosition();
-//                Position position = turnOfPlayer.getBoard().getMonsterCards().get(index);
-//                sendToGraveyard(position, turnOfPlayer);
-//            }
-//        }
-        return true;
     }
 
     public boolean setMonsterCardOnBoard() {

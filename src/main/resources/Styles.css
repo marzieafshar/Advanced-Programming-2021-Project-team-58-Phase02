@@ -135,3 +135,8 @@
     -fx-background-image: url("Images/Background/coinBackground.jpg");
     -fx-background-size: stretch;
 }
+.errorBox-background{
+    -fx-background-image: url("Images/error.jpg");
+    -fx-background-size: stretch;
+}
+
