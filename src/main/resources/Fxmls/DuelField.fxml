@@ -8,19 +8,101 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="627.0" prefWidth="847.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1214.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Game">
    <children>
-      <BorderPane prefHeight="626.0" prefWidth="847.0">
+      <BorderPane prefHeight="650.0" prefWidth="1214.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
-            <VBox prefHeight="510.0" prefWidth="251.0" styleClass="left-bar" stylesheets="@../Styles.css" BorderPane.alignment="CENTER">
+            <VBox maxWidth="-Infinity" prefHeight="650.0" prefWidth="220.0" styleClass="left-bar" stylesheets="@../Styles.css" BorderPane.alignment="CENTER">
                <children>
-                  <HBox prefHeight="91.0" prefWidth="251.0">
+                  <HBox alignment="CENTER" prefHeight="81.0" prefWidth="250.0">
                      <children>
-                        <ImageView fitHeight="91.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
+                        <Label text="Label">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <VBox prefHeight="603.0" prefWidth="250.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="267.0" prefWidth="171.0">
+                           <children>
+                              <ImageView fx:id="selectedCardImage" fitHeight="270.0" fitWidth="179.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Images/Monster/Unknown.jpg" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets top="10.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <HBox alignment="TOP_CENTER" prefHeight="331.0" prefWidth="250.0" stylesheets="@../Styles.css">
+                           <children>
+                              <Text fx:id="infoTextArea" strokeType="OUTSIDE" strokeWidth="0.0" text="No card is selected!">
+                                 <font>
+                                    <Font name="Berlin Sans FB Demi Bold" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </Text>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </left>
+         <center>
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="650.0" prefWidth="714.0" styleClass="duel-background" stylesheets="@../Styles.css" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="TOP_CENTER" layoutX="19.0" layoutY="550.0" prefHeight="102.0" prefWidth="701.0">
+                     <children>
+                        <GridPane fx:id="gridHandCardsTurnOfPlayer">
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                        </GridPane>
+                     </children></HBox>
+                  <HBox alignment="BOTTOM_CENTER" layoutX="-2.0" layoutY="-14.0" prefHeight="91.0" prefWidth="714.0">
+                     <children>
+                        <GridPane fx:id="gridHandCardsOpponent">
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                        </GridPane>
+                     </children>
+                  </HBox>
+                  <Button layoutX="-7.0" layoutY="528.0" mnemonicParsing="false" onAction="#drawPhase" rotate="90.0" text="Draw Phase" />
+                  <Button layoutX="-4.0" layoutY="348.0" mnemonicParsing="false" onAction="#endPhase" rotate="90.0" text="End phase" />
+                  <Button layoutX="-6.0" layoutY="437.0" mnemonicParsing="false" onAction="#mainPhase" rotate="90.0" text="main phase" />
+                  <ImageView fx:id="imageViewMonster15" fitHeight="97.0" fitWidth="73.0" layoutX="147.0" layoutY="347.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageViewMonster13" fitHeight="97.0" fitWidth="73.0" layoutX="246.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageViewMonster11" fitHeight="99.0" fitWidth="83.0" layoutX="342.0" layoutY="345.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageViewMonster12" fitHeight="97.0" fitWidth="73.0" layoutX="440.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageViewMonster14" fitHeight="97.0" fitWidth="73.0" layoutX="539.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageViewMonster25" fitHeight="97.0" fitWidth="73.0" layoutX="539.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
+                  <ImageView fx:id="imageViewMonster23" fitHeight="97.0" fitWidth="73.0" layoutX="440.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
+                  <ImageView fx:id="imageViewMonster21" fitHeight="97.0" fitWidth="73.0" layoutX="342.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
+                  <ImageView fx:id="imageViewMonster22" fitHeight="97.0" fitWidth="73.0" layoutX="246.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
+                  <ImageView fx:id="imageViewMonster24" fitHeight="97.0" fitWidth="73.0" layoutX="147.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
+               </children>
+            </AnchorPane>
+         </center>
+         <right>
+            <VBox maxWidth="-Infinity" prefHeight="650.0" prefWidth="280.0" styleClass="left-bar" stylesheets="@../Styles.css" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox prefHeight="91.0" prefWidth="307.0">
+                     <children>
+                        <ImageView fx:id="oppositionAvatar" fitHeight="91.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../Images/Characters/Chara001.dds1.png" />
                            </image>
@@ -37,7 +119,7 @@
                                           <Insets left="5.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <Label alignment="CENTER" text="8000">
+                                    <Label fx:id="oppositionLP" alignment="CENTER" text="8000">
                                        <HBox.margin>
                                           <Insets left="40.0" />
                                        </HBox.margin>
@@ -51,13 +133,13 @@
                                  <children>
                                     <ImageView fitHeight="38.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../Images/Icon/416-4162420_health-symbol-png-united-way-health-icon.png" />
+                                          <Image url="@../Images/icon/416-4162420_health-symbol-png-united-way-health-icon.png" />
                                        </image>
                                        <HBox.margin>
                                           <Insets left="2.0" right="5.0" />
                                        </HBox.margin>
                                     </ImageView>
-                                    <ProgressBar prefHeight="18.0" prefWidth="133.0" progress="0.61" styleClass="red-bar" stylesheets="@../Styles.css">
+                                    <ProgressBar fx:id="oppositionProgressBar" prefHeight="18.0" prefWidth="133.0" progress="1.0" styleClass="red-bar" stylesheets="@../Styles.css">
                                        <HBox.margin>
                                           <Insets right="3.0" />
                                        </HBox.margin>
@@ -68,31 +150,22 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <VBox prefHeight="464.0" prefWidth="251.0">
+                  <HBox prefHeight="555.0" prefWidth="250.0" />
+                  <HBox alignment="CENTER" prefHeight="619.0" prefWidth="250.0" styleClass="left-bar" stylesheets="@../Styles.css">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="338.0" prefWidth="251.0">
-                           <children>
-                              <ImageView fitHeight="324.0" fitWidth="251.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../Images/Monster/Unknown.jpg" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" stylesheets="@../Styles.css">
-                           <children>
-                              <Button mnemonicParsing="false" styleClass="search-button" stylesheets="@../Styles.css" text="info">
-                                 <font>
-                                    <Font name="Berlin Sans FB Bold" size="20.0" />
-                                 </font>
-                              </Button>
-                           </children>
-                        </HBox>
+                        <GridPane fx:id="gridPanePhaseIcons" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="0.0" prefWidth="0.0">
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <HBox.margin>
+                              <Insets top="10.0" />
+                           </HBox.margin>
+                        </GridPane>
                      </children>
-                  </VBox>
+                  </HBox>
                   <HBox prefHeight="91.0" prefWidth="251.0" styleClass="red-bar" stylesheets="@../Styles.css">
                      <children>
-                        <ImageView fitHeight="91.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="turnOfPlayerAvatar" fitHeight="91.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../Images/Characters/Chara001.dds1.png" />
                            </image>
@@ -103,13 +176,13 @@
                                  <children>
                                     <ImageView fitHeight="38.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../Images/Icon/416-4162420_health-symbol-png-united-way-health-icon.png" />
+                                          <Image url="@../Images/icon/416-4162420_health-symbol-png-united-way-health-icon.png" />
                                        </image>
                                        <HBox.margin>
                                           <Insets left="2.0" right="5.0" />
                                        </HBox.margin>
                                     </ImageView>
-                                    <ProgressBar prefHeight="18.0" prefWidth="133.0" progress="1.0">
+                                    <ProgressBar fx:id="turnOfPlayerProgressBar" prefHeight="18.0" prefWidth="133.0" progress="1.0">
                                        <HBox.margin>
                                           <Insets right="3.0" />
                                        </HBox.margin>
@@ -129,7 +202,7 @@
                                           <Insets left="5.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <Label alignment="CENTER" text="8000">
+                                    <Label fx:id="turnOfPlayerLP" alignment="CENTER" text="8000">
                                        <HBox.margin>
                                           <Insets left="40.0" />
                                        </HBox.margin>
@@ -145,124 +218,7 @@
                   </HBox>
                </children>
             </VBox>
-         </left>
-         <center>
-            <AnchorPane prefHeight="676.0" prefWidth="596.0" styleClass="duel-background" stylesheets="@../Styles.css" BorderPane.alignment="CENTER">
-               <children>
-                  <ImageView fitHeight="76.0" fitWidth="51.0" layoutX="116.0" layoutY="321.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Images/Monster/ARA.jpg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="76.0" fitWidth="51.0" layoutX="191.0" layoutY="323.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Images/Monster/ARA.jpg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="76.0" fitWidth="51.0" layoutX="271.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Images/Monster/ARA.jpg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="76.0" fitWidth="51.0" layoutX="348.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Images/Monster/ARA.jpg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="76.0" fitWidth="51.0" layoutX="427.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Images/Monster/ARA.jpg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="76.0" fitWidth="51.0" layoutX="426.0" layoutY="421.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Images/Monster/ARA.jpg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="76.0" fitWidth="51.0" layoutX="350.0" layoutY="420.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Images/Monster/ARA.jpg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="76.0" fitWidth="51.0" layoutX="270.0" layoutY="421.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Images/Monster/ARA.jpg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="76.0" fitWidth="51.0" layoutX="189.0" layoutY="421.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Images/Monster/ARA.jpg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="76.0" fitWidth="51.0" layoutX="117.0" layoutY="422.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Images/Monster/ARA.jpg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="76.0" fitWidth="51.0" layoutX="116.0" layoutY="202.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                     <image>
-                        <Image url="@../Images/Monster/ARA.jpg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="76.0" fitWidth="51.0" layoutX="189.0" layoutY="202.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                     <image>
-                        <Image url="@../Images/Monster/ARA.jpg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="76.0" fitWidth="51.0" layoutX="266.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                     <image>
-                        <Image url="@../Images/Monster/ARA.jpg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="76.0" fitWidth="51.0" layoutX="347.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                     <image>
-                        <Image url="@../Images/Monster/ARA.jpg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="76.0" fitWidth="51.0" layoutX="424.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                     <image>
-                        <Image url="@../Images/Monster/ARA.jpg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="76.0" fitWidth="51.0" layoutX="425.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                     <image>
-                        <Image url="@../Images/Monster/ARA.jpg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="76.0" fitWidth="51.0" layoutX="347.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                     <image>
-                        <Image url="@../Images/Monster/ARA.jpg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="76.0" fitWidth="51.0" layoutX="267.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                     <image>
-                        <Image url="@../Images/Monster/ARA.jpg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="76.0" fitWidth="51.0" layoutX="189.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                     <image>
-                        <Image url="@../Images/Monster/ARA.jpg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="76.0" fitWidth="51.0" layoutX="115.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                     <image>
-                        <Image url="@../Images/Monster/ARA.jpg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="87.0" fitWidth="64.0" layoutX="501.0" layoutY="430.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Images/Monster/activeDeck.jpg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="87.0" fitWidth="64.0" layoutX="28.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                     <image>
-                        <Image url="@../Images/Monster/activeDeck.jpg" />
-                     </image>
-                  </ImageView>
-                  <HBox alignment="TOP_CENTER" layoutX="2.0" layoutY="528.0" prefHeight="102.0" prefWidth="591.0" />
-               </children>
-            </AnchorPane>
-         </center>
+         </right>
       </BorderPane>
    </children>
 </AnchorPane>

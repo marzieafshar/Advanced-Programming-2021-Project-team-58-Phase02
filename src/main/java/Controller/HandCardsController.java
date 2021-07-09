@@ -29,14 +29,6 @@ public class HandCardsController {
         myListener.onClickListener(card);
     }
 
-//    @FXML
-//    void handleDragDetectionPlayerCards(MouseEvent event) {
-//        Dragboard db = source.startDragAndDrop(TransferMode.ANY);
-//        ClipboardContent cb = new ClipboardContent();
-//        cb.putString( "player" + index);
-//        db.setContent(cb);
-//    }
-
     public void setCard(Card card, MyListener myListener , int index , boolean isTurnOfPlayer) {
         this.card = card;
         this.index = index;

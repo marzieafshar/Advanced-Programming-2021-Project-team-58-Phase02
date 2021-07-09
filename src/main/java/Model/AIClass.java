@@ -1,5 +1,6 @@
 package Model;
 
+import Controller.Game;
 import com.gilecode.yagson.YaGson;
 import com.google.gson.reflect.TypeToken;
 
@@ -9,7 +10,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Objects;
 
 public class AIClass extends Player {
 

@@ -17,6 +17,7 @@ public class DeckCardsController {
     private MyListener myListener;
     private Card card;
     private int index;
+    private String deckType;
 
     @FXML
     public void click(MouseEvent mouseEvent) {
@@ -36,16 +37,17 @@ public class DeckCardsController {
         selected = (AnchorPane) event.getSource();
         Dragboard db = source.startDragAndDrop(TransferMode.ANY);
         ClipboardContent cb = new ClipboardContent();
-        cb.putString( "Deck" + index);
+        cb.putString( "Deck" +deckType+ index);
         db.setContent(cb);
     }
 
-    public void setCard(Card card , MyListener myListener , int index){
+    public void setCard(Card card , MyListener myListener , int index, String deckType){
         this.card = card;
         this.index = index;
         Image image = new Image(getClass().getResourceAsStream(card.getImageSrc()));
         cardImage.setImage(image);
         this.myListener = myListener;
+        this.deckType = deckType;
     }
 
 

@@ -5,26 +5,26 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="welcome-menu-background" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/8.0.281" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Controller">
+<AnchorPane prefHeight="650.0" prefWidth="1214.0" styleClass="welcome-menu-background" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Controller">
     <children>
-      <Button layoutX="8.0" layoutY="355.0" mnemonicParsing="false" onAction="#Exit" prefHeight="31.0" prefWidth="88.0" styleClass="menu-button" stylesheets="@../Styles.css" text="Exit" textFill="WHITE">
+      <Button layoutX="102.0" layoutY="457.0" mnemonicParsing="false" onAction="#Exit" prefHeight="66.0" prefWidth="281.0" styleClass="menu-button" stylesheets="@../Styles.css" text="Exit" textFill="WHITE">
          <font>
-            <Font size="18.0" />
+            <Font name="Berlin Sans FB Demi Bold" size="30.0" />
          </font>
       </Button>
-      <Label layoutX="68.0" layoutY="33.0" text="Welcome" textFill="#0d0909">
+      <Label layoutX="63.0" layoutY="21.0" prefHeight="148.0" prefWidth="384.0" text="Yu-Gi-Oh" textFill="#0d0909">
          <font>
-            <Font size="55.0" />
+            <Font name="Matura MT Script Capitals" size="72.0" />
          </font>
       </Label>
-      <Button layoutX="182.0" layoutY="176.0" mnemonicParsing="false" onAction="#switchToRegisterMenu" prefHeight="44.0" prefWidth="100.0" styleClass="menu-button" stylesheets="@../Styles.css" text="Register" textFill="WHITE">
+      <Button layoutX="101.0" layoutY="362.0" mnemonicParsing="false" onAction="#switchToRegisterMenu" prefHeight="66.0" prefWidth="281.0" styleClass="menu-button" stylesheets="@../Styles.css" text="Register" textFill="WHITE">
          <font>
-            <Font size="18.0" />
+            <Font name="Berlin Sans FB Bold" size="27.0" />
          </font>
       </Button>
-      <Button layoutX="52.0" layoutY="176.0" mnemonicParsing="false" onAction="#switchToLoginMenu" prefHeight="44.0" prefWidth="100.0" styleClass="menu-button" stylesheets="@../Styles.css" text="Login" textFill="WHITE">
+      <Button layoutX="102.0" layoutY="268.0" mnemonicParsing="false" onAction="#switchToLoginMenu" prefHeight="66.0" prefWidth="281.0" styleClass="menu-button" stylesheets="@../Styles.css" text="Login" textFill="WHITE">
          <font>
-            <Font size="18.0" />
+            <Font name="Berlin Sans FB Bold" size="29.0" />
          </font>
       </Button>
     </children>

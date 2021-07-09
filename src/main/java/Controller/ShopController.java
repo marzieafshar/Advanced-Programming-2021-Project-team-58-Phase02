@@ -103,7 +103,7 @@ public class ShopController implements Initializable {
 //                anchorPane.setCursor();
                     grid.add(anchorPane, column++, row);
 
-                    GridPane.setMargin(anchorPane, new Insets(10));
+                    GridPane.setMargin(anchorPane, new Insets(5));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

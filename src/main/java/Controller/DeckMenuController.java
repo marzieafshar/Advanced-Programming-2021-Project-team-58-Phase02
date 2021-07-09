@@ -2,6 +2,7 @@ package Controller;
 
 import Model.*;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -20,6 +21,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -29,12 +31,13 @@ public class DeckMenuController implements Initializable {
     private Scene scene;
 
     public GridPane gridDecks;
-    public GridPane gridDeckCards;
+    public GridPane gridMainDeckCards;
+    public GridPane gridSideDeckCards;
     public ImageView selectedCardImage;
     public GridPane gridPlayerCards;
     private MyListener myListener;
     private Player logInPlayer;
-
+    int index;
     private Deck selectedDeck;
     private Card selectedCard;
     private static boolean isGameStarted;
@@ -43,7 +46,7 @@ public class DeckMenuController implements Initializable {
         DeckMenuController.isGameStarted = isGameStarted;
     }
 
-    public static boolean getIsGameStarted(){
+    public static boolean getIsGameStarted() {
         return isGameStarted;
     }
 
@@ -60,7 +63,8 @@ public class DeckMenuController implements Initializable {
 
     public void setSelectedDeck(Deck selectedDeck) {
         this.selectedDeck = selectedDeck;
-        showDeckCards(selectedDeck);
+        showMainDeckCards(selectedDeck);
+        showSideDeckCards(selectedDeck);
     }
 
     public void showPlayerCards() {
@@ -79,7 +83,7 @@ public class DeckMenuController implements Initializable {
                 AnchorPane anchorPane = fxmlLoader.load();
 
                 PlayerCardsController playerCardsController = fxmlLoader.getController();
-                playerCardsController.setCard(logInPlayer.getAllCards().get(i), listenerAllCards , i);
+                playerCardsController.setCard(logInPlayer.getAllCards().get(i), listenerAllCards, i);
 
                 gridPlayerCards.add(anchorPane, column, 1);
                 column++;
@@ -89,45 +93,64 @@ public class DeckMenuController implements Initializable {
         }
     }
 
-    public void showDeckCards(Deck selectedDeck) {
-        gridDeckCards.getChildren().clear();
-        int row = 1;
-        int column = 0;
-        if (selectedDeck.getMainDeckSize() > 0) {
-            for (int i = 0; i < selectedDeck.getMainDeckSize(); i++) {
-                try {
-                    FXMLLoader fxmlLoader = new FXMLLoader();
-                    fxmlLoader.setLocation(getClass().getResource("/Fxmls/DeckItems.fxml"));
-                    AnchorPane anchorPane = fxmlLoader.load();
+    public void showMainDeckCards(Deck selectedDeck) {
+        showDeck(selectedDeck, gridMainDeckCards);
+    }
 
-                    DeckCardsController deckCardsController = fxmlLoader.getController();
-                    MyListener myListenerSelectedCard = new MyListener() {
-                        @Override
-                        public void onClickListener(Object object) {
-                            setSelectedCardImage((Card) object);
-                        }
-                    };
-                    deckCardsController.setCard(selectedDeck.getMainDeck().get(i), myListenerSelectedCard , i);
-//                anchorPane.setCursor();
-                    if (column == 12) {
-                        column = 0;
-                        row++;
-                    }
-                    gridDeckCards.add(anchorPane, column++, row);
+    public void showSideDeckCards(Deck selectedDeck) {
+        showDeck(selectedDeck, gridSideDeckCards);
+    }
 
-                    GridPane.setMargin(anchorPane, new Insets(5));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+    private void showDeck(Deck selectedDeck, GridPane gridDeckCards) {
+        if (selectedDeck != null) {
+            ArrayList<Card> tempDeck;
+            String deckType = null;
+            if (gridDeckCards.equals(gridMainDeckCards)) {
+                tempDeck = selectedDeck.getMainDeck();
+                deckType = "Main";
+            } else {
+                tempDeck = selectedDeck.getSideDeck();
+                deckType = "Side";
             }
-        } else {
             gridDeckCards.getChildren().clear();
+            int row = 1;
+            int column = 0;
+            if (tempDeck.size() > 0) {
+                for (int i = 0; i < tempDeck.size(); i++) {
+                    try {
+                        FXMLLoader fxmlLoader = new FXMLLoader();
+                        fxmlLoader.setLocation(getClass().getResource("/Fxmls/DeckItems.fxml"));
+                        AnchorPane anchorPane = fxmlLoader.load();
+
+                        DeckCardsController deckCardsController = fxmlLoader.getController();
+                        MyListener myListenerSelectedCard = new MyListener() {
+                            @Override
+                            public void onClickListener(Object object) {
+                                setSelectedCardImage((Card) object);
+                            }
+                        };
+                        deckCardsController.setCard(tempDeck.get(i), myListenerSelectedCard, i, deckType);
+//                anchorPane.setCursor();
+                        if (column == 12) {
+                            column = 0;
+                            row++;
+                        }
+                        gridDeckCards.add(anchorPane, column++, row);
+
+                        GridPane.setMargin(anchorPane, new Insets(5));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } else {
+                gridDeckCards.getChildren().clear();
+            }
         }
     }
 
     public void back(MouseEvent event) throws IOException {
-        JsonSaveAndLoad.save();
-        if(isGameStarted){
+//        JsonSaveAndLoad.save();
+        if (isGameStarted) {
             if (logInPlayer.getActiveDeck() == null) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText("You don't have any active deck!");
@@ -136,16 +159,14 @@ public class DeckMenuController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText("Your active deck is not valid!");
                 alert.showAndWait();
-            }
-            else {
+            } else {
                 setIsGameStarted(false);
                 root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/DuelMenu.fxml")));
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
             }
-        }
-        else {
+        } else {
             root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/MainMenu.fxml")));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
@@ -202,7 +223,35 @@ public class DeckMenuController implements Initializable {
         }
     }
 
+    public void deleteDeck(MouseEvent event) {
+        if (selectedDeck == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("You haven't chosen a deck yet!");
+            alert.showAndWait();
+        } else {
+            giveBackCards(selectedDeck);
+            Controller.getLoggedInPlayer().getDecks().remove(selectedDeck);
+            showPlayerCards();
+            addDecksToMenu();
+            gridSideDeckCards.getChildren().clear();
+            gridMainDeckCards.getChildren().clear();
+            setSelectedDeck(null);
+        }
+    }
+
+    private static void giveBackCards(Deck deck) {
+        ArrayList<Card> mainDeck = deck.getMainDeck();
+        ArrayList<Card> sideDeck = deck.getSideDeck();
+        for (Card card : mainDeck) {
+            Controller.getLoggedInPlayer().getAllCards().add(card);
+        }
+        for (Card card : sideDeck) {
+            Controller.getLoggedInPlayer().getAllCards().add(card);
+        }
+    }
+
     public void addDecksToMenu() {
+        gridDecks.getChildren().clear();
         myListener = new MyListener() {
             @Override
             public void onClickListener(Object object) {
@@ -229,50 +278,66 @@ public class DeckMenuController implements Initializable {
     }
 
     public void handleDragOverDeckCards(DragEvent event) {
-        if (event.getDragboard().hasString()) {
-            if (event.getDragboard().getString().startsWith("player"))
+        if (event.getDragboard().hasString())
+            if(selectedDeck!=null)
                 event.acceptTransferModes(TransferMode.ANY);
-        }
     }
 
-    public void handleCardDropDeckCards(DragEvent event) {
+    public void handleCardDropMainDeckCards(DragEvent event) {
         String message = event.getDragboard().getString();
-        System.out.println(message);
-        int index = Integer.parseInt(message.substring(6));
         if (selectedDeck != null) {
-            selectedDeck.addCardToMainDeck(logInPlayer.getAllCards().get(index));
-            System.out.println("before : " + gridPlayerCards.getChildren().size());
-            gridPlayerCards.getChildren().remove(index);
-            System.out.println("after : " + gridPlayerCards.getChildren().size());
-            logInPlayer.getAllCards().remove(index);
-            showPlayerCards();
-            showDeckCards(selectedDeck);
+            if (message.startsWith("DeckSide")) {
+                index = Integer.parseInt(message.substring(8));
+                selectedDeck.addCardToMainDeck(selectedDeck.getSideDeck().get(index));
+                selectedDeck.getSideDeck().remove(index);
+                showSideDeckCards(selectedDeck);
+            } else if (message.startsWith("player")){
+                index = Integer.parseInt(message.substring(6));
+                selectedDeck.addCardToMainDeck(logInPlayer.getAllCards().get(index));
+                logInPlayer.getAllCards().remove(index);
+                showPlayerCards();
+            }
+            showMainDeckCards(selectedDeck);
         }
     }
 
-    public void handleDragOverPlayerCards(DragEvent event) {
-        if (event.getDragboard().hasString()) {
-            if (event.getDragboard().getString().startsWith("Deck"))
-                event.acceptTransferModes(TransferMode.ANY);
-        }
-    }
-
-    public void handleDragDropPlayerCards(DragEvent event) {
+    public void handleCardDropSideDeckCards(DragEvent event) {
         String message = event.getDragboard().getString();
-        System.out.println(message);
-        int index = Integer.parseInt(message.substring(4));
-        logInPlayer.getAllCards().add(selectedDeck.getMainDeck().get(index));
-        gridDeckCards.getChildren().remove(index);
-        selectedDeck.getMainDeck().remove(index);
-        showPlayerCards();
-        showDeckCards(selectedDeck);
+        if (selectedDeck != null) {
+            if (message.startsWith("DeckMain")) {
+                index = Integer.parseInt(message.substring(8));
+                selectedDeck.addCardToSideDeck(selectedDeck.getMainDeck().get(index));
+                selectedDeck.getMainDeck().remove(index);
+                showSideDeckCards(selectedDeck);
+                showMainDeckCards(selectedDeck);
+            } else if (message.startsWith("player")){
+                index = Integer.parseInt(message.substring(6));
+                selectedDeck.addCardToSideDeck(logInPlayer.getAllCards().get(index));
+                logInPlayer.getAllCards().remove(index);
+                showPlayerCards();
+                showSideDeckCards(selectedDeck);
+            }
+        }
     }
 
-    public void activateDeck(ActionEvent event){
+
+    public void handleCardDropPlayerCards(DragEvent event) {
+        String message = event.getDragboard().getString();
+        index = Integer.parseInt(message.substring(8));
+        if (message.startsWith("DeckMain")) {
+            logInPlayer.getAllCards().add(selectedDeck.getMainDeck().get(index));
+            selectedDeck.getMainDeck().remove(index);
+            showMainDeckCards(selectedDeck);
+        } else {
+            logInPlayer.getAllCards().add(selectedDeck.getSideDeck().get(index));
+            selectedDeck.getSideDeck().remove(index);
+            showSideDeckCards(selectedDeck);
+        }
+        showPlayerCards();
+    }
+
+    public void activateDeck(ActionEvent event) {
         logInPlayer.setActiveDeck(selectedDeck);
         addDecksToMenu();
     }
-
-
-
 }

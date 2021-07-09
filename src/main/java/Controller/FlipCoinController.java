@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -26,8 +27,10 @@ import java.util.TimerTask;
 public class FlipCoinController implements Initializable {
     public BorderPane borderPane;
     public Label winnerLabel;
+    public Label goToGame;
     @FXML
     private ImageView imageView;
+
 
     private static Player winner;//check it later! (static)
     private static Player loser;
@@ -48,6 +51,7 @@ public class FlipCoinController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         winnerLabel.setText("");
+        goToGame.setText("");
         animation1 = new CoinAnimation(imageView);
         animation2 = new CoinAnimation(imageView);
         animation3 = new CoinAnimation(imageView);
@@ -76,18 +80,22 @@ public class FlipCoinController implements Initializable {
             public void handle(ActionEvent event) {
                 imageView.setImage(null);
                 heartOrStar();
-                loadNextScene();
             }
         });
 
     }
 
-    private void loadNextScene() {
+    public void loadNextScene(MouseEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/Fxmls/DuelField.fxml"));
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) imageView.getScene().getWindow();
-            stage.setScene(scene);
+            if(goToGame.getText().equals("Click to continue")) {
+                Parent root = FXMLLoader.load(getClass().getResource("/Fxmls/DuelField.fxml"));
+                Scene scene = new Scene(root);
+                Stage stage = (Stage) imageView.getScene().getWindow();
+                stage.setScene(scene);
+            }
+            else{
+                event.consume();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -111,6 +119,6 @@ public class FlipCoinController implements Initializable {
             imageView.setImage(image);
         }
         winnerLabel.setText(winner.getNickname() + " starts the game");
-
+        goToGame.setText("Click to continue");
     }
 }

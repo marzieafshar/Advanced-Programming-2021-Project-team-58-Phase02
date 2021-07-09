@@ -1,5 +1,7 @@
 package Model;
 
+import Controller.MyListener;
+
 import java.util.ArrayList;
 
 public class Board {
@@ -102,13 +104,13 @@ public class Board {
     public void clearBoard() {
         graveYard.clear();
         for (Position position : monsterCards) {
-            position.setStatus(StatusOfPosition.EMPTY);
             position.setCard(null);
-        }
-        for (Position position : trapAndSpellCards) {
             position.setStatus(StatusOfPosition.EMPTY);
-            position.setCard(null);
         }
+//        for (Position position : trapAndSpellCards) {
+//            position.setCard(null);
+//            position.setStatus(StatusOfPosition.EMPTY);
+//        }
     }
 
     public int getMinimumAttackPosition() {

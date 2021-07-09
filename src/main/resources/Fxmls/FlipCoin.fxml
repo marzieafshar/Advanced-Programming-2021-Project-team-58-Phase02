@@ -7,16 +7,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" prefHeight="416.0" prefWidth="624.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FlipCoinController">
+<BorderPane fx:id="borderPane" prefHeight="650.0" prefWidth="1214.0" styleClass="flip-coin" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FlipCoinController">
    <center>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="FlipCoin-background" stylesheets="@../Styles.css" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" stylesheets="@../Styles.css" BorderPane.alignment="CENTER">
          <children>
             <ImageView fx:id="imageView" fitHeight="241.0" fitWidth="291.0" pickOnBounds="true" preserveRatio="true" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label fx:id="winnerLabel" alignment="CENTER" prefHeight="54.0" prefWidth="631.0" text="Label">
+                  <Label fx:id="winnerLabel" alignment="CENTER" prefHeight="54.0" prefWidth="631.0" text="Label" textFill="#ffea00">
                      <font>
-                        <Font name="Berlin Sans FB Bold" size="40.0" />
+                        <Font name="Berlin Sans FB Bold" size="45.0" />
                      </font>
                   </Label>
                </children>
@@ -24,4 +24,15 @@
          </children>
       </VBox>
    </center>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="62.0" prefWidth="624.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="goToGame" onMouseClicked="#loadNextScene" text="Click to continue" textFill="#ffea00">
+               <font>
+                  <Font name="Kristen ITC" size="27.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </bottom>
 </BorderPane>

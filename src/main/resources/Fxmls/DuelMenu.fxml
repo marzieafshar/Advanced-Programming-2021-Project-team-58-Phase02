@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="497.0" prefWidth="758.0" styleClass="duelMenu-background" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DuelMenuController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1214.0" styleClass="duelMenu-background" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DuelMenuController">
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
@@ -70,14 +70,14 @@
             </HBox>
             <HBox prefHeight="59.0" prefWidth="758.0">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="379.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="94.0" prefWidth="585.0" HBox.hgrow="ALWAYS">
                      <children>
                         <ImageView fx:id="player1Avatar" fitHeight="95.0" fitWidth="79.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../Images/Characters/Chara001.dds0.png" />
                            </image>
                            <HBox.margin>
-                              <Insets left="40.0" right="75.0" />
+                              <Insets left="200.0" right="75.0" />
                            </HBox.margin>
                         </ImageView>
                         <Label fx:id="player1NickName" prefHeight="29.0" prefWidth="83.0" text="Player1">
@@ -90,12 +90,15 @@
                         </Label>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="75.0" prefWidth="49.0">
+                  <HBox alignment="CENTER" prefHeight="94.0" prefWidth="145.0">
                      <children>
-                        <Separator blendMode="MULTIPLY" prefWidth="200.0" stylesheets="@../Styles.css" />
+                        <Separator blendMode="MULTIPLY" prefWidth="200.0" stylesheets="@../Styles.css" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin></Separator>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="382.0">
+                  <HBox alignment="CENTER_RIGHT" prefHeight="94.0" prefWidth="601.0" HBox.hgrow="ALWAYS">
                      <children>
                         <Label fx:id="player2NickName" prefHeight="29.0" prefWidth="98.0" text="Player2">
                            <font>
@@ -107,7 +110,7 @@
                               <Image url="@../Images/Characters/Chara001.dds17.png" />
                            </image>
                            <HBox.margin>
-                              <Insets left="75.0" right="40.0" />
+                              <Insets left="75.0" right="200.0" />
                            </HBox.margin>
                         </ImageView>
                      </children>
