@@ -17,8 +17,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -41,6 +44,10 @@ public class DeckMenuController implements Initializable {
     private Deck selectedDeck;
     private Card selectedCard;
     private static boolean isGameStarted;
+
+    String str = "Button_Click.mp3";
+    Media media = new Media(new File(str).toURI().toString());
+    private MediaPlayer mediaPlayer;
 
     public static void setIsGameStarted(boolean isGameStarted) {
         DeckMenuController.isGameStarted = isGameStarted;
@@ -149,7 +156,10 @@ public class DeckMenuController implements Initializable {
     }
 
     public void back(MouseEvent event) throws IOException {
-//        JsonSaveAndLoad.save();
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
+        JsonSaveAndLoad.save();
         if (isGameStarted) {
             if (logInPlayer.getActiveDeck() == null) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -175,6 +185,9 @@ public class DeckMenuController implements Initializable {
     }
 
     public void showInfo(ActionEvent actionEvent) {
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         if (selectedCard != null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText(selectedCard.getCardName());
@@ -208,6 +221,9 @@ public class DeckMenuController implements Initializable {
     }
 
     public void createNewDeck(MouseEvent event) {
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         try {
             Stage thisStage = (Stage) selectedCardImage.getScene().getWindow();
             CreateDeckController.setDeckMenuStage(thisStage);
@@ -224,6 +240,9 @@ public class DeckMenuController implements Initializable {
     }
 
     public void deleteDeck(MouseEvent event) {
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         if (selectedDeck == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("You haven't chosen a deck yet!");
@@ -337,6 +356,9 @@ public class DeckMenuController implements Initializable {
     }
 
     public void activateDeck(ActionEvent event) {
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         logInPlayer.setActiveDeck(selectedDeck);
         addDecksToMenu();
     }

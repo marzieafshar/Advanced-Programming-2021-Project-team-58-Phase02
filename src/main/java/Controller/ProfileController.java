@@ -14,11 +14,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
@@ -52,8 +56,15 @@ public class ProfileController implements Initializable {
     private Stage stage;
     private MyListener myListener;
 
+    String str = "Button_Click.mp3";
+    Media media = new Media(new File(str).toURI().toString());
+    private MediaPlayer mediaPlayer = new MediaPlayer(media);
+
     @FXML
     void backToMainMenu(ActionEvent event) throws IOException {
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         JsonSaveAndLoad.save();
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/MainMenu.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -61,7 +72,10 @@ public class ProfileController implements Initializable {
     }
 
     @FXML
-    void nicknameChange(javafx.scene.input.MouseEvent event) {
+    void nicknameChange(MouseEvent event) {
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         String newNickName = nicknameChangeField.getText();
         if (nicknameChangeField == null) return;
         Controller.getLoggedInPlayer().setNickname(newNickName);
@@ -72,7 +86,10 @@ public class ProfileController implements Initializable {
     }
 
     @FXML
-    public void passwordChange(javafx.scene.input.MouseEvent event) {
+    public void passwordChange(MouseEvent event) {
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         String newPassword1 = passwordChangeField.getText();
         String newPassword2 = repeatPasswordChangeField.getText();
         if (newPassword2 == null || newPassword1 == null) return;

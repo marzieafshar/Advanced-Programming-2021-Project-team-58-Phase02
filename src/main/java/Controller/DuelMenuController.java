@@ -11,7 +11,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -72,6 +76,10 @@ public class DuelMenuController implements Initializable {
     @FXML
     private Label player2MaxLP;
 
+    String str = "Button_Click.mp3";
+    Media media = new Media(new File(str).toURI().toString());
+    private MediaPlayer mediaPlayer = new MediaPlayer(media);
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         handleRound();
@@ -79,6 +87,9 @@ public class DuelMenuController implements Initializable {
     }
 
     public void startANewRound(ActionEvent event) {
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         try {
             if(numOfCurrentRound == 0){
                 root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/FlipCoin.fxml")));
@@ -97,6 +108,9 @@ public class DuelMenuController implements Initializable {
     }
 
     public void goToDeckMenu(ActionEvent event) {
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         try {
             DeckMenuController.setIsGameStarted(true);
             root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/DeckMenu.fxml")));

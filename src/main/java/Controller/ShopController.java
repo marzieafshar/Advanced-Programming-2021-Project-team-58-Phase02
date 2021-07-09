@@ -16,8 +16,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -64,6 +67,9 @@ public class ShopController implements Initializable {
     private Parent root;
     private Stage stage;
     private Scene scene;
+
+    String str = "Button_Click.mp3";
+    private MediaPlayer mediaPlayer;
 
 
     private ArrayList<Card> allCards = Card.getAllCards();
@@ -123,12 +129,18 @@ public class ShopController implements Initializable {
     }
 
     public void buyCard(ActionEvent actionEvent) {
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         player.decreaseMoney(Card.getCardByName(selectedCardName.getText()).getPrice());
         player.getAllCards().add(Card.getCardByName(selectedCardName.getText()));
         setPlayerMoney();
     }
 
     public void showInfo(ActionEvent actionEvent) {
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         Card card = Card.getCardByName(selectedCardName.getText());
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(selectedCardName.getText());
@@ -149,6 +161,9 @@ public class ShopController implements Initializable {
     }
 
     public void search (ActionEvent e){
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         String cardName = searchBox.getText();
         if(Card.getCardByName(cardName) != null){
             setChosenCard(Card.getCardByName(cardName));
@@ -156,6 +171,9 @@ public class ShopController implements Initializable {
     }
 
     public void backToMainMenu(ActionEvent event) throws IOException {
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         JsonSaveAndLoad.save();
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/MainMenu.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

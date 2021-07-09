@@ -6,8 +6,11 @@ import javafx.scene.control.*;
 import javafx.event.*;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.*;
 
+import java.io.File;
 import java.util.*;
 
 import javafx.fxml.FXMLLoader;
@@ -34,6 +37,10 @@ public class Controller {
 
     private static Player loggedInPlayer;
 
+    String str = "Button_Click.mp3";
+    private MediaPlayer mediaPlayer;
+
+
     public static Player getLoggedInPlayer() {
         return loggedInPlayer;
     }
@@ -43,12 +50,18 @@ public class Controller {
     }
 
     public void switchToLoginMenu(ActionEvent event) throws IOException {
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Login.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
     }
     public void switchToRegisterMenu(ActionEvent event) throws IOException {
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Register.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -56,6 +69,9 @@ public class Controller {
     }
 
     public void Login(ActionEvent event) throws IOException {
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         String username = usernameLoginField.getText();
         String password = passwordLoginField.getText();
         if (username.equals("")||password.equals("")) return;
@@ -83,12 +99,18 @@ public class Controller {
         }
     }
     public void backToWelcomeMenu(ActionEvent event) throws IOException {
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/WelcomeMenu.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
     }
     public void Register(ActionEvent event) throws IOException {
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         String username = usernameRegisterField.getText();
         String password = passwordRegisterField.getText();
         String nickname = nicknameRegisterField.getText();
@@ -121,6 +143,9 @@ public class Controller {
 
     }
     public void Exit(ActionEvent event) {
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         System.exit(0);
     }
 

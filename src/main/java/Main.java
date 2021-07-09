@@ -31,6 +31,7 @@ public class Main extends Application {
         String str = "05. Grabbing the Hatchet.mp3";
         Media media = new Media(new File(str).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setVolume(0.5);
         mediaPlayer.setAutoPlay(true);
 
 

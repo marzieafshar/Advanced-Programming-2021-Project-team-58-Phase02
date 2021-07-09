@@ -9,8 +9,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -19,8 +22,14 @@ public class MainMenuController {
     private Stage stage;
     private Scene scene;
 
-    public void startANewGame(ActionEvent actionEvent) throws Exception {
+    String str = "Button_Click.mp3";
+    Media media = new Media(new File(str).toURI().toString());
+    private MediaPlayer mediaPlayer;
 
+    public void startANewGame(ActionEvent actionEvent) throws Exception {
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         Player loggedInPlayer = Controller.getLoggedInPlayer();
 
         if (loggedInPlayer.getActiveDeck() == null) {
@@ -43,6 +52,9 @@ public class MainMenuController {
     }
 
     public void goToShop(ActionEvent event) throws IOException {
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Shop.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -50,6 +62,9 @@ public class MainMenuController {
     }
 
     public void goToDeckMenu(ActionEvent event) throws IOException {
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         Deck deck1 = new Deck("first");
         Deck deck2 = new Deck("second");
         Deck deck3 = new Deck("third");
@@ -88,6 +103,9 @@ public class MainMenuController {
     }
 
     public void goToScoreBoard(ActionEvent event) throws IOException {
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Scoreboard.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -95,6 +113,9 @@ public class MainMenuController {
     }
 
     public void goToProfileMenu(ActionEvent event) throws IOException {
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Profile.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -102,6 +123,9 @@ public class MainMenuController {
     }
 
     public void logout(ActionEvent event) throws IOException {
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Login.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
