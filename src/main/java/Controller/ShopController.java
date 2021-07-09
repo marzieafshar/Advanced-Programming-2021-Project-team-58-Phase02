@@ -122,6 +122,11 @@ public class ShopController implements Initializable {
         selectedCardPrice.setText(String.valueOf(card.getPrice()));
         image = new Image(getClass().getResourceAsStream(card.getImageSrc()));
         selectedCardImage.setImage(image);
+        if (card.getPrice() > Controller.getLoggedInPlayer().getMoney()) {
+            buyButton.setDisable(true);
+        } else {
+            buyButton.setDisable(false);
+        }
     }
 
     public void setPlayerMoney() {
@@ -132,9 +137,17 @@ public class ShopController implements Initializable {
         Media media = new Media(new File(str).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(true);
+
         player.decreaseMoney(Card.getCardByName(selectedCardName.getText()).getPrice());
         player.getAllCards().add(Card.getCardByName(selectedCardName.getText()));
         setPlayerMoney();
+
+
+
+        if (Controller.getLoggedInPlayer().getMoney() < Card.getCardByName(selectedCardName.getText()).getPrice()){
+            buyButton.setDisable(true);
+        }
+
     }
 
     public void showInfo(ActionEvent actionEvent) {
@@ -160,12 +173,12 @@ public class ShopController implements Initializable {
         alert.showAndWait();
     }
 
-    public void search (ActionEvent e){
+    public void search(ActionEvent e) {
         Media media = new Media(new File(str).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(true);
         String cardName = searchBox.getText();
-        if(Card.getCardByName(cardName) != null){
+        if (Card.getCardByName(cardName) != null) {
             setChosenCard(Card.getCardByName(cardName));
         }
     }

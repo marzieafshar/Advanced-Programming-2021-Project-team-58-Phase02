@@ -135,3 +135,53 @@
     -fx-background-image: url("Images/Background/coinBackground.jpg");
     -fx-background-size: stretch;
 }
+.errorBox-background{
+    -fx-background-image: url("Images/error.jpg");
+    -fx-background-size: stretch;
+}
+
+.graveyard-background {
+    -fx-background-image: url("Images/Background/GraveYardBackground.png");
+}
+.scroll-pane {
+    -fx-background-color: black;
+}
+.duelMenu-left-background{
+    -fx-background-image: url("Images/Background/14235.jpg");
+    -fx-background-size: stretch;
+    -fx-border-color: black;
+}
+.duelMenu-middle-background{
+    -fx-background-color: #caf0f8;
+    -fx-border-color: black;
+    -fx-background-size: stretch;
+}
+.duel-bottom-background{
+    -fx-background-image: url("Images/Background/50011.png");
+    -fx-background-size: stretch;
+}
+.shop-background{
+    -fx-background-image: url("Images/Background/50061.png");
+    -fx-background-size: stretch;
+}
+.shop-up{
+    -fx-background-image: url("Images/Background/839134.jpg");
+    -fx-background-size: stretch;
+}
+.activate{
+    -fx-background-color: #63E01B;
+    -fx-border-color: blue;
+    -fx-border-radius: 80;
+    -fx-background-radius: 80;
+}
+.deckMenu-up{
+    -fx-background-image: url("Images/Background/blueBackground.jpg");
+    -fx-background-size: stretch;
+}
+.deckmenu-right{
+    -fx-background-image: url("Images/Background/yellow.jpg");
+    -fx-border-color: black;
+}
+.scroll-pane {
+    -fx-background-color: black;
+}

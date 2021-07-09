@@ -92,21 +92,31 @@
                   <ImageView fx:id="imageViewMonster11" fitHeight="99.0" fitWidth="83.0" layoutX="342.0" layoutY="345.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="imageViewMonster12" fitHeight="97.0" fitWidth="73.0" layoutX="440.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="imageViewMonster14" fitHeight="97.0" fitWidth="73.0" layoutX="539.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="imageViewMonster25" fitHeight="97.0" fitWidth="73.0" layoutX="539.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
-                  <ImageView fx:id="imageViewMonster23" fitHeight="97.0" fitWidth="73.0" layoutX="440.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
-                  <ImageView fx:id="imageViewMonster21" fitHeight="97.0" fitWidth="73.0" layoutX="342.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
-                  <ImageView fx:id="imageViewMonster22" fitHeight="97.0" fitWidth="73.0" layoutX="246.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
-                  <ImageView fx:id="imageViewMonster24" fitHeight="97.0" fitWidth="73.0" layoutX="147.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
-                  <ImageView fitHeight="99.0" fitWidth="84.0" layoutX="619.0" layoutY="345.0" onMouseClicked="#showGarveyardPlayer1" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imageViewMonster25" fitHeight="97.0" fitWidth="73.0" layoutX="536.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
+                  <ImageView fx:id="imageViewMonster23" fitHeight="97.0" fitWidth="73.0" layoutX="437.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
+                  <ImageView fx:id="imageViewMonster21" fitHeight="97.0" fitWidth="73.0" layoutX="339.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
+                  <ImageView fx:id="imageViewMonster22" fitHeight="97.0" fitWidth="73.0" layoutX="243.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
+                  <ImageView fx:id="imageViewMonster24" fitHeight="97.0" fitWidth="73.0" layoutX="144.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
+                  <ImageView fitHeight="99.0" fitWidth="84.0" layoutX="619.0" layoutY="345.0" onMouseClicked="#showGraveyardPlayer1" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Images/rip-grave.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="99.0" fitWidth="84.0" layoutX="35.0" layoutY="171.0" onMouseClicked="#showGraveyardPlayer2" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="99.0" fitWidth="84.0" layoutX="35.0" layoutY="171.0" onMouseClicked="#showGraveyardPlayer1" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Images/rip-grave.png" />
                      </image>
                   </ImageView>
+                  <ImageView fx:id="imageViewTrap15" fitHeight="97.0" fitWidth="73.0" layoutX="144.0" layoutY="453.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageViewTrap13" fitHeight="97.0" fitWidth="73.0" layoutX="236.0" layoutY="452.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageViewTrap11" fitHeight="99.0" fitWidth="83.0" layoutX="329.0" layoutY="451.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageViewTrap12" fitHeight="97.0" fitWidth="73.0" layoutX="435.0" layoutY="452.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageViewTrap14" fitHeight="97.0" fitWidth="73.0" layoutX="534.0" layoutY="452.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageViewTrap25" fitHeight="97.0" fitWidth="73.0" layoutX="529.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageViewTrap23" fitHeight="97.0" fitWidth="73.0" layoutX="430.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageViewTrap21" fitHeight="97.0" fitWidth="73.0" layoutX="332.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageViewTrap22" fitHeight="97.0" fitWidth="73.0" layoutX="236.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageViewTrap24" fitHeight="97.0" fitWidth="73.0" layoutX="137.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
          </center>
@@ -146,7 +156,7 @@
                                  <children>
                                     <ImageView fitHeight="38.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../Images/icon/416-4162420_health-symbol-png-united-way-health-icon.png" />
+                                          <Image url="@../Images/Icon/416-4162420_health-symbol-png-united-way-health-icon.png" />
                                        </image>
                                        <HBox.margin>
                                           <Insets left="2.0" right="5.0" />
@@ -189,7 +199,7 @@
                                  <children>
                                     <ImageView fitHeight="38.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../Images/icon/416-4162420_health-symbol-png-united-way-health-icon.png" />
+                                          <Image url="@../Images/Icon/416-4162420_health-symbol-png-united-way-health-icon.png" />
                                        </image>
                                        <HBox.margin>
                                           <Insets left="2.0" right="5.0" />

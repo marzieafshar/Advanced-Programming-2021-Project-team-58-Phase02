@@ -124,7 +124,7 @@ public class ProfileController implements Initializable {
         gridPane.setPrefWidth(Region.USE_COMPUTED_SIZE);
         gridPane.setMaxWidth(Region.USE_PREF_SIZE);
 
-        for (int i = 0; i < 35; i++) {
+        for (int i = 0; i < 32; i++) {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("/Fxmls/Avatars.fxml"));
@@ -134,7 +134,7 @@ public class ProfileController implements Initializable {
 
                 String str = "/Images/Characters/Chara001.dds" + i + ".png";
                 avatarsController.setImage( new Image(getClass().getResourceAsStream(str)), myListener);
-                if (column == 7) {
+                if (column == 8) {
                     column = 0;
                     row++;
                 }

@@ -35,10 +35,17 @@ public class Position {
         if (status.equals(StatusOfPosition.EMPTY)){
             imageView.setImage(null);
         }
+        if(status.equals(StatusOfPosition.SPELL_OR_TRAP_HIDDEN)){
+            imageView.setImage(new Image(getClass().getResourceAsStream("/Images/Monster/Unknown.jpg")));
+        }
+        if (status.equals(StatusOfPosition.SPELL_OR_TRAP_OCCUPIED)){
+            imageView.setImage(new Image(getClass().getResourceAsStream(card.getImageSrc())));
+        }
     }
 
     public void setImageView(ImageView imageView) {
         this.imageView = imageView;
+        setImageViewStatus();
     }
 
     public ImageView getImageView() {
@@ -59,6 +66,7 @@ public class Position {
 
     public void setStatus(StatusOfPosition status) {
         this.status = status;
+        setImageViewStatus();
     }
 
     public Card getCard() {
@@ -66,6 +74,7 @@ public class Position {
     }
 
     public void setCard(Card card) {
+        //اول status بعد card
         //برای خالی کردن پوزیشن setCard(null)
         this.card = card;
         imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {

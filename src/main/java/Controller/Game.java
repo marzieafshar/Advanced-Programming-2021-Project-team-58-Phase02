@@ -7,16 +7,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -70,8 +72,36 @@ public class Game implements Initializable {
     @FXML
     private ImageView imageViewMonster25;
 
-    private ArrayList<ImageView> player1Monsters = new ArrayList<>();
-    private ArrayList<ImageView> player2Monsters = new ArrayList<>();
+    @FXML
+    private ImageView imageViewTrap15;
+
+    @FXML
+    private ImageView imageViewTrap13;
+
+    @FXML
+    private ImageView imageViewTrap11;
+
+    @FXML
+    private ImageView imageViewTrap12;
+
+    @FXML
+    private ImageView imageViewTrap14;
+
+    @FXML
+    private ImageView imageViewTrap25;
+
+    @FXML
+    private ImageView imageViewTrap23;
+
+    @FXML
+    private ImageView imageViewTrap21;
+
+    @FXML
+    private ImageView imageViewTrap22;
+
+    @FXML
+    private ImageView imageViewTrap24;
+
 
 //-----------------
 
@@ -112,14 +142,17 @@ public class Game implements Initializable {
         setPlayersAvatar();
         setPlayersProgressBar();
         clearHand();
-        setPositionsOfPlayer1();
-        setPositionsOfPlayer2();
+        setPositionsListener(player1);
+        setPositionsListener(player2);
+
+        setPositionsOfTurnOfPlayer();
+        setPositionsOfOpposition();
         clearBoardGame();
         setPlayersDeckOnBoard();
+
         drawAtFirstTurn(player1);
-        changeTurnOfPlayer();
         drawAtFirstTurn(player2);
-        changeTurnOfPlayer();
+
         setCheatCounter();
     }
 
@@ -135,15 +168,15 @@ public class Game implements Initializable {
         this.turnOfPlayer = turnOfPlayer;
     }
 
-    public void setPlayersLp() {
-        turnOfPlayer.setLP(8000);
+    public void setPlayersLp() {//حله
+        turnOfPlayer.setLP(7000);
         getOpposition().setLP(8000);
         showPlayersLP();
     }
 
     private void setPlayersAvatar() {
-        turnOfPlayerAvatar.setImage(player1.getImage());
-        oppositionAvatar.setImage(player2.getImage());
+        turnOfPlayerAvatar.setImage(turnOfPlayer.getImage());
+        oppositionAvatar.setImage(getOpposition().getImage());
     }
 
     public void clearHand() {
@@ -167,7 +200,7 @@ public class Game implements Initializable {
             player.addCardToHand(player.getBoard().getMainDeck().get(index));
             player.getBoard().getMainDeck().remove(index);
         }
-        if (player.equals(player1))
+        if (player.equals(turnOfPlayer))
             showTurnOfPlayerHandCards();
         else
             showOppositionHandCards();
@@ -188,7 +221,7 @@ public class Game implements Initializable {
         int index = rand.nextInt(mainDeckSize);
         turnOfPlayer.addCardToHand(turnOfPlayer.getBoard().getMainDeck().get(index));
         turnOfPlayer.getBoard().getMainDeck().remove(index);
-        showHandCards();
+        showTurnOfPlayerHandCards();
     }
 
 
@@ -250,6 +283,7 @@ public class Game implements Initializable {
     }
 
     public void endPhase(ActionEvent event) {
+        setAllPositionsChangeStatus();
         changeTurnOfPlayer();
         showWhichPlayersTurn();
         isAnyCardSummoned = false;
@@ -423,6 +457,12 @@ public class Game implements Initializable {
         else {
             turnOfPlayer = player1;
         }
+        setPlayersAvatar();
+        showPlayersLP();
+        showTurnOfPlayerHandCards();
+        showOppositionHandCards();
+        setPositionsOfTurnOfPlayer();
+        setPositionsOfOpposition();
     }
 
     public void setPlayersDeckOnBoard() {
@@ -618,7 +658,7 @@ public class Game implements Initializable {
         turnOfPlayer.getBoard().getMonsterCards().get(i).setStatus(StatusOfPosition.OFFENSIVE_OCCUPIED);
         turnOfPlayer.getBoard().getMonsterCards().get(i).setCard(selectedCardHand);
         turnOfPlayer.getHand().remove(selectedCardHand);
-        showHandCards();
+        showTurnOfPlayerHandCards();
         errorText.setText("summoned successfully");
         selectedCardHandNulling();
         selectedPositionNulling();
@@ -640,19 +680,19 @@ public class Game implements Initializable {
 
     public boolean setMonsterCardOnBoard() {
         if ((selectedCardHand == null) && (selectedPosition == null)) {
-            System.out.println("no card is selected yet");
+            errorText.setText("no card is selected yet");
             return false;
         } else if (selectedCardHand == null) {
-            System.out.println("you can’t set this card");
+            errorText.setText("you can’t set this card");
             return false;
         } else if ((selectedCardHand instanceof MonsterCard) && !(this.phase.equals(Phase.MAIN))) {
-            System.out.println("you can’t do this action in this phase");
+            errorText.setText("you can’t do this action in this phase");
             return false;
         } else if (turnOfPlayer.getBoard().isMonsterZoneFull()) {
-            System.out.println("monster card zone is full");
+            errorText.setText("monster card zone is full");
             return false;
         } else if (this.isAnyCardSummoned) {
-            System.out.println("you already summoned/set on this turn");
+            errorText.setText("you already summoned/set on this turn");
             return true;
         } else {
             int i = firstEmptyIndex(turnOfPlayer.getBoard().getMonsterCards());
@@ -662,7 +702,7 @@ public class Game implements Initializable {
             turnOfPlayer.getHand().remove(selectedCardHand);
             selectedCardHandNulling();
             System.out.println("set successfully");
-
+            showTurnOfPlayerHandCards();
             return true;
         }
     }
@@ -869,14 +909,14 @@ public class Game implements Initializable {
 
     public void setTrapSpellOnBoard() {
         if ((selectedCardHand == null) && (selectedPosition == null)) {
-            System.out.println("no card is selected yet");
+            errorText.setText("no card is selected yet");
         } else if ((selectedCardHand == null)) {
-            System.out.println("you can’t set this card");
+            errorText.setText("you can’t set this card");
         } else if (!this.phase.equals(Phase.MAIN)) {
-            System.out.println("you can’t do this action in this phase");
+            errorText.setText("you can’t do this action in this phase");
         } else if (turnOfPlayer.getBoard().isTrapAndSpellZoneFull()) {
-            System.out.println("spell card zone is full");
-            setCardToFieldZone(selectedCardHand);
+            errorText.setText("spell card zone is full");
+            setCardToFieldZone(selectedCardHand);//TODO:add fieldzone to graphic
         } else {
             int i = firstEmptyIndex(turnOfPlayer.getBoard().getTrapAndSpellCards());
             turnOfPlayer.getBoard().getTrapAndSpellCards().get(i).setStatus(StatusOfPosition.SPELL_OR_TRAP_HIDDEN);
@@ -884,6 +924,7 @@ public class Game implements Initializable {
             turnOfPlayer.getBoard().getTrapAndSpellCards().get(i).setCard(selectedCardHand);
             turnOfPlayer.getHand().remove(selectedCardHand);
             selectedCardHandNulling();
+            showTurnOfPlayerHandCards();
             System.out.println("set successfully");
         }
     }
@@ -974,16 +1015,16 @@ public class Game implements Initializable {
 
     public void flipSummon() {
         if ((selectedPosition == null) && (selectedCardHand == null)) {
-            System.out.println("no card is selected yet");
+            errorText.setText("no card is selected yet");
         } else if ((selectedCardHand != null) || !(selectedPosition.getCard() instanceof MonsterCard)) {
-            System.out.println("you can’t change this card position");
+            errorText.setText("you can’t change this card position");
         } else if (!this.phase.equals(Phase.MAIN)) {
-            System.out.println("you can’t do this action in this phase");
+            errorText.setText("you can’t do this action in this phase");
         } else if ((!selectedPosition.getStatus().equals(StatusOfPosition.DEFENSIVE_HIDDEN)) || (selectedPosition.getIsStatusChanged())) {
-            System.out.println("you can’t flip summon this card");
+            errorText.setText("you can’t flip summon this card");
         } else {
             selectedPosition.setStatus(StatusOfPosition.OFFENSIVE_OCCUPIED);
-            System.out.println("flip summoned successfully");
+            errorText.setText("flip summoned successfully");
         }
     }
 
@@ -1162,9 +1203,7 @@ public class Game implements Initializable {
     }
 
     private void showWhichPlayersTurn() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("it is " + turnOfPlayer.getNickname() + "'s turn");
-        alert.showAndWait();
+        errorText.setText("it is " + turnOfPlayer.getNickname() + "'s turn");
     }
 
     private void phaseNavigationAlert(Phase destination) {
@@ -1179,8 +1218,8 @@ public class Game implements Initializable {
     public void showOppositionHandCards() {
         gridHandCardsOpponent.getChildren().clear();
         int margin = -5;
-        int handSize = player2.getHand().size();
-        ArrayList<Card> hand = player2.getHand();
+        int handSize = getOpposition().getHand().size();
+        ArrayList<Card> hand = getOpposition().getHand();
         int column = 0;
         for (int i = 0; i < handSize; i++) {
             try {
@@ -1213,8 +1252,8 @@ public class Game implements Initializable {
     public void showTurnOfPlayerHandCards() {
         gridHandCardsTurnOfPlayer.getChildren().clear();
         int margin = -5;
-        int handSize = player1.getHand().size();
-        ArrayList<Card> hand = player1.getHand();
+        int handSize = turnOfPlayer.getHand().size();
+        ArrayList<Card> hand = turnOfPlayer.getHand();
         int column = 0;
         for (int i = 0; i < handSize; i++) {
             try {
@@ -1246,15 +1285,6 @@ public class Game implements Initializable {
                 e.printStackTrace();
             }
         }
-    }
-
-    public void showHandCards() {
-        if (turnOfPlayer.equals(player1)) {
-            showTurnOfPlayerHandCards();
-        } else {
-            showOppositionHandCards();
-        }
-
     }
 
     public void showInfo() {
@@ -1308,7 +1338,7 @@ public class Game implements Initializable {
 
 
         ImageView imageView = new ImageView();
-        Image image = new Image(getClass().getResourceAsStream("/Images/icon/MainPhase/Summon.png"));
+        Image image = new Image(getClass().getResourceAsStream("/Images/Icon/MainPhase/Summon.png"));
         imageView.setImage(image);
         imageView.setFitHeight(70);
         imageView.setFitWidth(70);
@@ -1322,7 +1352,7 @@ public class Game implements Initializable {
         GridPane.setMargin(imageView, new Insets(10, 0, 0, 0));
 
         imageView = new ImageView();
-        image = new Image(getClass().getResourceAsStream("/Images/icon/MainPhase/Set.png"));
+        image = new Image(getClass().getResourceAsStream("/Images/Icon/MainPhase/Set.png"));
         imageView.setImage(image);
         imageView.setFitHeight(70);
         imageView.setFitWidth(70);
@@ -1336,7 +1366,7 @@ public class Game implements Initializable {
         GridPane.setMargin(imageView, new Insets(10, 0, 0, 0));
 
         imageView = new ImageView();
-        image = new Image(getClass().getResourceAsStream("/Images/icon/MainPhase/SpecialSummon.png"));
+        image = new Image(getClass().getResourceAsStream("/Images/Icon/MainPhase/SpecialSummon.png"));
         imageView.setImage(image);
         imageView.setFitHeight(70);
         imageView.setFitWidth(70);
@@ -1350,7 +1380,7 @@ public class Game implements Initializable {
         GridPane.setMargin(imageView, new Insets(10, 0, 0, 0));
 
         imageView = new ImageView();
-        image = new Image(getClass().getResourceAsStream("/Images/icon/MainPhase/FlipSummon.png"));
+        image = new Image(getClass().getResourceAsStream("/Images/Icon/MainPhase/FlipSummon.png"));
         imageView.setImage(image);
         imageView.setFitHeight(70);
         imageView.setFitWidth(70);
@@ -1364,7 +1394,7 @@ public class Game implements Initializable {
         GridPane.setMargin(imageView, new Insets(10, 0, 0, 0));
 
         imageView = new ImageView();
-        image = new Image(getClass().getResourceAsStream("/Images/icon/MainPhase/ActivateEffect.png"));
+        image = new Image(getClass().getResourceAsStream("/Images/Icon/MainPhase/ActivateEffect.png"));
         imageView.setImage(image);
         imageView.setFitHeight(70);
         imageView.setFitWidth(70);
@@ -1378,7 +1408,7 @@ public class Game implements Initializable {
         GridPane.setMargin(imageView, new Insets(25, 0, 0, 0));
 
         imageView = new ImageView();
-        image = new Image(getClass().getResourceAsStream("/Images/icon/MainPhase/ChangeStatus.png"));
+        image = new Image(getClass().getResourceAsStream("/Images/Icon/MainPhase/ChangeStatus.png"));
         imageView.setImage(image);
         imageView.setFitHeight(70);
         imageView.setFitWidth(70);
@@ -1393,20 +1423,21 @@ public class Game implements Initializable {
         GridPane.setMargin(imageView, new Insets(25, 0, 0, 0));
 
         imageView = new ImageView();
-        image = new Image(getClass().getResourceAsStream("/Images/icon/MainPhase/ChangeToAttack.png"));
+        image = new Image(getClass().getResourceAsStream("/Images/Icon/MainPhase/ChangeToAttack.png"));
         imageView.setImage(image);
         imageView.setFitHeight(70);
         imageView.setFitWidth(70);
         imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+
             }
         });
         gridPanePhaseIcons.add(imageView, 3, 1);
         GridPane.setMargin(imageView, new Insets(25, 0, 0, 0));
 
         imageView = new ImageView();
-        image = new Image(getClass().getResourceAsStream("/Images/icon/MainPhase/ChangeToDefense.png"));
+        image = new Image(getClass().getResourceAsStream("/Images/Icon/MainPhase/ChangeToDefense.png"));
         imageView.setImage(image);
         imageView.setFitHeight(70);
         imageView.setFitWidth(70);
@@ -1420,7 +1451,7 @@ public class Game implements Initializable {
         GridPane.setMargin(imageView, new Insets(25, 0, 0, 0));
     }
 
-    public void setPositionsOfPlayer1() {
+    public void setPositionsListener(Player player){
         MyListener myListener = new MyListener() {
             @Override
             public void onClickListener(Object object) {
@@ -1431,40 +1462,61 @@ public class Game implements Initializable {
                     setSelectedPosition((Position) object);
             }
         };
-        player1.getBoard().getMonsterCards().get(2).setMyListener(myListener);
-        player1.getBoard().getMonsterCards().get(2).setImageView(imageViewMonster11);
-        player1.getBoard().getMonsterCards().get(3).setMyListener(myListener);
-        player1.getBoard().getMonsterCards().get(3).setImageView(imageViewMonster12);
-        player1.getBoard().getMonsterCards().get(1).setMyListener(myListener);
-        player1.getBoard().getMonsterCards().get(1).setImageView(imageViewMonster13);
-        player1.getBoard().getMonsterCards().get(4).setMyListener(myListener);
-        player1.getBoard().getMonsterCards().get(4).setImageView(imageViewMonster14);
-        player1.getBoard().getMonsterCards().get(0).setMyListener(myListener);
-        player1.getBoard().getMonsterCards().get(0).setImageView(imageViewMonster15);
 
+        for(int i=0 ; i<5 ; i++){
+            player.getBoard().getMonsterCards().get(i).setMyListener(myListener);
+            player.getBoard().getTrapAndSpellCards().get(i).setMyListener(myListener);
+        }
     }
 
-    public void setPositionsOfPlayer2() {
-        MyListener myListener = new MyListener() {
-            @Override
-            public void onClickListener(Object object) {
-                Position position = (Position) object;
-                if (position.equals(selectedPosition))
-                    deSelect();
-                else
-                    setSelectedPosition((Position) object);
-            }
-        };
-        player2.getBoard().getMonsterCards().get(2).setMyListener(myListener);
-        player2.getBoard().getMonsterCards().get(2).setImageView(imageViewMonster21);
-        player2.getBoard().getMonsterCards().get(1).setMyListener(myListener);
-        player2.getBoard().getMonsterCards().get(1).setImageView(imageViewMonster22);
-        player2.getBoard().getMonsterCards().get(3).setMyListener(myListener);
-        player2.getBoard().getMonsterCards().get(3).setImageView(imageViewMonster23);
-        player2.getBoard().getMonsterCards().get(0).setMyListener(myListener);
-        player2.getBoard().getMonsterCards().get(0).setImageView(imageViewMonster24);
-        player2.getBoard().getMonsterCards().get(4).setMyListener(myListener);
-        player2.getBoard().getMonsterCards().get(4).setImageView(imageViewMonster21);
+    public void setPositionsOfTurnOfPlayer() {
+        turnOfPlayer.getBoard().getMonsterCards().get(2).setImageView(imageViewMonster11);
+        turnOfPlayer.getBoard().getMonsterCards().get(3).setImageView(imageViewMonster12);
+        turnOfPlayer.getBoard().getMonsterCards().get(1).setImageView(imageViewMonster13);
+        turnOfPlayer.getBoard().getMonsterCards().get(4).setImageView(imageViewMonster14);
+        turnOfPlayer.getBoard().getMonsterCards().get(0).setImageView(imageViewMonster15);
+
+        turnOfPlayer.getBoard().getTrapAndSpellCards().get(2).setImageView(imageViewTrap11);
+        turnOfPlayer.getBoard().getTrapAndSpellCards().get(3).setImageView(imageViewTrap12);
+        turnOfPlayer.getBoard().getTrapAndSpellCards().get(1).setImageView(imageViewTrap13);
+        turnOfPlayer.getBoard().getTrapAndSpellCards().get(4).setImageView(imageViewTrap14);
+        turnOfPlayer.getBoard().getTrapAndSpellCards().get(0).setImageView(imageViewTrap15);
+    }
+
+    public void setPositionsOfOpposition() {
+        getOpposition().getBoard().getMonsterCards().get(2).setImageView(imageViewMonster21);
+        getOpposition().getBoard().getMonsterCards().get(1).setImageView(imageViewMonster22);
+        getOpposition().getBoard().getMonsterCards().get(3).setImageView(imageViewMonster23);
+        getOpposition().getBoard().getMonsterCards().get(0).setImageView(imageViewMonster24);
+        getOpposition().getBoard().getMonsterCards().get(4).setImageView(imageViewMonster25);
+
+        getOpposition().getBoard().getTrapAndSpellCards().get(2).setImageView(imageViewTrap21);
+        getOpposition().getBoard().getTrapAndSpellCards().get(1).setImageView(imageViewTrap22);
+        getOpposition().getBoard().getTrapAndSpellCards().get(3).setImageView(imageViewTrap23);
+        getOpposition().getBoard().getTrapAndSpellCards().get(0).setImageView(imageViewTrap24);
+        getOpposition().getBoard().getTrapAndSpellCards().get(4).setImageView(imageViewTrap25);
+    }
+
+    public void showGraveyardPlayer1() {
+        try {
+            Stage stage = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/Fxmls/Graveyard.fxml"));
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+
+            turnOfPlayer.getBoard().addToGraveyard(Card.getCardByName("Suijin"));
+            turnOfPlayer.getBoard().addToGraveyard(Card.getCardByName("Silver Fang"));
+            turnOfPlayer.getBoard().addToGraveyard(Card.getCardByName("Battle OX"));
+            GraveyardController graveyardController = fxmlLoader.getController();
+            graveyardController.addCardsToGraveYardPane(turnOfPlayer);
+
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     //---------------------------------------------------------------------------------------

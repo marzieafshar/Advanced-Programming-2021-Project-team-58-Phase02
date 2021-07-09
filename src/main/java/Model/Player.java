@@ -43,7 +43,7 @@ public class Player {
         setUsername(username);
         setPassword(password);
         setNickname(nickname);
-        setMoney(1000000);
+        setMoney(1000);
 
         setImage(new Image(getClass().getResourceAsStream("/Images/Characters/Chara001.dds1.png")));
         this.board = new Board();

@@ -12,6 +12,12 @@ public class Board {
     private Position fieldZone = new Position(StatusOfPosition.EMPTY);
 
     public Board() {
+        graveYard.add(Card.getCardByName("Suijin"));
+        graveYard.add(Card.getCardByName("Silver Fang"));
+        graveYard.add(Card.getCardByName("Dark Hole"));
+        graveYard.add(Card.getCardByName("Trap Hole"));
+        graveYard.add(Card.getCardByName("Bitron"));
+        graveYard.add(Card.getCardByName("Suijin"));
         createMonsterCardPosition();
         createSpellCardPosition();
     }
@@ -104,13 +110,13 @@ public class Board {
     public void clearBoard() {
         graveYard.clear();
         for (Position position : monsterCards) {
-            position.setCard(null);
             position.setStatus(StatusOfPosition.EMPTY);
+            position.setCard(null);
         }
-//        for (Position position : trapAndSpellCards) {
-//            position.setCard(null);
-//            position.setStatus(StatusOfPosition.EMPTY);
-//        }
+        for (Position position : trapAndSpellCards) {
+            position.setStatus(StatusOfPosition.EMPTY);
+            position.setCard(null);
+        }
     }
 
     public int getMinimumAttackPosition() {

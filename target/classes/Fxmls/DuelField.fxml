@@ -21,13 +21,16 @@
          <left>
             <VBox maxWidth="-Infinity" prefHeight="650.0" prefWidth="220.0" styleClass="left-bar" stylesheets="@../Styles.css" BorderPane.alignment="CENTER">
                <children>
-                  <HBox alignment="CENTER" prefHeight="81.0" prefWidth="250.0">
+                  <HBox fx:id="errorbox" alignment="CENTER" prefHeight="161.0" prefWidth="220.0" styleClass="errorBox-background" stylesheets="@../Styles.css">
                      <children>
-                        <Label text="Label">
+                        <Text fx:id="errorText" fill="#f2ff00" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="194.58113861083984">
                            <font>
-                              <Font size="20.0" />
+                              <Font name="Berlin Sans FB Demi Bold" size="19.0" />
                            </font>
-                        </Label>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Text>
                      </children>
                   </HBox>
                   <VBox prefHeight="603.0" prefWidth="250.0">
@@ -81,19 +84,39 @@
                         </GridPane>
                      </children>
                   </HBox>
-                  <Button layoutX="-7.0" layoutY="528.0" mnemonicParsing="false" onAction="#drawPhase" rotate="90.0" text="Draw Phase" />
-                  <Button layoutX="-4.0" layoutY="348.0" mnemonicParsing="false" onAction="#endPhase" rotate="90.0" text="End phase" />
-                  <Button layoutX="-6.0" layoutY="437.0" mnemonicParsing="false" onAction="#mainPhase" rotate="90.0" text="main phase" />
+                  <Button layoutX="-24.0" layoutY="528.0" mnemonicParsing="false" onAction="#drawPhase" rotate="90.0" text="Draw Phase" />
+                  <Button layoutX="-20.0" layoutY="347.0" mnemonicParsing="false" onAction="#endPhase" rotate="90.0" text="End phase" />
+                  <Button layoutX="-22.0" layoutY="437.0" mnemonicParsing="false" onAction="#mainPhase" rotate="90.0" text="main phase" />
                   <ImageView fx:id="imageViewMonster15" fitHeight="97.0" fitWidth="73.0" layoutX="147.0" layoutY="347.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="imageViewMonster13" fitHeight="97.0" fitWidth="73.0" layoutX="246.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="imageViewMonster11" fitHeight="99.0" fitWidth="83.0" layoutX="342.0" layoutY="345.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="imageViewMonster12" fitHeight="97.0" fitWidth="73.0" layoutX="440.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="imageViewMonster14" fitHeight="97.0" fitWidth="73.0" layoutX="539.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="imageViewMonster25" fitHeight="97.0" fitWidth="73.0" layoutX="539.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
-                  <ImageView fx:id="imageViewMonster23" fitHeight="97.0" fitWidth="73.0" layoutX="440.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
-                  <ImageView fx:id="imageViewMonster21" fitHeight="97.0" fitWidth="73.0" layoutX="342.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
-                  <ImageView fx:id="imageViewMonster22" fitHeight="97.0" fitWidth="73.0" layoutX="246.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
-                  <ImageView fx:id="imageViewMonster24" fitHeight="97.0" fitWidth="73.0" layoutX="147.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
+                  <ImageView fx:id="imageViewMonster25" fitHeight="97.0" fitWidth="73.0" layoutX="536.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
+                  <ImageView fx:id="imageViewMonster23" fitHeight="97.0" fitWidth="73.0" layoutX="437.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
+                  <ImageView fx:id="imageViewMonster21" fitHeight="97.0" fitWidth="73.0" layoutX="339.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
+                  <ImageView fx:id="imageViewMonster22" fitHeight="97.0" fitWidth="73.0" layoutX="243.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
+                  <ImageView fx:id="imageViewMonster24" fitHeight="97.0" fitWidth="73.0" layoutX="144.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
+                  <ImageView fitHeight="99.0" fitWidth="84.0" layoutX="619.0" layoutY="345.0" onMouseClicked="#showGraveyardPlayer1" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/rip-grave.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="99.0" fitWidth="84.0" layoutX="35.0" layoutY="171.0" onMouseClicked="#showGraveyardPlayer1" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/rip-grave.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="imageViewTrap15" fitHeight="97.0" fitWidth="73.0" layoutX="144.0" layoutY="453.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageViewTrap13" fitHeight="97.0" fitWidth="73.0" layoutX="236.0" layoutY="452.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageViewTrap11" fitHeight="99.0" fitWidth="83.0" layoutX="329.0" layoutY="451.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageViewTrap12" fitHeight="97.0" fitWidth="73.0" layoutX="435.0" layoutY="452.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageViewTrap14" fitHeight="97.0" fitWidth="73.0" layoutX="534.0" layoutY="452.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageViewTrap25" fitHeight="97.0" fitWidth="73.0" layoutX="529.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageViewTrap23" fitHeight="97.0" fitWidth="73.0" layoutX="430.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageViewTrap21" fitHeight="97.0" fitWidth="73.0" layoutX="332.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageViewTrap22" fitHeight="97.0" fitWidth="73.0" layoutX="236.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageViewTrap24" fitHeight="97.0" fitWidth="73.0" layoutX="137.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
          </center>
@@ -133,7 +156,7 @@
                                  <children>
                                     <ImageView fitHeight="38.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../Images/icon/416-4162420_health-symbol-png-united-way-health-icon.png" />
+                                          <Image url="@../Images/Icon/416-4162420_health-symbol-png-united-way-health-icon.png" />
                                        </image>
                                        <HBox.margin>
                                           <Insets left="2.0" right="5.0" />
@@ -176,7 +199,7 @@
                                  <children>
                                     <ImageView fitHeight="38.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../Images/icon/416-4162420_health-symbol-png-united-way-health-icon.png" />
+                                          <Image url="@../Images/Icon/416-4162420_health-symbol-png-united-way-health-icon.png" />
                                        </image>
                                        <HBox.margin>
                                           <Insets left="2.0" right="5.0" />

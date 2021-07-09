@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="800.0" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ProfileController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1214.0" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ProfileController">
    <children>
       <BorderPane layoutX="-2.0" prefHeight="494.0" prefWidth="800.0" styleClass="profile-background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -249,7 +249,7 @@
                               </PasswordField>
                               <ImageView fitHeight="27.0" fitWidth="27.0" onMousePressed="#passwordChange" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../Images/icon/clipart289176.png" />
+                                    <Image url="@../Images/Icon/clipart289176.png" />
                                  </image>
                                  <HBox.margin>
                                     <Insets left="20.0" />
@@ -272,7 +272,7 @@
                               </TextField>
                               <ImageView fitHeight="27.0" fitWidth="27.0" onMousePressed="#nicknameChange" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../Images/icon/clipart289176.png" />
+                                    <Image url="@../Images/Icon/clipart289176.png" />
                                  </image>
                                  <HBox.margin>
                                     <Insets left="10.0" />
@@ -280,23 +280,25 @@
                               </ImageView>
                            </children>
                         </HBox>
-                        <HBox alignment="BOTTOM_LEFT" prefHeight="26.0" prefWidth="335.0">
-                           <children>
-                              <Button mnemonicParsing="false" onAction="#backToMainMenu" prefHeight="35.0" prefWidth="87.0" styleClass="profile-backButton" text="Back">
-                                 <font>
-                                    <Font name="Rockwell Extra Bold" size="14.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="10.0" />
-                                 </HBox.margin>
-                              </Button>
-                           </children>
-                        </HBox>
                      </children>
                   </VBox>
                </left>
             </BorderPane>
          </center>
+         <bottom>
+            <HBox alignment="BOTTOM_LEFT" prefHeight="26.0" prefWidth="335.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#backToMainMenu" prefHeight="35.0" prefWidth="87.0" styleClass="profile-backButton" text="Back">
+                     <font>
+                        <Font name="Rockwell Extra Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </bottom>
       </BorderPane>
    </children>
 </AnchorPane>
