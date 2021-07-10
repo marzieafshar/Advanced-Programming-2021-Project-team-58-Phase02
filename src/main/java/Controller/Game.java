@@ -399,50 +399,55 @@ public class Game implements Initializable {
         isAnyCardSummoned = anyCardSummoned;
     }
 
-    public void battlePhase() {
-
-        setPhase(Phase.BATTLE);
-        showPhaseAlert();
-        String input;
-        while (!(input = scanner.nextLine()).equals("next phase")) {
-//            Matcher matchSelect = getCommandMatcher(input, "^select --(hand|monster|spell) (--opponent )*([0-9]+)$");
-
-            if (input.trim().matches("^(?i)(attack direct)$"))
-                directAttack();
-            else if (input.trim().matches("^(?i)(attack (.+))$")) {
-//                Matcher matcher = getCommandMatcher(input, "^(?i)(attack (.+))$");
-//                if (matcher.find()) {
-                int index;
-                try {
-//                        index = convertIndex(Integer.parseInt(matcher.group(2)));
-                } catch (Exception e) {
-                    System.out.println("Please enter an integer");
-                    return;
-                }
-//                    attackToMonster(index);
-            }
-//            } else if (matchSelect.find())
-//                select(matchSelect);
-            else if (input.equals("show current-phase"))
-                System.out.println(phase);
-            else if (input.equals("surrender"))
-                surrender();
-            else if (input.equals("card show selected")) {
-                showCard();
-            } else if (input.matches("card show (.+)")) {
-//                cardShow(getCommandMatcher(input, "card show (.+)"));
-            } else {
-                if (!cheat(input))
-                    System.out.println("invalid command for this phase");
-            }
-
-            showBoard();
-            if (isAnyoneWin()) {
-                return;
-            }
+    public void battlePhase(ActionEvent event) {
+        if(phase.equals(Phase.MAIN) && nextPhaseCheck==1){
+            nextPhaseCheck = 0;
+            setPhase(Phase.BATTLE);
+            showPhaseAlert();
         }
+        else{
+            phaseNavigationAlert(Phase.BATTLE);
+        }
+//        String input;
+//        while (!(input = scanner.nextLine()).equals("next phase")) {
+////            Matcher matchSelect = getCommandMatcher(input, "^select --(hand|monster|spell) (--opponent )*([0-9]+)$");
+//
+//            if (input.trim().matches("^(?i)(attack direct)$"))
+//                directAttack();
+//            else if (input.trim().matches("^(?i)(attack (.+))$")) {
+////                Matcher matcher = getCommandMatcher(input, "^(?i)(attack (.+))$");
+////                if (matcher.find()) {
+//                int index;
+//                try {
+////                        index = convertIndex(Integer.parseInt(matcher.group(2)));
+//                } catch (Exception e) {
+//                    System.out.println("Please enter an integer");
+//                    return;
+//                }
+////                    attackToMonster(index);
+//            }
+////            } else if (matchSelect.find())
+////                select(matchSelect);
+//            else if (input.equals("show current-phase"))
+//                System.out.println(phase);
+//            else if (input.equals("surrender"))
+//                surrender();
+//            else if (input.equals("card show selected")) {
+//                showCard();
+//            } else if (input.matches("card show (.+)")) {
+////                cardShow(getCommandMatcher(input, "card show (.+)"));
+//            } else {
+//                if (!cheat(input))
+//                    System.out.println("invalid command for this phase");
+//            }
+//
+//            showBoard();
+//            if (isAnyoneWin()) {
+//                return;
+//            }
+//        }
         clearAttackedCardsArrayList();
-        mainPhase();
+//        mainPhase();
     }
 
     public void standbyPhase() {
@@ -764,28 +769,28 @@ public class Game implements Initializable {
 
     public boolean isConditionsUnsuitableForAttack() {
         if ((selectedPosition == null) && (selectedCardHand == null)) {
-            System.out.println("no card is selected yet");
+            errorText.setText("no card is selected yet");
             return true;
         }
         if (selectedPosition == null) {
-            System.out.println("selected card should not be in your hand");
+            errorText.setText("selected card should not be in your hand");
             return true;
         }
         if (!(selectedPosition.getCard() instanceof MonsterCard)) {
-            System.out.println("you can’t attack with this card");
+            errorText.setText("you can’t attack with this card");
             return true;
         }
 
         if (!phase.equals(Phase.BATTLE)) {
-            System.out.println("you can’t do this action in this phase");
+            errorText.setText("you can’t do this action in this phase");
             return true;
         }
         if (hasCardAttackedInThisPhase(selectedPosition)) {
-            System.out.println("this card already attacked");
+            errorText.setText("this card already attacked");
             return true;
         }
         if (!selectedPosition.getStatus().equals(StatusOfPosition.OFFENSIVE_OCCUPIED)) {
-            System.out.println("selected card is in defensive position!");
+            errorText.setText("selected card is in defensive position!");
             return true;
         }
         return false;
@@ -877,12 +882,13 @@ public class Game implements Initializable {
         if (isConditionsUnsuitableForAttack())
             return;
         if (!isOpponentMonsterZoneEmpty())
-            System.out.println("you can’t attack the opponent directly");
+            errorText.setText("you can’t attack the opponent directly");
         else {
             int damage = ((MonsterCard) selectedPosition.getCard()).getAttack();
             getOpposition().decreaseLP(damage);
-            System.out.println("you opponent receives " + damage + " battle damage");
+            errorText.setText("you opponent receives " + damage + " battle damage");
             attackedCards.add(selectedPosition);
+            showPlayersLP();
 
             selectedPositionNulling();
             selectedCardHandNulling();
@@ -1202,9 +1208,7 @@ public class Game implements Initializable {
     }
 
     public void showPhaseAlert() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText(phase.name());
-        alert.showAndWait();
+        errorText.setText(phase.name());
     }
 
     private void showWhichPlayersTurn() {
@@ -1212,10 +1216,8 @@ public class Game implements Initializable {
     }
 
     private void phaseNavigationAlert(Phase destination) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("navigation between " + phase.name() +
+        errorText.setText("navigation between " + phase.name() +
                 " phase and " + destination.name() + "is not possible");
-        alert.showAndWait();
     }
     //------------------------------------------------------------------------------------
 

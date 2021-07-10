@@ -84,9 +84,9 @@
                         </GridPane>
                      </children>
                   </HBox>
-                  <Button layoutX="-24.0" layoutY="528.0" mnemonicParsing="false" onAction="#drawPhase" rotate="90.0" text="Draw Phase" />
-                  <Button layoutX="-20.0" layoutY="347.0" mnemonicParsing="false" onAction="#endPhase" rotate="90.0" text="End phase" />
-                  <Button layoutX="-22.0" layoutY="437.0" mnemonicParsing="false" onAction="#mainPhase" rotate="90.0" text="main phase" />
+                  <Button layoutX="-25.0" layoutY="469.0" mnemonicParsing="false" onAction="#drawPhase" rotate="90.0" text="Draw Phase" />
+                  <Button layoutX="-21.0" layoutY="199.0" mnemonicParsing="false" onAction="#endPhase" rotate="90.0" text="End phase" />
+                  <Button layoutX="-24.0" layoutY="373.0" mnemonicParsing="false" onAction="#mainPhase" rotate="90.0" text="main phase" />
                   <ImageView fx:id="imageViewMonster15" fitHeight="97.0" fitWidth="73.0" layoutX="147.0" layoutY="347.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="imageViewMonster13" fitHeight="97.0" fitWidth="73.0" layoutX="246.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="imageViewMonster11" fitHeight="99.0" fitWidth="83.0" layoutX="342.0" layoutY="345.0" pickOnBounds="true" preserveRatio="true" />
@@ -117,6 +117,7 @@
                   <ImageView fx:id="imageViewTrap21" fitHeight="97.0" fitWidth="73.0" layoutX="332.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="imageViewTrap22" fitHeight="97.0" fitWidth="73.0" layoutX="236.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="imageViewTrap24" fitHeight="97.0" fitWidth="73.0" layoutX="137.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" />
+                  <Button layoutX="-27.0" layoutY="284.0" mnemonicParsing="false" onAction="#battlePhase" prefHeight="24.0" prefWidth="84.0" rotate="90.0" text="Battle phase" />
                </children>
             </AnchorPane>
          </center>
