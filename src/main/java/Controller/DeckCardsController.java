@@ -7,8 +7,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 
-import java.util.ArrayList;
-
 public class DeckCardsController {
 
     private static AnchorPane selected;
@@ -28,20 +26,16 @@ public class DeckCardsController {
         return selected;
     }
 
-    public int getIndex() {
-        return index;
-    }
-
     @FXML
     public void handleDragDetectionDeckCards(MouseEvent event) {
         selected = (AnchorPane) event.getSource();
         Dragboard db = source.startDragAndDrop(TransferMode.ANY);
         ClipboardContent cb = new ClipboardContent();
-        cb.putString( "Deck" +deckType+ index);
+        cb.putString("Deck" + deckType + index);
         db.setContent(cb);
     }
 
-    public void setCard(Card card , MyListener myListener , int index, String deckType){
+    public void setCard(Card card, MyListener myListener, int index, String deckType) {
         this.card = card;
         this.index = index;
         Image image = new Image(getClass().getResourceAsStream(card.getImageSrc()));

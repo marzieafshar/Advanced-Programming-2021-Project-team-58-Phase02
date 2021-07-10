@@ -1,7 +1,5 @@
 package Model;
 
-import Controller.MyListener;
-
 import java.util.ArrayList;
 
 public class Board {
@@ -47,14 +45,6 @@ public class Board {
         return true;
     }
 
-    public boolean isMonsterZoneEmpty() {
-        for (Position position : monsterCards) {
-            if (!position.getStatus().equals(StatusOfPosition.EMPTY)) {
-                return false;
-            }
-        }
-        return true;
-    }
 
     public int cardsInMonsterZone() {
         int i = 0;
@@ -66,15 +56,6 @@ public class Board {
         return i;
     }
 
-    public int cardsInTrapAndSpellZone() {
-        int i = 0;
-        for (Position position : trapAndSpellCards) {
-            if (!position.getStatus().equals(StatusOfPosition.EMPTY)) {
-                i++;
-            }
-        }
-        return i;
-    }
 
     public boolean isTrapAndSpellZoneFull() {
         for (Position position : trapAndSpellCards) {
@@ -113,28 +94,6 @@ public class Board {
         }
     }
 
-    public int getMinimumAttackPosition() {
-        int min = 4000;
-        int index = 0;
-        int cardForce;
-        for (int i = 0; i < monsterCards.size(); i++) {
-            Position position = monsterCards.get(i);
-            if (!position.getStatus().equals(StatusOfPosition.EMPTY)) {
-
-                if (position.getStatus().equals(StatusOfPosition.OFFENSIVE_OCCUPIED)) {
-                    cardForce = ((MonsterCard) position.getCard()).getAttack();
-                } else {
-                    cardForce = ((MonsterCard) position.getCard()).getDefense();
-                }
-                if (cardForce < min) {
-                    min = cardForce;
-                    index = i;
-                }
-            }
-        }
-        return index;
-    }
-
     public Position getMaximumPuver() {
         int max = 0;
         int cardAttack;
@@ -150,14 +109,6 @@ public class Board {
             }
         }
         return bestPosition;
-    }
-
-    public boolean isMonsterInGraveYard() {
-        for (Card card : graveYard) {
-            if (card instanceof MonsterCard)
-                return true;
-        }
-        return false;
     }
 
     public Position getFieldZone() {

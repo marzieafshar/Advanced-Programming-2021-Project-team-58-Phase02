@@ -19,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -32,7 +33,7 @@ public class DeckMenuController implements Initializable {
     private Parent root;
     private Stage stage;
     private Scene scene;
-
+    public Text selectedCardInfo;
     public GridPane gridDecks;
     public GridPane gridMainDeckCards;
     public GridPane gridSideDeckCards;
@@ -184,28 +185,24 @@ public class DeckMenuController implements Initializable {
         }
     }
 
-    public void showInfo(ActionEvent actionEvent) {
+    public void showInfo() {
         Media media = new Media(new File(str).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(true);
+        selectedCardInfo.setWrappingWidth(250);
         if (selectedCard != null) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setHeaderText(selectedCard.getCardName());
-            alert.setTitle("Information");
             Card card = selectedCard;
             if (card instanceof MonsterCard) {
-                alert.setContentText("Level: " + ((MonsterCard) card).getCardLevel() +
+                selectedCardInfo.setText("Level: " + ((MonsterCard) card).getCardLevel() +
                         "\nType: " + ((MonsterCard) card).getMonsterType() +
                         "\nATK: " + ((MonsterCard) card).getAttack() +
                         "\nDEF: " + ((MonsterCard) card).getDefense() +
                         "\nDescription: " + card.getCardDescription());
             } else {
                 TrapAndSpellCard TPCard = (TrapAndSpellCard) card;
-                alert.setContentText("Type: " + TPCard.getTrapOrSpellTypes() +
+                selectedCardInfo.setText("Type: " + TPCard.getTrapOrSpellTypes() +
                         "\nDescription: " + TPCard.getCardDescription());
             }
-//        alert.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("Images/Bitron.jpg"))));
-            alert.showAndWait();
         }
     }
 
@@ -217,6 +214,7 @@ public class DeckMenuController implements Initializable {
         Image image = new Image(card.getImageSrc());
         selectedCardImage.setImage(image);
         setSelectedCard(card);
+        showInfo();
 
     }
 

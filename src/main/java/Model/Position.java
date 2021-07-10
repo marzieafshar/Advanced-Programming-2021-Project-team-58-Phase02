@@ -14,31 +14,30 @@ public class Position {
     private ImageView imageView;
 
 
-
     public Position(StatusOfPosition status) {
         setStatus(status);
     }
 
-    public void setImageViewStatus(){
+    public void setImageViewStatus() {
         imageView.setRotate(0);
-        if(status.equals(StatusOfPosition.DEFENSIVE_HIDDEN)) {
+        if (status.equals(StatusOfPosition.DEFENSIVE_HIDDEN)) {
             imageView.setImage(new Image(getClass().getResourceAsStream("/Images/Monster/Unknown.jpg")));
             imageView.setRotate(90);
         }
-        if(status.equals(StatusOfPosition.DEFENSIVE_OCCUPIED)) {
+        if (status.equals(StatusOfPosition.DEFENSIVE_OCCUPIED)) {
             imageView.setImage(new Image(getClass().getResourceAsStream(card.getImageSrc())));
             imageView.setRotate(90);
         }
-        if(status.equals(StatusOfPosition.OFFENSIVE_OCCUPIED)) {
+        if (status.equals(StatusOfPosition.OFFENSIVE_OCCUPIED)) {
             imageView.setImage(new Image(getClass().getResourceAsStream(card.getImageSrc())));
         }
-        if (status.equals(StatusOfPosition.EMPTY)){
+        if (status.equals(StatusOfPosition.EMPTY)) {
             imageView.setImage(null);
         }
-        if(status.equals(StatusOfPosition.SPELL_OR_TRAP_HIDDEN)){
+        if (status.equals(StatusOfPosition.SPELL_OR_TRAP_HIDDEN)) {
             imageView.setImage(new Image(getClass().getResourceAsStream("/Images/Monster/Unknown.jpg")));
         }
-        if (status.equals(StatusOfPosition.SPELL_OR_TRAP_OCCUPIED)){
+        if (status.equals(StatusOfPosition.SPELL_OR_TRAP_OCCUPIED)) {
             imageView.setImage(new Image(getClass().getResourceAsStream(card.getImageSrc())));
         }
     }
@@ -73,10 +72,9 @@ public class Position {
 
     public void setStatus(StatusOfPosition status) {
         this.status = status;
-//        setImageViewStatus();
     }
 
-    public void changeStatus(){
+    public void changeStatus() {
         if (getStatus().equals(StatusOfPosition.OFFENSIVE_OCCUPIED))
             setStatus(StatusOfPosition.DEFENSIVE_OCCUPIED);
         else if (getStatus().equals(StatusOfPosition.DEFENSIVE_OCCUPIED))
@@ -90,13 +88,11 @@ public class Position {
     }
 
     public void setCard(Card card) {
-        //اول status بعد card
-        //برای خالی کردن پوزیشن setCard(null)
         this.card = card;
         setImageViewStatus();
     }
 
-    public void click(MouseEvent event){
+    public void click(MouseEvent event) {
         myListener.onClickListener(this);
     }
 

@@ -10,7 +10,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -22,6 +21,9 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class SetOpponentController implements Initializable {
+    private static String roundChoice;
+    private static Player player2;
+    private static Stage mainMenuStage;
     private Parent root;
     private Stage stage;
     private Scene scene;
@@ -33,11 +35,6 @@ public class SetOpponentController implements Initializable {
 
     @FXML
     private ComboBox<String> comboBox;
-
-    private static String roundChoice;
-    private static Player player2;
-
-    private static Stage mainMenuStage;
 
     public static void setMainMenuStage(Stage menuStage) {
         mainMenuStage = menuStage;
@@ -61,7 +58,7 @@ public class SetOpponentController implements Initializable {
 
     public void checkOpponent(ActionEvent event) throws IOException {
         String opponentName = opponentUsername.getText();
-         if (!Player.getAllPlayers().contains(Player.getPlayerByUsername(opponentName)))
+        if (!Player.getAllPlayers().contains(Player.getPlayerByUsername(opponentName)))
             ErrorLabel.setText("There is no player with this username!");
         else {
             setPlayer2(Player.getPlayerByUsername(opponentName));
@@ -70,8 +67,8 @@ public class SetOpponentController implements Initializable {
             else if (!player2.getActiveDeck().isValid())
                 ErrorLabel.setText("Your opponent's active deck is not valid!");
             else if (roundChoice == null)
-                 ErrorLabel.setText("Please choose a round number!");
-            else if(opponentName.equals(Controller.getLoggedInPlayer().getUsername()))
+                ErrorLabel.setText("Please choose a round number!");
+            else if (opponentName.equals(Controller.getLoggedInPlayer().getUsername()))
                 ErrorLabel.setText("You can't play with yourself!");
             else {
                 root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/DuelMenu.fxml")));

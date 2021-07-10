@@ -190,3 +190,49 @@
 .cheat-imageView{
     -fx-border-radius: 80;
 }
+.import-background {
+    -fx-background-image: url("Images/Background/wp2753204.jpg");
+    -fx-background-size: stretch;
+}
+.error-background {
+    -fx-background-image: url("Images/Background/exportError.png");
+}
+.cardCreator-Background {
+    -fx-background-image: url("Images/Background/789456.png");
+    -fx-background-size: stretch;
+}
+
+.cardCreator-buttons {
+    -fx-background-color: #2E3DB1;
+    -fx-border-color: #00ff55;
+    -fx-background-radius: 80;
+    -fx-border-radius: 80;
+}
+
+.cardCreator-smallTextFields {
+    -fx-background-color: #2E3DB1;
+    -fx-border-color: #00ff55;
+    -fx-border-width: 2;
+    -fx-background-radius: 80;
+    -fx-border-radius: 80;
+    -fx-prompt-text-fill: #1E1307;
+}
+
+.text-area .content {
+    -fx-border-color: #00ff55;
+    -fx-background-color: #EFE3D6;
+}
+
+.cardCreator-box {
+    -fx-background-color: #00ff55;
+    -fx-border-radius: 80;
+    -fx-background-radius: 80;
+    -fx-border-color: black;
+}
+.cardCreator-Back{
+    -fx-background-color: #2E3DB1;
+    -fx-border-color: #00ff55;
+    -fx-background-radius: 80;
+    -fx-border-radius: 80;
+    -fx-prompt-text-fill: black;
+}

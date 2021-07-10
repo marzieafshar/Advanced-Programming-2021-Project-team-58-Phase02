@@ -17,13 +17,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
-import java.util.regex.Matcher;
 
 public class Game implements Initializable {
 
@@ -102,11 +104,7 @@ public class Game implements Initializable {
     @FXML
     private ImageView imageViewTrap24;
 
-
-//-----------------
-
     private static int nextPhaseCheck;
-    static Scanner scanner = new Scanner(System.in);
 
     private Player player1;
     private Player player2;
@@ -123,12 +121,10 @@ public class Game implements Initializable {
     List<Position> attackedCards = new ArrayList<Position>();
     List<Position> activatedSpells = new ArrayList<>();
 
-//    public Game(Player player1, Player player2) {
-//        setPlayer1(player1);
-//        setPlayer2(player2);
-//        drawAtFirstTurn(player1);
-//        drawAtFirstTurn(player2);
-//    }
+    String str = "LP.wav";
+    String str2 = "attack.wav";
+    String str3 = "summon.mp3";
+    private MediaPlayer mediaPlayer;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -172,9 +168,9 @@ public class Game implements Initializable {
         this.turnOfPlayer = turnOfPlayer;
     }
 
-    public void setPlayersLp() {//حله
-        turnOfPlayer.setLP(7000);
-        getOpposition().setLP(8000);
+    public void setPlayersLp() {
+        turnOfPlayer.setLP(4000);
+        getOpposition().setLP(4000);
         showPlayersLP();
     }
 
@@ -215,8 +211,13 @@ public class Game implements Initializable {
             nextPhaseCheck = 0;
             setPhase(Phase.DRAW);
             showPhaseAlert();
-            if (isAnyoneWin()) return;
             draw();
+            if (turnOfPlayer.getBoard().getMainDeck().size() == 0) {
+                showEndOfGameAlert("deck");
+                DuelMenuController.setLoserOfRound(turnOfPlayer);
+                DuelMenuController.setWinnerOfRound(getOpposition());
+                goToDuelMenu();
+            }
         } else if (phase.equals(Phase.DRAW)) {
             errorText.setText("You are in Draw Phase now");
         } else {
@@ -226,7 +227,7 @@ public class Game implements Initializable {
 
     public void mainPhase() {
         if (phase.equals(Phase.DRAW) || (phase.equals(Phase.BATTLE))) {
-            if(phase.equals(Phase.DRAW))
+            if (phase.equals(Phase.DRAW))
                 nextPhaseCheck = 1;
             else
                 nextPhaseCheck = 0;
@@ -276,27 +277,6 @@ public class Game implements Initializable {
         this.cheatCounter++;
     }
 
-//    public void run() {
-//        try {
-//            while (!isAnyoneWin()) {
-//                nextPhaseCheck = 0;
-//                isAnyCardSummoned = false;
-//                setAllPositionsChangeStatus();
-//
-//                showTurnOfPlayerAlert();
-//                if (turnOfPlayer instanceof AIClass) {
-//                    ((AIClass) turnOfPlayer).play(this);
-//                    endPhase();
-//                } else {
-//                    drawPhase();
-//                }
-//            }
-//        } catch (Exception e) {
-//            System.out.println("I have caught an exception");
-//            e.printStackTrace();
-//        }
-//    }
-
     public void setSelectedPosition(Position selectedPosition) {
         selectedCardHandNulling();
         this.selectedPosition = selectedPosition;
@@ -324,85 +304,11 @@ public class Game implements Initializable {
         this.phase = phase;
     }
 
-    public Phase getPhase() {
-        return phase;
-    }
-
-    public Player getTurnOfPlayer() {
-        return turnOfPlayer;
-    }
-
     private void deSelect() {
         selectedPositionNulling();
         selectedCardHandNulling();
         infoTextArea.setText("No card is selected!");
     }
-
-//    public void select(Matcher matcher) {
-//        int number = Integer.parseInt(matcher.group(3));
-//
-//        if ((matcher.group(1).equals("monster")) && (matcher.group(2) == null)) {
-//            if ((number >= 1) && (number <= 5)) {
-//                if (turnOfPlayer.getBoard().getMonsterCards().get(convertIndex(number)).getCard() == null) {
-//                    System.out.println("no card found in the given position");
-//                } else {
-//                    selectedCardHandNulling();
-//                    selectedPosition = turnOfPlayer.getBoard().getMonsterCards().get(convertIndex(number));
-//                    System.out.println("card selected");
-//                }
-//            } else {
-//                System.out.println("invalid selection");
-//            }
-//        } else if ((matcher.group(1).equals("spell")) && (matcher.group(2) == null)) {
-//            if ((number >= 1) && (number <= 5)) {
-//                if (turnOfPlayer.getBoard().getTrapAndSpellCards().get(convertIndex(number)).getCard() == null) {
-//                    System.out.println("no card found in the given position");
-//                } else {
-//                    selectedCardHandNulling();
-//                    selectedPosition = turnOfPlayer.getBoard().getTrapAndSpellCards().get(convertIndex(number));
-//                    System.out.println("card selected");
-//                }
-//            } else {
-//                System.out.println("invalid selection");
-//            }
-//        } else if ((matcher.group(1).equals("hand")) && (matcher.group(2) == null)) {
-//            if ((number >= 1) && (number <= turnOfPlayer.getHand().size())) {
-//                selectedPositionNulling();
-//                selectedCardHand = turnOfPlayer.getHand().get(number - 1);
-//                System.out.println("card selected");
-//            } else {
-//                System.out.println("invalid selection");
-//            }
-//        } else if ((matcher.group(1).equals("monster")) && (matcher.group(2).equals("--opponent "))) {
-//            if ((number >= 1) && (number <= 5)) {
-//                if (getOpposition().getBoard().getMonsterCards().get(convertIndex(number)).getCard() == null) {
-//                    System.out.println("no card found in the given position");
-//                } else {
-//                    selectedCardHandNulling();
-//                    selectedPosition = getOpposition().getBoard().getMonsterCards().get(convertIndex(number));
-//                    System.out.println("card selected");
-//                }
-//            } else {
-//                System.out.println("invalid selection");
-//            }
-//        } else if ((matcher.group(1).equals("spell")) && (matcher.group(2).equals("--opponent "))) {
-//            if ((number >= 1) && (number <= 5)) {
-//                if (getOpposition().getBoard().getTrapAndSpellCards().get(convertIndex(number)).getCard() == null) {
-//                    System.out.println("no card found in the given position");
-//                } else {
-//                    selectedCardHandNulling();
-//                    selectedPosition = getOpposition().getBoard().getTrapAndSpellCards().get(convertIndex(number));
-//                    System.out.println("card selected");
-//                }
-//            } else {
-//                System.out.println("invalid selection");
-//            }
-//        } else if ((matcher.group(1).equals("hand")) && (matcher.group(2).equals("--opponent "))) {
-//            System.out.println("invalid selection");
-//        } else {
-//            System.out.println("invalid selection");
-//        }
-//    }
 
     public void set() {
         if (selectedCardHand instanceof TrapAndSpellCard) {
@@ -415,10 +321,6 @@ public class Game implements Initializable {
                 isAnyCardSummoned = setMonsterCardOnBoard();
             }
         }
-    }
-
-    public void setAnyCardSummoned(boolean anyCardSummoned) {
-        isAnyCardSummoned = anyCardSummoned;
     }
 
     private void setAllPositionsChangeStatus() {
@@ -446,13 +348,11 @@ public class Game implements Initializable {
         player2.getBoard().setMainDeck((ArrayList<Card>) (player2.getActiveDeck().getMainDeck().clone()));
     }
 
-    public Position getSelectedPosition() {
-        return selectedPosition;
-    }
-
-
-    public void surrender() {
+    public void surrender(MouseEvent event) {
         isSurrendered = true;
+        DuelMenuController.setLoserOfRound(turnOfPlayer);
+        DuelMenuController.setWinnerOfRound(getOpposition());
+        goToDuelMenu();
     }
 
     private String convertStatusToChar(StatusOfPosition status) {
@@ -471,87 +371,6 @@ public class Game implements Initializable {
         } else {
             return "E";
         }
-    }
-
-    private String printOpponentMonsterOnBoard(Player player) {
-        String result = "";
-        String character = "";
-        for (int i = 4; i >= 0; i--) {
-            character = convertStatusToChar(player.getBoard().getMonsterCards().get(i).getStatus());
-            if (character.length() == 2) {
-                result = result + character + "   ";
-            } else {
-                result = result + character + "    ";
-            }
-        }
-        return result;
-    }
-
-    private String printOpponentSpellCardsOnBoard(Player player) {
-        String result = "";
-        String character = "";
-        for (int i = 4; i >= 0; i--) {
-            character = convertStatusToChar(player.getBoard().getTrapAndSpellCards().get(i).getStatus());
-            result = result + character + "    ";
-        }
-        return result;
-    }
-
-    private String printMonsterCardOnBoard(Player player) {
-        String result = "";
-        String character = "";
-        for (int i = 0; i < 5; i++) {
-            character = convertStatusToChar(player.getBoard().getMonsterCards().get(i).getStatus());
-            if (character.length() == 2) {
-                result = result + character + "   ";
-            } else {
-                result = result + character + "    ";
-            }
-        }
-        return result;
-    }
-
-    private String printSpellCardsOnBoard(Player player) {
-        String result = "";
-        String character = "";
-        for (int i = 0; i < 5; i++) {
-            character = convertStatusToChar(player.getBoard().getTrapAndSpellCards().get(i).getStatus());
-            result = result + character + "    ";
-        }
-        return result;
-    }
-
-    private String printCardsOnBoard(Player player) {
-        int handCardNumbers = player.getHand().size();
-        String result = "";
-        for (int i = 0; i < handCardNumbers; i++) {
-            result = result + "c    ";
-        }
-        return result;
-    }
-
-    public void showBoard() {
-        System.out.println(getOpposition().getNickname() + " : " + getOpposition().getLP());
-        System.out.println("     " + printCardsOnBoard(getOpposition()));
-        System.out.println(getOpposition().getBoard().getMainDeck().size());
-        System.out.println("     " + printOpponentSpellCardsOnBoard(getOpposition()));
-        System.out.println("     " + printOpponentMonsterOnBoard(getOpposition()));
-        System.out.println(getOpposition().getBoard().getGraveYard().size() +
-                "                            " + showFieldZone(getOpposition()));
-        System.out.println();
-        System.out.println("-------------------------------");
-        System.out.println();
-        System.out.println(showFieldZone(turnOfPlayer) +
-                "                            " + turnOfPlayer.getBoard().getGraveYard().size());
-        System.out.println("     " + printMonsterCardOnBoard(turnOfPlayer));
-        System.out.println("     " + printSpellCardsOnBoard(turnOfPlayer));
-        System.out.println("                             " + turnOfPlayer.getBoard().getMainDeck().size());
-        System.out.println(printCardsOnBoard(turnOfPlayer));
-        System.out.println(turnOfPlayer.getNickname() + " : " + turnOfPlayer.getLP());
-    }
-
-    private String showFieldZone(Player player) {
-        return convertStatusToChar(player.getBoard().getFieldZone().getStatus());
     }
 
     public void selectedPositionNulling() {
@@ -590,7 +409,6 @@ public class Game implements Initializable {
             isAnyCardSummoned = summonMonsterOnBoard();
         }
     }
-
 
     public boolean summonMonsterOnBoard() {
         boolean isTributeSucceeds = false;
@@ -635,6 +453,9 @@ public class Game implements Initializable {
     }
 
     private boolean lastStepForSummon() {
+        Media media = new Media(new File(str3).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         int i = firstEmptyIndex(turnOfPlayer.getBoard().getMonsterCards());
         turnOfPlayer.getBoard().getMonsterCards().get(i).setStatus(StatusOfPosition.OFFENSIVE_OCCUPIED);
         turnOfPlayer.getBoard().getMonsterCards().get(i).setCard(selectedCardHand);
@@ -682,7 +503,7 @@ public class Game implements Initializable {
             turnOfPlayer.getBoard().getMonsterCards().get(i).setCard(selectedCardHand);
             turnOfPlayer.getHand().remove(selectedCardHand);
             selectedCardHandNulling();
-            System.out.println("set successfully");
+            errorText.setText("set successfully");
             showTurnOfPlayerHandCards();
             return true;
         }
@@ -791,8 +612,10 @@ public class Game implements Initializable {
     }
 
     public void attackToMonster() {
+        Media media2 = new Media(new File(str2).toURI().toString());
+        mediaPlayer = new MediaPlayer(media2);
+        mediaPlayer.setAutoPlay(true);
         StatusOfPosition statusOfOpposition = oppositionCardPosition.getStatus();
-
         int selectedCardAttack = ((MonsterCard) selectedPosition.getCard()).getAttack();
         int oppositionCardAttack = ((MonsterCard) oppositionCardPosition.getCard()).getAttack();
         int oppositionCardDefense = ((MonsterCard) oppositionCardPosition.getCard()).getDefense();
@@ -843,12 +666,26 @@ public class Game implements Initializable {
                     errorText.setText("opponent’s monster card was " + cardName + " no card is destroyed");
             }
         }
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         showPlayersLP();
         attackedCards.add(selectedPosition);
         oppositionCardPositionNulling();
         selectedCardHandNulling();
         selectedPositionNulling();
-
+        if (getOpposition().getLP() == 0) {
+            showEndOfGameAlert("attack");
+            DuelMenuController.setLoserOfRound(getOpposition());
+            DuelMenuController.setWinnerOfRound(turnOfPlayer);
+            goToDuelMenu();
+        }
+        if (getOpposition().getLP() == 0) {
+            showEndOfGameAlert("attack");
+            DuelMenuController.setLoserOfRound(turnOfPlayer);
+            DuelMenuController.setWinnerOfRound(getOpposition());
+            goToDuelMenu();
+        }
     }
 
     public boolean isOpponentMonsterZoneEmpty() {
@@ -860,30 +697,33 @@ public class Game implements Initializable {
     }
 
     public void directAttack() {
+
+        Media media2 = new Media(new File(str2).toURI().toString());
+        mediaPlayer = new MediaPlayer(media2);
+        mediaPlayer.setAutoPlay(true);
+
         if (isConditionsUnsuitableForAttack())
             return;
         if (!isOpponentMonsterZoneEmpty())
             errorText.setText("you can’t attack the opponent directly");
         else {
+            Media media = new Media(new File(str).toURI().toString());
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setAutoPlay(true);
             int damage = ((MonsterCard) selectedPosition.getCard()).getAttack();
             getOpposition().decreaseLP(damage);
             errorText.setText("you opponent receives " + damage + " battle damage");
             attackedCards.add(selectedPosition);
             showPlayersLP();
-
             selectedPositionNulling();
             selectedCardHandNulling();
         }
-
-    }
-
-    public boolean isAnyoneWin() {
-        if (getPhase().equals(Phase.DRAW) && turnOfPlayer.getBoard().getMainDeck().size() == 0) {
-            System.out.println(turnOfPlayer.getNickname() + " has no more card to draw and lost the round");
-            return true;
+        if (getOpposition().getLP() == 0) {
+            showEndOfGameAlert("attack");
+            DuelMenuController.setLoserOfRound(getOpposition());
+            DuelMenuController.setWinnerOfRound(turnOfPlayer);
+            goToDuelMenu();
         }
-        if (isSurrendered) return true;
-        return (player1.getLP() <= 0) || (player2.getLP() <= 0);
     }
 
 //    --------------------------------------------------------------------------------------------------------
@@ -908,7 +748,7 @@ public class Game implements Initializable {
             errorText.setText("you can’t do this action in this phase");
         } else if (turnOfPlayer.getBoard().isTrapAndSpellZoneFull()) {
             errorText.setText("spell card zone is full");
-            setCardToFieldZone(selectedCardHand);//TODO:add fieldzone to graphic
+            setCardToFieldZone(selectedCardHand);
         } else {
             int i = firstEmptyIndex(turnOfPlayer.getBoard().getTrapAndSpellCards());
             turnOfPlayer.getBoard().getTrapAndSpellCards().get(i).setStatus(StatusOfPosition.SPELL_OR_TRAP_HIDDEN);
@@ -917,91 +757,7 @@ public class Game implements Initializable {
             turnOfPlayer.getHand().remove(selectedCardHand);
             selectedCardHandNulling();
             showTurnOfPlayerHandCards();
-            System.out.println("set successfully");
-        }
-    }
-
-    private boolean isAnyMonsterInArray(ArrayList<Card> array) {
-        for (Card card : array) {
-            if (card instanceof MonsterCard) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void specialSummonHelping(ArrayList<Card> array) {
-        int n = 0;
-        while (n == 0) {
-            int intNumber = 0;
-            while (true) {
-                System.out.println("Please enter an index");
-                String number = scanner.nextLine();
-                try {
-                    intNumber = Integer.parseInt(number);
-                    break;
-                } catch (Exception e) {
-                    System.out.println("The index must be only an integer");
-                }
-            }
-            if (intNumber < 1) {
-                System.out.println("index must be a positive number.");
-            } else if (intNumber > array.size()) {
-                System.out.println("given number is greater than number of cards");
-            } else if (!(array.get(intNumber - 1) instanceof MonsterCard)) {
-                System.out.println("you can't summon this card");
-            } else {
-                int i = firstEmptyIndex(turnOfPlayer.getBoard().getMonsterCards());
-                turnOfPlayer.getBoard().getMonsterCards().get(i).setStatus(StatusOfPosition.OFFENSIVE_OCCUPIED);
-                turnOfPlayer.getBoard().getMonsterCards().get(i).setCard(array.get(intNumber - 1));
-                array.remove(intNumber - 1);
-                System.out.println("special summoned successfully");
-                n = 1;
-            }
-        }
-    }
-
-    public void specialSummon(String arrayName) {
-        if (arrayName.equals("deck")) {
-            if (!isAnyMonsterInArray(turnOfPlayer.getBoard().getMainDeck())) {
-                System.out.println("there is no way you could special summon a monster");
-            } else {
-                if (turnOfPlayer.getBoard().isMonsterZoneFull()) {
-                    System.out.println("monster zone is full");
-                } else {
-                    specialSummonHelping(turnOfPlayer.getBoard().getMainDeck());
-                }
-            }
-        } else if (arrayName.equals("hand")) {
-            if (!isAnyMonsterInArray(turnOfPlayer.getHand())) {
-                System.out.println("there is no way you could special summon a monster");
-            } else {
-                if (turnOfPlayer.getBoard().isMonsterZoneFull()) {
-                    System.out.println("monster zone is full");
-                } else {
-                    specialSummonHelping(turnOfPlayer.getHand());
-                }
-            }
-        } else if (arrayName.equals("opponents graveyard")) {
-            if (!isAnyMonsterInArray(getOpposition().getBoard().getGraveYard())) {
-                System.out.println("there is no way you could special summon a monster");
-            } else {
-                if (turnOfPlayer.getBoard().isMonsterZoneFull()) {
-                    System.out.println("monster zone is full");
-                } else {
-                    specialSummonHelping(getOpposition().getBoard().getGraveYard());
-                }
-            }
-        } else {
-            if (!isAnyMonsterInArray(turnOfPlayer.getBoard().getGraveYard())) {
-                System.out.println("there is no way you could special summon a monster");
-            } else {
-                if (turnOfPlayer.getBoard().isMonsterZoneFull()) {
-                    System.out.println("monster zone is full");
-                } else {
-                    specialSummonHelping(turnOfPlayer.getBoard().getGraveYard());
-                }
-            }
+            errorText.setText("set successfully");
         }
     }
 
@@ -1015,98 +771,17 @@ public class Game implements Initializable {
         } else if ((!selectedPosition.getStatus().equals(StatusOfPosition.DEFENSIVE_HIDDEN)) || (selectedPosition.getIsStatusChanged())) {
             errorText.setText("you can’t flip summon this card");
         } else {
+            Media media = new Media(new File(str3).toURI().toString());
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setAutoPlay(true);
             selectedPosition.setStatus(StatusOfPosition.OFFENSIVE_OCCUPIED);
             errorText.setText("flip summoned successfully");
         }
     }
 
-//    public void showGraveyard() {
-//        int graveSize = turnOfPlayer.getBoard().getGraveYard().size();
-//        if (graveSize == 0) {
-//            System.out.println("graveyard is empty");
-//        } else {
-//            for (int i = 0; i < graveSize; i++) {
-//                String cardName = turnOfPlayer.getBoard().getGraveYard().get(i).getCardName();
-//                String cardDescription = turnOfPlayer.getBoard().getGraveYard().get(i).getCardDescription();
-//                int rank = i + 1;
-//                System.out.println(rank + ". " + cardName + " : " + cardDescription);
-//            }
-//        }
-//    }
-
-//    public void activateSpell() {
-//        if (selectedPosition == null) {
-//            System.out.println("no card is selected yet");
-//        } else if (!(selectedPosition.getCard() instanceof TrapAndSpellCard) ||
-//                !((TrapAndSpellCard) selectedPosition.getCard()).getTrapOrSpellTypes().equals(TrapOrSpellTypes.SPELL_CARD)) {
-//            System.out.println("activate effect is only for spell cards.");
-//        } else if (!getPhase().equals(Phase.MAIN)) {
-//            System.out.println("you can’t activate an effect on this turn");
-//        } else if (activatedSpells.contains(selectedPosition)) {
-//            System.out.println("you have already activated this card");
-//        } else {
-//            if (!((TrapAndSpellCard) Objects.requireNonNull(getSelectedPosition().getCard())).getEffect().isSuitableForActivate(this)) {
-//                System.out.println("preparations of this spell are not done yet");
-//            } else {
-//                activatedSpells.add(selectedPosition);
-//                System.out.println("spell activated");
-//                ((TrapAndSpellCard) Objects.requireNonNull(getSelectedPosition().getCard())).getEffect().activate(this);
-//                sendToGraveyard(selectedPosition, turnOfPlayer);
-//                selectedCardHandNulling();
-//                selectedPositionNulling();
-//            }
-//        }
-//    }
-
-    //until adding effect class !!
-
-    private boolean isPositionInOpponentsBoard() {
-        if (getOpposition().getBoard().getMonsterCards().contains(selectedPosition)) {
-            return true;
-        } else return getOpposition().getBoard().getTrapAndSpellCards().contains(selectedPosition);
-    }
-
-    private boolean isPositionHidden() {
-        return (selectedPosition.getStatus().equals(StatusOfPosition.DEFENSIVE_HIDDEN)) ||
-                (selectedPosition.getStatus().equals(StatusOfPosition.SPELL_OR_TRAP_HIDDEN));
-    }
-
-    public void showCard() {
-        if ((selectedCardHand == null) && (selectedPosition == null)) {
-            System.out.println("no card is selected yet");
-        } else if ((isPositionInOpponentsBoard()) && (isPositionHidden())) {
-            System.out.println("card is not visible");
-        } else {
-            if (selectedPosition == null) {
-                selectedCardHand.showCard();
-            } else if (selectedCardHand == null) {
-                selectedPosition.getCard().showCard();
-            }
-        }
-    }
-
-    public void cardShow(Matcher matcher) {
-        if (matcher.find()) {
-            String cardName = matcher.group(1);
-            if (Card.getCardByName(cardName) == null)
-                System.out.println("No card with this name was found!");
-            else Objects.requireNonNull(Card.getCardByName(cardName)).showCard();
-        }
-    }
-
-
     private int getCheatCounter() {
         return this.cheatCounter;
     }
-
-//    public void showHand() {
-//
-//        for (int i = 0; i < turnOfPlayer.getHand().size(); i++) {
-//            System.out.print((i + 1) + ". ");
-//            turnOfPlayer.getHand().get(i).showCard();
-//            System.out.println();
-//        }
-//    }
 
     public void setCardToFieldZone(Card card) {
         if (turnOfPlayer.getBoard().getFieldZone().getCard() != null) {
@@ -1117,9 +792,16 @@ public class Game implements Initializable {
     }
 
     //----------------------------------------Alerts---------------------------------------
-    public void showTurnOfPlayerAlert() {
+    public void showEndOfGameAlert(String reason) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("It's " + turnOfPlayer.getNickname() + "’s turn");
+        alert.setTitle("Game Over");
+        if (reason.equals("deck")) {
+            alert.setContentText(turnOfPlayer.getNickname() + "'s deck is empty");
+        } else if (turnOfPlayer.getLP() == 0) {
+            alert.setContentText(turnOfPlayer.getNickname() + "'s LP is 0");
+        } else {
+            alert.setContentText(getOpposition().getNickname() + "'s LP is 0");
+        }
         alert.showAndWait();
     }
 
@@ -1228,7 +910,6 @@ public class Game implements Initializable {
                         "\nType: " + TPCard.getTrapOrSpellTypes() +
                         "\nDescription: " + TPCard.getCardDescription());
             }
-//        alert.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("Images/Bitron.jpg"))));
         }
     }
 
@@ -1241,7 +922,7 @@ public class Game implements Initializable {
         } else {
             Image image = new Image(getClass().getResourceAsStream(card.getImageSrc()));
             selectedCardImage.setImage(image);
-            selectedCardGraphic = card;//TODO: delete this attribute
+            selectedCardGraphic = card;
             showInfo();
         }
     }
@@ -1259,8 +940,6 @@ public class Game implements Initializable {
     }
 
     public void setIcons() {
-
-
         ImageView imageView = new ImageView();
         Image image = new Image(getClass().getResourceAsStream("/Images/Icon/phaseActions/Summon.png"));
         imageView.setImage(image);
@@ -1297,7 +976,7 @@ public class Game implements Initializable {
         imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-//                specialSummon();
+                ;
             }
         });
         gridPanePhaseIcons.add(imageView, 3, 0);
@@ -1325,7 +1004,7 @@ public class Game implements Initializable {
         imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                // I don't know
+                ;
             }
         });
         gridPanePhaseIcons.add(imageView, 1, 1);
@@ -1336,7 +1015,6 @@ public class Game implements Initializable {
         imageView.setImage(image);
         imageView.setFitHeight(70);
         imageView.setFitWidth(70);
-//        imageView.
         imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -1486,7 +1164,7 @@ public class Game implements Initializable {
         if (cheatCounter <= 3) {
             turnOfPlayer = getOpposition();
             increaseCheatCounter();
-            surrender();
+            isSurrendered = true;
         }
     }
 
@@ -1535,69 +1213,14 @@ public class Game implements Initializable {
         }
     }
 
-    //---------------------------------------------------------------------------------------
-
-    public boolean cheat(String cheatCode) {
-        if (cheatCode.equals("0051iPl")) {
-            if (getCheatCounter() < 3) {
-                turnOfPlayer.increaseLP(1500);
-                System.out.println("cheat activated:\n" +
-                        "1500 LP was added to you");
-                increaseCheatCounter();
-            } else {
-                System.out.println("you can't use cheats anymore");
-            }
-            return true;
-        } else if (cheatCode.equals("bAcOo")) {
-            if (getCheatCounter() < 3) {
-                if (!getOpposition().getBoard().getMonsterCards().isEmpty()) {
-                    sendToGraveyard(getOpposition().getBoard().getMaximumPuver(), getOpposition());
-                    System.out.println("cheat activated:\n" +
-                            "you removed the most powerful monster of your opponent");
-                    increaseCheatCounter();
-                    return true;
-                }
-            } else {
-                System.out.println("you can't use cheats anymore");
-                return false;
-            }
-            return true;
-
-        } else if (cheatCode.equals("12yBdB")) {
-            if (getCheatCounter() < 3) {
-                if (selectedPosition == null)
-                    System.out.println("selected position is null");
-                else {
-                    if (attackedCards.contains(selectedPosition)) {
-                        attackedCards.remove(selectedPosition);
-                        System.out.println("cheat activated:\n" +
-                                "now you can attack again with your card");
-                        increaseCheatCounter();
-                    }
-                }
-            } else
-                System.out.println("you can't use cheats anymore");
-
-            return true;
-        } else if (cheatCode.equals("hPoSt2")) {
-            if (getCheatCounter() < 3) {
-                isAnyCardSummoned = false;
-                System.out.println("cheat activated:\n" +
-                        "you can now summon or set another card");
-                increaseCheatCounter();
-            } else
-                System.out.println("you can't use cheats anymore");
-
-            return true;
-        } else if (cheatCode.equals("pUvEr")) {
-            if (getCheatCounter() < 3) {
-                System.out.println("puver activated:\n" +
-                        "now you win the round");
-
-            } else
-                System.out.println("you can't use cheats anymore");
-            return true;
+    public void goToDuelMenu() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/Fxmls/DuelMenu.fxml"));
+            Stage stage = (Stage) errorText.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return false;
     }
 }

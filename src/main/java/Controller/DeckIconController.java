@@ -19,8 +19,8 @@ public class DeckIconController {
         myListener.onClickListener(deck);
     }
 
-    public void setDeckLabel(Deck deck , MyListener myListener){
-        if(Controller.getLoggedInPlayer().getActiveDeck() != null) {
+    public void setDeckLabel(Deck deck, MyListener myListener) {
+        if (Controller.getLoggedInPlayer().getActiveDeck() != null) {
             if (Controller.getLoggedInPlayer().getActiveDeck().equals(deck)) {
                 Image image = new Image(getClass().getResourceAsStream("/Images/Monster/activeDeck.jpg"));
                 deckIcon.setImage(image);

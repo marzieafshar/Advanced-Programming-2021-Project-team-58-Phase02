@@ -4,12 +4,11 @@ package Model;
 import java.util.ArrayList;
 
 public class TrapAndSpellCard extends Card {
-
+    private static ArrayList<TrapAndSpellCard> allSpellOrTrapCards = new ArrayList<TrapAndSpellCard>();
     private TrapOrSpellTypes cardType;
     private TrapOrSpellIcons cardIcon;
     private TrapAndSpellStatus cardStatus;
-//    private Effect effect;
-    private static ArrayList<TrapAndSpellCard> allSpellOrTrapCards = new ArrayList<TrapAndSpellCard>();
+
 
     public TrapAndSpellCard(String cardName, TrapOrSpellTypes cardType, TrapOrSpellIcons cardIcon, String cardDescription, TrapAndSpellStatus status, int price, String imgSrc) {
         super(cardName, cardDescription, price, "TrapAndSpell/" + imgSrc);
@@ -18,23 +17,10 @@ public class TrapAndSpellCard extends Card {
         setCardStatus(status);
         allCards.add(this);
     }
-//
-//    public void setEffect(Effect effect) {
-//        this.effect = effect;
-//    }
-//
-//    public Effect getEffect() {
-//        return effect;
-//    }
 
-//    public static void setEffects() {
-//        ((TrapAndSpellCard) Objects.requireNonNull(Card.getCardByName("Dark Hole"))).setEffect(new DarkHole());
-//        ((TrapAndSpellCard) Objects.requireNonNull(Card.getCardByName("Harpie's Feather Duster"))).setEffect(new HarpieFeatherDuster());
-//        ((TrapAndSpellCard) Objects.requireNonNull(Card.getCardByName("Monster Reborn"))).setEffect(new MonsterReborn());
-//        ((TrapAndSpellCard) Objects.requireNonNull(Card.getCardByName("Pot of Greed"))).setEffect(new PotOfGreed());
-//        ((TrapAndSpellCard) Objects.requireNonNull(Card.getCardByName("Raigeki"))).setEffect(new Raigeki());
-//        ((TrapAndSpellCard) Objects.requireNonNull(Card.getCardByName("Twin Twisters"))).setEffect(new TwinTwisters());
-//    }
+    public static ArrayList<TrapAndSpellCard> getAllSpellOrTrapCards() {
+        return allSpellOrTrapCards;
+    }
 
     public void setCardStatus(TrapAndSpellStatus cardStatus) {
         this.cardStatus = cardStatus;
@@ -69,7 +55,7 @@ public class TrapAndSpellCard extends Card {
     public static void addTrapAndSpell() {
         allSpellOrTrapCards.add(new TrapAndSpellCard("Trap Hole", TrapOrSpellTypes.TRAP_CARD, TrapOrSpellIcons.NORMAL,
                 "When your opponent Normal or Flip Summons 1 monster with 1000 or more ATK: Target that " +
-                        "monster; destroy that target.", TrapAndSpellStatus.UNLIMITED, 2000 , "TrapHole.jpg"));
+                        "monster; destroy that target.", TrapAndSpellStatus.UNLIMITED, 2000, "TrapHole.jpg"));
         allSpellOrTrapCards.add(new TrapAndSpellCard("Mirror Force", TrapOrSpellTypes.TRAP_CARD, TrapOrSpellIcons.NORMAL,
                 "When an opponent's monster declares an attack: Destroy all your opponent's Attack Position monsters.",
                 TrapAndSpellStatus.UNLIMITED, 2000, "MirrorForce.jpg"));

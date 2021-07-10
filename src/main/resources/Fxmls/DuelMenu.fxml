@@ -6,10 +6,12 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1214.0" styleClass="duelMenu-background" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DuelMenuController">
    <center>
@@ -28,7 +30,7 @@
                <children>
                   <HBox alignment="CENTER_RIGHT" prefHeight="65.0" prefWidth="647.0">
                      <children>
-                        <Label text="Number Of Rounds:">
+                        <Label text="Number Of Rounds:" textFill="#dab654">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
@@ -36,7 +38,7 @@
                               <Font name="Berlin Sans FB Demi Bold" size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="numberOfRounds" text="3">
+                        <Label fx:id="numberOfRounds" text="3" textFill="#dab654">
                            <HBox.margin>
                               <Insets left="30.0" right="50.0" />
                            </HBox.margin>
@@ -48,7 +50,7 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="65.0" prefWidth="643.0">
                      <children>
-                        <Label text="Rounds Played So Far:">
+                        <Label text="Rounds Played So Far:" textFill="#dab654">
                            <HBox.margin>
                               <Insets left="50.0" />
                            </HBox.margin>
@@ -56,7 +58,7 @@
                               <Font name="Berlin Sans FB Demi Bold" size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="roundsPlayed" text="1">
+                        <Label fx:id="roundsPlayed" text="1" textFill="#dab654">
                            <HBox.margin>
                               <Insets left="30.0" />
                            </HBox.margin>
@@ -146,7 +148,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="44.0" prefWidth="758.0">
                <children>
-                  <Label fx:id="player1MaxLP" prefHeight="29.0" prefWidth="19.0" text="3400">
+                  <Label fx:id="player1MaxLP" alignment="CENTER_RIGHT" prefHeight="29.0" prefWidth="145.0" text="3400">
                      <font>
                         <Font name="Berlin Sans FB Demi Bold" size="25.0" />
                      </font>
@@ -159,7 +161,7 @@
                         <Insets left="160.0" right="160.0" />
                      </HBox.margin>
                   </Label>
-                  <Label fx:id="player2MaxLP" prefHeight="29.0" prefWidth="20.0" text="0">
+                  <Label fx:id="player2MaxLP" prefHeight="29.0" prefWidth="144.0" text="0">
                      <font>
                         <Font name="Berlin Sans FB Demi Bold" size="25.0" />
                      </font>
@@ -168,7 +170,12 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="184.0" prefWidth="758.0" stylesheets="@../Styles.css">
                <children>
-                  <Button fx:id="nextRoundButton" mnemonicParsing="false" onAction="#startANewRound" text="next round">
+                  <Button mnemonicParsing="false" onAction="#test" text="Button">
+                     <HBox.margin>
+                        <Insets right="50.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="nextRoundButton" mnemonicParsing="false" onAction="#startANewRound" styleClass="back-button" text="next round" textFill="#dab654">
                      <HBox.margin>
                         <Insets right="50.0" />
                      </HBox.margin>
@@ -176,7 +183,7 @@
                         <Font name="Berlin Sans FB Bold" size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="editDeckButton" mnemonicParsing="false" onAction="#goToDeckMenu" stylesheets="@../Styles.css" text="edit deck">
+                  <Button fx:id="editDeckButton" mnemonicParsing="false" onAction="#goToDeckMenu" styleClass="back-button" stylesheets="@../Styles.css" text="edit deck" textFill="#dab654">
                      <HBox.margin>
                         <Insets left="50.0" />
                      </HBox.margin>
@@ -185,7 +192,27 @@
                      </font>
                   </Button>
                </children></HBox>
+            <HBox alignment="CENTER" prefHeight="71.0" prefWidth="1214.0">
+               <children>
+                  <Text fx:id="matchResult" strokeType="OUTSIDE" strokeWidth="0.0">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
          </children>
       </VBox>
    </center>
+   <bottom>
+      <AnchorPane prefHeight="51.0" prefWidth="1214.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="8.0" layoutY="7.0" mnemonicParsing="false" onAction="#backToMainMenu" prefHeight="38.0" prefWidth="86.0" styleClass="back-button" stylesheets="@../Styles.css" text="back" textFill="#dab654">
+               <font>
+                  <Font name="Berlin Sans FB Bold" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </bottom>
 </BorderPane>

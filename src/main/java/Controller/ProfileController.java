@@ -53,7 +53,6 @@ public class ProfileController implements Initializable {
     private Label userNumOfLosses;
     @FXML
     private GridPane gridPane;
-    private Stage stage;
     private MyListener myListener;
 
     String str = "Button_Click.mp3";
@@ -67,7 +66,7 @@ public class ProfileController implements Initializable {
         mediaPlayer.setAutoPlay(true);
         JsonSaveAndLoad.save();
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/MainMenu.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
     }
 

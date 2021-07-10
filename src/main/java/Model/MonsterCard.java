@@ -1,6 +1,5 @@
 package Model;
 
-
 import java.util.ArrayList;
 
 public class MonsterCard extends Card {
@@ -50,10 +49,6 @@ public class MonsterCard extends Card {
         this.cardLevel = cardLevel;
     }
 
-    public Attribute getCardAttribute() {
-        return cardAttribute;
-    }
-
     public void setCardAttribute(Attribute cardAttribute) {
         this.cardAttribute = cardAttribute;
     }
@@ -72,14 +67,6 @@ public class MonsterCard extends Card {
 
     public void setDefense(int defense) {
         this.defense = defense;
-    }
-
-    public Effects getEffect() {
-        return effect;
-    }
-
-    public void setEffect(Effects effect) {
-        this.effect = effect;
     }
 
     public void showCard() {

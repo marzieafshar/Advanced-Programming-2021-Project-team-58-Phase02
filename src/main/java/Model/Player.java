@@ -27,14 +27,6 @@ public class Player {
         allPlayers = players;
     }
 
-    public static Player getPlayerByNickName(String nickname) {
-        for (Player player : allPlayers) {
-            if (player.getNickname().equals(nickname))
-                return player;
-        }
-        return null;
-    }
-
     public ArrayList<Card> getAllCards() {
         return this.allCards;
     }
@@ -59,19 +51,6 @@ public class Player {
 
     public int getWinMatches() {
         return winMatches;
-    }
-
-    public void increaseLoseMatches(){
-        loseMatches++;
-    }
-
-    public void increaseWinMatches(){
-        winMatches++;
-    }
-
-
-    public void setBoard(Board board) {
-        this.board = board;
     }
 
     public void setUsername(String username) {
@@ -197,24 +176,11 @@ public class Player {
         return false;
     }
 
-    public boolean hasACard(Card card) {
-        if (card == null) return false;
-        for (Card c : allCards) {
-            if (c.getCardName().equals(card.getCardName()))
-                return true;
-        }
-        return false;
-    }
-
     public Deck getDeckByName(String deckName) {
         for (Deck deck : decks)
             if (deck.getDeckName().equals(deckName))
                 return deck;
         return null;
-    }
-
-    public void removeCardFromAllCards(Card card) {
-        this.allCards.remove(card);
     }
 
     public Image getImage() {

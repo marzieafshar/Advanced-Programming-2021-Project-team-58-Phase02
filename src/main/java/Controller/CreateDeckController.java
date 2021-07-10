@@ -12,7 +12,6 @@ public class CreateDeckController {
     public TextField deckNameTextfield;
 
     private Player player = Controller.getLoggedInPlayer();
-    private Stage stage;
     private static Stage deckMenuStage;
     private static DeckMenuController deckMenuController;
 
@@ -24,22 +23,20 @@ public class CreateDeckController {
         CreateDeckController.deckMenuStage = deckMenuStage;
     }
 
-    public void createNewDeck(ActionEvent event){
+    public void createNewDeck(ActionEvent event) {
         String newDeckName = deckNameTextfield.getText();
-        if(newDeckName.equals("")){
+        if (newDeckName.equals("")) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setContentText("text field is empty!");
             alert.showAndWait();
-        }
-        else if(player.hasADeck(player.getDeckByName(newDeckName))){
+        } else if (player.hasADeck(player.getDeckByName(newDeckName))) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setContentText("deck with name " + newDeckName + " already exists");
             alert.showAndWait();
-        }
-        else{
+        } else {
             Deck deck = new Deck(newDeckName);
             player.getDecks().add(deck);
-            stage = (Stage) deckNameTextfield.getScene().getWindow();
+            Stage stage = (Stage) deckNameTextfield.getScene().getWindow();
             stage.close();
             deckMenuController.addDecksToMenu();
         }

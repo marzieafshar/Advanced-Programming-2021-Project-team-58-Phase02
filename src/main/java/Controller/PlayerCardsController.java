@@ -20,10 +20,6 @@ public class PlayerCardsController {
     @FXML
     private ImageView cardImage;
 
-    public int getIndex() {
-        return index;
-    }
-
     @FXML
     void click(MouseEvent event) {
         myListener.onClickListener(card);

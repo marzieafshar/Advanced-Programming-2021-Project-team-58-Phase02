@@ -35,9 +35,6 @@ public class ShopController implements Initializable {
     private TextField searchBox;
 
     @FXML
-    private Button searchButton;
-
-    @FXML
     private ImageView selectedCardImage;
 
     @FXML
@@ -47,16 +44,7 @@ public class ShopController implements Initializable {
     private Label selectedCardPrice;
 
     @FXML
-    private Button infoButton;
-
-    @FXML
     private Button buyButton;
-
-    @FXML
-    private Button backButton;
-
-    @FXML
-    private ScrollPane scroll;
 
     @FXML
     private GridPane grid;
@@ -109,7 +97,6 @@ public class ShopController implements Initializable {
                         column = 0;
                         row++;
                     }
-//                anchorPane.setCursor();
                     grid.add(anchorPane, column++, row);
 
                     GridPane.setMargin(anchorPane, new Insets(5));
@@ -182,7 +169,6 @@ public class ShopController implements Initializable {
             alert.setContentText("Type: " + TPCard.getTrapOrSpellTypes() +
                     "\nDescription: " + TPCard.getCardDescription());
         }
-//        alert.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("Images/Bitron.jpg"))));
         alert.showAndWait();
     }
 

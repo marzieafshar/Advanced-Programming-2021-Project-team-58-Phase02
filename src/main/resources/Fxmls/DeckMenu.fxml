@@ -160,7 +160,7 @@
             </HBox>
             <HBox prefHeight="253.0" prefWidth="312.0">
                <children>
-                  <Text fx:id="selectedCardInfo" strokeType="OUTSIDE" strokeWidth="0.0">
+                  <Text fx:id="selectedCardInfo" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="287.3333435058594" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets left="20.0" top="15.0" />
                      </HBox.margin>

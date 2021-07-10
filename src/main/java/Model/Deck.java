@@ -28,36 +28,14 @@ public class Deck implements Comparable<Deck>, Cloneable {
         return false;
     }
 
-    public int getMainDeckSize() {
-        return this.mainDeck.size();
-    }
-
-    public int getSideDeckSize() {
-        return this.sideDeck.size();
-    }
-
     public void addCardToMainDeck(Card card) {
         this.mainDeck.add(card);
         this.allCards.add(card);
     }
 
-    public void removeCardFromMainDeck(Card card) {
-        this.mainDeck.remove(card);
-        this.allCards.remove(card);
-    }
-
     public void addCardToSideDeck(Card card) {
         this.sideDeck.add(card);
         this.allCards.add(card);
-    }
-
-    public void removeCardFromSideDeck(Card card) {
-        this.sideDeck.remove(card);
-        this.allCards.remove(card);
-    }
-
-    public static void removeDeckFromAllDecks(Deck deck) {
-        allDecks.remove(deck);
     }
 
 
@@ -67,14 +45,6 @@ public class Deck implements Comparable<Deck>, Cloneable {
 
     public ArrayList<Card> getSideDeck() {
         return sideDeck;
-    }
-
-    public int getNumOfCardInDeck(Card card) {
-        int counter = 0;
-        for (Card c : allCards)
-            if (c.getCardName().equals(card.getCardName()))
-                counter++;
-        return counter;
     }
 
     public int compareTo(Deck anotherDeck) {
@@ -89,13 +59,5 @@ public class Deck implements Comparable<Deck>, Cloneable {
             System.err.println("hi");
         }
         return null;
-    }
-
-    public boolean hasACardInMainDeck(Card card) {
-        for (Card c : mainDeck) {
-            if (c.getCardName().equals(card.getCardName()))
-                return true;
-        }
-        return false;
     }
 }

@@ -12,17 +12,13 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-//import sun.jvm.hotspot.runtime.Threads;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class FlipCoinController implements Initializable {
     public BorderPane borderPane;
@@ -32,7 +28,7 @@ public class FlipCoinController implements Initializable {
     private ImageView imageView;
 
 
-    private static Player winner;//check it later! (static)
+    private static Player winner;
     private static Player loser;
 
     private CoinAnimation animation1;
@@ -42,10 +38,6 @@ public class FlipCoinController implements Initializable {
 
     public static Player getWinner() {
         return winner;
-    }
-
-    public static Player getLoser() {
-        return loser;
     }
 
     @Override
@@ -87,13 +79,12 @@ public class FlipCoinController implements Initializable {
 
     public void loadNextScene(MouseEvent event) {
         try {
-            if(goToGame.getText().equals("Click to continue")) {
+            if (goToGame.getText().equals("Click to continue")) {
                 Parent root = FXMLLoader.load(getClass().getResource("/Fxmls/DuelField.fxml"));
                 Scene scene = new Scene(root);
                 Stage stage = (Stage) imageView.getScene().getWindow();
                 stage.setScene(scene);
-            }
-            else{
+            } else {
                 event.consume();
             }
         } catch (IOException e) {
@@ -104,14 +95,13 @@ public class FlipCoinController implements Initializable {
     public void heartOrStar() {
         Random rand = new Random();
         int a = rand.nextInt(2);
-        if(a == 1) {
+        if (a == 1) {
             winner = Controller.getLoggedInPlayer();
             loser = SetOpponentController.getPlayer2();
             String str = "/Images/Coin/0.png";
             Image image = new Image(getClass().getResourceAsStream(str));
             imageView.setImage(image);
-        }
-        else {
+        } else {
             winner = SetOpponentController.getPlayer2();
             loser = Controller.getLoggedInPlayer();
             String str = "/Images/Coin/Gold_21.png";

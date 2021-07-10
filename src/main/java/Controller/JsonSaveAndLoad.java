@@ -24,5 +24,4 @@ public class JsonSaveAndLoad {
         }.getType());
         Player.setAllPlayers(players);
     }
-
 }

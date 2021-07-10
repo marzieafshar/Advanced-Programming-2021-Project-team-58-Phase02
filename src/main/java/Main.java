@@ -9,12 +9,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import javafx.scene.media.*;
-import org.apache.commons.codec.language.Soundex;
-
 import java.io.File;
 import java.io.IOException;
 
-public class Main extends Application {
+public class Main extends Application{
     private MediaPlayer mediaPlayer;
 
     @Override
@@ -30,11 +28,11 @@ public class Main extends Application {
             }
         }
 
-//        String str = "05. Grabbing the Hatchet.mp3";
-//        Media media = new Media(new File(str).toURI().toString());
-//        mediaPlayer = new MediaPlayer(media);
-//        mediaPlayer.setVolume(0.5);
-//        mediaPlayer.setAutoPlay(true);
+        String str = "05. Grabbing the Hatchet.mp3";
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setVolume(0.5);
+        mediaPlayer.setAutoPlay(true);
 
 
         Parent root = FXMLLoader.load(getClass().getResource("/Fxmls/WelcomeMenu.fxml"));
@@ -50,7 +48,7 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         launch(args);
     }
 
