@@ -257,7 +257,14 @@ public class Game implements Initializable {
     public void setSelectedPosition(Position selectedPosition) {
         selectedCardHandNulling();
         this.selectedPosition = selectedPosition;
-        setSelectedCardImage(selectedPosition.getCard());
+        if(getOpposition().getBoard().getMonsterCards().contains(selectedPosition) &&
+                (selectedPosition.getStatus().equals(StatusOfPosition.DEFENSIVE_HIDDEN)))
+            setSelectedCardImage(null);
+        else if(selectedPosition.getStatus().equals(StatusOfPosition.SPELL_OR_TRAP_HIDDEN) &&
+                getOpposition().getBoard().getTrapAndSpellCards().contains(selectedPosition))
+            setSelectedCardImage(null);
+        else
+            setSelectedCardImage(selectedPosition.getCard());
     }
 
     public void setSelectedCardHand(Card selectedCardHand) {
@@ -602,6 +609,7 @@ public class Game implements Initializable {
     }
 
     public void summon() {
+        errorText.setText("summon selected");
         if (isAnyCardSummoned) {
             isAnyCardSummoned = summonMonsterOnBoard();
             isAnyCardSummoned = true;
@@ -709,25 +717,22 @@ public class Game implements Initializable {
 
     public void changeMonsterStatus(String newStatus) {
         if (selectedPosition == null) {
-            System.out.println("no card is selected on the board yet");
+            errorText.setText("no card is selected on the board yet");
         } else if (!(selectedPosition.getCard() instanceof MonsterCard)) {
-            System.out.println("you can’t change this card position");
+            errorText.setText("you can’t change this card position");
         } else if (!this.phase.equals(Phase.MAIN)) {
-            System.out.println("you can’t do this action in this phase");
+            errorText.setText("you can’t do this action in this phase");
         } else if (selectedPosition.getStatus().equals(StatusOfPosition.DEFENSIVE_HIDDEN)) {
-            System.out.println("you can't change the position of cards that are in DH. Use flip-summon");
+            errorText.setText("you can't change the position of cards that are in DH. Use flip-summon");
         } else if (((selectedPosition.getStatus().equals(StatusOfPosition.OFFENSIVE_OCCUPIED)) && (newStatus.equals("attack")))
                 || ((selectedPosition.getStatus().equals(StatusOfPosition.DEFENSIVE_OCCUPIED)) && (newStatus.equals("defense")))) {
-            System.out.println("this card is already in the wanted position");
+            errorText.setText("this card is already in the wanted position");
         } else if (selectedPosition.getIsStatusChanged()) {
-            System.out.println("you already changed this card position in this turn");
+            errorText.setText("you already changed this card position in this turn");
         } else {
-            if (selectedPosition.getStatus().equals(StatusOfPosition.OFFENSIVE_OCCUPIED))
-                selectedPosition.setStatus(StatusOfPosition.DEFENSIVE_OCCUPIED);
-            else if (selectedPosition.getStatus().equals(StatusOfPosition.DEFENSIVE_OCCUPIED))
-                selectedPosition.setStatus(StatusOfPosition.OFFENSIVE_OCCUPIED);
+            selectedPosition.changeStatus();
 
-            System.out.println("monster card position changed successfully");
+            errorText.setText("monster card position changed successfully");
             selectedPosition.setStatusChanged(true);
             selectedPositionNulling();
             selectedCardHandNulling();
@@ -1314,6 +1319,7 @@ public class Game implements Initializable {
             Image image = new Image(getClass().getResourceAsStream("/Images/Monster/Unknown.jpg"));
             selectedCardImage.setImage(image);
             selectedCardGraphic = null;
+            infoTextArea.setText("");
         } else {
             Image image = new Image(getClass().getResourceAsStream(card.getImageSrc()));
             selectedCardImage.setImage(image);
@@ -1338,7 +1344,7 @@ public class Game implements Initializable {
 
 
         ImageView imageView = new ImageView();
-        Image image = new Image(getClass().getResourceAsStream("/Images/Icon/MainPhase/Summon.png"));
+        Image image = new Image(getClass().getResourceAsStream("/Images/Icon/phaseActions/Summon.png"));
         imageView.setImage(image);
         imageView.setFitHeight(70);
         imageView.setFitWidth(70);
@@ -1352,7 +1358,7 @@ public class Game implements Initializable {
         GridPane.setMargin(imageView, new Insets(10, 0, 0, 0));
 
         imageView = new ImageView();
-        image = new Image(getClass().getResourceAsStream("/Images/Icon/MainPhase/Set.png"));
+        image = new Image(getClass().getResourceAsStream("/Images/Icon/phaseActions/Set.png"));
         imageView.setImage(image);
         imageView.setFitHeight(70);
         imageView.setFitWidth(70);
@@ -1366,7 +1372,7 @@ public class Game implements Initializable {
         GridPane.setMargin(imageView, new Insets(10, 0, 0, 0));
 
         imageView = new ImageView();
-        image = new Image(getClass().getResourceAsStream("/Images/Icon/MainPhase/SpecialSummon.png"));
+        image = new Image(getClass().getResourceAsStream("/Images/Icon/phaseActions/SpecialSummon.png"));
         imageView.setImage(image);
         imageView.setFitHeight(70);
         imageView.setFitWidth(70);
@@ -1380,7 +1386,7 @@ public class Game implements Initializable {
         GridPane.setMargin(imageView, new Insets(10, 0, 0, 0));
 
         imageView = new ImageView();
-        image = new Image(getClass().getResourceAsStream("/Images/Icon/MainPhase/FlipSummon.png"));
+        image = new Image(getClass().getResourceAsStream("/Images/Icon/phaseActions/FlipSummon.png"));
         imageView.setImage(image);
         imageView.setFitHeight(70);
         imageView.setFitWidth(70);
@@ -1394,7 +1400,7 @@ public class Game implements Initializable {
         GridPane.setMargin(imageView, new Insets(10, 0, 0, 0));
 
         imageView = new ImageView();
-        image = new Image(getClass().getResourceAsStream("/Images/Icon/MainPhase/ActivateEffect.png"));
+        image = new Image(getClass().getResourceAsStream("/Images/Icon/phaseActions/ActivateEffect.png"));
         imageView.setImage(image);
         imageView.setFitHeight(70);
         imageView.setFitWidth(70);
@@ -1408,7 +1414,7 @@ public class Game implements Initializable {
         GridPane.setMargin(imageView, new Insets(25, 0, 0, 0));
 
         imageView = new ImageView();
-        image = new Image(getClass().getResourceAsStream("/Images/Icon/MainPhase/ChangeStatus.png"));
+        image = new Image(getClass().getResourceAsStream("/Images/Icon/phaseActions/ChangeStatus.png"));
         imageView.setImage(image);
         imageView.setFitHeight(70);
         imageView.setFitWidth(70);
@@ -1423,32 +1429,60 @@ public class Game implements Initializable {
         GridPane.setMargin(imageView, new Insets(25, 0, 0, 0));
 
         imageView = new ImageView();
-        image = new Image(getClass().getResourceAsStream("/Images/Icon/MainPhase/ChangeToAttack.png"));
+        image = new Image(getClass().getResourceAsStream("/Images/Icon/phaseActions/ChangeToAttack.png"));
         imageView.setImage(image);
         imageView.setFitHeight(70);
         imageView.setFitWidth(70);
         imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-
+                changeMonsterStatus("attack");
             }
         });
         gridPanePhaseIcons.add(imageView, 3, 1);
         GridPane.setMargin(imageView, new Insets(25, 0, 0, 0));
 
         imageView = new ImageView();
-        image = new Image(getClass().getResourceAsStream("/Images/Icon/MainPhase/ChangeToDefense.png"));
+        image = new Image(getClass().getResourceAsStream("/Images/Icon/phaseActions/ChangeToDefense.png"));
         imageView.setImage(image);
         imageView.setFitHeight(70);
         imageView.setFitWidth(70);
         imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-
+                changeMonsterStatus("defense");
             }
         });
         gridPanePhaseIcons.add(imageView, 4, 1);
         GridPane.setMargin(imageView, new Insets(25, 0, 0, 0));
+
+        imageView = new ImageView();
+        image = new Image(getClass().getResourceAsStream("/Images/Icon/phaseActions/Attack.png"));
+        imageView.setImage(image);
+        imageView.setFitHeight(70);
+        imageView.setFitWidth(70);
+        imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                attackToMonster(1);
+            }
+        });
+        gridPanePhaseIcons.add(imageView, 2, 2);
+        GridPane.setMargin(imageView, new Insets(0, 0, 0, 0));
+
+        imageView = new ImageView();
+        image = new Image(getClass().getResourceAsStream("/Images/Icon/phaseActions/DirectAttack.png"));
+        imageView.setImage(image);
+        imageView.setFitHeight(70);
+        imageView.setFitWidth(70);
+        imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                directAttack();
+            }
+        });
+        gridPanePhaseIcons.add(imageView, 3, 2);
+        GridPane.setMargin(imageView, new Insets(0, 0, 0, 0));
     }
 
     public void setPositionsListener(Player player){

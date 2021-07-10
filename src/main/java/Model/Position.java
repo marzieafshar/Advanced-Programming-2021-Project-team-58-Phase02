@@ -45,6 +45,13 @@ public class Position {
 
     public void setImageView(ImageView imageView) {
         this.imageView = imageView;
+        imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (card != null)
+                    click(event);
+            }
+        });
         setImageViewStatus();
     }
 
@@ -66,6 +73,15 @@ public class Position {
 
     public void setStatus(StatusOfPosition status) {
         this.status = status;
+//        setImageViewStatus();
+    }
+
+    public void changeStatus(){
+        if (getStatus().equals(StatusOfPosition.OFFENSIVE_OCCUPIED))
+            setStatus(StatusOfPosition.DEFENSIVE_OCCUPIED);
+        else if (getStatus().equals(StatusOfPosition.DEFENSIVE_OCCUPIED))
+            setStatus(StatusOfPosition.OFFENSIVE_OCCUPIED);
+
         setImageViewStatus();
     }
 
@@ -77,13 +93,6 @@ public class Position {
         //اول status بعد card
         //برای خالی کردن پوزیشن setCard(null)
         this.card = card;
-        imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if (card != null)
-                    click(event);
-            }
-        });
         setImageViewStatus();
     }
 

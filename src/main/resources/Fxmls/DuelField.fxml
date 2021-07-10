@@ -67,7 +67,7 @@
          <center>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="650.0" prefWidth="714.0" styleClass="duel-background" stylesheets="@../Styles.css" BorderPane.alignment="CENTER">
                <children>
-                  <HBox alignment="TOP_CENTER" layoutX="19.0" layoutY="550.0" prefHeight="102.0" prefWidth="701.0">
+                  <HBox alignment="TOP_CENTER" layoutX="19.0" layoutY="575.0" prefHeight="77.0" prefWidth="701.0">
                      <children>
                         <GridPane fx:id="gridHandCardsTurnOfPlayer">
                           <rowConstraints>
@@ -173,8 +173,8 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <HBox prefHeight="555.0" prefWidth="250.0" />
-                  <HBox alignment="CENTER" prefHeight="619.0" prefWidth="250.0" styleClass="left-bar" stylesheets="@../Styles.css">
+                  <HBox prefHeight="371.0" prefWidth="280.0" />
+                  <HBox alignment="TOP_CENTER" prefHeight="549.0" prefWidth="280.0" styleClass="left-bar" stylesheets="@../Styles.css">
                      <children>
                         <GridPane fx:id="gridPanePhaseIcons" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="0.0" prefWidth="0.0">
                            <rowConstraints>
