@@ -118,6 +118,7 @@ public class Game implements Initializable {
     private Card selectedCardHand;
     private boolean isAnyCardSummoned;
     private int cheatCounter;
+    private Position oppositionCardPosition;
 
     List<Position> attackedCards = new ArrayList<Position>();
     List<Position> activatedSpells = new ArrayList<>();
@@ -154,6 +155,9 @@ public class Game implements Initializable {
         drawAtFirstTurn(player2);
 
         setCheatCounter();
+
+        setIcons();
+        setPhase(Phase.END);
     }
 
     public void setPlayer1(Player player1) {
@@ -207,12 +211,51 @@ public class Game implements Initializable {
     }
 
     public void drawPhase(ActionEvent event) {
-        nextPhaseCheck = 0;
-        setPhase(Phase.DRAW);
-        showPhaseAlert();
-        if (isAnyoneWin()) return;
-        draw();
-//        standbyPhase();
+        if (phase.equals(Phase.END)) {
+            nextPhaseCheck = 0;
+            setPhase(Phase.DRAW);
+            showPhaseAlert();
+            if (isAnyoneWin()) return;
+            draw();
+        } else if (phase.equals(Phase.DRAW)) {
+            errorText.setText("You are in Draw Phase now");
+        } else {
+            phaseNavigationAlert(Phase.DRAW);
+        }
+    }
+
+    public void mainPhase() {
+        if (phase.equals(Phase.DRAW) || (phase.equals(Phase.BATTLE))) {
+            if(phase.equals(Phase.DRAW))
+                nextPhaseCheck = 1;
+            else
+                nextPhaseCheck = 0;
+            setPhase(Phase.MAIN);
+            showPhaseAlert();
+        } else if (phase.equals(Phase.MAIN)) {
+            errorText.setText("You are in Main Phase now!");
+        } else {
+            phaseNavigationAlert(Phase.MAIN);
+        }
+    }
+
+    public void battlePhase(ActionEvent event) {
+        if (phase.equals(Phase.MAIN) && nextPhaseCheck == 1) {
+            nextPhaseCheck = 0;
+            setPhase(Phase.BATTLE);
+            showPhaseAlert();
+        } else {
+            phaseNavigationAlert(Phase.BATTLE);
+        }
+    }
+
+    public void endPhase(ActionEvent event) {
+        setPhase(Phase.END);
+        setAllPositionsChangeStatus();
+        changeTurnOfPlayer();
+        showWhichPlayersTurn();
+        isAnyCardSummoned = false;
+        clearAttackedCardsArrayList();
     }
 
     public void draw() {
@@ -257,10 +300,10 @@ public class Game implements Initializable {
     public void setSelectedPosition(Position selectedPosition) {
         selectedCardHandNulling();
         this.selectedPosition = selectedPosition;
-        if(getOpposition().getBoard().getMonsterCards().contains(selectedPosition) &&
+        if (getOpposition().getBoard().getMonsterCards().contains(selectedPosition) &&
                 (selectedPosition.getStatus().equals(StatusOfPosition.DEFENSIVE_HIDDEN)))
             setSelectedCardImage(null);
-        else if(selectedPosition.getStatus().equals(StatusOfPosition.SPELL_OR_TRAP_HIDDEN) &&
+        else if (selectedPosition.getStatus().equals(StatusOfPosition.SPELL_OR_TRAP_HIDDEN) &&
                 getOpposition().getBoard().getTrapAndSpellCards().contains(selectedPosition))
             setSelectedCardImage(null);
         else
@@ -288,27 +331,6 @@ public class Game implements Initializable {
     public Player getTurnOfPlayer() {
         return turnOfPlayer;
     }
-
-    public void endPhase(ActionEvent event) {
-        setAllPositionsChangeStatus();
-        changeTurnOfPlayer();
-        showWhichPlayersTurn();
-        isAnyCardSummoned = false;
-    }
-
-    public void mainPhase() {
-        if (phase.equals(Phase.DRAW) || (phase.equals(Phase.BATTLE))) {
-            setPhase(Phase.MAIN);
-            showPhaseAlert();
-            setMainPhaseIcons();
-            if (nextPhaseCheck == 0) {
-                nextPhaseCheck = 1;
-            }
-        } else {
-            phaseNavigationAlert(Phase.MAIN);
-        }
-    }
-
 
     private void deSelect() {
         selectedPositionNulling();
@@ -397,64 +419,6 @@ public class Game implements Initializable {
 
     public void setAnyCardSummoned(boolean anyCardSummoned) {
         isAnyCardSummoned = anyCardSummoned;
-    }
-
-    public void battlePhase(ActionEvent event) {
-        if(phase.equals(Phase.MAIN) && nextPhaseCheck==1){
-            nextPhaseCheck = 0;
-            setPhase(Phase.BATTLE);
-            showPhaseAlert();
-        }
-        else{
-            phaseNavigationAlert(Phase.BATTLE);
-        }
-//        String input;
-//        while (!(input = scanner.nextLine()).equals("next phase")) {
-////            Matcher matchSelect = getCommandMatcher(input, "^select --(hand|monster|spell) (--opponent )*([0-9]+)$");
-//
-//            if (input.trim().matches("^(?i)(attack direct)$"))
-//                directAttack();
-//            else if (input.trim().matches("^(?i)(attack (.+))$")) {
-////                Matcher matcher = getCommandMatcher(input, "^(?i)(attack (.+))$");
-////                if (matcher.find()) {
-//                int index;
-//                try {
-////                        index = convertIndex(Integer.parseInt(matcher.group(2)));
-//                } catch (Exception e) {
-//                    System.out.println("Please enter an integer");
-//                    return;
-//                }
-////                    attackToMonster(index);
-//            }
-////            } else if (matchSelect.find())
-////                select(matchSelect);
-//            else if (input.equals("show current-phase"))
-//                System.out.println(phase);
-//            else if (input.equals("surrender"))
-//                surrender();
-//            else if (input.equals("card show selected")) {
-//                showCard();
-//            } else if (input.matches("card show (.+)")) {
-////                cardShow(getCommandMatcher(input, "card show (.+)"));
-//            } else {
-//                if (!cheat(input))
-//                    System.out.println("invalid command for this phase");
-//            }
-//
-//            showBoard();
-//            if (isAnyoneWin()) {
-//                return;
-//            }
-//        }
-        clearAttackedCardsArrayList();
-//        mainPhase();
-    }
-
-    public void standbyPhase() {
-        setPhase(Phase.STANDBY);
-        showPhaseAlert();
-        showPhaseAlert();
-        mainPhase();
     }
 
     private void setAllPositionsChangeStatus() {
@@ -598,6 +562,10 @@ public class Game implements Initializable {
     public void selectedCardHandNulling() {
         selectedCardHand = null;
         setSelectedCardImage(null);
+    }
+
+    public void oppositionCardPositionNulling() {
+        oppositionCardPosition = null;
     }
 
     private int firstEmptyIndex(ArrayList<Position> array) {
@@ -804,69 +772,83 @@ public class Game implements Initializable {
         attackedCards.clear();
     }
 
-    public void attackToMonster(int index) {
-
-        if (isConditionsUnsuitableForAttack())
-            return;
-        Position oppositionCardPosition = getOpposition().getBoard().getMonsterCards().get(index);
-        StatusOfPosition statusOfOpposition = oppositionCardPosition.getStatus();
-        if (isOpponentMonsterZoneEmpty())
-            System.out.println("your opponent's monster zone is empty and you can attack directly to their LP");
-        else if (statusOfOpposition.equals(StatusOfPosition.EMPTY))
-            System.out.println("there is no card to attack here");
-        else {
-            int selectedCardAttack = ((MonsterCard) selectedPosition.getCard()).getAttack();
-            int oppositionCardAttack = ((MonsterCard) oppositionCardPosition.getCard()).getAttack();
-            int oppositionCardDefense = ((MonsterCard) oppositionCardPosition.getCard()).getDefense();
-
-            if (statusOfOpposition.equals(StatusOfPosition.OFFENSIVE_OCCUPIED)) {
-                if (selectedCardAttack > oppositionCardAttack) {
-                    int damage = selectedCardAttack - oppositionCardAttack;
-                    sendToGraveyard(oppositionCardPosition, getOpposition());
-                    getOpposition().decreaseLP(damage);
-                    System.out.println("your opponent’s monster is destroyed and your opponent receives "
-                            + damage + " battle damage");
-                } else if (selectedCardAttack < oppositionCardAttack) {
-                    int damage = oppositionCardAttack - selectedCardAttack;
-                    sendToGraveyard(selectedPosition, turnOfPlayer);
-                    turnOfPlayer.decreaseLP(damage);
-                    System.out.println("Your monster card is destroyed and you received " + damage +
-                            " battle damage");
-                } else {
-                    sendToGraveyard(oppositionCardPosition, getOpposition());
-                    sendToGraveyard(selectedPosition, turnOfPlayer);
-                    System.out.println("both you and your opponent monster cards "
-                            + "are destroyed and no one receives damage");
-                }
-            } else {
-                String cardName = oppositionCardPosition.getCard().getCardName();
-                if (selectedCardAttack > oppositionCardDefense) {
-                    sendToGraveyard(oppositionCardPosition, getOpposition());
-                    if (statusOfOpposition.equals(StatusOfPosition.DEFENSIVE_OCCUPIED))
-                        System.out.println("the defense position monster is destroyed");
-                    else {
-                        System.out.println("opponent’s monster card was " + cardName +
-                                " and the defense position monster is destroyed");
-                    }
-                } else if (selectedCardAttack < oppositionCardDefense) {
-                    int damage = oppositionCardDefense - selectedCardAttack;
-                    turnOfPlayer.decreaseLP(damage);
-                    if (statusOfOpposition.equals(StatusOfPosition.DEFENSIVE_OCCUPIED))
-                        System.out.println("no card is destroyed and you received " + damage + " battle damage");
-                    else
-                        System.out.println("opponent’s monster card was " + cardName +
-                                " no card is destroyed and you received " + damage + " battle damage");
-                } else {
-                    if (statusOfOpposition.equals(StatusOfPosition.DEFENSIVE_OCCUPIED))
-                        System.out.println("no card is destroyed");
-                    else
-                        System.out.println("opponent’s monster card was " + cardName + " no card is destroyed");
-                }
-            }
-            attackedCards.add(selectedPosition);
-            selectedCardHandNulling();
-            selectedPositionNulling();
+    public void battleStandby() {
+        setPhase(Phase.BATTLE_STANDBY);
+        if (oppositionCardPosition != null) {
+            setPhase(Phase.BATTLE);
+            attackToMonster();
         }
+
+    }
+
+    public void setOppositionCardPosition(Position position) {
+        if (getOpposition().getBoard().getMonsterCards().contains(position)) {
+            this.oppositionCardPosition = position;
+            battleStandby();
+        } else {
+            errorText.setText("You can't attack this card!");
+        }
+    }
+
+    public void attackToMonster() {
+        StatusOfPosition statusOfOpposition = oppositionCardPosition.getStatus();
+
+        int selectedCardAttack = ((MonsterCard) selectedPosition.getCard()).getAttack();
+        int oppositionCardAttack = ((MonsterCard) oppositionCardPosition.getCard()).getAttack();
+        int oppositionCardDefense = ((MonsterCard) oppositionCardPosition.getCard()).getDefense();
+
+        if (statusOfOpposition.equals(StatusOfPosition.OFFENSIVE_OCCUPIED)) {
+            if (selectedCardAttack > oppositionCardAttack) {
+                int damage = selectedCardAttack - oppositionCardAttack;
+                sendToGraveyard(oppositionCardPosition, getOpposition());
+                getOpposition().decreaseLP(damage);
+                errorText.setText("your opponent’s monster is destroyed and your opponent receives "
+                        + damage + " battle damage");
+
+            } else if (selectedCardAttack < oppositionCardAttack) {
+                int damage = oppositionCardAttack - selectedCardAttack;
+                sendToGraveyard(selectedPosition, turnOfPlayer);
+                turnOfPlayer.decreaseLP(damage);
+                errorText.setText("Your monster card is destroyed and you received " + damage +
+                        " battle damage");
+
+            } else {
+                sendToGraveyard(oppositionCardPosition, getOpposition());
+                sendToGraveyard(selectedPosition, turnOfPlayer);
+                errorText.setText("both you and your opponent monster cards "
+                        + "are destroyed and no one receives damage");
+            }
+        } else {
+            String cardName = oppositionCardPosition.getCard().getCardName();
+            if (selectedCardAttack > oppositionCardDefense) {
+                sendToGraveyard(oppositionCardPosition, getOpposition());
+                if (statusOfOpposition.equals(StatusOfPosition.DEFENSIVE_OCCUPIED))
+                    errorText.setText("the defense position monster is destroyed");
+                else {
+                    errorText.setText("opponent’s monster card was " + cardName +
+                            " and the defense position monster is destroyed");
+                }
+            } else if (selectedCardAttack < oppositionCardDefense) {
+                int damage = oppositionCardDefense - selectedCardAttack;
+                turnOfPlayer.decreaseLP(damage);
+                if (statusOfOpposition.equals(StatusOfPosition.DEFENSIVE_OCCUPIED))
+                    errorText.setText("no card is destroyed and you received " + damage + " battle damage");
+                else
+                    errorText.setText("opponent’s monster card was " + cardName +
+                            " no card is destroyed and you received " + damage + " battle damage");
+            } else {
+                if (statusOfOpposition.equals(StatusOfPosition.DEFENSIVE_OCCUPIED))
+                    errorText.setText("no card is destroyed");
+                else
+                    errorText.setText("opponent’s monster card was " + cardName + " no card is destroyed");
+            }
+        }
+        showPlayersLP();
+        attackedCards.add(selectedPosition);
+        oppositionCardPositionNulling();
+        selectedCardHandNulling();
+        selectedPositionNulling();
+
     }
 
     public boolean isOpponentMonsterZoneEmpty() {
@@ -876,7 +858,6 @@ public class Game implements Initializable {
         }
         return true;
     }
-
 
     public void directAttack() {
         if (isConditionsUnsuitableForAttack())
@@ -911,8 +892,8 @@ public class Game implements Initializable {
     public void sendToGraveyard(Position position, Player player) {
         if (!(position.getStatus().equals(StatusOfPosition.EMPTY))) {
             player.getBoard().addToGraveyard(position.getCard());
-            position.setCard(null);
             position.setStatus(StatusOfPosition.EMPTY);
+            position.setCard(null);
             attackedCards.remove(position);
             activatedSpells.remove(position);
         }
@@ -1039,19 +1020,19 @@ public class Game implements Initializable {
         }
     }
 
-    public void showGraveyard() {
-        int graveSize = turnOfPlayer.getBoard().getGraveYard().size();
-        if (graveSize == 0) {
-            System.out.println("graveyard is empty");
-        } else {
-            for (int i = 0; i < graveSize; i++) {
-                String cardName = turnOfPlayer.getBoard().getGraveYard().get(i).getCardName();
-                String cardDescription = turnOfPlayer.getBoard().getGraveYard().get(i).getCardDescription();
-                int rank = i + 1;
-                System.out.println(rank + ". " + cardName + " : " + cardDescription);
-            }
-        }
-    }
+//    public void showGraveyard() {
+//        int graveSize = turnOfPlayer.getBoard().getGraveYard().size();
+//        if (graveSize == 0) {
+//            System.out.println("graveyard is empty");
+//        } else {
+//            for (int i = 0; i < graveSize; i++) {
+//                String cardName = turnOfPlayer.getBoard().getGraveYard().get(i).getCardName();
+//                String cardDescription = turnOfPlayer.getBoard().getGraveYard().get(i).getCardDescription();
+//                int rank = i + 1;
+//                System.out.println(rank + ". " + cardName + " : " + cardDescription);
+//            }
+//        }
+//    }
 
 //    public void activateSpell() {
 //        if (selectedPosition == null) {
@@ -1113,71 +1094,6 @@ public class Game implements Initializable {
         }
     }
 
-    public boolean cheat(String cheatCode) {
-        if (cheatCode.equals("0051iPl")) {
-            if (getCheatCounter() < 3) {
-                turnOfPlayer.increaseLP(1500);
-                System.out.println("cheat activated:\n" +
-                        "1500 LP was added to you");
-                increaseCheatCounter();
-            } else {
-                System.out.println("you can't use cheats anymore");
-            }
-            return true;
-        } else if (cheatCode.equals("bAcOo")) {
-            if (getCheatCounter() < 3) {
-                if (!getOpposition().getBoard().getMonsterCards().isEmpty()) {
-                    sendToGraveyard(getOpposition().getBoard().getMaximumPuver(), getOpposition());
-                    System.out.println("cheat activated:\n" +
-                            "you removed the most powerful monster of your opponent");
-                    increaseCheatCounter();
-                    return true;
-                }
-            } else {
-                System.out.println("you can't use cheats anymore");
-                return false;
-            }
-            return true;
-
-        } else if (cheatCode.equals("12yBdB")) {
-            if (getCheatCounter() < 3) {
-                if (selectedPosition == null)
-                    System.out.println("selected position is null");
-                else {
-                    if (attackedCards.contains(selectedPosition)) {
-                        attackedCards.remove(selectedPosition);
-                        System.out.println("cheat activated:\n" +
-                                "now you can attack again with your card");
-                        increaseCheatCounter();
-                    }
-                }
-            } else
-                System.out.println("you can't use cheats anymore");
-
-            return true;
-        } else if (cheatCode.equals("hPoSt2")) {
-            if (getCheatCounter() < 3) {
-                isAnyCardSummoned = false;
-                System.out.println("cheat activated:\n" +
-                        "you can now summon or set another card");
-                increaseCheatCounter();
-            } else
-                System.out.println("you can't use cheats anymore");
-
-            return true;
-        } else if (cheatCode.equals("pUvEr")) {
-            if (getCheatCounter() < 3) {
-                System.out.println("puver activated:\n" +
-                        "now you win the round");
-                turnOfPlayer = getOpposition();
-                increaseCheatCounter();
-                surrender();
-            } else
-                System.out.println("you can't use cheats anymore");
-            return true;
-        }
-        return false;
-    }
 
     private int getCheatCounter() {
         return this.cheatCounter;
@@ -1217,7 +1133,7 @@ public class Game implements Initializable {
 
     private void phaseNavigationAlert(Phase destination) {
         errorText.setText("navigation between " + phase.name() +
-                " phase and " + destination.name() + "is not possible");
+                " phase and " + destination.name() + " phase is not possible");
     }
     //------------------------------------------------------------------------------------
 
@@ -1342,7 +1258,7 @@ public class Game implements Initializable {
         turnOfPlayerProgressBar.setProgress(oppositionPercentage);
     }
 
-    public void setMainPhaseIcons() {
+    public void setIcons() {
 
 
         ImageView imageView = new ImageView();
@@ -1466,7 +1382,12 @@ public class Game implements Initializable {
         imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                attackToMonster(1);
+                if (!isConditionsUnsuitableForAttack())
+                    if (isOpponentMonsterZoneEmpty()) {
+                        errorText.setText("Your opponent's monster zone is empty and you can attack directly to their LP");
+                    } else {
+                        battleStandby();
+                    }
             }
         });
         gridPanePhaseIcons.add(imageView, 2, 2);
@@ -1487,19 +1408,22 @@ public class Game implements Initializable {
         GridPane.setMargin(imageView, new Insets(0, 0, 0, 0));
     }
 
-    public void setPositionsListener(Player player){
+    public void setPositionsListener(Player player) {
         MyListener myListener = new MyListener() {
             @Override
             public void onClickListener(Object object) {
                 Position position = (Position) object;
                 if (position.equals(selectedPosition))
                     deSelect();
-                else
+                else if (phase.equals(Phase.BATTLE_STANDBY)) {
+                    setOppositionCardPosition((Position) object);
+                } else {
                     setSelectedPosition((Position) object);
+                }
             }
         };
 
-        for(int i=0 ; i<5 ; i++){
+        for (int i = 0; i < 5; i++) {
             player.getBoard().getMonsterCards().get(i).setMyListener(myListener);
             player.getBoard().getTrapAndSpellCards().get(i).setMyListener(myListener);
         }
@@ -1533,7 +1457,15 @@ public class Game implements Initializable {
         getOpposition().getBoard().getTrapAndSpellCards().get(4).setImageView(imageViewTrap25);
     }
 
-    public void showGraveyardPlayer1() {
+    public void showGraveyardTurnOfPlayer() {
+        showGraveyard(turnOfPlayer);
+    }
+
+    public void showGraveyardOpposition() {
+        showGraveyard(getOpposition());
+    }
+
+    public void showGraveyard(Player player) {
         try {
             Stage stage = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader();
@@ -1541,21 +1473,131 @@ public class Game implements Initializable {
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);
-
-            turnOfPlayer.getBoard().addToGraveyard(Card.getCardByName("Suijin"));
-            turnOfPlayer.getBoard().addToGraveyard(Card.getCardByName("Silver Fang"));
-            turnOfPlayer.getBoard().addToGraveyard(Card.getCardByName("Battle OX"));
             GraveyardController graveyardController = fxmlLoader.getController();
-            graveyardController.addCardsToGraveYardPane(turnOfPlayer);
+            graveyardController.addCardsToGraveYardPane(player);
 
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    public void puver(MouseEvent event) {
+        if (cheatCounter <= 3) {
+            turnOfPlayer = getOpposition();
+            increaseCheatCounter();
+            surrender();
+        }
+    }
+
+    public void yBdB12(MouseEvent event) {
+        if (cheatCounter <= 3) {
+            if (selectedPosition == null)
+                errorText.setText("selected position is null");
+            else {
+                if (attackedCards.contains(selectedPosition)) {
+                    attackedCards.remove(selectedPosition);
+                    errorText.setText("cheat activated:\n" +
+                            "now you can attack again with your card");
+                    increaseCheatCounter();
+                }
+            }
+        }
+    }
+
+    public void bAcOo(MouseEvent event) {
+        if (getCheatCounter() < 3) {
+            if (!getOpposition().getBoard().getMonsterCards().isEmpty()) {
+                sendToGraveyard(getOpposition().getBoard().getMaximumPuver(), getOpposition());
+                errorText.setText("cheat activated:\n" +
+                        "you removed the most powerful monster of your opponent");
+                increaseCheatCounter();
+            }
+        }
+    }
+
+    public void hPoSt2(MouseEvent event) {
+        if (getCheatCounter() < 3) {
+            isAnyCardSummoned = false;
+            errorText.setText("cheat activated:\n" +
+                    "you can now summon or set another card");
+            increaseCheatCounter();
+        }
+    }
+
+    public void lPi0051(MouseEvent event) {
+        if (getCheatCounter() < 3) {
+            turnOfPlayer.increaseLP(1500);
+            errorText.setText("cheat activated:\n" +
+                    "1500 LP was added to you");
+            increaseCheatCounter();
+            showPlayersLP();
+        }
     }
 
     //---------------------------------------------------------------------------------------
 
+    public boolean cheat(String cheatCode) {
+        if (cheatCode.equals("0051iPl")) {
+            if (getCheatCounter() < 3) {
+                turnOfPlayer.increaseLP(1500);
+                System.out.println("cheat activated:\n" +
+                        "1500 LP was added to you");
+                increaseCheatCounter();
+            } else {
+                System.out.println("you can't use cheats anymore");
+            }
+            return true;
+        } else if (cheatCode.equals("bAcOo")) {
+            if (getCheatCounter() < 3) {
+                if (!getOpposition().getBoard().getMonsterCards().isEmpty()) {
+                    sendToGraveyard(getOpposition().getBoard().getMaximumPuver(), getOpposition());
+                    System.out.println("cheat activated:\n" +
+                            "you removed the most powerful monster of your opponent");
+                    increaseCheatCounter();
+                    return true;
+                }
+            } else {
+                System.out.println("you can't use cheats anymore");
+                return false;
+            }
+            return true;
 
+        } else if (cheatCode.equals("12yBdB")) {
+            if (getCheatCounter() < 3) {
+                if (selectedPosition == null)
+                    System.out.println("selected position is null");
+                else {
+                    if (attackedCards.contains(selectedPosition)) {
+                        attackedCards.remove(selectedPosition);
+                        System.out.println("cheat activated:\n" +
+                                "now you can attack again with your card");
+                        increaseCheatCounter();
+                    }
+                }
+            } else
+                System.out.println("you can't use cheats anymore");
+
+            return true;
+        } else if (cheatCode.equals("hPoSt2")) {
+            if (getCheatCounter() < 3) {
+                isAnyCardSummoned = false;
+                System.out.println("cheat activated:\n" +
+                        "you can now summon or set another card");
+                increaseCheatCounter();
+            } else
+                System.out.println("you can't use cheats anymore");
+
+            return true;
+        } else if (cheatCode.equals("pUvEr")) {
+            if (getCheatCounter() < 3) {
+                System.out.println("puver activated:\n" +
+                        "now you win the round");
+
+            } else
+                System.out.println("you can't use cheats anymore");
+            return true;
+        }
+        return false;
+    }
 }

@@ -60,7 +60,25 @@
                   <Pane prefHeight="0.0" prefWidth="250.0" VBox.vgrow="ALWAYS" />
                   <VBox alignment="TOP_CENTER" prefHeight="342.0" prefWidth="250.0">
                      <children>
-                        <HBox prefHeight="2.0" prefWidth="250.0" />
+                        <HBox alignment="CENTER" prefHeight="2.0" prefWidth="250.0">
+                           <children>
+                              <Label fx:id="numberOfCard" text="-" textFill="WHITE">
+                                 <font>
+                                    <Font name="Berlin Sans FB" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label text="available" textFill="WHITE">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Berlin Sans FB Demi Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin></HBox>
                         <HBox prefHeight="11.0" prefWidth="250.0" />
                         <ImageView fx:id="selectedCardImage" fitHeight="244.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
                            <image>
@@ -72,7 +90,7 @@
                         </ImageView>
                         <HBox alignment="CENTER" prefHeight="39.0" prefWidth="250.0">
                            <children>
-                              <Label text="Name:">
+                              <Label text="Name:" textFill="WHITE">
                                  <font>
                                     <Font name="Bauhaus 93" size="18.0" />
                                  </font>
@@ -80,7 +98,7 @@
                                     <Insets left="29.0" />
                                  </HBox.margin>
                               </Label>
-                              <Label fx:id="selectedCardName" alignment="CENTER" prefHeight="25.0" prefWidth="134.0" text="Bitron">
+                              <Label fx:id="selectedCardName" alignment="CENTER" prefHeight="25.0" prefWidth="134.0" text="Bitron" textFill="WHITE">
                                  <font>
                                     <Font name="Bauhaus 93" size="18.0" />
                                  </font>
@@ -90,12 +108,12 @@
                               </Label>
                            </children>
                            <VBox.margin>
-                              <Insets bottom="-20.0" left="20.0" />
+                              <Insets left="20.0" top="10.0" />
                            </VBox.margin>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="39.0" prefWidth="250.0">
                            <children>
-                              <Label text="Price:">
+                              <Label text="Price:" textFill="WHITE">
                                  <font>
                                     <Font name="Bauhaus 93" size="18.0" />
                                  </font>
@@ -103,7 +121,7 @@
                                     <Insets left="10.0" />
                                  </HBox.margin>
                               </Label>
-                              <Label fx:id="selectedCardPrice" alignment="CENTER" prefHeight="25.0" prefWidth="76.0" text="2000">
+                              <Label fx:id="selectedCardPrice" alignment="CENTER" prefHeight="25.0" prefWidth="76.0" text="2000" textFill="WHITE">
                                  <font>
                                     <Font name="Bauhaus 93" size="18.0" />
                                  </font>
@@ -113,11 +131,11 @@
                               </Label>
                            </children>
                            <VBox.margin>
-                              <Insets bottom="10.0" />
+                              <Insets />
                            </VBox.margin>
                         </HBox>
                         <HBox prefHeight="19.0" prefWidth="250.0" />
-                        <HBox alignment="CENTER" prefHeight="44.0" prefWidth="250.0">
+                        <HBox alignment="CENTER" prefHeight="7.0" prefWidth="250.0">
                            <children>
                               <Button fx:id="infoButton" mnemonicParsing="false" onAction="#showInfo" prefHeight="44.0" prefWidth="59.0" styleClass="search-button" text="Info">
                                  <font>
@@ -134,12 +152,12 @@
                               </Button>
                            </children>
                            <VBox.margin>
-                              <Insets bottom="-5.0" top="-30.0" />
+                              <Insets top="10.0" />
                            </VBox.margin>
                         </HBox>
                      </children>
                      <VBox.margin>
-                        <Insets top="15.0" />
+                        <Insets bottom="10.0" />
                      </VBox.margin>
                   </VBox>
                   <Pane prefHeight="0.0" prefWidth="250.0" VBox.vgrow="ALWAYS" />
@@ -183,7 +201,7 @@
                               <Insets left="10.0" />
                            </HBox.margin>
                         </Label>
-                        <Label fx:id="playerMoney" prefHeight="18.0" prefWidth="58.0" text="2000">
+                        <Label fx:id="playerMoney" prefHeight="24.0" prefWidth="139.0" text="2000">
                            <font>
                               <Font name="Bauhaus 93" size="20.0" />
                            </font>

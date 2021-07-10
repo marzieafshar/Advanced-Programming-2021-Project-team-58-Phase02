@@ -5,5 +5,7 @@ public enum Phase {
     STANDBY,
     MAIN,
     BATTLE,
-    END
+    END,
+    BATTLE_STANDBY,
+    TRIBUTE
 }

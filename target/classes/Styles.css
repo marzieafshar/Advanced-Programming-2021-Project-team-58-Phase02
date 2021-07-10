@@ -139,12 +139,13 @@
     -fx-background-image: url("Images/error.jpg");
     -fx-background-size: stretch;
 }
-
 .graveyard-background {
     -fx-background-image: url("Images/Background/GraveYardBackground.png");
+    -fx-background-size: stretch;
 }
-.scroll-pane {
-    -fx-background-color: black;
+.scroll-pane>.viewport{
+    -fx-background-color: transparent;
+    -fx-background-size: stretch;
 }
 .duelMenu-left-background{
     -fx-background-image: url("Images/Background/14235.jpg");
@@ -182,6 +183,10 @@
     -fx-background-image: url("Images/Background/yellow.jpg");
     -fx-border-color: black;
 }
-.scroll-pane {
-    -fx-background-color: black;
+.vBox-duelMenu-background{
+    -fx-background-image: url("Images/Background/blue-gray.jpg");
+    -fx-background-size: stretch;
+}
+.cheat-imageView{
+    -fx-border-radius: 80;
 }

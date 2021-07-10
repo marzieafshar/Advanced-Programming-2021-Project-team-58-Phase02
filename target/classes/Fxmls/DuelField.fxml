@@ -21,9 +21,9 @@
          <left>
             <VBox maxWidth="-Infinity" prefHeight="650.0" prefWidth="220.0" styleClass="left-bar" stylesheets="@../Styles.css" BorderPane.alignment="CENTER">
                <children>
-                  <HBox fx:id="errorbox" alignment="CENTER" prefHeight="161.0" prefWidth="220.0" styleClass="errorBox-background" stylesheets="@../Styles.css">
+                  <HBox fx:id="errorbox" alignment="CENTER" prefHeight="298.0" prefWidth="220.0" styleClass="errorBox-background" stylesheets="@../Styles.css">
                      <children>
-                        <Text fx:id="errorText" fill="#f2ff00" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="194.58113861083984">
+                        <Text fx:id="errorText" fill="#f2ff00" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="194.58113861083984">
                            <font>
                               <Font name="Berlin Sans FB Demi Bold" size="19.0" />
                            </font>
@@ -33,7 +33,7 @@
                         </Text>
                      </children>
                   </HBox>
-                  <VBox prefHeight="603.0" prefWidth="250.0">
+                  <VBox prefHeight="603.0" prefWidth="250.0" styleClass="vBox-duelMenu-background" stylesheets="@../Styles.css">
                      <children>
                         <HBox alignment="CENTER" prefHeight="267.0" prefWidth="171.0">
                            <children>
@@ -47,7 +47,7 @@
                               </ImageView>
                            </children>
                         </HBox>
-                        <HBox alignment="TOP_CENTER" prefHeight="331.0" prefWidth="250.0" stylesheets="@../Styles.css">
+                        <HBox alignment="TOP_CENTER" prefHeight="331.0" prefWidth="250.0">
                            <children>
                               <Text fx:id="infoTextArea" strokeType="OUTSIDE" strokeWidth="0.0" text="No card is selected!">
                                  <font>
@@ -92,17 +92,17 @@
                   <ImageView fx:id="imageViewMonster11" fitHeight="99.0" fitWidth="83.0" layoutX="342.0" layoutY="345.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="imageViewMonster12" fitHeight="97.0" fitWidth="73.0" layoutX="440.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="imageViewMonster14" fitHeight="97.0" fitWidth="73.0" layoutX="539.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="imageViewMonster25" fitHeight="97.0" fitWidth="73.0" layoutX="536.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
+                  <ImageView fx:id="imageViewMonster25" fitHeight="97.0" fitWidth="73.0" layoutX="536.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
                   <ImageView fx:id="imageViewMonster23" fitHeight="97.0" fitWidth="73.0" layoutX="437.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
                   <ImageView fx:id="imageViewMonster21" fitHeight="97.0" fitWidth="73.0" layoutX="339.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
                   <ImageView fx:id="imageViewMonster22" fitHeight="97.0" fitWidth="73.0" layoutX="243.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
                   <ImageView fx:id="imageViewMonster24" fitHeight="97.0" fitWidth="73.0" layoutX="144.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
-                  <ImageView fitHeight="99.0" fitWidth="84.0" layoutX="619.0" layoutY="345.0" onMouseClicked="#showGraveyardPlayer1" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="99.0" fitWidth="84.0" layoutX="619.0" layoutY="345.0" onMouseClicked="#showGraveyardTurnOfPlayer" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Images/rip-grave.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="99.0" fitWidth="84.0" layoutX="35.0" layoutY="171.0" onMouseClicked="#showGraveyardPlayer1" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="99.0" fitWidth="84.0" layoutX="35.0" layoutY="171.0" onMouseClicked="#showGraveyardOpposition" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Images/rip-grave.png" />
                      </image>
@@ -118,11 +118,16 @@
                   <ImageView fx:id="imageViewTrap22" fitHeight="97.0" fitWidth="73.0" layoutX="236.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="imageViewTrap24" fitHeight="97.0" fitWidth="73.0" layoutX="137.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" />
                   <Button layoutX="-27.0" layoutY="284.0" mnemonicParsing="false" onAction="#battlePhase" prefHeight="24.0" prefWidth="84.0" rotate="90.0" text="Battle phase" />
+                  <ImageView fitHeight="20.0" fitWidth="22.0" layoutX="616.0" layoutY="85.0" onMouseClicked="#lPi0051" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="20.0" fitWidth="22.0" layoutX="619.0" layoutY="171.0" onMouseClicked="#hPoSt2" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="21.0" fitWidth="19.0" layoutX="107.0" layoutY="533.0" onMouseClicked="#bAcOo" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="105.0" layoutY="451.0" onMouseClicked="#yBdB12" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="15.0" fitWidth="18.0" layoutX="692.0" layoutY="248.0" onMouseClicked="#puver" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
          </center>
          <right>
-            <VBox maxWidth="-Infinity" prefHeight="650.0" prefWidth="280.0" styleClass="left-bar" stylesheets="@../Styles.css" BorderPane.alignment="CENTER">
+            <VBox maxWidth="-Infinity" prefHeight="650.0" prefWidth="280.0" styleClass="vBox-duelMenu-background" stylesheets="@../Styles.css" BorderPane.alignment="CENTER">
                <children>
                   <HBox prefHeight="91.0" prefWidth="307.0">
                      <children>
@@ -175,7 +180,7 @@
                      </children>
                   </HBox>
                   <HBox prefHeight="371.0" prefWidth="280.0" />
-                  <HBox alignment="TOP_CENTER" prefHeight="549.0" prefWidth="280.0" styleClass="left-bar" stylesheets="@../Styles.css">
+                  <HBox alignment="TOP_CENTER" prefHeight="549.0" prefWidth="280.0" stylesheets="@../Styles.css">
                      <children>
                         <GridPane fx:id="gridPanePhaseIcons" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="0.0" prefWidth="0.0">
                            <rowConstraints>

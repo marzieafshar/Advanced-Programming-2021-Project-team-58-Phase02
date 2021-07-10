@@ -29,6 +29,9 @@ import java.util.ResourceBundle;
 
 public class ShopController implements Initializable {
     @FXML
+    private Label numberOfCard;
+
+    @FXML
     private TextField searchBox;
 
     @FXML
@@ -122,11 +125,23 @@ public class ShopController implements Initializable {
         selectedCardPrice.setText(String.valueOf(card.getPrice()));
         image = new Image(getClass().getResourceAsStream(card.getImageSrc()));
         selectedCardImage.setImage(image);
+        numberOfCard.setText(String.valueOf(numberOfCardsInAllCards(card)));
         if (card.getPrice() > Controller.getLoggedInPlayer().getMoney()) {
             buyButton.setDisable(true);
         } else {
             buyButton.setDisable(false);
         }
+    }
+
+    public int numberOfCardsInAllCards(Card card){
+        ArrayList<Card> allCards = Controller.getLoggedInPlayer().getAllCards();
+        int result = 0;
+        for (Card card2 : allCards) {
+            if(card.getCardName().equals(card2.getCardName())){
+                result++;
+            }
+        }
+        return result;
     }
 
     public void setPlayerMoney() {
@@ -141,12 +156,10 @@ public class ShopController implements Initializable {
         player.decreaseMoney(Card.getCardByName(selectedCardName.getText()).getPrice());
         player.getAllCards().add(Card.getCardByName(selectedCardName.getText()));
         setPlayerMoney();
-
-
-
         if (Controller.getLoggedInPlayer().getMoney() < Card.getCardByName(selectedCardName.getText()).getPrice()){
             buyButton.setDisable(true);
         }
+        numberOfCard.setText(String.valueOf(numberOfCardsInAllCards(Card.getCardByName(selectedCardName.getText()))));
 
     }
 

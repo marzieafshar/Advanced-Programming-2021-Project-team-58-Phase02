@@ -64,7 +64,7 @@ public class AIClass extends Player {
             game.directAttack();
         } else {
             selectAttackMonster(game);
-            game.attackToMonster(selectOpponentMonster(game));
+//            game.attackToMonster(selectOpponentMonster(game));
         }
         game.showBoard();
         try {

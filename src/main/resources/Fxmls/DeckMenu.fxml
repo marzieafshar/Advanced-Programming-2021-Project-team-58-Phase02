@@ -142,14 +142,14 @@
                         <Image url="@../Images/Icon/pngfind.com-back-arrow-png-1999892.png" />
                      </image>
                   </ImageView>
-                  <Label prefHeight="99.0" prefWidth="224.0" text="Duel Menu">
+                  <Label prefHeight="74.0" prefWidth="239.0" text="Deck Menu">
                      <font>
                         <Font name="Matura MT Script Capitals" size="39.0" />
                      </font>
                   </Label>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="326.0" prefWidth="312.0" stylesheets="@../Styles.css">
+            <HBox alignment="CENTER" prefHeight="324.0" prefWidth="306.0" stylesheets="@../Styles.css">
                <children>
                   <ImageView fx:id="selectedCardImage" fitHeight="281.0" fitWidth="235.0" pickOnBounds="true" preserveRatio="true">
                      <image>

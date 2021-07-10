@@ -12,12 +12,6 @@ public class Board {
     private Position fieldZone = new Position(StatusOfPosition.EMPTY);
 
     public Board() {
-        graveYard.add(Card.getCardByName("Suijin"));
-        graveYard.add(Card.getCardByName("Silver Fang"));
-        graveYard.add(Card.getCardByName("Dark Hole"));
-        graveYard.add(Card.getCardByName("Trap Hole"));
-        graveYard.add(Card.getCardByName("Bitron"));
-        graveYard.add(Card.getCardByName("Suijin"));
         createMonsterCardPosition();
         createSpellCardPosition();
     }
