@@ -91,10 +91,20 @@ public class DuelMenuController implements Initializable {
     Media media = new Media(new File(str).toURI().toString());
     private MediaPlayer mediaPlayer = new MediaPlayer(media);
 
+    private static boolean isFromGame = false;
+
+    public static void setFromGame(boolean fromGame) {
+        isFromGame = fromGame;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        handleRound();
+        if(isFromGame || numOfCurrentRound == 0)
+            handleRound();
         setPlayersInfo();
+        if (isAnyOneWonTheMatch()) {
+            endOfGameSettings();
+        }
     }
 
     private boolean isAnyOneWonTheMatch() {
@@ -202,9 +212,6 @@ public class DuelMenuController implements Initializable {
     }
 
     public void test (ActionEvent event){
-        if (isAnyOneWonTheMatch()) {
-            endOfGameSettings();
-        }
     }
 
     public void endOfGameSettings() {
@@ -240,7 +247,8 @@ public class DuelMenuController implements Initializable {
 
     public void backToMainMenu(ActionEvent event) throws IOException {
         numOfCurrentRound = 0;
-//        JsonSaveAndLoad.save();
+        setFromGame(false);
+        JsonSaveAndLoad.save();
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/MainMenu.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);

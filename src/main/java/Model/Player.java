@@ -38,7 +38,6 @@ public class Player {
         setMoney(100000);
 
         setImage(new Image(getClass().getResourceAsStream("/Images/Characters/Chara001.dds1.png")));
-        this.board = new Board();
         allPlayers.add(this);
     }
 
@@ -185,5 +184,9 @@ public class Player {
 
     public Image getImage() {
         return this.image;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
     }
 }

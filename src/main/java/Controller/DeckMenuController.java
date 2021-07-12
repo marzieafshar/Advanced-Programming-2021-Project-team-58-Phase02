@@ -172,6 +172,7 @@ public class DeckMenuController implements Initializable {
                 alert.showAndWait();
             } else {
                 setIsGameStarted(false);
+                DuelMenuController.setFromGame(false);
                 root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/DuelMenu.fxml")));
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);

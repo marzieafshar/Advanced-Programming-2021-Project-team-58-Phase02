@@ -116,7 +116,9 @@ public class Game implements Initializable {
     private Card selectedCardHand;
     private boolean isAnyCardSummoned;
     private int cheatCounter;
+
     private Position oppositionCardPosition;
+    private Position tributeCardPosition;
 
     List<Position> attackedCards = new ArrayList<Position>();
     List<Position> activatedSpells = new ArrayList<>();
@@ -125,6 +127,7 @@ public class Game implements Initializable {
     String str2 = "attack.wav";
     String str3 = "summon.mp3";
     private MediaPlayer mediaPlayer;
+    private int numberOfCardsTributed = 0;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -134,6 +137,8 @@ public class Game implements Initializable {
     }
 
     public void startOfGameSettings() {
+        player1.setBoard(new Board());
+        player2.setBoard(new Board());
         setTurnOfPlayer(FlipCoinController.getWinner());
         setPlayersLp();
         setPlayersAvatar();
@@ -387,6 +392,10 @@ public class Game implements Initializable {
         oppositionCardPosition = null;
     }
 
+    public void tributeCardPositionNulling(){
+        tributeCardPosition = null;
+    }
+
     private int firstEmptyIndex(ArrayList<Position> array) {
         int n = 0;
         int i = 1;
@@ -411,7 +420,7 @@ public class Game implements Initializable {
     }
 
     public boolean summonMonsterOnBoard() {
-        boolean isTributeSucceeds = false;
+        numberOfCardsTributed = 0;
         if ((selectedCardHand == null) && (selectedPosition == null)) {
             errorText.setText("no card is selected yet");
             return false;
@@ -436,16 +445,16 @@ public class Game implements Initializable {
                         errorText.setText("there are not enough cards for tribute");
                         return false;
                     } else {
-                        tribute(1);
-                        return lastStepForSummon();
+                        tributeStandby();
+                        return true;
                     }
                 } else {
                     if (turnOfPlayer.getBoard().cardsInMonsterZone() < 2) {
                         errorText.setText("there are not enough cards for tribute");
                         return false;
                     } else {
-                        tribute(2);
-                        return lastStepForSummon();
+                        tributeStandby();
+                        return true;
                     }
                 }
             }
@@ -467,17 +476,10 @@ public class Game implements Initializable {
         return true;
     }
 
-    private void tribute(int numberOfCards) {
-        int numOfCardsTributed = 0;
-        errorText.setText("Please choose " + (numberOfCards - numOfCardsTributed) + " monsters for tribute");
-        if (selectedPosition != null) {
-            if (turnOfPlayer.getBoard().getMonsterCards().contains(selectedPosition)) {
-                sendToGraveyard(selectedPosition, turnOfPlayer);
-                selectedPositionNulling();
-            } else {
-                errorText.setText("you can't tribute this card");
-            }
-        }
+    private void tribute() {
+        sendToGraveyard(tributeCardPosition, turnOfPlayer);
+        tributeCardPositionNulling();
+        numberOfCardsTributed ++;
     }
 
     public boolean setMonsterCardOnBoard() {
@@ -600,6 +602,30 @@ public class Game implements Initializable {
             attackToMonster();
         }
 
+    }
+
+    public void tributeStandby() {
+        setPhase(Phase.TRIBUTE);
+        errorText.setText("Please choose a monsters for tribute");
+        if (tributeCardPosition != null) {
+            tribute();
+            if((((MonsterCard) selectedCardHand).getCardLevel() > 7) && (numberOfCardsTributed == 1)){
+                tributeStandby();
+            }
+            else {
+                boolean tmp = lastStepForSummon();
+                setPhase(Phase.MAIN);
+            }
+        }
+    }
+
+    public void setTributePosition(Position position) {
+        if (turnOfPlayer.getBoard().getMonsterCards().contains(position)) {
+            this.tributeCardPosition = position;
+            tributeStandby();
+        } else {
+            errorText.setText("you can't tribute this card");
+        }
     }
 
     public void setOppositionCardPosition(Position position) {
@@ -1095,6 +1121,8 @@ public class Game implements Initializable {
                     deSelect();
                 else if (phase.equals(Phase.BATTLE_STANDBY)) {
                     setOppositionCardPosition((Position) object);
+                } else if (phase.equals(Phase.TRIBUTE)) {
+                    setTributePosition((Position) object);
                 } else {
                     setSelectedPosition((Position) object);
                 }
@@ -1215,6 +1243,9 @@ public class Game implements Initializable {
 
     public void goToDuelMenu() {
         try {
+            player1.setBoard(null);
+            player2.setBoard(null);
+            DuelMenuController.setFromGame(true);
             Parent root = FXMLLoader.load(getClass().getResource("/Fxmls/DuelMenu.fxml"));
             Stage stage = (Stage) errorText.getScene().getWindow();
             Scene scene = new Scene(root);

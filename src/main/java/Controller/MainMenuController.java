@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.Card;
+import Model.Deck;
 import Model.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -59,9 +61,40 @@ public class MainMenuController {
     }
 
     public void goToDeckMenu(ActionEvent event) throws IOException {
+        Deck deck1 = new Deck("first");
+        Deck deck2 = new Deck("second");
+        Deck deck3 = new Deck("third");
+        for (int i = 0; i < 7; i++) {
+            deck1.addCardToMainDeck(Card.getCardByName("Trap Hole"));
+            deck1.addCardToMainDeck(Card.getCardByName("Command Knight"));
+            deck1.addCardToMainDeck(Card.getCardByName("Silver Fang"));
+            deck1.addCardToMainDeck(Card.getCardByName("Battle OX"));
+            deck1.addCardToMainDeck(Card.getCardByName("Wattaildragon"));
+            deck1.addCardToMainDeck(Card.getCardByName("Suijin"));
+            deck1.addCardToMainDeck(Card.getCardByName("Wattkid"));
+        }
+//        deck2.addCardToMainDeck(Card.getCardByName("Raigeki"));
+//        deck2.addCardToMainDeck(Card.getCardByName("Raigeki"));
+//        deck2.addCardToMainDeck(Card.getCardByName("Raigeki"));
+//        deck2.addCardToMainDeck(Card.getCardByName("Suijin"));
+//        deck2.addCardToMainDeck(Card.getCardByName("Axe Raider"));
+//        deck2.addCardToMainDeck(Card.getCardByName("Bitron"));
+//        deck2.addCardToMainDeck(Card.getCardByName("Dark Hole"));
+//
+//        deck3.addCardToMainDeck(Card.getCardByName("Silver Fang"));
+//        deck3.addCardToMainDeck(Card.getCardByName("Yomi Ship"));
+//        deck3.addCardToMainDeck(Card.getCardByName("Dark Hole"));
+//        deck3.addCardToMainDeck(Card.getCardByName("Fireyarou"));
+//        deck3.addCardToMainDeck(Card.getCardByName("Suijin"));
+//        deck3.addCardToMainDeck(Card.getCardByName("Command Knight"));
+//        deck3.addCardToMainDeck(Card.getCardByName("Dark Hole"));
+
+        Controller.getLoggedInPlayer().getDecks().add(deck1);
+
         Media media = new Media(new File(str).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(true);
+
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/DeckMenu.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
