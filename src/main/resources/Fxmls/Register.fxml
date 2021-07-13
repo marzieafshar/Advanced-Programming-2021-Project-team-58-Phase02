@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="650.0" prefWidth="1214.0" styleClass="Register-background" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Controller">
+<AnchorPane prefHeight="650.0" prefWidth="1214.0" styleClass="Register-background" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.Controller">
     <children>
         <Button layoutX="12.0" layoutY="604.0" mnemonicParsing="false" onAction="#backToWelcomeMenu" prefHeight="33.0" prefWidth="81.0" styleClass="profile-backButton" text="Back">
          <font>

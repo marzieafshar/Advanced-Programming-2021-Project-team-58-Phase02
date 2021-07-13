@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" prefHeight="650.0" prefWidth="1214.0" styleClass="flip-coin" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FlipCoinController">
+<BorderPane fx:id="borderPane" prefHeight="650.0" prefWidth="1214.0" styleClass="flip-coin" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.FlipCoinController">
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" stylesheets="@../Styles.css" BorderPane.alignment="CENTER">
          <children>

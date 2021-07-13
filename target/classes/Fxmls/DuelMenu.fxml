@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1214.0" styleClass="duelMenu-background" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DuelMenuController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1214.0" styleClass="duelMenu-background" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.DuelMenuController">
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
@@ -82,7 +82,7 @@
                               <Insets left="200.0" right="75.0" />
                            </HBox.margin>
                         </ImageView>
-                        <Label fx:id="player1NickName" prefHeight="29.0" prefWidth="83.0" text="Player1">
+                        <Label fx:id="player1NickName" alignment="CENTER_RIGHT" prefHeight="29.0" prefWidth="83.0" text="Player1">
                            <font>
                               <Font name="Berlin Sans FB Demi Bold" size="25.0" />
                            </font>
@@ -170,11 +170,6 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="184.0" prefWidth="758.0" stylesheets="@../Styles.css">
                <children>
-                  <Button mnemonicParsing="false" onAction="#test" text="Button">
-                     <HBox.margin>
-                        <Insets right="50.0" />
-                     </HBox.margin>
-                  </Button>
                   <Button fx:id="nextRoundButton" mnemonicParsing="false" onAction="#startANewRound" styleClass="back-button" text="next round" textFill="#dab654">
                      <HBox.margin>
                         <Insets right="50.0" />
@@ -192,11 +187,11 @@
                      </font>
                   </Button>
                </children></HBox>
-            <HBox alignment="CENTER" prefHeight="71.0" prefWidth="1214.0">
+            <HBox alignment="CENTER" prefHeight="73.0" prefWidth="1214.0">
                <children>
                   <Text fx:id="matchResult" strokeType="OUTSIDE" strokeWidth="0.0">
                      <font>
-                        <Font size="27.0" />
+                        <Font name="Berlin Sans FB Bold" size="27.0" />
                      </font>
                   </Text>
                </children>
