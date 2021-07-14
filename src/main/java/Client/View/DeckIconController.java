@@ -1,6 +1,6 @@
 package Client.View;
 
-import Server.Model.Deck;
+import Client.Model.Deck;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;

@@ -86,7 +86,7 @@
                   </HBox>
                   <Button layoutX="-24.0" layoutY="505.0" mnemonicParsing="false" onAction="#drawPhase" rotate="90.0" text="Draw Phase" />
                   <Button layoutX="-20.0" layoutY="216.0" mnemonicParsing="false" onAction="#endPhase" rotate="90.0" text="End phase" />
-                  <Button layoutX="-23.0" layoutY="411.0" mnemonicParsing="false" onAction="#mainPhase" rotate="90.0" text="Client.Client.View.View.Main phase" />
+                  <Button layoutX="-23.0" layoutY="411.0" mnemonicParsing="false" onAction="#mainPhase" rotate="90.0" text="Main phase" />
                   <ImageView fx:id="imageViewMonster15" fitHeight="97.0" fitWidth="73.0" layoutX="147.0" layoutY="347.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="imageViewMonster13" fitHeight="97.0" fitWidth="73.0" layoutX="246.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="imageViewMonster11" fitHeight="99.0" fitWidth="83.0" layoutX="342.0" layoutY="345.0" pickOnBounds="true" preserveRatio="true" />

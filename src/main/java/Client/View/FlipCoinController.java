@@ -1,6 +1,6 @@
 package Client.View;
 
-import Server.Model.Player;
+import Client.Model.Player;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -97,12 +97,12 @@ public class FlipCoinController implements Initializable {
         int a = rand.nextInt(2);
         if (a == 1) {
             winner = Controller.getLoggedInPlayer();
-            loser = SetOpponentController.getPlayer2();
+//            loser = SetOpponentController.getPlayer2();
             String str = "/Images/Coin/0.png";
             Image image = new Image(getClass().getResourceAsStream(str));
             imageView.setImage(image);
         } else {
-            winner = SetOpponentController.getPlayer2();
+//            winner = SetOpponentController.getPlayer2();
             loser = Controller.getLoggedInPlayer();
             String str = "/Images/Coin/Gold_21.png";
             Image image = new Image(getClass().getResourceAsStream(str));

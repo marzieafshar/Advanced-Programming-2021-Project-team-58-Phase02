@@ -1,6 +1,6 @@
 package Client.View;
 
-import Server.Model.Player;
+import Client.Model.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,7 +31,7 @@ public class DuelMenuController implements Initializable {
 
 
     Player player1 = Controller.getLoggedInPlayer();
-    Player player2 = SetOpponentController.getPlayer2();
+//    Player player2 = SetOpponentController.getPlayer2();
 
     private static int player1SetsWin;
     private static int player2SetsWin;
@@ -176,7 +176,7 @@ public class DuelMenuController implements Initializable {
             else
                 player2SetsWin++;
             LPsPlayer1.add(player1.getLP());
-            LPsPlayer2.add(player2.getLP());
+//            LPsPlayer2.add(player2.getLP());
             int maxLP1 = Collections.max(LPsPlayer1);
             int maxLP2 = Collections.max(LPsPlayer2);
 
@@ -199,9 +199,9 @@ public class DuelMenuController implements Initializable {
         }
 
         player1NickName.setText(player1.getNickname());
-        player2NickName.setText(player2.getNickname());
+//        player2NickName.setText(player2.getNickname());
         player1Avatar.setImage(player1.getImage());
-        player2Avatar.setImage(player2.getImage());
+//        player2Avatar.setImage(player2.getImage());
         player1Score.setText(String.valueOf(player1SetsWin));
         player2Score.setText(String.valueOf(player2SetsWin));
         player1MaxLP.setText(String.valueOf(maxLP1));
@@ -221,11 +221,11 @@ public class DuelMenuController implements Initializable {
         if (numOfRounds == 3) {
             if (player1SetsWin == 2) {
                 setMatchWinner(player1);
-                setMatchLoser(player2);
+//                setMatchLoser(player2);
                 maxLpWinner = Collections.max(LPsPlayer1);
 
             } else {
-                setMatchWinner(player2);
+//                setMatchWinner(player2);
                 setMatchLoser(player1);
                 maxLpWinner = Collections.max(LPsPlayer2);
             }

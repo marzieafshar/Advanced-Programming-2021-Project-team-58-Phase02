@@ -1,7 +1,6 @@
 package Client.View;
 
-import Server.Model.*;
-import Server.Model.Card;
+import Client.Model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,10 +23,12 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ShopController implements Initializable {
+    public Label numberOfCardInShop;
     @FXML
     private Label numberOfCard;
 
@@ -62,114 +63,112 @@ public class ShopController implements Initializable {
     String str = "Button_Click.mp3";
     private MediaPlayer mediaPlayer;
 
-
-    private ArrayList<Card> allCards = Card.getAllCards();
+    private ArrayList<String> allCards = new ArrayList<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if (Card.getAllCards().size() > 0) {
-            setPlayerMoney();
-            setChosenCard(Card.getAllCards().get(0));
-            myListener = new MyListener() {
-                @Override
-                public void onClickListener(Object object) {
-                    setChosenCard((Card) object);
+        loadCards();
+        setPlayerMoney();
+        setChosenCard(allCards.get(0));
+        showCards();
+    }
+
+    public void showCards() {
+        myListener = new MyListener() {
+            @Override
+            public void onClickListener(Object object) {
+                setChosenCard((String) object);
+            }
+        };
+        grid.setMinHeight(Region.USE_COMPUTED_SIZE);
+        grid.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        grid.setMaxHeight(Region.USE_PREF_SIZE);
+
+        grid.setMinWidth(Region.USE_COMPUTED_SIZE);
+        grid.setPrefWidth(Region.USE_COMPUTED_SIZE);
+        grid.setMaxWidth(Region.USE_PREF_SIZE);
+        int column = 0;
+        int row = 1;
+        for (int i = 0; i < allCards.size(); i++) {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("/Fxmls/Items.fxml"));
+                AnchorPane anchorPane = fxmlLoader.load();
+
+                ItemController ItemController = fxmlLoader.getController();
+                ItemController.setItem(allCards.get(i), myListener);
+                if (column == 8) {
+                    column = 0;
+                    row++;
                 }
-            };
-            grid.setMinHeight(Region.USE_COMPUTED_SIZE);
-            grid.setPrefHeight(Region.USE_COMPUTED_SIZE);
-            grid.setMaxHeight(Region.USE_PREF_SIZE);
+                grid.add(anchorPane, column++, row);
 
-            grid.setMinWidth(Region.USE_COMPUTED_SIZE);
-            grid.setPrefWidth(Region.USE_COMPUTED_SIZE);
-            grid.setMaxWidth(Region.USE_PREF_SIZE);
-            int column = 0;
-            int row = 1;
-            for (int i = 0; i < Card.getAllCards().size(); i++) {
-                try {
-                    FXMLLoader fxmlLoader = new FXMLLoader();
-                    fxmlLoader.setLocation(getClass().getResource("/Fxmls/Items.fxml"));
-                    AnchorPane anchorPane = fxmlLoader.load();
-
-                    ItemController ItemController = fxmlLoader.getController();
-                    ItemController.setItem(Card.getAllCards().get(i), myListener);
-                    if (column == 8) {
-                        column = 0;
-                        row++;
-                    }
-                    grid.add(anchorPane, column++, row);
-
-                    GridPane.setMargin(anchorPane, new Insets(5));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                GridPane.setMargin(anchorPane, new Insets(5));
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
 
-    public void setChosenCard(Card card) {
-        selectedCardName.setText(card.getCardName());
-        selectedCardPrice.setText(String.valueOf(card.getPrice()));
-        image = new Image(getClass().getResourceAsStream(card.getImageSrc()));
+    public void setChosenCard(String cardName) {
+        selectedCardName.setText(cardName);
+        selectedCardPrice.setText(getCardInfo(cardName, "price"));
+        image = new Image(getClass().getResourceAsStream(getCardInfo(cardName, "imageSrc")));
         selectedCardImage.setImage(image);
-        numberOfCard.setText(String.valueOf(numberOfCardsInAllCards(card)));
-        if (card.getPrice() > Controller.getLoggedInPlayer().getMoney()) {
+        int cardPrice = Integer.parseInt(getCardInfo(cardName, "price"));
+        int playerMoney = Integer.parseInt(ProfileController.getPlayerInfo("money"));
+        numberOfCard.setText(getNumberOfPlayerCard(cardName));
+        numberOfCardInShop.setText(getNumberOfShopCard(cardName));
+        if (cardPrice > playerMoney) {
             buyButton.setDisable(true);
         } else {
             buyButton.setDisable(false);
         }
-    }
 
-    public int numberOfCardsInAllCards(Card card){
-        ArrayList<Card> allCards = Controller.getLoggedInPlayer().getAllCards();
-        int result = 0;
-        for (Card card2 : allCards) {
-            if(card.getCardName().equals(card2.getCardName())){
-                result++;
-            }
-        }
-        return result;
     }
 
     public void setPlayerMoney() {
-        playerMoney.setText(String.valueOf(player.getMoney()));
+        playerMoney.setText(ProfileController.getPlayerInfo("money"));
     }
 
     public void buyCard(ActionEvent actionEvent) {
         Media media = new Media(new File(str).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(true);
-
-        player.decreaseMoney(Card.getCardByName(selectedCardName.getText()).getPrice());
-        player.getAllCards().add(Card.getCardByName(selectedCardName.getText()));
+        try {
+            Controller.getDataOutputStream().writeUTF("Shop buy"
+                    + selectedCardName.getText() + "#" + Controller.getToken());
+            Controller.getDataOutputStream().flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         setPlayerMoney();
-        if (Controller.getLoggedInPlayer().getMoney() < Card.getCardByName(selectedCardName.getText()).getPrice()){
+        int playerMoney = Integer.parseInt(ProfileController.getPlayerInfo("money"));
+        int cardPrice = Integer.parseInt(getCardInfo(selectedCardName.getText(), "price"));
+        int numberInShop = Integer.parseInt(getNumberOfShopCard(selectedCardName.getText()));
+        if ((playerMoney < cardPrice) || (numberInShop == 0)) {
             buyButton.setDisable(true);
         }
-        numberOfCard.setText(String.valueOf(numberOfCardsInAllCards(Card.getCardByName(selectedCardName.getText()))));
-
+        numberOfCard.setText(getNumberOfPlayerCard(selectedCardName.getText()));
+        numberOfCardInShop.setText(getNumberOfShopCard(selectedCardName.getText()));
     }
 
     public void showInfo(ActionEvent actionEvent) {
         Media media = new Media(new File(str).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(true);
-        Card card = Card.getCardByName(selectedCardName.getText());
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setHeaderText(selectedCardName.getText());
-        alert.setTitle("Information");
-        if (card instanceof MonsterCard) {
-            alert.setContentText("Level: " + ((MonsterCard) card).getCardLevel() +
-                    "\nType: " + ((MonsterCard) card).getMonsterType() +
-                    "\nATK: " + ((MonsterCard) card).getAttack() +
-                    "\nDEF: " + ((MonsterCard) card).getDefense() +
-                    "\nDescription: " + card.getCardDescription());
-        } else {
-            TrapAndSpellCard TPCard = (TrapAndSpellCard) card;
-            alert.setContentText("Type: " + TPCard.getTrapOrSpellTypes() +
-                    "\nDescription: " + TPCard.getCardDescription());
+        try {
+            Controller.getDataOutputStream().writeUTF("Shop show info" + selectedCardName.getText());
+            Controller.getDataOutputStream().flush();
+            String result = Controller.getDataInputStream().readUTF();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText(selectedCardName.getText());
+            alert.setTitle("Information");
+            alert.setContentText(result);
+            alert.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        alert.showAndWait();
     }
 
     public void search(ActionEvent e) {
@@ -177,9 +176,8 @@ public class ShopController implements Initializable {
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(true);
         String cardName = searchBox.getText();
-        if (Card.getCardByName(cardName) != null) {
-            setChosenCard(Card.getCardByName(cardName));
-        }
+        if (allCards.contains(cardName))
+            setChosenCard(cardName);
     }
 
     public void backToMainMenu(ActionEvent event) throws IOException {
@@ -192,6 +190,56 @@ public class ShopController implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         setPlayerMoney();
+    }
+
+    public void loadCards() {
+        try {
+            Controller.getDataOutputStream().writeUTF("Shop get cards");
+            Controller.getDataOutputStream().flush();
+            String result = Controller.getDataInputStream().readUTF();
+            String[] allCardsArray = result.split("#");
+            allCards.addAll(Arrays.asList(allCardsArray));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String getCardInfo(String cardName, String info) {
+        try {
+            Controller.getDataOutputStream().writeUTF("Shop get card" + info + "#" + cardName);
+            Controller.getDataOutputStream().flush();
+            String result = Controller.getDataInputStream().readUTF();
+            return result;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    public static String getNumberOfPlayerCard(String cardName) {
+        try {
+            String message = "Shop num of card" + cardName + "#" + Controller.getToken();
+            Controller.getDataOutputStream().writeUTF(message);
+            Controller.getDataOutputStream().flush();
+            String result = Controller.getDataInputStream().readUTF();
+            return result;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    public static String getNumberOfShopCard(String cardName) {
+        try {
+            String message = "Shop number of card" + cardName;
+            Controller.getDataOutputStream().writeUTF(message);
+            Controller.getDataOutputStream().flush();
+            String result = Controller.getDataInputStream().readUTF();
+            return result;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
 }

@@ -1,6 +1,6 @@
 package Client.View;
 
-import Server.Model.Player;
+import Client.Model.Player;
 import com.gilecode.yagson.*;
 import com.gilecode.yagson.com.google.gson.reflect.TypeToken;
 

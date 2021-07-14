@@ -1,4 +1,4 @@
-package Server.Model;
+package Client.Model;
 
 public enum TrapOrSpellIcons {
     FIELD,

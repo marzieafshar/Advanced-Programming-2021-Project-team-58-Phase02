@@ -1,6 +1,6 @@
 package Client.View;
 
-import Server.Model.Card;
+import Client.Model.Card;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

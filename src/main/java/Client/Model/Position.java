@@ -1,4 +1,4 @@
-package Server.Model;
+package Client.Model;
 
 import Client.View.MyListener;
 import javafx.event.EventHandler;

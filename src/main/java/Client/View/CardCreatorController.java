@@ -1,6 +1,6 @@
 package Client.View;
 
-import Server.Model.*;
+import Client.Model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

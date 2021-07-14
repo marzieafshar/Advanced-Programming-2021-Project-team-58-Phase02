@@ -1,4 +1,4 @@
-package Server.Model;
+package Client.Model;
 
 import javafx.scene.image.Image;
 

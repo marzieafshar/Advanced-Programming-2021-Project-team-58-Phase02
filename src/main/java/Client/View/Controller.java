@@ -1,6 +1,6 @@
 package Client.View;
 
-import Server.Model.Player;
+import Client.Model.Player;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.event.*;

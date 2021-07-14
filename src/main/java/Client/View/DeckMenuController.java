@@ -1,6 +1,6 @@
 package Client.View;
 
-import Server.Model.*;
+import Client.Model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -90,7 +90,7 @@ public class DeckMenuController implements Initializable {
                 AnchorPane anchorPane = fxmlLoader.load();
 
                 PlayerCardsController playerCardsController = fxmlLoader.getController();
-                playerCardsController.setCard(logInPlayer.getAllCards().get(i), listenerAllCards, i);
+//                playerCardsController.setCard(logInPlayer.getAllCards().get(i), listenerAllCards, i);
 
                 gridPlayerCards.add(anchorPane, column, 1);
                 column++;

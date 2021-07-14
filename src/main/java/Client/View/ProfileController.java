@@ -1,7 +1,8 @@
 package Client.View;
 
-import Server.Model.Player;
+
 import com.gilecode.yagson.YaGson;
+import com.gilecode.yagson.com.google.gson.reflect.TypeToken;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -59,6 +60,13 @@ public class ProfileController implements Initializable {
     Media media = new Media(new File(str).toURI().toString());
     private MediaPlayer mediaPlayer = new MediaPlayer(media);
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        setUserInfo();
+        myListener = object -> setPlayerImage((Image) object);
+        showAllAvatars();
+    }
+
     @FXML
     void backToMainMenu(ActionEvent event) throws IOException {
         Media media = new Media(new File(str).toURI().toString());
@@ -80,7 +88,7 @@ public class ProfileController implements Initializable {
             if (nicknameChangeField == null) return;
             String token = Controller.getToken();
             String newNickName = nicknameChangeField.getText();
-            String message = "Change Nickname" + newNickName + "#" + token;
+            String message = "Profile change nickname" + newNickName + "#" + token;
 
             Controller.getDataOutputStream().writeUTF(message);
             Controller.getDataOutputStream().flush();
@@ -98,6 +106,9 @@ public class ProfileController implements Initializable {
                     alert2.setContentText("Nickname Changed Successfully !");
                     alert2.showAndWait();
             }
+            nicknameChangeField.setPromptText("Your nickname: " + getPlayerInfo("nickname"));
+            nicknameChangeField.setText("");
+//            nicknameChangeField.isFocused();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -118,7 +129,7 @@ public class ProfileController implements Initializable {
         } else {
             try {
                 String token = Controller.getToken();
-                String message = "Change Password" + newPassword1 + "#" + token;
+                String message = "Profile change password" + newPassword1 + "#" + token;
                 Controller.getDataOutputStream().writeUTF(message);
                 Controller.getDataOutputStream().flush();
 
@@ -141,25 +152,15 @@ public class ProfileController implements Initializable {
         }
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        setUserInfo();
-        myListener = object -> setPlayerImage((Image) object);
-        showAllAvatars();
-    }
-
     private void showAllAvatars() {
         int column = 0;
         int row = 1;
-
         gridPane.setMinHeight(Region.USE_COMPUTED_SIZE);
         gridPane.setPrefHeight(Region.USE_COMPUTED_SIZE);
         gridPane.setMaxHeight(Region.USE_PREF_SIZE);
-
         gridPane.setMinWidth(Region.USE_COMPUTED_SIZE);
         gridPane.setPrefWidth(Region.USE_COMPUTED_SIZE);
         gridPane.setMaxWidth(Region.USE_PREF_SIZE);
-
         for (int i = 0; i < 32; i++) {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
@@ -175,7 +176,6 @@ public class ProfileController implements Initializable {
                     row++;
                 }
                 gridPane.add(anchorPane, column++, row);
-
                 GridPane.setMargin(anchorPane, new Insets(5));
             } catch (IOException e) {
                 e.printStackTrace();
@@ -184,47 +184,77 @@ public class ProfileController implements Initializable {
     }
 
     private void setPlayerImage(Image image) {
-
-//        String imageJson = new YaGson().toJson(image);
-////        String
-
         try {
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(Controller.getSocket().getOutputStream());
-            objectOutputStream.writeObject(image);
-            objectOutputStream.flush();
+            String imageJson = new YaGson().toJson(image);
+            int x = imageJson.length() / 64000;
+            Controller.getDataOutputStream().writeUTF("Profile length" + (x + 1) + "#" + Controller.getToken());
+            Controller.getDataOutputStream().flush();
+
+            for (int i = 0; i < x; i++) {
+                String tmp = imageJson.substring(0, 64000);
+                imageJson = imageJson.substring(64000);
+                Controller.getDataOutputStream().writeUTF("Profile change" + tmp);
+                Controller.getDataOutputStream().flush();
+            }
+            Controller.getDataOutputStream().writeUTF("Profile change" + imageJson);
+            Controller.getDataOutputStream().flush();
+            Controller.getDataOutputStream().writeUTF("Profile change");
+            Controller.getDataOutputStream().flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        itemImage.setImage(image);
+    }
+
+    private void setUserInfo() {
+        try {
+            itemImage.setImage(getImage());
+            username.setText(getPlayerInfo("username"));
+            userMoney.setText(String.valueOf(getPlayerInfo("money")));
+            userScore.setText(String.valueOf(getPlayerInfo("score")));
+            userActiveDeckName.setText(getPlayerInfo("active deck name"));
+            userNumOfDecks.setText(getPlayerInfo("decks size"));
+            userNumOfWins.setText(String.valueOf(getPlayerInfo("win matches")));
+            userNumOfLosses.setText(String.valueOf(getPlayerInfo("lose matches")));
+            nicknameChangeField.setPromptText("Your nickname: " + getPlayerInfo("nickname"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Image getImage() {
+        try {
+            String token = Controller.getToken();
+            Controller.getDataOutputStream().writeUTF("Profile Image" + token);
+            String imageJson = "";
+            String imageLengthMessage = Controller.getDataInputStream().readUTF();
+            int imageLength = Integer.parseInt(imageLengthMessage);
+
+            for (int i = 0; i < imageLength; i++) {
+                String imageMessage = Controller.getDataInputStream().readUTF();
+                imageJson = imageJson + imageMessage;
+            }
+            Image image = new YaGson().fromJson(imageJson, new TypeToken<Image>() {
+            }.getType());
+            return image;
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        String token = Controller.getToken();
-//        try {
-//            Controller.getDataOutputStream().write();
-//            Controller.getDataOutputStream().write("Change Profile" + token + "#" + imageJson);
-//            Controller.getDataOutputStream().flush();
-//
-////            String result = Controller.getDataInputStream().readUTF();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-        itemImage.setImage(image);
-        System.out.println(image);
+        return null;
     }
 
-    private void setUserInfo() {
-        Player player = Controller.getLoggedInPlayer();
-        itemImage.setImage(player.getImage());
-        username.setText(player.getUsername());
-        userMoney.setText(String.valueOf(player.getMoney()));
-        userScore.setText(String.valueOf(player.getScore()));
-        if (player.getActiveDeck() == null)
-            userActiveDeckName.setText("Not set yet");
-        else
-            userActiveDeckName.setText(player.getActiveDeck().getDeckName());
-        userNumOfDecks.setText(String.valueOf(player.getDecks().size()));
-        userNumOfWins.setText(String.valueOf(player.getWinMatches()));
-        userNumOfLosses.setText(String.valueOf(player.getLoseMatches()));
-        nicknameChangeField.setPromptText("Your nickname: " + player.getNickname());
+    public static String getPlayerInfo(String str){
+        try {
+            String token = Controller.getToken();
+            Controller.getDataOutputStream().writeUTF( "Profile " + str + token);
+            String result = Controller.getDataInputStream().readUTF();
+            return result;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
+
 }
 

@@ -1,8 +1,6 @@
 package Client.View;
 
-import Server.Model.Card;
-import Server.Model.Deck;
-import Server.Model.Player;
+import Client.Model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -146,7 +144,7 @@ public class MainMenuController {
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(true);
 
-        Controller.getDataOutputStream().writeUTF("logout" + Controller.getToken());
+        Controller.getDataOutputStream().writeUTF("Logout" + Controller.getToken());
         Controller.getDataOutputStream().flush();
 
         String result = Controller.getDataInputStream().readUTF();

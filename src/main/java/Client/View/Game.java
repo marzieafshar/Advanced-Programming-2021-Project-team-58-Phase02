@@ -1,6 +1,6 @@
 package Client.View;
 
-import Server.Model.*;
+import Client.Model.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;

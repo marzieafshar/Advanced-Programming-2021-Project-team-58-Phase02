@@ -1,8 +1,6 @@
 package Client.View;
 
-import Server.Model.Card;
-import Server.Model.MonsterCard;
-import Server.Model.TrapAndSpellCard;
+import Client.Model.*;
 import com.gilecode.yagson.YaGson;
 import com.google.gson.reflect.TypeToken;
 import javafx.event.ActionEvent;

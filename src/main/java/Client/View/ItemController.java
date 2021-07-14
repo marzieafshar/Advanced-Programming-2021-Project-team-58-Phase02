@@ -1,26 +1,28 @@
 package Client.View;
 
-import Server.Model.Card;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
+import java.io.IOException;
+
 public class ItemController {
-    private Card card;
+    private String cardName;
     private MyListener myListener;
     @FXML
     private ImageView cardPicture;
 
     @FXML
     private void click(MouseEvent mouseEvent) {
-        myListener.onClickListener(card);
+        myListener.onClickListener(cardName);
     }
 
-    public void setItem(Card card, MyListener myListener) {
-        this.card = card;
+    public void setItem(String cardName, MyListener myListener) {
+        this.cardName = cardName;
         this.myListener = myListener;
-        Image image = new Image(getClass().getResourceAsStream(card.getImageSrc()));
+        String imageSrc = ShopController.getCardInfo(cardName, "imageSrc");
+        Image image = new Image(getClass().getResourceAsStream(imageSrc));
         cardPicture.setImage(image);
     }
 }

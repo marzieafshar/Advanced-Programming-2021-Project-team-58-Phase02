@@ -1,6 +1,6 @@
 package Client.View;
 
-import Server.Model.Player;
+import Client.Model.Player;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -29,7 +29,7 @@ public class GraveyardController {
                 AnchorPane anchorPane = fxmlLoader.load();
 
                 ItemController ItemController = fxmlLoader.getController();
-                ItemController.setItem(player.getBoard().getGraveYard().get(i), myListener);
+//                ItemController.setItem(player.getBoard().getGraveYard().get(i), myListener);
                 if (column == 5) {
                     column = 0;
                     row++;
