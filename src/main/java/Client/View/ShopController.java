@@ -373,9 +373,23 @@ public class ShopController implements Initializable {
     }
 
     public void increaseCardNumberInShop(MouseEvent event) {
+        try {
+            Controller.getDataOutputStream().writeUTF("Shop increase shop card" + selectedCardName.getText());
+            Controller.getDataOutputStream().flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        numberOfCardInShop.setText(getNumberOfShopCard(selectedCardName.getText()));
     }
 
     public void decreaseCardNumberInShop(MouseEvent event) {
+        try {
+            Controller.getDataOutputStream().writeUTF("Shop decrease shop card" + selectedCardName.getText());
+            Controller.getDataOutputStream().flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        numberOfCardInShop.setText(getNumberOfShopCard(selectedCardName.getText()));
     }
 }
 
