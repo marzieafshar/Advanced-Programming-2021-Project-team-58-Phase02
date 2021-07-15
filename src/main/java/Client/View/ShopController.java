@@ -69,6 +69,9 @@ public class ShopController implements Initializable {
     @FXML
     private ImageView cardImageView;
 
+    @FXML
+    private Button sellButton;
+
     public ImageView adminImageView;
 
     private Image image;
@@ -168,14 +171,12 @@ public class ShopController implements Initializable {
         int cardPrice = Integer.parseInt(getCardInfo(cardName, "price"));
         int playerMoney = Integer.parseInt(ProfileController.getPlayerInfo("money"));
         int numberInShop = Integer.parseInt(getNumberOfShopCard(cardName));
+        int playerCardNumber = Integer.parseInt(getNumberOfPlayerCard(cardName));
 
         numberOfCard.setText(getNumberOfPlayerCard(cardName));
         numberOfCardInShop.setText(getNumberOfShopCard(cardName));
-        if ((cardPrice > playerMoney) || (isCardForbidden(cardName)) || (numberInShop == 0)) {
-            buyButton.setDisable(true);
-        } else {
-            buyButton.setDisable(false);
-        }
+        sellButton.setDisable(playerCardNumber == 0);
+        buyButton.setDisable((cardPrice > playerMoney) || (isCardForbidden(cardName)) || (numberInShop == 0));
     }
 
 
@@ -194,15 +195,49 @@ public class ShopController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        setPlayerMoney();
         int playerMoney = Integer.parseInt(ProfileController.getPlayerInfo("money"));
         int cardPrice = Integer.parseInt(getCardInfo(selectedCardName.getText(), "price"));
         int numberInShop = Integer.parseInt(getNumberOfShopCard(selectedCardName.getText()));
+        int playerCardNumber = Integer.parseInt(getNumberOfPlayerCard(selectedCardName.getText()));
+
         if ((playerMoney < cardPrice) || (numberInShop == 0)) {
             buyButton.setDisable(true);
         }
+        if (playerCardNumber > 0) {
+            sellButton.setDisable(false);
+        }
         numberOfCard.setText(getNumberOfPlayerCard(selectedCardName.getText()));
         numberOfCardInShop.setText(getNumberOfShopCard(selectedCardName.getText()));
+        setPlayerMoney();
+
+    }
+
+    public void sellCard(ActionEvent event) {
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
+
+        try {
+            Controller.getDataOutputStream().writeUTF("Shop sell" + selectedCardName.getText()
+                    + "#" + Controller.getToken());
+            Controller.getDataOutputStream().flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        int playerCardNumber = Integer.parseInt(getNumberOfPlayerCard(selectedCardName.getText()));
+        int numberInShop = Integer.parseInt(getNumberOfShopCard(selectedCardName.getText()));
+
+        if (playerCardNumber == 0) {
+            sellButton.setDisable(true);
+        }
+        if (numberInShop > 0) {
+            buyButton.setDisable(false);
+        }
+
+        numberOfCard.setText(getNumberOfPlayerCard(selectedCardName.getText()));
+        numberOfCardInShop.setText(getNumberOfShopCard(selectedCardName.getText()));
+        setPlayerMoney();
     }
 
     public void showInfo(ActionEvent actionEvent) {

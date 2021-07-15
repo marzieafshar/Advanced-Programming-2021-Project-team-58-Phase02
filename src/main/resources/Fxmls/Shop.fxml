@@ -182,6 +182,15 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </VBox>
+                  <HBox alignment="CENTER" prefHeight="39.0" prefWidth="250.0">
+                     <children>
+                        <Button fx:id="sellButton" mnemonicParsing="false" onAction="#sellCard" prefHeight="35.0" prefWidth="59.0" styleClass="search-button" text="Sell">
+                           <font>
+                              <Font name="Century Gothic Bold" size="18.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
                   <Pane prefHeight="0.0" prefWidth="250.0" VBox.vgrow="ALWAYS" />
                   <HBox alignment="BASELINE_LEFT" prefHeight="43.0" prefWidth="250.0">
                      <VBox.margin>
