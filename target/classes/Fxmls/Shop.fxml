@@ -246,7 +246,7 @@
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" prefHeight="24.0" prefWidth="729.0">
                            <children>
-                              <ImageView fx:id="decreaseImageView" fitHeight="20.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                              <ImageView fx:id="decreaseImageView" fitHeight="20.0" fitWidth="24.0" onMouseClicked="#decreaseCardNumberInShop" pickOnBounds="true" preserveRatio="true" rotate="180.0">
                                  <image>
                                     <Image url="@../Images/Icon/preview.png" />
                                  </image>
@@ -254,7 +254,7 @@
                                     <Insets right="5.0" />
                                  </HBox.margin>
                               </ImageView>
-                              <ImageView fx:id="increaseImageView" fitHeight="20.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="increaseImageView" fitHeight="20.0" fitWidth="24.0" onMouseClicked="#increaseCardNumberInShop" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../Images/Icon/preview.png" />
                                  </image>
@@ -262,7 +262,7 @@
                                     <Insets right="5.0" />
                                  </HBox.margin>
                               </ImageView>
-                              <ImageView fx:id="forbiddenImageView" fitHeight="20.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="forbiddenImageView" fitHeight="20.0" fitWidth="24.0" onMouseClicked="#forbidCard" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../Images/Icon/Ban-PNG-Free-Download.png" />
                                  </image>

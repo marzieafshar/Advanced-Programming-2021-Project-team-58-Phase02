@@ -15,6 +15,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Reflection;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.InputMethodTextRun;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -349,16 +350,15 @@ public class ShopController implements Initializable {
         return "";
     }
 
-    private static void forbidCard(String cardName) {
+    public void forbidCard(MouseEvent event) {
         try {
-            Controller.getDataOutputStream().writeUTF("Shop forbid" + cardName);
+            Controller.getDataOutputStream().writeUTF("Shop forbid" + selectedCardName.getText());
             Controller.getDataOutputStream().flush();
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        showCards();
+        setChosenCard(selectedCardName.getText());
     }
 
     private static boolean isCardForbidden(String cardName) {
@@ -372,6 +372,11 @@ public class ShopController implements Initializable {
         return false;
     }
 
+    public void increaseCardNumberInShop(MouseEvent event) {
+    }
+
+    public void decreaseCardNumberInShop(MouseEvent event) {
+    }
 }
 
 
