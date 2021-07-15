@@ -14,7 +14,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="139.0" prefWidth="600.0">
                <children>
-                  <Label styleClass="main-menu-text" text="Client.Client.View.View.Main Menu" textFill="WHITE">
+                  <Label styleClass="main-menu-text" text="Main Menu" textFill="WHITE">
                      <font>
                         <Font name="Matura MT Script Capitals" size="40.0" />
                      </font>

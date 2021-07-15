@@ -10,8 +10,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Reflection;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
@@ -53,12 +57,27 @@ public class ShopController implements Initializable {
     @FXML
     private Label playerMoney;
 
+    @FXML
+    private ImageView decreaseImageView;
+
+    @FXML
+    private ImageView increaseImageView;
+
+    @FXML
+    private ImageView forbiddenImageView;
+
+    @FXML
+    private ImageView cardImageView;
+
+    public ImageView adminImageView;
+
     private Image image;
     private MyListener myListener;
     public Player player = Controller.getLoggedInPlayer();
     private Parent root;
     private Stage stage;
     private Scene scene;
+    private boolean isAdmin;
 
     String str = "Button_Click.mp3";
     private MediaPlayer mediaPlayer;
@@ -67,10 +86,30 @@ public class ShopController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        isAdmin = false;
+        disableAdminButtons();
         loadCards();
         setPlayerMoney();
         setChosenCard(allCards.get(0));
         showCards();
+    }
+
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+
+    public void disableAdminButtons() {
+        decreaseImageView.setVisible(false);
+        increaseImageView.setVisible(false);
+        forbiddenImageView.setVisible(false);
+        cardImageView.setVisible(false);
+    }
+
+    public void enableAdminButtons() {
+        decreaseImageView.setVisible(true);
+        increaseImageView.setVisible(true);
+        forbiddenImageView.setVisible(true);
+        cardImageView.setVisible(true);
     }
 
     public void showCards() {
@@ -96,7 +135,7 @@ public class ShopController implements Initializable {
                 AnchorPane anchorPane = fxmlLoader.load();
 
                 ItemController ItemController = fxmlLoader.getController();
-                ItemController.setItem(allCards.get(i), myListener);
+                ItemController.setItem(allCards.get(i), myListener, isCardForbidden(allCards.get(i)));
                 if (column == 8) {
                     column = 0;
                     row++;
@@ -115,17 +154,30 @@ public class ShopController implements Initializable {
         selectedCardPrice.setText(getCardInfo(cardName, "price"));
         image = new Image(getClass().getResourceAsStream(getCardInfo(cardName, "imageSrc")));
         selectedCardImage.setImage(image);
+        Reflection reflection = new Reflection();
+        reflection.setFraction(0.4);
+        reflection.setTopOpacity(0.35);
+        if (isCardForbidden(cardName)) {
+            ColorAdjust colorAdjust = new ColorAdjust();
+            colorAdjust.setSaturation(-1);
+            colorAdjust.setBrightness(0);
+            reflection.setInput(colorAdjust);
+        }
+        selectedCardImage.setEffect(reflection);
+
         int cardPrice = Integer.parseInt(getCardInfo(cardName, "price"));
         int playerMoney = Integer.parseInt(ProfileController.getPlayerInfo("money"));
+        int numberInShop = Integer.parseInt(getNumberOfShopCard(cardName));
+
         numberOfCard.setText(getNumberOfPlayerCard(cardName));
         numberOfCardInShop.setText(getNumberOfShopCard(cardName));
-        if (cardPrice > playerMoney) {
+        if ((cardPrice > playerMoney) || (isCardForbidden(cardName)) || (numberInShop == 0)) {
             buyButton.setDisable(true);
         } else {
             buyButton.setDisable(false);
         }
-
     }
+
 
     public void setPlayerMoney() {
         playerMoney.setText(ProfileController.getPlayerInfo("money"));
@@ -192,6 +244,26 @@ public class ShopController implements Initializable {
         setPlayerMoney();
     }
 
+    public void changeMode(MouseEvent event) {
+        if (isAdmin) {
+            disableAdminButtons();
+            isAdmin = false;
+            Image image = new Image(getClass().getResourceAsStream("/Images/Icon/admin.png"));
+            adminImageView.setImage(image);
+        } else {
+            AdminPasswordController.setShopController(this);
+            try {
+                root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/PopupAdminPassword.fxml")));
+                Stage stage1 = new Stage();
+                scene = new Scene(root);
+                stage1.setScene(scene);
+                stage1.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public void loadCards() {
         try {
             Controller.getDataOutputStream().writeUTF("Shop get cards");
@@ -240,6 +312,29 @@ public class ShopController implements Initializable {
             e.printStackTrace();
         }
         return "";
+    }
+
+    private static void forbidCard(String cardName) {
+        try {
+            Controller.getDataOutputStream().writeUTF("Shop forbid" + cardName);
+            Controller.getDataOutputStream().flush();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private static boolean isCardForbidden(String cardName) {
+        try {
+            Controller.getDataOutputStream().writeUTF("Shop is card forbidden" + cardName);
+            Controller.getDataOutputStream().flush();
+            return Boolean.parseBoolean(Controller.getDataInputStream().readUTF());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
 }

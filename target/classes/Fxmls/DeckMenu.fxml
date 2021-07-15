@@ -62,7 +62,7 @@
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="456.0" styleClass="deckMenu-up" stylesheets="@../Styles.css" VBox.vgrow="ALWAYS">
                      <children>
-                        <Label prefHeight="35.0" prefWidth="100.0" text="Client.Client.View.View.Main Deck" textFill="WHITE">
+                        <Label prefHeight="35.0" prefWidth="100.0" text="Main Deck" textFill="WHITE">
                            <font>
                               <Font name="Berlin Sans FB Demi Bold" size="21.0" />
                            </font>
