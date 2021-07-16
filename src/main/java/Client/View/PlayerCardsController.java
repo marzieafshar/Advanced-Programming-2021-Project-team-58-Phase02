@@ -13,7 +13,7 @@ import javafx.scene.layout.AnchorPane;
 public class PlayerCardsController {
 
     private MyListener myListener;
-    private Card card;
+    private String cardName;
     private int index;
     @FXML
     private AnchorPane source;
@@ -22,7 +22,7 @@ public class PlayerCardsController {
 
     @FXML
     void click(MouseEvent event) {
-        myListener.onClickListener(card);
+        myListener.onClickListener(cardName);
     }
 
     @FXML
@@ -33,10 +33,10 @@ public class PlayerCardsController {
         db.setContent(cb);
     }
 
-    public void setCard(Card card, MyListener myListener , int index) {
-        this.card = card;
+    public void setCard(String cardName, MyListener myListener , int index) {
+        this.cardName = cardName;
         this.index = index;
-        Image image = new Image(getClass().getResourceAsStream(card.getImageSrc()));
+        Image image = new Image(getClass().getResourceAsStream(ShopController.getCardInfo(cardName, "imageSrc")));
         cardImage.setImage(image);
         this.myListener = myListener;
     }

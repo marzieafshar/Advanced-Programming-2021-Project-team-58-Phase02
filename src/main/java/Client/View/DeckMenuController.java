@@ -21,10 +21,12 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import javax.swing.plaf.synth.ColorType;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -41,13 +43,16 @@ public class DeckMenuController implements Initializable {
     private MyListener myListener;
     private Player logInPlayer;
     int index;
-    private Deck selectedDeck;
-    private Card selectedCard;
+    private String selectedDeck;
+    private String selectedCard;
     private static boolean isGameStarted;
 
     String str = "Button_Click.mp3";
     Media media = new Media(new File(str).toURI().toString());
     private MediaPlayer mediaPlayer;
+
+    private static ArrayList<String> playerAllCards = new ArrayList<>();
+    private ArrayList<String> playerAllDecks = new ArrayList<>();
 
     public static void setIsGameStarted(boolean isGameStarted) {
         DeckMenuController.isGameStarted = isGameStarted;
@@ -59,16 +64,15 @@ public class DeckMenuController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.logInPlayer = Controller.getLoggedInPlayer();
-        if (logInPlayer.getAllCards().size() > 0) {
-            showPlayerCards();
-        }
-        if (logInPlayer.getDecks().size() > 0) {
+        loadPlayerCards();
+        loadPlayerDecks();
+        showPlayerCards();
+        if (playerAllDecks.size() > 0) {
             addDecksToMenu();
         }
     }
 
-    public void setSelectedDeck(Deck selectedDeck) {
+    public void setSelectedDeck(String selectedDeck) {
         this.selectedDeck = selectedDeck;
         showMainDeckCards(selectedDeck);
         showSideDeckCards(selectedDeck);
@@ -79,18 +83,18 @@ public class DeckMenuController implements Initializable {
         MyListener listenerAllCards = new MyListener() {
             @Override
             public void onClickListener(Object object) {
-                setSelectedCardImage((Card) object);
+                setSelectedCardImage((String) object);
             }
         };
         int column = 0;
-        for (int i = 0; i < logInPlayer.getAllCards().size(); i++) {
+        for (int i = 0; i < playerAllCards.size(); i++) {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("/Fxmls/PlayerCards.fxml"));
                 AnchorPane anchorPane = fxmlLoader.load();
 
                 PlayerCardsController playerCardsController = fxmlLoader.getController();
-//                playerCardsController.setCard(logInPlayer.getAllCards().get(i), listenerAllCards, i);
+                playerCardsController.setCard(playerAllCards.get(i), listenerAllCards, i);
 
                 gridPlayerCards.add(anchorPane, column, 1);
                 column++;
@@ -100,23 +104,23 @@ public class DeckMenuController implements Initializable {
         }
     }
 
-    public void showMainDeckCards(Deck selectedDeck) {
+    public void showMainDeckCards(String selectedDeck) {
         showDeck(selectedDeck, gridMainDeckCards);
     }
 
-    public void showSideDeckCards(Deck selectedDeck) {
+    public void showSideDeckCards(String selectedDeck) {
         showDeck(selectedDeck, gridSideDeckCards);
     }
 
-    private void showDeck(Deck selectedDeck, GridPane gridDeckCards) {
+    private void showDeck(String selectedDeck, GridPane gridDeckCards) {
         if (selectedDeck != null) {
-            ArrayList<Card> tempDeck;
-            String deckType = null;
+            ArrayList<String> tempDeck;
+            String deckType = "";
             if (gridDeckCards.equals(gridMainDeckCards)) {
-                tempDeck = selectedDeck.getMainDeck();
-                deckType = "Client.Client.View.View.Main";
+                tempDeck = getMainDeckCards(selectedDeck);
+                deckType = "Main";
             } else {
-                tempDeck = selectedDeck.getSideDeck();
+                tempDeck = getSideDeckCards(selectedDeck);
                 deckType = "Side";
             }
             gridDeckCards.getChildren().clear();
@@ -133,11 +137,10 @@ public class DeckMenuController implements Initializable {
                         MyListener myListenerSelectedCard = new MyListener() {
                             @Override
                             public void onClickListener(Object object) {
-                                setSelectedCardImage((Card) object);
+                                setSelectedCardImage((String) object);
                             }
                         };
                         deckCardsController.setCard(tempDeck.get(i), myListenerSelectedCard, i, deckType);
-//                anchorPane.setCursor();
                         if (column == 12) {
                             column = 0;
                             row++;
@@ -186,34 +189,25 @@ public class DeckMenuController implements Initializable {
     }
 
     public void showInfo() {
-        Media media = new Media(new File(str).toURI().toString());
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setAutoPlay(true);
-        selectedCardInfo.setWrappingWidth(250);
-        if (selectedCard != null) {
-            Card card = selectedCard;
-            if (card instanceof MonsterCard) {
-                selectedCardInfo.setText("Level: " + ((MonsterCard) card).getCardLevel() +
-                        "\nType: " + ((MonsterCard) card).getMonsterType() +
-                        "\nATK: " + ((MonsterCard) card).getAttack() +
-                        "\nDEF: " + ((MonsterCard) card).getDefense() +
-                        "\nDescription: " + card.getCardDescription());
-            } else {
-                TrapAndSpellCard TPCard = (TrapAndSpellCard) card;
-                selectedCardInfo.setText("Type: " + TPCard.getTrapOrSpellTypes() +
-                        "\nDescription: " + TPCard.getCardDescription());
-            }
+        try {
+            selectedCardInfo.setWrappingWidth(250);
+            Controller.getDataOutputStream().writeUTF("Shop show info" + selectedCard);
+            Controller.getDataOutputStream().flush();
+            String result = Controller.getDataInputStream().readUTF();
+            selectedCardInfo.setText(result);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    public void setSelectedCard(Card selectedCard) {
-        this.selectedCard = selectedCard;
+    public void setSelectedCard(String selectedCardName) {
+        this.selectedCard = selectedCardName;
     }
 
-    public void setSelectedCardImage(Card card) {
-        Image image = new Image(card.getImageSrc());
+    public void setSelectedCardImage(String cardName) {
+        Image image = new Image(ShopController.getCardInfo(cardName, "imageSrc"));
         selectedCardImage.setImage(image);
-        setSelectedCard(card);
+        setSelectedCard(cardName);
         showInfo();
 
     }
@@ -247,23 +241,25 @@ public class DeckMenuController implements Initializable {
             alert.showAndWait();
         } else {
             giveBackCards(selectedDeck);
-            Controller.getLoggedInPlayer().getDecks().remove(selectedDeck);
-            showPlayerCards();
-            addDecksToMenu();
+            removeDeckFromPlayerDecks(selectedDeck);
             gridSideDeckCards.getChildren().clear();
             gridMainDeckCards.getChildren().clear();
             setSelectedDeck(null);
+            loadPlayerCards();
+            loadPlayerDecks();
+            showPlayerCards();
+            addDecksToMenu();
         }
     }
 
-    private static void giveBackCards(Deck deck) {
-        ArrayList<Card> mainDeck = deck.getMainDeck();
-        ArrayList<Card> sideDeck = deck.getSideDeck();
-        for (Card card : mainDeck) {
-            Controller.getLoggedInPlayer().getAllCards().add(card);
+    private static void giveBackCards(String deckName) {
+        ArrayList<String> mainDeck = getMainDeckCards(deckName);
+        ArrayList<String> sideDeck = getSideDeckCards(deckName);
+        for (String cardName : mainDeck) {
+            addToPlayerCards(cardName);
         }
-        for (Card card : sideDeck) {
-            Controller.getLoggedInPlayer().getAllCards().add(card);
+        for (String cardName : sideDeck) {
+            addToPlayerCards(cardName);
         }
     }
 
@@ -272,19 +268,18 @@ public class DeckMenuController implements Initializable {
         myListener = new MyListener() {
             @Override
             public void onClickListener(Object object) {
-                setSelectedDeck((Deck) object);
+                setSelectedDeck((String) object);
             }
         };
         int row = 1;
-        for (int i = 0; i < logInPlayer.getDecks().size(); i++) {
+        for (int i = 0; i < playerAllDecks.size(); i++) {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("/Fxmls/DeckIcons.fxml"));
                 AnchorPane anchorPane = fxmlLoader.load();
 
                 DeckIconController deckIconController = fxmlLoader.getController();
-                deckIconController.setDeckLabel(logInPlayer.getDecks().get(i), myListener);
-//                anchorPane.setCursor();
+                deckIconController.setDeckLabel(playerAllDecks.get(i), myListener);
                 gridDecks.add(anchorPane, 0, row);
                 row++;
                 GridPane.setMargin(anchorPane, new Insets(5));
@@ -296,7 +291,7 @@ public class DeckMenuController implements Initializable {
 
     public void handleDragOverDeckCards(DragEvent event) {
         if (event.getDragboard().hasString())
-            if(selectedDeck!=null)
+            if (selectedDeck != null)
                 event.acceptTransferModes(TransferMode.ANY);
     }
 
@@ -305,13 +300,14 @@ public class DeckMenuController implements Initializable {
         if (selectedDeck != null) {
             if (message.startsWith("DeckSide")) {
                 index = Integer.parseInt(message.substring(8));
-                selectedDeck.addCardToMainDeck(selectedDeck.getSideDeck().get(index));
-                selectedDeck.getSideDeck().remove(index);
+                addCardToMainDeck(getSideDeckCards(selectedDeck).get(index), selectedDeck);
+                removeFromSideDeck(index, selectedDeck);
                 showSideDeckCards(selectedDeck);
-            } else if (message.startsWith("player")){
+            } else if (message.startsWith("player")) {
                 index = Integer.parseInt(message.substring(6));
-                selectedDeck.addCardToMainDeck(logInPlayer.getAllCards().get(index));
-                logInPlayer.getAllCards().remove(index);
+                addCardToMainDeck(playerAllCards.get(index), selectedDeck);
+                removeCardFromPlayerCards(index);
+                loadPlayerCards();
                 showPlayerCards();
             }
             showMainDeckCards(selectedDeck);
@@ -323,14 +319,15 @@ public class DeckMenuController implements Initializable {
         if (selectedDeck != null) {
             if (message.startsWith("DeckMain")) {
                 index = Integer.parseInt(message.substring(8));
-                selectedDeck.addCardToSideDeck(selectedDeck.getMainDeck().get(index));
-                selectedDeck.getMainDeck().remove(index);
+                addCardToSideDeck(getMainDeckCards(selectedDeck).get(index), selectedDeck);
+                removeFromMainDeck(index, selectedDeck);
                 showSideDeckCards(selectedDeck);
                 showMainDeckCards(selectedDeck);
-            } else if (message.startsWith("player")){
+            } else if (message.startsWith("player")) {
                 index = Integer.parseInt(message.substring(6));
-                selectedDeck.addCardToSideDeck(logInPlayer.getAllCards().get(index));
-                logInPlayer.getAllCards().remove(index);
+                addCardToSideDeck(playerAllCards.get(index), selectedDeck);
+                removeCardFromPlayerCards(index);
+                loadPlayerCards();
                 showPlayerCards();
                 showSideDeckCards(selectedDeck);
             }
@@ -342,22 +339,173 @@ public class DeckMenuController implements Initializable {
         String message = event.getDragboard().getString();
         index = Integer.parseInt(message.substring(8));
         if (message.startsWith("DeckMain")) {
-            logInPlayer.getAllCards().add(selectedDeck.getMainDeck().get(index));
-            selectedDeck.getMainDeck().remove(index);
+            addToPlayerCards(getMainDeckCards(selectedDeck).get(index));
+            removeFromMainDeck(index, selectedDeck);
             showMainDeckCards(selectedDeck);
         } else {
-            logInPlayer.getAllCards().add(selectedDeck.getSideDeck().get(index));
-            selectedDeck.getSideDeck().remove(index);
+            addToPlayerCards(getSideDeckCards(selectedDeck).get(index));
+            removeFromSideDeck(index, selectedDeck);
             showSideDeckCards(selectedDeck);
         }
+        loadPlayerCards();
         showPlayerCards();
     }
+
 
     public void activateDeck(ActionEvent event) {
         Media media = new Media(new File(str).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(true);
-        logInPlayer.setActiveDeck(selectedDeck);
+        activateDeckByName(selectedDeck);
+        loadPlayerDecks();
         addDecksToMenu();
     }
+
+    public void activateDeckByName(String deckName) {
+        try {
+            Controller.getDataOutputStream().writeUTF("Deck set activate"
+                    + deckName + "#" + Controller.getToken());
+            Controller.getDataOutputStream().flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadPlayerCards() {
+        try {
+            Controller.getDataOutputStream().writeUTF("Deck player cards" + Controller.getToken());
+            Controller.getDataOutputStream().flush();
+            String str = Controller.getDataInputStream().readUTF();
+            String[] allCardsArray = str.split("#");
+            playerAllCards.clear();
+            if (!allCardsArray[0].equals("")) {
+                playerAllCards.addAll(Arrays.asList(allCardsArray));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadPlayerDecks() {
+        try {
+            Controller.getDataOutputStream().writeUTF("Deck player decks"
+                    + Controller.getToken());
+            Controller.getDataOutputStream().flush();
+            String str = Controller.getDataInputStream().readUTF();
+            String[] allDecksArray = str.split("#");
+            playerAllDecks.clear();
+            if (!allDecksArray[0].equals("")) {
+                playerAllDecks.addAll(Arrays.asList(allDecksArray));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static ArrayList<String> getMainDeckCards(String deckName) {
+        try {
+            ArrayList<String> result = new ArrayList<>();
+            Controller.getDataOutputStream().writeUTF("Deck main deck cards"
+                    + deckName + "#" + Controller.getToken());
+            Controller.getDataOutputStream().flush();
+            String str = Controller.getDataInputStream().readUTF();
+            String[] mainDeckArray = str.split("#");
+            if (!mainDeckArray[0].equals("")) {
+                result.addAll(Arrays.asList(mainDeckArray));
+            }
+            return result;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static ArrayList<String> getSideDeckCards(String deckName) {
+        try {
+            ArrayList<String> result = new ArrayList<>();
+            Controller.getDataOutputStream().writeUTF("Deck side deck cards"
+                    + deckName + "#" + Controller.getToken());
+            Controller.getDataOutputStream().flush();
+            String str = Controller.getDataInputStream().readUTF();
+            String[] sideDeckArray = str.split("#");
+            if (!sideDeckArray[0].equals("")) {
+                result.addAll(Arrays.asList(sideDeckArray));
+            }
+            return result;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static void addToPlayerCards(String cardName) {
+        try {
+            Controller.getDataOutputStream().writeUTF("Deck add card player"
+                    + cardName + "#" + Controller.getToken());
+            Controller.getDataOutputStream().flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void removeDeckFromPlayerDecks(String selectedDeckName) {
+        try {
+            Controller.getDataOutputStream().writeUTF("Deck remove deck player"
+                    + selectedDeckName + "#" + Controller.getToken());
+            Controller.getDataOutputStream().flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void removeFromSideDeck(int index, String deckName) {
+        try {
+            Controller.getDataOutputStream().writeUTF("Deck remove card from side"
+                    + index + "#" + deckName + "#" + Controller.getToken());
+            Controller.getDataOutputStream().flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void removeFromMainDeck(int index, String deckName) {
+        try {
+            Controller.getDataOutputStream().writeUTF("Deck remove card from main"
+                    + index + "#" + deckName + "#" + Controller.getToken());
+            Controller.getDataOutputStream().flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void removeCardFromPlayerCards(int index) {
+        try {
+            Controller.getDataOutputStream().writeUTF("Deck remove from player cards"
+                    + index + "#" + Controller.getToken());
+            Controller.getDataOutputStream().flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void addCardToMainDeck(String cardName, String selectedDeck) {
+        try {
+            Controller.getDataOutputStream().writeUTF("Deck add card to main"
+                    + cardName + "#" + selectedDeck + "#" + Controller.getToken());
+            Controller.getDataOutputStream().flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void addCardToSideDeck(String cardName, String selectedDeck) {
+        try {
+            Controller.getDataOutputStream().writeUTF("Deck add card to side"
+                    + cardName + "#" + selectedDeck + "#" + Controller.getToken());
+            Controller.getDataOutputStream().flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -12,22 +12,24 @@ public class DeckIconController {
     @FXML
     private Label deckName;
 
-    private Deck deck;
+    private String deckNameStr;
     private MyListener myListener;
 
     public void click(MouseEvent mouseEvent) {
-        myListener.onClickListener(deck);
+        myListener.onClickListener(deckNameStr);
     }
 
-    public void setDeckLabel(Deck deck, MyListener myListener) {
-        if (Controller.getLoggedInPlayer().getActiveDeck() != null) {
-            if (Controller.getLoggedInPlayer().getActiveDeck().equals(deck)) {
+    public void setDeckLabel(String deckNameStr, MyListener myListener) {
+
+        String result = ProfileController.getPlayerInfo("active deck name");
+        if(!result.equals("Not set yet")) {
+            if (result.equals(deckNameStr)) {
                 Image image = new Image(getClass().getResourceAsStream("/Images/Monster/activeDeck.jpg"));
                 deckIcon.setImage(image);
             }
         }
-        this.deck = deck;
+        this.deckNameStr = deckNameStr;
         this.myListener = myListener;
-        deckName.setText(deck.getDeckName());
+        deckName.setText(deckNameStr);
     }
 }

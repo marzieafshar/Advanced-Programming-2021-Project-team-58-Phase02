@@ -13,13 +13,13 @@ public class DeckCardsController {
     public ImageView cardImage;
     public AnchorPane source;
     private MyListener myListener;
-    private Card card;
+    private String cardName;
     private int index;
     private String deckType;
 
     @FXML
     public void click(MouseEvent mouseEvent) {
-        myListener.onClickListener(card);
+        myListener.onClickListener(cardName);
     }
 
     public static AnchorPane getSelected() {
@@ -35,10 +35,10 @@ public class DeckCardsController {
         db.setContent(cb);
     }
 
-    public void setCard(Card card, MyListener myListener, int index, String deckType) {
-        this.card = card;
+    public void setCard(String cardName, MyListener myListener, int index, String deckType) {
+        this.cardName = cardName;
         this.index = index;
-        Image image = new Image(getClass().getResourceAsStream(card.getImageSrc()));
+        Image image = new Image(getClass().getResourceAsStream(ShopController.getCardInfo(cardName, "imageSrc")));
         cardImage.setImage(image);
         this.myListener = myListener;
         this.deckType = deckType;
