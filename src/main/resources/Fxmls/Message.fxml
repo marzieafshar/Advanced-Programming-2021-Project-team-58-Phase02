@@ -20,7 +20,7 @@
       </HBox>
       <HBox prefHeight="53.0" prefWidth="458.0">
          <children>
-            <Text fx:id="messageTextBox" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="308.78582763671875">
+            <Text fx:id="messageTextBox" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="306.11920166015625">
                <font>
                   <Font name="Berlin Sans FB Demi Bold" size="18.0" />
                </font>
