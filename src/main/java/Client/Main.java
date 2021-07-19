@@ -1,7 +1,9 @@
 package Client;
 
+import Client.View.ChatRoomController;
 import Client.View.Controller;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -10,20 +12,36 @@ import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import javafx.scene.media.*;
 
+import java.awt.event.ActionEvent;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.Socket;
+import java.util.ArrayList;
+import java.util.SplittableRandom;
 
-public class Main extends Application{
+public class Main extends Application {
     private MediaPlayer mediaPlayer;
+    private static String message;
+
+    public static ArrayList<Thread> threads = new ArrayList<>();
+
+    public static String getMessage() {
+        return message;
+    }
+
+    public static void setMessage(String message) {
+        Main.message = message;
+    }
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
 //        String str = "05. Grabbing the Hatchet.mp3";
 //        Media media = new Media(new File(str).toURI().toString());
 //        mediaPlayer = new MediaPlayer(media);
 //        mediaPlayer.setVolume(0.5);
 //        mediaPlayer.setAutoPlay(true);
-
-
+        makeServerInputThread(Controller.getSocket());
         Parent root = FXMLLoader.load(getClass().getResource("/Fxmls/WelcomeMenu.fxml"));
         primaryStage.setTitle("Yu-Gi-Oh");
         primaryStage.setScene(new Scene(root));
@@ -48,5 +66,29 @@ public class Main extends Application{
             Controller.closeAll();
             System.exit(0);
         }
+    }
+
+    public static void makeServerInputThread(Socket socket) {
+        new Thread(() -> {
+            try {
+                while (!socket.isClosed()) {
+                    if(ChatRoomController.isIsInChatRoom()) {
+                        String message = Controller.getDataInputStream().readUTF();
+                        setMessage(message);
+                        if (message.startsWith("Server load message")) {
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    ChatRoomController.getChatRoomController().loadMessages();
+                                }
+                            });
+                        }
+                    }
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 }

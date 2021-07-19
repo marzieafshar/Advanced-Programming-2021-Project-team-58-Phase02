@@ -1,6 +1,7 @@
 package Client.View;
 
 import Client.Model.*;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -13,6 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.Socket;
 import java.util.Objects;
 
 public class MainMenuController {
@@ -139,6 +141,17 @@ public class MainMenuController {
         stage.setScene(scene);
     }
 
+    public void goToChatRoom(ActionEvent event) throws IOException {
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/ChatRoom.fxml")));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+
+    }
+
     public void logout(ActionEvent event) throws IOException {
         Media media = new Media(new File(str).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
@@ -160,4 +173,5 @@ public class MainMenuController {
 //                alert.show();
         }
     }
+
 }

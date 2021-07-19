@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1214.0" styleClass="chatRoom-background" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="374.0" layoutY="69.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="452.0">
+         <children>
+            <VBox layoutX="-40.0" prefHeight="487.0" prefWidth="458.0" styleClass="vbox-chatRoom" stylesheets="@../Styles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <HBox prefHeight="129.0" prefWidth="412.0" />
+                  <ScrollPane fx:id="messagesScrollPane" prefHeight="481.0" prefWidth="361.0" styleClass="transparent" stylesheets="@../Styles.css">
+                     <content>
+                        <GridPane fx:id="gridMessages" prefHeight="0.0" prefWidth="0.0">
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                        </GridPane>
+                     </content>
+                  </ScrollPane>
+                  <HBox prefHeight="35.0" prefWidth="361.0">
+                     <children>
+                        <TextField fx:id="clientMessageTextField" prefHeight="25.0" prefWidth="368.0" />
+                        <Button mnemonicParsing="false" onAction="#sendMessage" prefHeight="40.0" prefWidth="87.0" text="Send" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <Button layoutX="26.0" layoutY="602.0" mnemonicParsing="false" onAction="#backToMainMenu" text="back" />
+      <Label layoutX="24.0" layoutY="6.0" text="Chat Room" textFill="WHITE">
+         <font>
+            <Font name="Matura MT Script Capitals" size="48.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

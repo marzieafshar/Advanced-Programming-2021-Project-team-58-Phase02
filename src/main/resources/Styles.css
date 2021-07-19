@@ -236,3 +236,11 @@
     -fx-border-radius: 80;
     -fx-prompt-text-fill: black;
 }
+.chatRoom-background{
+    -fx-background-image: url("Images/Background/backgroundChat.jpg");
+    -fx-background-size: stretch;
+}
+.vbox-chatRoom{
+    -fx-border-color: white;
+    -fx-border-width: 3;
+}

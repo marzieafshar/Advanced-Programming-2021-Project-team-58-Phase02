@@ -25,6 +25,8 @@ public class Controller {
     private Stage stage;
     private Scene scene;
 
+    private static String username;
+
     @FXML
     private TextField usernameLoginField;
     @FXML
@@ -49,6 +51,14 @@ public class Controller {
 
     public static Socket getSocket() {
         return socket;
+    }
+
+    public static String getUsername() {
+        return username;
+    }
+
+    public static void setUsername(String username) {
+        Controller.username = username;
     }
 
     public static DataInputStream getDataInputStream() {
@@ -142,6 +152,7 @@ public class Controller {
                 alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setContentText("user logged in successfully!");
                 alert.show();
+                setUsername(username);
                 root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/MainMenu.fxml")));
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
@@ -173,6 +184,7 @@ public class Controller {
         String message = "Register" + username + "#" + nickname + "#" + password;
         dataOutputStream.writeUTF(message);
         dataOutputStream.flush();
+        System.out.println(1);
 
         String result = dataInputStream.readUTF();
         switch (result){
