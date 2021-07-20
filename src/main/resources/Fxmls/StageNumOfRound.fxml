@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="172.0" prefWidth="471.0" styleClass="round-background" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.StageNumOfRoundController">
+   <children>
+      <Button fx:id="oneRoundButton" layoutX="92.0" layoutY="43.0" mnemonicParsing="false" onAction="#selectOneRound" prefHeight="43.0" prefWidth="114.0" styleClass="one-round-button" stylesheets="@../Styles.css" text="1-Round" textFill="#f8f8f8">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <font>
+            <Font name="Berlin Sans FB Demi Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="threeRoundButton" layoutX="268.0" layoutY="43.0" mnemonicParsing="false" onAction="#selectThreeRound" prefHeight="43.0" prefWidth="114.0" styleClass="three-round-button" stylesheets="@../Styles.css" text="3-Rounds" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Berlin Sans FB Demi Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="177.0" layoutY="104.0" mnemonicParsing="false" onAction="#submit" styleClass="find-opponent-button" stylesheets="@../Styles.css" text="Find Opponent">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Berlin Sans FB Demi Bold" size="14.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

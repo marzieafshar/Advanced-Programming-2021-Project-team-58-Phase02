@@ -1,6 +1,5 @@
 package Client.View;
 
-import Client.Model.Player;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.event.*;
@@ -67,10 +66,6 @@ public class Controller {
 
     public static DataOutputStream getDataOutputStream() {
         return dataOutputStream;
-    }
-
-    public static Player getLoggedInPlayer(){
-        return new Player();
     }
 
     public static void setupConnection() {

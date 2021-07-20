@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="650.0" prefWidth="1214.0" styleClass="Register-background" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.LobbyController">
+   <children>
+      <Label layoutX="86.0" layoutY="4.0" prefHeight="63.0" prefWidth="409.0" text="Yu-Gi-Oh Lobby" textFill="WHITE">
+         <font>
+            <Font name="Berlin Sans FB" size="57.0" />
+         </font>
+         <effect>
+            <Bloom />
+         </effect>
+      </Label>
+      <VBox layoutX="893.0" layoutY="230.0" prefHeight="391.0" prefWidth="292.0" styleClass="chat-background" stylesheets="@../Styles.css" />
+      <AnchorPane layoutX="884.0" layoutY="112.0" onMouseClicked="#startAGame" prefHeight="100.0" prefWidth="299.0" styleClass="cardCreator-Background" stylesheets="@../Styles.css" AnchorPane.topAnchor="112.0">
+         <children>
+            <Label layoutX="63.0" layoutY="34.0" prefHeight="31.0" prefWidth="178.0" text="START GAME">
+               <font>
+                  <Font name="Berlin Sans FB Demi Bold" size="30.0" />
+               </font>
+            </Label>
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </AnchorPane>
+      <ImageView fx:id="player2Avatar" fitHeight="132.0" fitWidth="113.0" layoutX="286.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Characters/Chara001.dds18.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="player5Avatar" fitHeight="132.0" fitWidth="113.0" layoutX="719.0" layoutY="363.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Characters/Chara001.dds28.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="player4Avatar" fitHeight="132.0" fitWidth="113.0" layoutX="566.0" layoutY="278.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Characters/Chara001.dds3.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="player3Avatar" fitHeight="132.0" fitWidth="113.0" layoutX="415.0" layoutY="368.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Characters/Chara001.dds17.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <HBox alignment="CENTER_LEFT" layoutX="32.0" layoutY="539.0" prefHeight="75.0" prefWidth="363.0">
+         <children>
+            <ImageView fx:id="userAvatar" fitHeight="85.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/Characters/Chara001.dds1.png" />
+               </image>
+               <HBox.margin>
+                  <Insets right="15.0" />
+               </HBox.margin>
+            </ImageView>
+            <VBox prefHeight="85.0" prefWidth="277.0">
+               <children>
+                  <Label text="Your info:" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB Demi Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="userNickname" text="Nickname: Marzie" textFill="#f5f05d">
+                     <font>
+                        <Font name="Berlin Sans FB Demi Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="userScore" text="Score: 3400" textFill="#f5f05d">
+                     <font>
+                        <Font name="Berlin Sans FB Demi Bold" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+      </HBox>
+      <ImageView fx:id="player1Avatar" fitHeight="132.0" fitWidth="113.0" layoutX="103.0" layoutY="299.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Characters/Chara001.dds21.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="11.0" layoutY="5.0" onMouseClicked="#backToMainMenu" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Icon/backButton.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+   </children>
+</AnchorPane>

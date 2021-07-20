@@ -142,6 +142,4 @@ public class ChatRoomController implements Initializable {
     public static ChatRoomController getChatRoomController() {
         return chatRoomController;
     }
-
-
 }

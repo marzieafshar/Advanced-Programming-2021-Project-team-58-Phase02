@@ -1,7 +1,5 @@
 package Client.View;
 
-import Client.Model.Deck;
-import Client.Model.Player;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;

@@ -72,7 +72,6 @@ public class ProfileController implements Initializable {
         Media media = new Media(new File(str).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(true);
-        JsonSaveAndLoad.save();
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/MainMenu.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
@@ -101,7 +100,6 @@ public class ProfileController implements Initializable {
                     alert.setContentText("This nickname already exists");
                     alert.show();
                 case "nickname changed":
-                    nicknameChangeField.setPromptText("Your nickname: " + Controller.getLoggedInPlayer().getNickname());
                     Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
                     alert2.setContentText("Nickname Changed Successfully !");
                     alert2.showAndWait();

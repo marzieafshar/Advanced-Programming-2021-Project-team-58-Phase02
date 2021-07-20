@@ -41,7 +41,6 @@ public class DeckMenuController implements Initializable {
     public ImageView selectedCardImage;
     public GridPane gridPlayerCards;
     private MyListener myListener;
-    private Player logInPlayer;
     int index;
     private String selectedDeck;
     private String selectedCard;
@@ -162,30 +161,29 @@ public class DeckMenuController implements Initializable {
         Media media = new Media(new File(str).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(true);
-        JsonSaveAndLoad.save();
-        if (isGameStarted) {
-            if (logInPlayer.getActiveDeck() == null) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("You don't have any active deck!");
-                alert.showAndWait();
-            } else if (!logInPlayer.getActiveDeck().isValid()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("Your active deck is not valid!");
-                alert.showAndWait();
-            } else {
-                setIsGameStarted(false);
-                DuelMenuController.setFromGame(false);
-                root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/DuelMenu.fxml")));
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-            }
-        } else {
+//        if (isGameStarted) {
+//            if (logInPlayer.getActiveDeck() == null) {
+//                Alert alert = new Alert(Alert.AlertType.ERROR);
+//                alert.setContentText("You don't have any active deck!");
+//                alert.showAndWait();
+//            } else if (!logInPlayer.getActiveDeck().isValid()) {
+//                Alert alert = new Alert(Alert.AlertType.ERROR);
+//                alert.setContentText("Your active deck is not valid!");
+//                alert.showAndWait();
+//            } else {
+//                setIsGameStarted(false);
+//                DuelMenuController.setFromGame(false);
+//                root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/DuelMenu.fxml")));
+//                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//                scene = new Scene(root);
+//                stage.setScene(scene);
+//            }
+//        } else {
             root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/MainMenu.fxml")));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
-        }
+//        }
     }
 
     public void showInfo() {
