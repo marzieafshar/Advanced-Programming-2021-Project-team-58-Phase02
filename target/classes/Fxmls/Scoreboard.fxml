@@ -1,21 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.ScoreBoardController">
-    <children>
-        <TableView fx:id="table" layoutX="26.0" layoutY="29.0" prefHeight="400.0" prefWidth="600.0"
-                   AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                   AnchorPane.topAnchor="0.0">
-            <columns>
-                <TableColumn fx:id="Rank" prefWidth="95.5" text="Rank"/>
-                <TableColumn fx:id="Nickname" prefWidth="353.5" text="Player's Nickname"/>
-                <TableColumn fx:id="Score" prefWidth="150.0" text="Score"/>
-            </columns>
-        </TableView>
-    </children>
+<AnchorPane prefHeight="650.0" prefWidth="1214.0" styleClass="score-board-background" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.ScoreBoardController">
+   <children>
+      <TableView fx:id="myTable" layoutX="445.0" layoutY="104.0" prefHeight="525.0" prefWidth="357.0" styleClass="score-board-table" stylesheets="@../Styles.css">
+         <columns>
+            <TableColumn fx:id="rankColumn" minWidth="-Infinity" prefWidth="75.0" text="Rank" />
+            <TableColumn fx:id="nameColumn" prefWidth="200.0" text="Player Name" />
+            <TableColumn fx:id="scoreColumn" prefWidth="75.0" text="Score" />
+         </columns>
+      </TableView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="78.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/ScoreBoardItems/Something.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="220.0" layoutY="274.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/ScoreBoardItems/Key.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="406.0" layoutY="6.0" text="ScoreBoard Menu" textFill="WHITE">
+         <font>
+            <Font name="Matura MT Script Capitals" size="48.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="886.0" layoutY="441.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/ScoreBoardItems/Diamond.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="43.0" layoutY="441.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/ScoreBoardItems/Twins.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="219.0" fitWidth="247.0" layoutX="921.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/ScoreBoardItems/Galaxy.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="79.0" fitWidth="73.0" layoutX="1121.0" layoutY="19.0" onMouseClicked="#refreshPage" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Icon/scoreBoardRefresh.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <Button layoutX="23.0" layoutY="585.0" mnemonicParsing="false" onAction="#backToMainMenu" prefHeight="38.0" prefWidth="85.0" styleClass="menu-button" stylesheets="@../Styles.css" text="Back" textFill="WHITE">
+         <font>
+            <Font name="Bodoni MT Bold" size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
 
 </AnchorPane>

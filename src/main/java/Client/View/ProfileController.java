@@ -208,12 +208,12 @@ public class ProfileController implements Initializable {
         try {
             itemImage.setImage(getImage());
             username.setText(getPlayerInfo("username"));
-            userMoney.setText(String.valueOf(getPlayerInfo("money")));
-            userScore.setText(String.valueOf(getPlayerInfo("score")));
+            userMoney.setText(getPlayerInfo("money"));
+            userScore.setText(getPlayerInfo("score"));
             userActiveDeckName.setText(getPlayerInfo("active deck name"));
             userNumOfDecks.setText(getPlayerInfo("decks size"));
-            userNumOfWins.setText(String.valueOf(getPlayerInfo("win matches")));
-            userNumOfLosses.setText(String.valueOf(getPlayerInfo("lose matches")));
+            userNumOfWins.setText(getPlayerInfo("win matches"));
+            userNumOfLosses.setText(getPlayerInfo("lose matches"));
             nicknameChangeField.setPromptText("Your nickname: " + getPlayerInfo("nickname"));
         } catch (Exception e) {
             e.printStackTrace();
@@ -223,7 +223,7 @@ public class ProfileController implements Initializable {
     private Image getImage() {
         try {
             String token = Controller.getToken();
-            Controller.getDataOutputStream().writeUTF("Profile Image" + token);
+            Controller.getDataOutputStream().writeUTF("Profile image" + token);
             String imageJson = "";
             String imageLengthMessage = Controller.getDataInputStream().readUTF();
             int imageLength = Integer.parseInt(imageLengthMessage);

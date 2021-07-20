@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -44,6 +45,9 @@ public class ChatRoomController implements Initializable {
     public static ChatRoomController chatRoomController;
     private static boolean isInChatRoom = false;
 
+    private static String message;
+    private Thread thread;
+
     String str = "Button_Click.mp3";
     private MediaPlayer mediaPlayer;
 
@@ -51,6 +55,7 @@ public class ChatRoomController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         isInChatRoom = true;
         chatRoomController = this;
+        makeServerInputThread();
         loadMessages();
     }
 
@@ -60,14 +65,14 @@ public class ChatRoomController implements Initializable {
             Controller.getDataOutputStream().writeUTF("Chat get all messages");
             Controller.getDataOutputStream().flush();
             try {
-                Thread.sleep(12);
+                Thread.sleep(25);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            String result = Main.getMessage();
+            String result = message;
             if (!result.equals("")) {
                 String[] str = result.split("#");
-                messages.addAll(Arrays.asList(str)); //ترتیب به هم میخوره؟
+                messages.addAll(Arrays.asList(str));
                 showMessages();
             }
         } catch (IOException e) {
@@ -90,7 +95,7 @@ public class ChatRoomController implements Initializable {
                 } else {
                     fxmlLoader.setLocation(getClass().getResource("/Fxmls/Message.fxml"));
                 }
-                HBox hBox = fxmlLoader.load();
+                AnchorPane hBox = fxmlLoader.load();
 
                 MessageController messageController = fxmlLoader.getController();
                 messageController.setMessage(senderName, messageText);
@@ -105,7 +110,7 @@ public class ChatRoomController implements Initializable {
         messagesScrollPane.vvalueProperty().bind(gridMessages.heightProperty());
     }
 
-    public void sendMessage(ActionEvent event) {
+    public void sendMessage(MouseEvent event) {
         String message = clientMessageTextField.getText();
         if (message.equals("")) {
 
@@ -133,6 +138,9 @@ public class ChatRoomController implements Initializable {
         Media media = new Media(new File(str).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(true);
+        isInChatRoom = false;
+        Controller.getDataOutputStream().writeUTF("Chat tamoomesh kon");
+        Controller.getDataOutputStream().flush();
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/MainMenu.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -142,4 +150,27 @@ public class ChatRoomController implements Initializable {
     public static ChatRoomController getChatRoomController() {
         return chatRoomController;
     }
+
+    public void makeServerInputThread() {
+        Thread thread = new Thread(() -> {
+            try {
+                while (isIsInChatRoom()) {
+                    message = Controller.getDataInputStream().readUTF();
+                    if (message.startsWith("Server load message")) {
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                loadMessages();
+                            }
+                        });
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        this.thread = thread;
+        thread.start();
+    }
+
 }

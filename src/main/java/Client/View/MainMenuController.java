@@ -26,11 +26,11 @@ public class MainMenuController {
     String str = "Button_Click.mp3";
     private MediaPlayer mediaPlayer;
 
-//    public void startANewGame(ActionEvent actionEvent) throws Exception {
+    public void startANewGame(ActionEvent actionEvent) throws Exception {
 //        Media media = new Media(new File(str).toURI().toString());
 //        mediaPlayer = new MediaPlayer(media);
 //        mediaPlayer.setAutoPlay(true);
-//        Player loggedInPlayer = Controller.getLoggedInPlayer();
+////        Player loggedInPlayer = Controller.getLoggedInPlayer();
 //
 //        if (loggedInPlayer.getActiveDeck() == null) {
 //            Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -49,8 +49,8 @@ public class MainMenuController {
 //            stageSetOpponent.setScene(scene);
 //            stageSetOpponent.show();
 //        }
-//    }
-//
+    }
+
     public void goToShop(ActionEvent event) throws IOException {
         Media media = new Media(new File(str).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
@@ -91,7 +91,6 @@ public class MainMenuController {
 //        deck3.addCardToMainDeck(Card.getCardByName("Dark Hole"));
 
 //        Controller.getLoggedInPlayer().getDecks().add(deck1);
-
         Media media = new Media(new File(str).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(true);
@@ -103,9 +102,9 @@ public class MainMenuController {
     }
 
     public void goToLobby(ActionEvent actionEvent) {
-//        Media media = new Media(new File(str).toURI().toString());
-//        mediaPlayer = new MediaPlayer(media);
-//        mediaPlayer.setAutoPlay(true);
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         try {
             DataOutputStream dataOutputStream = Controller.getDataOutputStream();
             String token = Controller.getToken();
@@ -120,21 +119,31 @@ public class MainMenuController {
         }
     }
 
-    public void goToScoreBoard(ActionEvent event) throws IOException {
-        Media media = new Media(new File(str).toURI().toString());
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setAutoPlay(true);
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Scoreboard.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-    }
-
     public void goToProfileMenu(ActionEvent event) throws IOException {
         Media media = new Media(new File(str).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(true);
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Profile.fxml")));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+    }
+
+    public void goToCardCreator(ActionEvent event) throws IOException {
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/CardCreator.fxml")));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+    }
+
+    public void goToImportExportMenu(ActionEvent event) throws IOException {
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/ImportExportMenu.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -149,6 +158,16 @@ public class MainMenuController {
         scene = new Scene(root);
         stage.setScene(scene);
 
+    }
+
+    public void goToScoreBoard(ActionEvent event) throws IOException {
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Scoreboard.fxml")));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
     }
 
     public void logout(ActionEvent event) throws IOException {
@@ -168,7 +187,5 @@ public class MainMenuController {
                 stage.setScene(scene);
         }
     }
-
-
 
 }

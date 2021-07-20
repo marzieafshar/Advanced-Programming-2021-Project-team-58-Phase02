@@ -1,260 +1,260 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<!--<?import javafx.geometry.Insets?>-->
+<!--<?import javafx.scene.control.Button?>-->
+<!--<?import javafx.scene.control.Label?>-->
+<!--<?import javafx.scene.control.ProgressBar?>-->
+<!--<?import javafx.scene.image.Image?>-->
+<!--<?import javafx.scene.image.ImageView?>-->
+<!--<?import javafx.scene.layout.AnchorPane?>-->
+<!--<?import javafx.scene.layout.BorderPane?>-->
+<!--<?import javafx.scene.layout.GridPane?>-->
+<!--<?import javafx.scene.layout.HBox?>-->
+<!--<?import javafx.scene.layout.RowConstraints?>-->
+<!--<?import javafx.scene.layout.VBox?>-->
+<!--<?import javafx.scene.text.Font?>-->
+<!--<?import javafx.scene.text.Text?>-->
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1214.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.Game">
-   <children>
-      <BorderPane prefHeight="650.0" prefWidth="1214.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <left>
-            <VBox maxWidth="-Infinity" prefHeight="650.0" prefWidth="220.0" styleClass="left-bar" stylesheets="@../Styles.css" BorderPane.alignment="CENTER">
-               <children>
-                  <HBox fx:id="errorbox" alignment="CENTER" prefHeight="298.0" prefWidth="220.0" styleClass="errorBox-background" stylesheets="@../Styles.css">
-                     <children>
-                        <Text fx:id="errorText" fill="#f2ff00" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="194.58113861083984">
-                           <font>
-                              <Font name="Berlin Sans FB Demi Bold" size="19.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="5.0" />
-                           </HBox.margin>
-                        </Text>
-                     </children>
-                  </HBox>
-                  <VBox prefHeight="603.0" prefWidth="250.0" styleClass="vBox-duelMenu-background" stylesheets="@../Styles.css">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="267.0" prefWidth="171.0">
-                           <children>
-                              <ImageView fx:id="selectedCardImage" fitHeight="270.0" fitWidth="179.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../Images/Monster/Unknown.jpg" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets top="10.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <HBox alignment="TOP_CENTER" prefHeight="331.0" prefWidth="250.0">
-                           <children>
-                              <Text fx:id="infoTextArea" strokeType="OUTSIDE" strokeWidth="0.0" text="No card is selected!">
-                                 <font>
-                                    <Font name="Berlin Sans FB Demi Bold" size="14.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets left="10.0" top="10.0" />
-                                 </HBox.margin>
-                              </Text>
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-               </children>
-            </VBox>
-         </left>
-         <center>
-            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="650.0" prefWidth="714.0" styleClass="duel-background" stylesheets="@../Styles.css" BorderPane.alignment="CENTER">
-               <children>
-                  <HBox alignment="TOP_CENTER" layoutX="19.0" layoutY="575.0" prefHeight="77.0" prefWidth="701.0">
-                     <children>
-                        <GridPane fx:id="gridHandCardsTurnOfPlayer">
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                        </GridPane>
-                     </children></HBox>
-                  <HBox alignment="BOTTOM_CENTER" layoutX="-2.0" layoutY="-14.0" prefHeight="91.0" prefWidth="714.0">
-                     <children>
-                        <GridPane fx:id="gridHandCardsOpponent">
-                           <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                        </GridPane>
-                     </children>
-                  </HBox>
-                  <Button layoutX="-24.0" layoutY="505.0" mnemonicParsing="false" onAction="#drawPhase" rotate="90.0" text="Draw Phase" />
-                  <Button layoutX="-20.0" layoutY="216.0" mnemonicParsing="false" onAction="#endPhase" rotate="90.0" text="End phase" />
-                  <Button layoutX="-23.0" layoutY="411.0" mnemonicParsing="false" onAction="#mainPhase" rotate="90.0" text="Main phase" />
-                  <ImageView fx:id="imageViewMonster15" fitHeight="97.0" fitWidth="73.0" layoutX="147.0" layoutY="347.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="imageViewMonster13" fitHeight="97.0" fitWidth="73.0" layoutX="246.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="imageViewMonster11" fitHeight="99.0" fitWidth="83.0" layoutX="342.0" layoutY="345.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="imageViewMonster12" fitHeight="97.0" fitWidth="73.0" layoutX="440.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="imageViewMonster14" fitHeight="97.0" fitWidth="73.0" layoutX="539.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="imageViewMonster25" fitHeight="97.0" fitWidth="73.0" layoutX="536.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
-                  <ImageView fx:id="imageViewMonster23" fitHeight="97.0" fitWidth="73.0" layoutX="437.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
-                  <ImageView fx:id="imageViewMonster21" fitHeight="97.0" fitWidth="73.0" layoutX="339.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
-                  <ImageView fx:id="imageViewMonster22" fitHeight="97.0" fitWidth="73.0" layoutX="243.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
-                  <ImageView fx:id="imageViewMonster24" fitHeight="97.0" fitWidth="73.0" layoutX="144.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />
-                  <ImageView fitHeight="99.0" fitWidth="84.0" layoutX="619.0" layoutY="345.0" onMouseClicked="#showGraveyardTurnOfPlayer" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Images/rip-grave.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="99.0" fitWidth="84.0" layoutX="35.0" layoutY="171.0" onMouseClicked="#showGraveyardOpposition" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Images/rip-grave.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="imageViewTrap15" fitHeight="97.0" fitWidth="73.0" layoutX="144.0" layoutY="453.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="imageViewTrap13" fitHeight="97.0" fitWidth="73.0" layoutX="236.0" layoutY="452.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="imageViewTrap11" fitHeight="99.0" fitWidth="83.0" layoutX="329.0" layoutY="451.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="imageViewTrap12" fitHeight="97.0" fitWidth="73.0" layoutX="435.0" layoutY="452.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="imageViewTrap14" fitHeight="97.0" fitWidth="73.0" layoutX="534.0" layoutY="452.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="imageViewTrap25" fitHeight="97.0" fitWidth="73.0" layoutX="529.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="imageViewTrap23" fitHeight="97.0" fitWidth="73.0" layoutX="430.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="imageViewTrap21" fitHeight="97.0" fitWidth="73.0" layoutX="332.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="imageViewTrap22" fitHeight="97.0" fitWidth="73.0" layoutX="236.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="imageViewTrap24" fitHeight="97.0" fitWidth="73.0" layoutX="137.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" />
-                  <Button layoutX="-26.0" layoutY="314.0" mnemonicParsing="false" onAction="#battlePhase" prefHeight="24.0" prefWidth="84.0" rotate="90.0" text="Battle phase" />
-                  <ImageView fitHeight="20.0" fitWidth="22.0" layoutX="616.0" layoutY="85.0" onMouseClicked="#lPi0051" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fitHeight="20.0" fitWidth="22.0" layoutX="619.0" layoutY="171.0" onMouseClicked="#hPoSt2" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fitHeight="21.0" fitWidth="19.0" layoutX="107.0" layoutY="533.0" onMouseClicked="#bAcOo" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="105.0" layoutY="451.0" onMouseClicked="#yBdB12" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fitHeight="15.0" fitWidth="18.0" layoutX="692.0" layoutY="248.0" onMouseClicked="#puver" pickOnBounds="true" preserveRatio="true" />
-               </children>
-            </AnchorPane>
-         </center>
-         <right>
-            <VBox maxWidth="-Infinity" prefHeight="650.0" prefWidth="280.0" styleClass="vBox-duelMenu-background" stylesheets="@../Styles.css" BorderPane.alignment="CENTER">
-               <children>
-                  <HBox prefHeight="91.0" prefWidth="307.0">
-                     <children>
-                        <ImageView fx:id="oppositionAvatar" fitHeight="91.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Images/Characters/Chara001.dds1.png" />
-                           </image>
-                        </ImageView>
-                        <VBox prefHeight="91.0" prefWidth="181.0">
-                           <children>
-                              <HBox alignment="CENTER_LEFT" prefHeight="52.0" prefWidth="175.0">
-                                 <children>
-                                    <Label text="LP">
-                                       <font>
-                                          <Font name="Berlin Sans FB Bold" size="25.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets left="5.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                    <Label fx:id="oppositionLP" alignment="CENTER" text="8000">
-                                       <HBox.margin>
-                                          <Insets left="40.0" />
-                                       </HBox.margin>
-                                       <font>
-                                          <Font name="Berlin Sans FB" size="26.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER_RIGHT" prefHeight="38.0" prefWidth="175.0">
-                                 <children>
-                                    <ImageView fitHeight="38.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Images/Icon/416-4162420_health-symbol-png-united-way-health-icon.png" />
-                                       </image>
-                                       <HBox.margin>
-                                          <Insets left="2.0" right="5.0" />
-                                       </HBox.margin>
-                                    </ImageView>
-                                    <ProgressBar fx:id="oppositionProgressBar" prefHeight="18.0" prefWidth="133.0" progress="1.0" styleClass="red-bar" stylesheets="@../Styles.css">
-                                       <HBox.margin>
-                                          <Insets right="3.0" />
-                                       </HBox.margin>
-                                    </ProgressBar>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="371.0" prefWidth="280.0">
-                     <children>
-                        <ImageView fitHeight="70.0" fitWidth="70.0" onMouseClicked="#surrender" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Images/Icon/phaseActions/Surrender.png" />
-                           </image>
-                        </ImageView>
-                     </children></HBox>
-                  <HBox alignment="TOP_CENTER" prefHeight="549.0" prefWidth="280.0" stylesheets="@../Styles.css">
-                     <children>
-                        <GridPane fx:id="gridPanePhaseIcons" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="0.0" prefWidth="0.0">
-                           <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                           <HBox.margin>
-                              <Insets top="10.0" />
-                           </HBox.margin>
-                        </GridPane>
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="91.0" prefWidth="251.0" styleClass="red-bar" stylesheets="@../Styles.css">
-                     <children>
-                        <ImageView fx:id="turnOfPlayerAvatar" fitHeight="91.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Images/Characters/Chara001.dds1.png" />
-                           </image>
-                        </ImageView>
-                        <VBox alignment="BASELINE_LEFT" prefHeight="91.0" prefWidth="181.0">
-                           <children>
-                              <HBox alignment="CENTER_RIGHT" prefHeight="11.0" prefWidth="175.0">
-                                 <children>
-                                    <ImageView fitHeight="38.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Images/Icon/416-4162420_health-symbol-png-united-way-health-icon.png" />
-                                       </image>
-                                       <HBox.margin>
-                                          <Insets left="2.0" right="5.0" />
-                                       </HBox.margin>
-                                    </ImageView>
-                                    <ProgressBar fx:id="turnOfPlayerProgressBar" prefHeight="18.0" prefWidth="133.0" progress="1.0">
-                                       <HBox.margin>
-                                          <Insets right="3.0" />
-                                       </HBox.margin>
-                                    </ProgressBar>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets top="5.0" />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="59.0" prefWidth="175.0">
-                                 <children>
-                                    <Label text="LP">
-                                       <font>
-                                          <Font name="Berlin Sans FB Bold" size="25.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets left="5.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                    <Label fx:id="turnOfPlayerLP" alignment="CENTER" text="8000">
-                                       <HBox.margin>
-                                          <Insets left="40.0" />
-                                       </HBox.margin>
-                                       <font>
-                                          <Font name="Berlin Sans FB" size="26.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </right>
-      </BorderPane>
-   </children>
-</AnchorPane>
+<!--<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1214.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.Game">-->
+<!--   <children>-->
+<!--      <BorderPane prefHeight="650.0" prefWidth="1214.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">-->
+<!--         <left>-->
+<!--            <VBox maxWidth="-Infinity" prefHeight="650.0" prefWidth="220.0" styleClass="left-bar" stylesheets="@../Styles.css" BorderPane.alignment="CENTER">-->
+<!--               <children>-->
+<!--                  <HBox fx:id="errorbox" alignment="CENTER" prefHeight="298.0" prefWidth="220.0" styleClass="errorBox-background" stylesheets="@../Styles.css">-->
+<!--                     <children>-->
+<!--                        <Text fx:id="errorText" fill="#f2ff00" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="194.58113861083984">-->
+<!--                           <font>-->
+<!--                              <Font name="Berlin Sans FB Demi Bold" size="19.0" />-->
+<!--                           </font>-->
+<!--                           <HBox.margin>-->
+<!--                              <Insets left="5.0" />-->
+<!--                           </HBox.margin>-->
+<!--                        </Text>-->
+<!--                     </children>-->
+<!--                  </HBox>-->
+<!--                  <VBox prefHeight="603.0" prefWidth="250.0" styleClass="vBox-duelMenu-background" stylesheets="@../Styles.css">-->
+<!--                     <children>-->
+<!--                        <HBox alignment="CENTER" prefHeight="267.0" prefWidth="171.0">-->
+<!--                           <children>-->
+<!--                              <ImageView fx:id="selectedCardImage" fitHeight="270.0" fitWidth="179.0" pickOnBounds="true" preserveRatio="true">-->
+<!--                                 <image>-->
+<!--                                    <Image url="@../Images/Monster/Unknown.jpg" />-->
+<!--                                 </image>-->
+<!--                                 <HBox.margin>-->
+<!--                                    <Insets top="10.0" />-->
+<!--                                 </HBox.margin>-->
+<!--                              </ImageView>-->
+<!--                           </children>-->
+<!--                        </HBox>-->
+<!--                        <HBox alignment="TOP_CENTER" prefHeight="331.0" prefWidth="250.0">-->
+<!--                           <children>-->
+<!--                              <Text fx:id="infoTextArea" strokeType="OUTSIDE" strokeWidth="0.0" text="No card is selected!">-->
+<!--                                 <font>-->
+<!--                                    <Font name="Berlin Sans FB Demi Bold" size="14.0" />-->
+<!--                                 </font>-->
+<!--                                 <HBox.margin>-->
+<!--                                    <Insets left="10.0" top="10.0" />-->
+<!--                                 </HBox.margin>-->
+<!--                              </Text>-->
+<!--                           </children>-->
+<!--                        </HBox>-->
+<!--                     </children>-->
+<!--                  </VBox>-->
+<!--               </children>-->
+<!--            </VBox>-->
+<!--         </left>-->
+<!--         <center>-->
+<!--            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="650.0" prefWidth="714.0" styleClass="duel-background" stylesheets="@../Styles.css" BorderPane.alignment="CENTER">-->
+<!--               <children>-->
+<!--                  <HBox alignment="TOP_CENTER" layoutX="19.0" layoutY="575.0" prefHeight="77.0" prefWidth="701.0">-->
+<!--                     <children>-->
+<!--                        <GridPane fx:id="gridHandCardsTurnOfPlayer">-->
+<!--                          <rowConstraints>-->
+<!--                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />-->
+<!--                          </rowConstraints>-->
+<!--                        </GridPane>-->
+<!--                     </children></HBox>-->
+<!--                  <HBox alignment="BOTTOM_CENTER" layoutX="-2.0" layoutY="-14.0" prefHeight="91.0" prefWidth="714.0">-->
+<!--                     <children>-->
+<!--                        <GridPane fx:id="gridHandCardsOpponent">-->
+<!--                           <rowConstraints>-->
+<!--                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />-->
+<!--                           </rowConstraints>-->
+<!--                        </GridPane>-->
+<!--                     </children>-->
+<!--                  </HBox>-->
+<!--                  <Button layoutX="-24.0" layoutY="505.0" mnemonicParsing="false" onAction="#drawPhase" rotate="90.0" text="Draw Phase" />-->
+<!--                  <Button layoutX="-20.0" layoutY="216.0" mnemonicParsing="false" onAction="#endPhase" rotate="90.0" text="End phase" />-->
+<!--                  <Button layoutX="-23.0" layoutY="411.0" mnemonicParsing="false" onAction="#mainPhase" rotate="90.0" text="Main phase" />-->
+<!--                  <ImageView fx:id="imageViewMonster15" fitHeight="97.0" fitWidth="73.0" layoutX="147.0" layoutY="347.0" pickOnBounds="true" preserveRatio="true" />-->
+<!--                  <ImageView fx:id="imageViewMonster13" fitHeight="97.0" fitWidth="73.0" layoutX="246.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true" />-->
+<!--                  <ImageView fx:id="imageViewMonster11" fitHeight="99.0" fitWidth="83.0" layoutX="342.0" layoutY="345.0" pickOnBounds="true" preserveRatio="true" />-->
+<!--                  <ImageView fx:id="imageViewMonster12" fitHeight="97.0" fitWidth="73.0" layoutX="440.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true" />-->
+<!--                  <ImageView fx:id="imageViewMonster14" fitHeight="97.0" fitWidth="73.0" layoutX="539.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true" />-->
+<!--                  <ImageView fx:id="imageViewMonster25" fitHeight="97.0" fitWidth="73.0" layoutX="536.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />-->
+<!--                  <ImageView fx:id="imageViewMonster23" fitHeight="97.0" fitWidth="73.0" layoutX="437.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />-->
+<!--                  <ImageView fx:id="imageViewMonster21" fitHeight="97.0" fitWidth="73.0" layoutX="339.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />-->
+<!--                  <ImageView fx:id="imageViewMonster22" fitHeight="97.0" fitWidth="73.0" layoutX="243.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />-->
+<!--                  <ImageView fx:id="imageViewMonster24" fitHeight="97.0" fitWidth="73.0" layoutX="144.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" />-->
+<!--                  <ImageView fitHeight="99.0" fitWidth="84.0" layoutX="619.0" layoutY="345.0" onMouseClicked="#showGraveyardTurnOfPlayer" pickOnBounds="true" preserveRatio="true">-->
+<!--                     <image>-->
+<!--                        <Image url="@../Images/rip-grave.png" />-->
+<!--                     </image>-->
+<!--                  </ImageView>-->
+<!--                  <ImageView fitHeight="99.0" fitWidth="84.0" layoutX="35.0" layoutY="171.0" onMouseClicked="#showGraveyardOpposition" pickOnBounds="true" preserveRatio="true">-->
+<!--                     <image>-->
+<!--                        <Image url="@../Images/rip-grave.png" />-->
+<!--                     </image>-->
+<!--                  </ImageView>-->
+<!--                  <ImageView fx:id="imageViewTrap15" fitHeight="97.0" fitWidth="73.0" layoutX="144.0" layoutY="453.0" pickOnBounds="true" preserveRatio="true" />-->
+<!--                  <ImageView fx:id="imageViewTrap13" fitHeight="97.0" fitWidth="73.0" layoutX="236.0" layoutY="452.0" pickOnBounds="true" preserveRatio="true" />-->
+<!--                  <ImageView fx:id="imageViewTrap11" fitHeight="99.0" fitWidth="83.0" layoutX="329.0" layoutY="451.0" pickOnBounds="true" preserveRatio="true" />-->
+<!--                  <ImageView fx:id="imageViewTrap12" fitHeight="97.0" fitWidth="73.0" layoutX="435.0" layoutY="452.0" pickOnBounds="true" preserveRatio="true" />-->
+<!--                  <ImageView fx:id="imageViewTrap14" fitHeight="97.0" fitWidth="73.0" layoutX="534.0" layoutY="452.0" pickOnBounds="true" preserveRatio="true" />-->
+<!--                  <ImageView fx:id="imageViewTrap25" fitHeight="97.0" fitWidth="73.0" layoutX="529.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" />-->
+<!--                  <ImageView fx:id="imageViewTrap23" fitHeight="97.0" fitWidth="73.0" layoutX="430.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" />-->
+<!--                  <ImageView fx:id="imageViewTrap21" fitHeight="97.0" fitWidth="73.0" layoutX="332.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" />-->
+<!--                  <ImageView fx:id="imageViewTrap22" fitHeight="97.0" fitWidth="73.0" layoutX="236.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" />-->
+<!--                  <ImageView fx:id="imageViewTrap24" fitHeight="97.0" fitWidth="73.0" layoutX="137.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" />-->
+<!--                  <Button layoutX="-26.0" layoutY="314.0" mnemonicParsing="false" onAction="#battlePhase" prefHeight="24.0" prefWidth="84.0" rotate="90.0" text="Battle phase" />-->
+<!--                  <ImageView fitHeight="20.0" fitWidth="22.0" layoutX="616.0" layoutY="85.0" onMouseClicked="#lPi0051" pickOnBounds="true" preserveRatio="true" />-->
+<!--                  <ImageView fitHeight="20.0" fitWidth="22.0" layoutX="619.0" layoutY="171.0" onMouseClicked="#hPoSt2" pickOnBounds="true" preserveRatio="true" />-->
+<!--                  <ImageView fitHeight="21.0" fitWidth="19.0" layoutX="107.0" layoutY="533.0" onMouseClicked="#bAcOo" pickOnBounds="true" preserveRatio="true" />-->
+<!--                  <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="105.0" layoutY="451.0" onMouseClicked="#yBdB12" pickOnBounds="true" preserveRatio="true" />-->
+<!--                  <ImageView fitHeight="15.0" fitWidth="18.0" layoutX="692.0" layoutY="248.0" onMouseClicked="#puver" pickOnBounds="true" preserveRatio="true" />-->
+<!--               </children>-->
+<!--            </AnchorPane>-->
+<!--         </center>-->
+<!--         <right>-->
+<!--            <VBox maxWidth="-Infinity" prefHeight="650.0" prefWidth="280.0" styleClass="vBox-duelMenu-background" stylesheets="@../Styles.css" BorderPane.alignment="CENTER">-->
+<!--               <children>-->
+<!--                  <HBox prefHeight="91.0" prefWidth="307.0">-->
+<!--                     <children>-->
+<!--                        <ImageView fx:id="oppositionAvatar" fitHeight="91.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">-->
+<!--                           <image>-->
+<!--                              <Image url="@../Images/Characters/Chara001.dds1.png" />-->
+<!--                           </image>-->
+<!--                        </ImageView>-->
+<!--                        <VBox prefHeight="91.0" prefWidth="181.0">-->
+<!--                           <children>-->
+<!--                              <HBox alignment="CENTER_LEFT" prefHeight="52.0" prefWidth="175.0">-->
+<!--                                 <children>-->
+<!--                                    <Label text="LP">-->
+<!--                                       <font>-->
+<!--                                          <Font name="Berlin Sans FB Bold" size="25.0" />-->
+<!--                                       </font>-->
+<!--                                       <HBox.margin>-->
+<!--                                          <Insets left="5.0" />-->
+<!--                                       </HBox.margin>-->
+<!--                                    </Label>-->
+<!--                                    <Label fx:id="oppositionLP" alignment="CENTER" text="8000">-->
+<!--                                       <HBox.margin>-->
+<!--                                          <Insets left="40.0" />-->
+<!--                                       </HBox.margin>-->
+<!--                                       <font>-->
+<!--                                          <Font name="Berlin Sans FB" size="26.0" />-->
+<!--                                       </font>-->
+<!--                                    </Label>-->
+<!--                                 </children>-->
+<!--                              </HBox>-->
+<!--                              <HBox alignment="CENTER_RIGHT" prefHeight="38.0" prefWidth="175.0">-->
+<!--                                 <children>-->
+<!--                                    <ImageView fitHeight="38.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">-->
+<!--                                       <image>-->
+<!--                                          <Image url="@../Images/Icon/416-4162420_health-symbol-png-united-way-health-icon.png" />-->
+<!--                                       </image>-->
+<!--                                       <HBox.margin>-->
+<!--                                          <Insets left="2.0" right="5.0" />-->
+<!--                                       </HBox.margin>-->
+<!--                                    </ImageView>-->
+<!--                                    <ProgressBar fx:id="oppositionProgressBar" prefHeight="18.0" prefWidth="133.0" progress="1.0" styleClass="red-bar" stylesheets="@../Styles.css">-->
+<!--                                       <HBox.margin>-->
+<!--                                          <Insets right="3.0" />-->
+<!--                                       </HBox.margin>-->
+<!--                                    </ProgressBar>-->
+<!--                                 </children>-->
+<!--                              </HBox>-->
+<!--                           </children>-->
+<!--                        </VBox>-->
+<!--                     </children>-->
+<!--                  </HBox>-->
+<!--                  <HBox alignment="CENTER" prefHeight="371.0" prefWidth="280.0">-->
+<!--                     <children>-->
+<!--                        <ImageView fitHeight="70.0" fitWidth="70.0" onMouseClicked="#surrender" pickOnBounds="true" preserveRatio="true">-->
+<!--                           <image>-->
+<!--                              <Image url="@../Images/Icon/phaseActions/Surrender.png" />-->
+<!--                           </image>-->
+<!--                        </ImageView>-->
+<!--                     </children></HBox>-->
+<!--                  <HBox alignment="TOP_CENTER" prefHeight="549.0" prefWidth="280.0" stylesheets="@../Styles.css">-->
+<!--                     <children>-->
+<!--                        <GridPane fx:id="gridPanePhaseIcons" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="0.0" prefWidth="0.0">-->
+<!--                           <rowConstraints>-->
+<!--                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />-->
+<!--                           </rowConstraints>-->
+<!--                           <HBox.margin>-->
+<!--                              <Insets top="10.0" />-->
+<!--                           </HBox.margin>-->
+<!--                        </GridPane>-->
+<!--                     </children>-->
+<!--                  </HBox>-->
+<!--                  <HBox prefHeight="91.0" prefWidth="251.0" styleClass="red-bar" stylesheets="@../Styles.css">-->
+<!--                     <children>-->
+<!--                        <ImageView fx:id="turnOfPlayerAvatar" fitHeight="91.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">-->
+<!--                           <image>-->
+<!--                              <Image url="@../Images/Characters/Chara001.dds1.png" />-->
+<!--                           </image>-->
+<!--                        </ImageView>-->
+<!--                        <VBox alignment="BASELINE_LEFT" prefHeight="91.0" prefWidth="181.0">-->
+<!--                           <children>-->
+<!--                              <HBox alignment="CENTER_RIGHT" prefHeight="11.0" prefWidth="175.0">-->
+<!--                                 <children>-->
+<!--                                    <ImageView fitHeight="38.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">-->
+<!--                                       <image>-->
+<!--                                          <Image url="@../Images/Icon/416-4162420_health-symbol-png-united-way-health-icon.png" />-->
+<!--                                       </image>-->
+<!--                                       <HBox.margin>-->
+<!--                                          <Insets left="2.0" right="5.0" />-->
+<!--                                       </HBox.margin>-->
+<!--                                    </ImageView>-->
+<!--                                    <ProgressBar fx:id="turnOfPlayerProgressBar" prefHeight="18.0" prefWidth="133.0" progress="1.0">-->
+<!--                                       <HBox.margin>-->
+<!--                                          <Insets right="3.0" />-->
+<!--                                       </HBox.margin>-->
+<!--                                    </ProgressBar>-->
+<!--                                 </children>-->
+<!--                                 <VBox.margin>-->
+<!--                                    <Insets top="5.0" />-->
+<!--                                 </VBox.margin>-->
+<!--                              </HBox>-->
+<!--                              <HBox alignment="CENTER_LEFT" prefHeight="59.0" prefWidth="175.0">-->
+<!--                                 <children>-->
+<!--                                    <Label text="LP">-->
+<!--                                       <font>-->
+<!--                                          <Font name="Berlin Sans FB Bold" size="25.0" />-->
+<!--                                       </font>-->
+<!--                                       <HBox.margin>-->
+<!--                                          <Insets left="5.0" />-->
+<!--                                       </HBox.margin>-->
+<!--                                    </Label>-->
+<!--                                    <Label fx:id="turnOfPlayerLP" alignment="CENTER" text="8000">-->
+<!--                                       <HBox.margin>-->
+<!--                                          <Insets left="40.0" />-->
+<!--                                       </HBox.margin>-->
+<!--                                       <font>-->
+<!--                                          <Font name="Berlin Sans FB" size="26.0" />-->
+<!--                                       </font>-->
+<!--                                    </Label>-->
+<!--                                 </children>-->
+<!--                              </HBox>-->
+<!--                           </children>-->
+<!--                        </VBox>-->
+<!--                     </children>-->
+<!--                  </HBox>-->
+<!--               </children>-->
+<!--            </VBox>-->
+<!--         </right>-->
+<!--      </BorderPane>-->
+<!--   </children>-->
+<!--</AnchorPane>-->

@@ -2,33 +2,42 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="361.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.MessageController">
+<AnchorPane prefHeight="22.0" prefWidth="458.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.MessageController">
    <children>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox prefHeight="29.0" prefWidth="458.0">
          <children>
-            <Label fx:id="senderNameLabel" text="Label">
+            <HBox alignment="BOTTOM_LEFT" prefHeight="29.0" prefWidth="31.0">
+               <children>
+                  <Label fx:id="senderNameLabel" prefHeight="17.0" prefWidth="28.0" text="Label" textFill="WHITE">
+                     <font>
+                        <Font name="Matura MT Script Capitals" size="14.0" />
+                     </font></Label>
+               </children>
                <HBox.margin>
-                  <Insets left="5.0" top="5.0" />
+                  <Insets left="5.0" right="5.0" />
                </HBox.margin>
-            </Label>
-         </children>
-      </HBox>
-      <HBox prefHeight="53.0" prefWidth="458.0">
-         <children>
-            <Text fx:id="messageTextBox" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="306.11920166015625">
-               <font>
-                  <Font name="Berlin Sans FB Demi Bold" size="18.0" />
-               </font>
+            </HBox>
+            <HBox fx:id="messageHBox" prefHeight="29.0" prefWidth="51.0" styleClass="ChatRoom-MessageHBox2" stylesheets="@../Styles.css">
+               <children>
+                  <Text fx:id="messageTextBox" strokeType="OUTSIDE" strokeWidth="0.0" text="a" wrappingWidth="350.0">
+                     <font>
+                        <Font name="Berlin Sans FB Demi Bold" size="19.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
                <HBox.margin>
-                  <Insets top="2.0" />
+                  <Insets />
                </HBox.margin>
-            </Text>
+            </HBox>
          </children>
       </HBox>
    </children>
-</HBox>
+</AnchorPane>

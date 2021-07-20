@@ -41,7 +41,6 @@ public class Main extends Application {
 //        mediaPlayer = new MediaPlayer(media);
 //        mediaPlayer.setVolume(0.5);
 //        mediaPlayer.setAutoPlay(true);
-        makeServerInputThread(Controller.getSocket());
         Parent root = FXMLLoader.load(getClass().getResource("/Fxmls/WelcomeMenu.fxml"));
         primaryStage.setTitle("Yu-Gi-Oh");
         primaryStage.setScene(new Scene(root));
@@ -68,27 +67,5 @@ public class Main extends Application {
         }
     }
 
-    public static void makeServerInputThread(Socket socket) {
-        new Thread(() -> {
-            try {
-                while (!socket.isClosed()) {
-                    if(ChatRoomController.isIsInChatRoom()) {
-                        String message = Controller.getDataInputStream().readUTF();
-                        setMessage(message);
-                        if (message.startsWith("Server load message")) {
-                            Platform.runLater(new Runnable() {
-                                @Override
-                                public void run() {
-                                    ChatRoomController.getChatRoomController().loadMessages();
-                                }
-                            });
-                        }
-                    }
-                }
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }).start();
-    }
 }

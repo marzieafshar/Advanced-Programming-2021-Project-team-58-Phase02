@@ -2,33 +2,39 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<HBox alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="29.0" prefWidth="361.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.MessageController">
+<AnchorPane prefHeight="29.0" prefWidth="453.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.MessageController">
    <children>
-      <HBox alignment="TOP_RIGHT" prefHeight="35.0" prefWidth="470.0">
+      <HBox alignment="TOP_RIGHT" prefHeight="29.0" prefWidth="458.0">
          <children>
-            <Text fx:id="messageTextBox" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="RIGHT" wrappingWidth="37.4700927734375">
+            <HBox fx:id="messgaeHBox" alignment="TOP_RIGHT" prefHeight="29.0" prefWidth="46.0" styleClass="ChatRoom-MessageHBox" stylesheets="@../Styles.css">
+               <children>
+                  <Text fx:id="messageTextBox" blendMode="SRC_ATOP" fill="#242424" strokeType="OUTSIDE" strokeWidth="0.0" text="a" textAlignment="RIGHT" wrappingWidth="12.136703491210938">
+                     <font>
+                        <Font name="Berlin Sans FB" size="19.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="29.0" prefWidth="44.0">
+               <children>
+                  <Label fx:id="senderNameLabel" prefHeight="35.0" prefWidth="39.0" text="a" textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font name="Matura MT Script Capitals" size="19.0" />
+                     </font></Label>
+               </children>
                <HBox.margin>
-                  <Insets right="5.0" top="2.0" />
+                  <Insets right="20.0" />
                </HBox.margin>
-               <font>
-                  <Font name="Berlin Sans FB Demi Bold" size="19.0" />
-               </font>
-            </Text>
-         </children>
-      </HBox>
-      <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
-         <children>
-            <Label fx:id="senderNameLabel" text="Label">
-               <HBox.margin>
-                  <Insets right="5.0" top="5.0" />
-               </HBox.margin>
-            </Label>
+            </HBox>
          </children>
       </HBox>
    </children>
-</HBox>
+</AnchorPane>

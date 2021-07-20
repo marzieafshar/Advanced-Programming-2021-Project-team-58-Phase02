@@ -114,89 +114,109 @@
     -fx-background-image: url("Images/Background/duelMenu.png");
     -fx-background-size: stretch;
 }
-.profile-background{
+
+.profile-background {
     -fx-background-image: url("Images/Background/50061.png");
     -fx-background-size: stretch;
 }
-.profile-textField{
+
+.profile-textField {
     -fx-background-color: #273746;
     -fx-border-color: black;
     -fx-border-radius: 10;
     -fx-background-radius: 10;
     -fx-text-fill: white;
 }
-.profile-backButton{
+
+.profile-backButton {
     -fx-background-color: white;
     -fx-border-color: black;
     -fx-border-radius: 40;
     -fx-background-radius: 40;
 }
-.flip-coin{
+
+.flip-coin {
     -fx-background-image: url("Images/Background/coinBackground.jpg");
     -fx-background-size: stretch;
 }
-.errorBox-background{
+
+.errorBox-background {
     -fx-background-image: url("Images/error.jpg");
     -fx-background-size: stretch;
 }
+
 .graveyard-background {
     -fx-background-image: url("Images/Background/GraveYardBackground.png");
     -fx-background-size: stretch;
 }
-.scroll-pane>.viewport{
+
+.scroll-pane > .viewport {
     -fx-background-color: transparent;
     -fx-background-size: stretch;
 }
-.duelMenu-left-background{
+
+.duelMenu-left-background {
     -fx-background-image: url("Images/Background/14235.jpg");
     -fx-background-size: stretch;
     -fx-border-color: black;
 }
-.duelMenu-middle-background{
+
+.duelMenu-middle-background {
     -fx-background-color: #caf0f8;
     -fx-border-color: black;
     -fx-background-size: stretch;
 }
-.duel-bottom-background{
+
+.duel-bottom-background {
     -fx-background-image: url("Images/Background/50011.png");
     -fx-background-size: stretch;
 }
-.shop-background{
+
+.shop-background {
     -fx-background-image: url("Images/Background/50061.png");
     -fx-background-size: stretch;
 }
-.shop-up{
+
+.shop-up {
     -fx-background-image: url("Images/Background/839134.jpg");
     -fx-background-size: stretch;
 }
-.activate{
+
+.activate {
     -fx-background-color: #63E01B;
     -fx-border-color: blue;
     -fx-border-radius: 80;
     -fx-background-radius: 80;
 }
-.deckMenu-up{
+
+.deckMenu-up {
     -fx-background-image: url("Images/Background/blueBackground.jpg");
     -fx-background-size: stretch;
 }
-.deckmenu-right{
+
+.deckmenu-right {
     -fx-background-image: url("Images/Background/yellow.jpg");
     -fx-border-color: black;
 }
-.vBox-duelMenu-background{
+
+.vBox-duelMenu-background {
     -fx-background-image: url("Images/Background/blue-gray.jpg");
     -fx-background-size: stretch;
 }
-.cheat-imageView{
+
+.cheat-imageView {
     -fx-border-radius: 80;
 }
+
 .import-background {
     -fx-background-image: url("Images/Background/wp2753204.jpg");
     -fx-background-size: stretch;
 }
+
 .error-background {
     -fx-background-image: url("Images/Background/exportError.png");
 }
+
 .cardCreator-Background {
     -fx-background-image: url("Images/Background/789456.png");
     -fx-background-size: stretch;
@@ -229,18 +249,91 @@
     -fx-background-radius: 80;
     -fx-border-color: black;
 }
-.cardCreator-Back{
+
+.cardCreator-Back {
     -fx-background-color: #2E3DB1;
     -fx-border-color: #00ff55;
     -fx-background-radius: 80;
     -fx-border-radius: 80;
     -fx-prompt-text-fill: black;
 }
-.chatRoom-background{
+
+.chatRoom-background {
     -fx-background-image: url("Images/Background/backgroundChat.jpg");
     -fx-background-size: stretch;
 }
-.vbox-chatRoom{
+
+.vbox-chatRoom {
     -fx-border-color: white;
     -fx-border-width: 3;
+}
+
+.ChatRoom-Textfield {
+    -fx-background-radius: 30;
+    -fx-background-color: rgba(255, 255, 255, 0.3);
+    -fx-effect: dropshadow(gaussian, #ffdb00, 10, 0, 0, 0);
+    -fx-border-color: white;
+    -fx-border-width: 2;
+    -fx-border-radius: 30;
+}
+
+.ChatRoom-MessageHBox {
+    -fx-background-image: url("Images/Icon/newMessageBox.png");
+    -fx-background-size: stretch;
+}
+
+.ChatRoom-MessageHBox2 {
+    -fx-background-image: url("Images/Icon/messageBox2.png");
+    -fx-background-size: stretch;
+}
+
+.find-opponent-button {
+    -fx-background-color: #0ac20a;
+    -fx-background-radius: 100;
+    -fx-border-width: 3;
+    -fx-border-color: white;
+    -fx-border-radius: 100;
+}
+
+.one-round-button {
+    -fx-background-color: #900490;
+    -fx-background-radius: 100;
+    -fx-border-width: 3;
+    -fx-border-color: white;
+    -fx-border-radius: 100;
+}
+
+.three-round-button {
+    -fx-background-color: #06069c;
+    -fx-background-radius: 100;
+    -fx-border-width: 3;
+    -fx-border-color: white;
+    -fx-border-radius: 100;
+}
+
+.round-background {
+    -fx-background-image: url("Images/Background/round.jpg");
+    -fx-background-size: stretch;
+}
+
+.score-board-background {
+    -fx-background-image: url("Images/Background/scoreBoardPic.jpg");
+    -fx-background-size: stretch;
+}
+
+.score-board-table {
+    -fx-background-color: rgba(224, 30, 98, 0.3);
+    -fx-border-width: 3;
+    -fx-border-color: rgb(255, 255, 255);
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.start-game-background {
+    -fx-background-image: url("/Images/Background/startGameBackground.png");
+}
+
+.Lobby-background {
+    -fx-background-image: url("/Images/Background/lobby.jpg");
+    -fx-background-size: stretch;
 }
