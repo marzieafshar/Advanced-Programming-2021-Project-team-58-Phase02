@@ -56,9 +56,9 @@ public class ProfileController implements Initializable {
     private GridPane gridPane;
     private MyListener myListener;
 
-    String str = "Button_Click.mp3";
-    Media media = new Media(new File(str).toURI().toString());
-    private MediaPlayer mediaPlayer = new MediaPlayer(media);
+//    String str = "Button_Click.mp3";
+//    Media media = new Media(new File(str).toURI().toString());
+//    private MediaPlayer mediaPlayer = new MediaPlayer(media);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -69,9 +69,9 @@ public class ProfileController implements Initializable {
 
     @FXML
     void backToMainMenu(ActionEvent event) throws IOException {
-        Media media = new Media(new File(str).toURI().toString());
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setAutoPlay(true);
+//        Media media = new Media(new File(str).toURI().toString());
+//        mediaPlayer = new MediaPlayer(media);
+//        mediaPlayer.setAutoPlay(true);
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/MainMenu.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
@@ -79,9 +79,9 @@ public class ProfileController implements Initializable {
 
     @FXML
     void nicknameChange(MouseEvent event) {
-        Media media = new Media(new File(str).toURI().toString());
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setAutoPlay(true);
+//        Media media = new Media(new File(str).toURI().toString());
+//        mediaPlayer = new MediaPlayer(media);
+//        mediaPlayer.setAutoPlay(true);
 
         try {
             if (nicknameChangeField == null) return;
@@ -114,9 +114,9 @@ public class ProfileController implements Initializable {
 
     @FXML
     public void passwordChange(MouseEvent event) {
-        Media media = new Media(new File(str).toURI().toString());
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setAutoPlay(true);
+//        Media media = new Media(new File(str).toURI().toString());
+//        mediaPlayer = new MediaPlayer(media);
+//        mediaPlayer.setAutoPlay(true);
         String newPassword1 = passwordChangeField.getText();
         String newPassword2 = repeatPasswordChangeField.getText();
         if (newPassword2 == null || newPassword1 == null) return;
@@ -206,7 +206,7 @@ public class ProfileController implements Initializable {
 
     private void setUserInfo() {
         try {
-            itemImage.setImage(getImage());
+            itemImage.setImage(getImage(Controller.getToken()));
             username.setText(getPlayerInfo("username"));
             userMoney.setText(getPlayerInfo("money"));
             userScore.setText(getPlayerInfo("score"));
@@ -220,9 +220,8 @@ public class ProfileController implements Initializable {
         }
     }
 
-    private Image getImage() {
+    public static Image getImage(String token) {
         try {
-            String token = Controller.getToken();
             Controller.getDataOutputStream().writeUTF("Profile image" + token);
             String imageJson = "";
             String imageLengthMessage = Controller.getDataInputStream().readUTF();
@@ -242,10 +241,10 @@ public class ProfileController implements Initializable {
         return null;
     }
 
-    public static String getPlayerInfo(String str){
+    public static String getPlayerInfo(String str) {
         try {
             String token = Controller.getToken();
-            Controller.getDataOutputStream().writeUTF( "Profile " + str + token);
+            Controller.getDataOutputStream().writeUTF("Profile " + str + token);
             String result = Controller.getDataInputStream().readUTF();
             return result;
         } catch (IOException e) {

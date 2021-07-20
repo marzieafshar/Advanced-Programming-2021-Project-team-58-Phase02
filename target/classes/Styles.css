@@ -331,9 +331,17 @@
 
 .start-game-background {
     -fx-background-image: url("/Images/Background/startGameBackground.png");
+    -fx-background-size: stretch;
 }
 
 .Lobby-background {
     -fx-background-image: url("/Images/Background/lobby.jpg");
     -fx-background-size: stretch;
+}
+.chat-background {
+    -fx-background-color: #06063b;
+    -fx-background-radius: 10;
+    -fx-border-color: white;
+    -fx-border-width: 5;
+    -fx-border-radius: 10;
 }

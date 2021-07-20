@@ -2,6 +2,7 @@ package Client;
 
 import Client.View.ChatRoomController;
 import Client.View.Controller;
+import Client.View.MainMenuController;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 import java.util.SplittableRandom;
 
 public class Main extends Application {
-    private MediaPlayer mediaPlayer;
+    //    private MediaPlayer mediaPlayer;
     private static String message;
 
     public static ArrayList<Thread> threads = new ArrayList<>();
@@ -47,7 +48,11 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.setOnCloseRequest(event -> {
             event.consume();
-            quit(primaryStage);
+            try {
+                quit(primaryStage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
         primaryStage.show();
     }
@@ -57,15 +62,20 @@ public class Main extends Application {
         launch(args);
     }
 
-    public void quit(Stage stage) {
+    public void quit(Stage stage) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Quit");
         alert.setContentText("Are you sure you want to exit the program?");
         if (alert.showAndWait().get() == ButtonType.OK) {
-            Controller.closeAll();
-            System.exit(0);
+            Controller.getDataOutputStream().writeUTF("Logout" + Controller.getToken());
+            Controller.getDataOutputStream().flush();
+
+            String result = Controller.getDataInputStream().readUTF();
+            switch (result) {
+                case "logged out successfully":
+                    Controller.closeAll();
+                    System.exit(0);
+            }
         }
     }
-
-
 }

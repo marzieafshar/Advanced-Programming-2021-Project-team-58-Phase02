@@ -19,6 +19,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
@@ -36,6 +37,9 @@ public class ChatRoomController implements Initializable {
     @FXML
     private ScrollPane messagesScrollPane;
 
+    @FXML
+    private GridPane gridPane;
+
     private ArrayList<String> messages = new ArrayList<>();
 
     private Parent root;
@@ -48,8 +52,9 @@ public class ChatRoomController implements Initializable {
     private static String message;
     private Thread thread;
 
-    String str = "Button_Click.mp3";
-    private MediaPlayer mediaPlayer;
+//    String str = "Button_Click.mp3";
+//    private MediaPlayer mediaPlayer;
+    private static boolean isFromLobby;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -57,6 +62,18 @@ public class ChatRoomController implements Initializable {
         chatRoomController = this;
         makeServerInputThread();
         loadMessages();
+        loadOnlineUsers();
+    }
+
+    private void loadOnlineUsers() {
+        try {
+            Controller.getDataOutputStream().writeUTF("Chat get all nicknames"+Controller.getToken());
+            Controller.getDataOutputStream().flush();
+
+            String[] tokens = Controller.getDataInputStream().readUTF().split("#");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void loadMessages() {
@@ -65,7 +82,7 @@ public class ChatRoomController implements Initializable {
             Controller.getDataOutputStream().writeUTF("Chat get all messages");
             Controller.getDataOutputStream().flush();
             try {
-                Thread.sleep(25);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -135,16 +152,20 @@ public class ChatRoomController implements Initializable {
 
     public void backToMainMenu(ActionEvent event) throws IOException {
         isInChatRoom = false;
-        Media media = new Media(new File(str).toURI().toString());
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setAutoPlay(true);
+//        Media media = new Media(new File(str).toURI().toString());
+//        mediaPlayer = new MediaPlayer(media);
+//        mediaPlayer.setAutoPlay(true);
         isInChatRoom = false;
         Controller.getDataOutputStream().writeUTF("Chat tamoomesh kon");
         Controller.getDataOutputStream().flush();
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/MainMenu.fxml")));
+        if (isFromLobby)
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Lobby.fxml")));
+        else
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/MainMenu.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        isFromLobby = false;
     }
 
     public static ChatRoomController getChatRoomController() {
@@ -173,4 +194,7 @@ public class ChatRoomController implements Initializable {
         thread.start();
     }
 
+    public static void setIsFromLobby(boolean value) {
+        isFromLobby = value;
+    }
 }

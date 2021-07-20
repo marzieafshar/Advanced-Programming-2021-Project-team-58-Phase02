@@ -1,21 +1,15 @@
 package Client.View;
 
-import Client.Model.*;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.io.DataOutputStream;
-import java.io.File;
 import java.io.IOException;
-import java.net.Socket;
 import java.util.Objects;
 
 public class MainMenuController {
@@ -52,9 +46,9 @@ public class MainMenuController {
     }
 
     public void goToShop(ActionEvent event) throws IOException {
-        Media media = new Media(new File(str).toURI().toString());
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setAutoPlay(true);
+//        Media media = new Media(new File(str).toURI().toString());
+//        mediaPlayer = new MediaPlayer(media);
+//        mediaPlayer.setAutoPlay(true);
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Shop.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -91,9 +85,9 @@ public class MainMenuController {
 //        deck3.addCardToMainDeck(Card.getCardByName("Dark Hole"));
 
 //        Controller.getLoggedInPlayer().getDecks().add(deck1);
-        Media media = new Media(new File(str).toURI().toString());
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setAutoPlay(true);
+//        Media media = new Media(new File(str).toURI().toString());
+//        mediaPlayer = new MediaPlayer(media);
+//        mediaPlayer.setAutoPlay(true);
 
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/DeckMenu.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -102,9 +96,9 @@ public class MainMenuController {
     }
 
     public void goToLobby(ActionEvent actionEvent) {
-        Media media = new Media(new File(str).toURI().toString());
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setAutoPlay(true);
+//        Media media = new Media(new File(str).toURI().toString());
+//        mediaPlayer = new MediaPlayer(media);
+//        mediaPlayer.setAutoPlay(true);
         try {
             DataOutputStream dataOutputStream = Controller.getDataOutputStream();
             String token = Controller.getToken();
@@ -120,40 +114,21 @@ public class MainMenuController {
     }
 
     public void goToProfileMenu(ActionEvent event) throws IOException {
-        Media media = new Media(new File(str).toURI().toString());
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setAutoPlay(true);
+//        Media media = new Media(new File(str).toURI().toString());
+//        mediaPlayer = new MediaPlayer(media);
+//        mediaPlayer.setAutoPlay(true);
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Profile.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
     }
 
-    public void goToCardCreator(ActionEvent event) throws IOException {
-        Media media = new Media(new File(str).toURI().toString());
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setAutoPlay(true);
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/CardCreator.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-    }
-
-    public void goToImportExportMenu(ActionEvent event) throws IOException {
-        Media media = new Media(new File(str).toURI().toString());
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setAutoPlay(true);
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/ImportExportMenu.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-    }
 
     public void goToChatRoom(ActionEvent event) throws IOException {
-        Media media = new Media(new File(str).toURI().toString());
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setAutoPlay(true);
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/ChatRoom.fxml")));
+//        Media media = new Media(new File(str).toURI().toString());
+//        mediaPlayer = new MediaPlayer(media);
+//        mediaPlayer.setAutoPlay(true);
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/chat.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -161,9 +136,9 @@ public class MainMenuController {
     }
 
     public void goToScoreBoard(ActionEvent event) throws IOException {
-        Media media = new Media(new File(str).toURI().toString());
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setAutoPlay(true);
+//        Media media = new Media(new File(str).toURI().toString());
+//        mediaPlayer = new MediaPlayer(media);
+//        mediaPlayer.setAutoPlay(true);
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Scoreboard.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -171,9 +146,9 @@ public class MainMenuController {
     }
 
     public void logout(ActionEvent event) throws IOException {
-        Media media = new Media(new File(str).toURI().toString());
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setAutoPlay(true);
+//        Media media = new Media(new File(str).toURI().toString());
+//        mediaPlayer = new MediaPlayer(media);
+//        mediaPlayer.setAutoPlay(true);
 
         Controller.getDataOutputStream().writeUTF("Logout" + Controller.getToken());
         Controller.getDataOutputStream().flush();

@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -16,6 +17,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -54,7 +56,7 @@ public class LobbyController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializer();
         setPlayerInfo();
-//        setOtherPlayersInfo();
+        setOtherPlayersInfo();
     }
 
     private void initializer() {
@@ -64,23 +66,44 @@ public class LobbyController implements Initializable {
     }
 
     private void setPlayerInfo() {
-//        userAvatar.setImage(ProfileController.getImage());
+        userAvatar.setImage(ProfileController.getImage(Controller.getToken()));
         userNickname.setText("Your Nickname: " + ProfileController.getPlayerInfo("nickname"));
         userScore.setText("Your Score: " + ProfileController.getPlayerInfo("score"));
     }
 
-//    private void setOtherPlayersInfo() {
-//        try {
+    private void setOtherPlayersInfo() {
+        ArrayList<ImageView> allImageViews = new ArrayList<>();
+        allImageViews.add(player1Avatar);
+        allImageViews.add(player2Avatar);
+        allImageViews.add(player3Avatar);
+        allImageViews.add(player4Avatar);
+        allImageViews.add(player5Avatar);
+        try {
+            dataOutputStream.writeUTF("Lobby get tokens" + Controller.getToken());
+            dataOutputStream.flush();
+            String[] tokens = dataInputStream.readUTF().split("#");
+            for (int i = 0; i < tokens.length; i++)
+                System.out.println(tokens[i]);
+
+            System.out.println(Controller.getToken());
+            for (int i = 0; i < tokens.length; i++) {
+                Image image;
+                if (tokens[i] != null && !tokens[i].equals("")) {
+                    image = ProfileController.getImage(tokens[i]);
+                    allImageViews.get(i).setImage(image);
+                    System.out.println(tokens[i]);
+                }
+            }
+
 //            dataOutputStream.writeUTF("Lobby get players nickname");
 //            dataOutputStream.flush();
 //            String result = dataInputStream.readUTF();
 //            String[] playersInLobby = result.split("#");
-//            dataOutputStream.writeUTF("Lobby get players image");
-//            dataOutputStream.flush();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     void startAGame(MouseEvent event) throws IOException {
@@ -96,15 +119,16 @@ public class LobbyController implements Initializable {
             dataOutputStream.flush();
             boolean isActiveDeckValid = Boolean.parseBoolean(dataInputStream.readUTF());
             if (!isActiveDeckValid) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Your active deck is not valid!");
-            alert.showAndWait();
-        } else {
-            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/StageNumOfRound.fxml")));
-            Stage stageNumOfRound = new Stage();
-            stageNumOfRound.setScene(new Scene(root));
-            stageNumOfRound.show();
-        }}
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Your active deck is not valid!");
+                alert.showAndWait();
+            } else {
+                root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/StageNumOfRound.fxml")));
+                Stage stageNumOfRound = new Stage();
+                stageNumOfRound.setScene(new Scene(root));
+                stageNumOfRound.show();
+            }
+        }
     }
 
     @FXML
@@ -114,6 +138,12 @@ public class LobbyController implements Initializable {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/MainMenu.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
-        stage.show();
+    }
+
+    public void goToChatRoom(MouseEvent mouseEvent) throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/chat.fxml")));
+        stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        ChatRoomController.setIsFromLobby(true);
     }
 }

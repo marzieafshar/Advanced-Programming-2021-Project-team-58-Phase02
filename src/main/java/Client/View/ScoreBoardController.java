@@ -89,9 +89,7 @@ public class ScoreBoardController implements Initializable {
 
     @FXML
     void refreshPage(MouseEvent event) throws IOException {
-        while (true) {
-            loadPage();
-        }
+        loadPage();
     }
 
     public ObservableList<ScoreBoardPlayer> getPlayers(String[] data) {

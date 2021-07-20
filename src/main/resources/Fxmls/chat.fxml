@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1214.0" styleClass="chatRoom-background" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.ChatRoomController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1214.0" styleClass="chatRoom-background" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.ChatRoomController">
    <children>
       <AnchorPane layoutX="374.0" layoutY="69.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="452.0">
          <children>
@@ -61,5 +61,18 @@
             <Font name="Matura MT Script Capitals" size="48.0" />
          </font>
       </Label>
+      <VBox layoutX="862.0" layoutY="102.0" prefHeight="449.0" prefWidth="74.0">
+         <children>
+            <ScrollPane prefHeight="500.0" prefWidth="74.0">
+               <content>
+                  <GridPane fx:id="gridPane" prefHeight="12.0" prefWidth="0.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                  </GridPane>
+               </content>
+            </ScrollPane>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
