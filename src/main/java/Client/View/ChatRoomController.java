@@ -60,9 +60,9 @@ public class ChatRoomController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         isInChatRoom = true;
         chatRoomController = this;
-        makeServerInputThread();
         loadMessages();
         loadOnlineUsers();
+        makeServerInputThread();
     }
 
     private void loadOnlineUsers() {

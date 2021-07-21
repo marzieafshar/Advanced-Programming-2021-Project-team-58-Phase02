@@ -10,11 +10,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -68,15 +73,25 @@ public class ScoreBoardController implements Initializable {
         scoreColumn.setCellValueFactory(new PropertyValueFactory<>("score"));
 
         myTable.setItems(getPlayers(data));
-//        int i = 0;
-//        for (Node n : myTable.) {
-//            if (n instanceof TableRow) {
-//                TableRow row = (TableRow) n;
-//                if (myTable.getItems().get(i).getNickName().equals("marzie")) {
-//                    row.getStyleClass().add("-fx-background-color: pink");
-//                } i++;
-//            }
-//        }
+        rankColumn.setStyle("-fx-background-color: transparent");
+        nameColumn.setStyle("-fx-background-color: transparent");
+        scoreColumn.setStyle("-fx-background-color: transparent");
+
+
+        myTable.setRowFactory(tv -> new TableRow<ScoreBoardPlayer>() {
+            @Override
+            public void updateItem(ScoreBoardPlayer player, boolean empty) {
+                super.updateItem(player, empty);
+                if (player == null) {
+                    setStyle("-fx-background-color: rgba(239,234,234,0.42)");
+                } else if (player.getNickName().equals(ProfileController.getPlayerInfo("nickname"))) {
+                    setStyle("-fx-background-color: rgba(234,224,79,0.82); -fx-border-color: #000000");
+                } else {
+                    setStyle("-fx-background-color: rgba(239,234,234,0.42)");
+                    setFont(Font.font("Verdana", 20));
+                }
+            }
+        });
     }
 
     @FXML
