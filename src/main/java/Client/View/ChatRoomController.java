@@ -80,6 +80,8 @@ public class ChatRoomController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        message = "";
+        messages.clear();
         isInChatRoom = true;
         chatRoomController = this;
         loadPinnedMessage();
@@ -147,7 +149,10 @@ public class ChatRoomController implements Initializable {
             String result = message;
             if (!result.equals("")) {
                 String[] str = result.split("#");
-                messages.addAll(Arrays.asList(str));
+                for (int i = 0; i < str.length; i++) {
+                    if(!str[i].startsWith("Server load message"))
+                        messages.add(str[i]);
+                }
                 showMessages();
             }
         } catch (IOException e) {
@@ -167,6 +172,7 @@ public class ChatRoomController implements Initializable {
         for (int i = 0; i < messages.size(); i++) {
             try {
                 String[] tmp = messages.get(i).split("@");
+                System.out.println(messages.get(i));
                 String senderName = tmp[0];
                 String messageText = tmp[1];
                 FXMLLoader fxmlLoader = new FXMLLoader();
@@ -215,6 +221,8 @@ public class ChatRoomController implements Initializable {
     }
 
     public void backToMainMenu(ActionEvent event) throws IOException {
+        messages.clear();
+        message = "";
         isInChatRoom = false;
 //        Media media = new Media(new File(str).toURI().toString());
 //        mediaPlayer = new MediaPlayer(media);

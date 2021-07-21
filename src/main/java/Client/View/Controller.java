@@ -70,7 +70,7 @@ public class Controller {
 
     public static void setupConnection() {
         try {
-            socket = new Socket("localhost", 1234);
+            socket = new Socket("8.tcp.ngrok.io", 17048);
             dataInputStream = new DataInputStream(socket.getInputStream());
             dataOutputStream = new DataOutputStream(socket.getOutputStream());
         } catch (IOException e) {
