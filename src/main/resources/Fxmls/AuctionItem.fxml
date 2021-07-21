@@ -6,12 +6,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="283.0" prefWidth="166.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.AuctionItemController">
+<AnchorPane prefHeight="283.0" prefWidth="166.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.AuctionItemController">
    <children>
-      <Label layoutX="10.0" layoutY="1.0" prefHeight="15.0" prefWidth="35.0" text="Owner:">
+      <Label layoutX="10.0" layoutY="1.0" prefHeight="15.0" prefWidth="35.0" text="Owner:" textFill="#fff200">
          <font>
-            <Font size="10.0" />
+            <Font name="Berlin Sans FB Demi Bold" size="10.0" />
          </font>
       </Label>
       <ImageView fx:id="cardImg" fitHeight="221.0" fitWidth="176.0" layoutX="7.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
@@ -19,17 +18,26 @@
             <Image url="@../Images/Monster/YomiShip.jpg" />
          </image>
       </ImageView>
-      <Label fx:id="ownerName" alignment="CENTER" layoutX="46.0" prefHeight="17.0" prefWidth="105.0" text="Owner Name" />
-      <Label layoutX="10.0" layoutY="248.0" text="Card Name:">
+      <Label fx:id="ownerName" alignment="CENTER" layoutX="46.0" prefHeight="17.0" prefWidth="105.0" textFill="#fff200">
          <font>
-            <Font size="10.0" />
+            <Font name="Berlin Sans FB Demi Bold" size="15.0" />
+         </font></Label>
+      <Label layoutX="10.0" layoutY="248.0" text="Card Name:" textFill="#fff200">
+         <font>
+            <Font name="Berlin Sans FB Demi Bold" size="10.0" />
          </font>
       </Label>
-      <Label fx:id="lastPriceOffered" alignment="CENTER" layoutX="95.0" layoutY="263.0" prefHeight="17.0" prefWidth="64.0" text="price" />
-      <Label fx:id="cardName" alignment="CENTER" layoutX="58.0" layoutY="247.0" prefHeight="17.0" prefWidth="105.0" text="Card Name" />
-      <Label layoutX="11.0" layoutY="266.0" text="Last Price Offered:">
+      <Label fx:id="lastPriceOffered" alignment="CENTER" layoutX="95.0" layoutY="263.0" prefHeight="17.0" prefWidth="64.0" textFill="#fff200">
          <font>
-            <Font size="10.0" />
+            <Font name="Berlin Sans FB Demi Bold" size="15.0" />
+         </font></Label>
+      <Label fx:id="cardName" alignment="CENTER" layoutX="58.0" layoutY="247.0" prefHeight="17.0" prefWidth="105.0" textFill="#fff200">
+         <font>
+            <Font name="Berlin Sans FB Demi Bold" size="15.0" />
+         </font></Label>
+      <Label layoutX="11.0" layoutY="266.0" text="Last Price Offered:" textFill="#fff200">
+         <font>
+            <Font name="Berlin Sans FB Demi Bold" size="10.0" />
          </font>
       </Label>
    </children>

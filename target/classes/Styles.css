@@ -356,11 +356,6 @@
     -fx-border-radius: 30;
 }
 
-.auction-background {
-    -fx-background-image: url("/Images/Background/1.jpg");
-    -fx-background-size: stretch;
-}
-
 .chatRoom-topHBox {
     -fx-background-color: white;
 }
@@ -388,4 +383,32 @@
 .edit-text-area {
     -fx-border-color: green;
     -fx-border-width: 1.75;
+}
+
+.auction-background {
+    -fx-background-image: url("Images/Background/auctionBackground.jpg");
+    -fx-background-size: stretch;
+}
+
+.auction-button {
+    -fx-background-radius: 80;
+    -fx-background-color: black;
+    -fx-border-color: yellow;
+    -fx-border-radius: 80;
+}
+
+.auction-cards {
+    -fx-background-image: transparent;
+    -fx-border-color: yellow;
+    -fx-border-width: 3;
+}
+
+.auction-textfield {
+    -fx-border-radius: 80;
+    -fx-background-radius: 80;
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-border-color: yellow;
+    -fx-border-width: 1;
+    -fx-prompt-text-fill: yellow;
 }

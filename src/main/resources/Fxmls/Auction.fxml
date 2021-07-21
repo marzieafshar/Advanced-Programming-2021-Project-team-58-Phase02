@@ -12,14 +12,14 @@
 
 <AnchorPane prefHeight="650.0" prefWidth="1214.0" styleClass="auction-background" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.AuctionController">
    <children>
-      <Label layoutX="473.0" layoutY="28.0" text="Auction">
+      <Label layoutX="473.0" layoutY="28.0" text="Auction" textFill="#ddcb00">
          <font>
             <Font name="Showcard Gothic" size="60.0" />
          </font>
       </Label>
-      <HBox layoutX="33.0" layoutY="108.0" prefHeight="305.0" prefWidth="1149.0">
+      <HBox layoutX="33.0" layoutY="108.0" prefHeight="305.0" prefWidth="1149.0" styleClass="vbox-chatRoom" stylesheets="@../Styles.css">
          <children>
-            <ScrollPane prefHeight="279.0" prefWidth="1149.0">
+            <ScrollPane prefHeight="279.0" prefWidth="1149.0" styleClass="transparent" stylesheets="@../Styles.css">
                <content>
                   <GridPane fx:id="gridPane" prefHeight="12.0" prefWidth="9.0">
                     <columnConstraints>
@@ -30,14 +30,14 @@
             </ScrollPane>
          </children>
       </HBox>
-      <Label layoutX="36.0" layoutY="82.0" prefHeight="27.0" prefWidth="191.0" text="On-Going Auctions">
+      <Label layoutX="36.0" layoutY="74.0" prefHeight="27.0" prefWidth="191.0" text="On-Going Auctions" textFill="WHITE">
          <font>
-            <Font name="Century" size="21.0" />
+            <Font name="Berlin Sans FB Demi Bold" size="21.0" />
          </font>
       </Label>
-      <HBox layoutX="464.0" layoutY="467.0" prefHeight="173.0" prefWidth="717.0">
+      <HBox layoutX="464.0" layoutY="467.0" prefHeight="173.0" prefWidth="717.0" styleClass="vbox-chatRoom" stylesheets="@../Styles.css">
          <children>
-            <ScrollPane prefHeight="150.0" prefWidth="717.0">
+            <ScrollPane prefHeight="150.0" prefWidth="717.0" styleClass="transparent" stylesheets="@../Styles.css">
                <content>
                   <GridPane fx:id="gridPanePlayerCards" prefHeight="0.0" prefWidth="0.0">
                     <columnConstraints>
@@ -48,31 +48,31 @@
             </ScrollPane>
          </children>
       </HBox>
-      <Label layoutX="463.0" layoutY="432.0" text="Your Cards">
+      <Label layoutX="463.0" layoutY="431.0" text="Your Cards" textFill="WHITE">
          <font>
-            <Font name="Century" size="21.0" />
+            <Font name="Berlin Sans FB Demi Bold" size="21.0" />
          </font>
       </Label>
-      <Button layoutX="140.0" layoutY="451.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="132.0" text="New Auction">
+      <Button layoutX="129.0" layoutY="452.0" mnemonicParsing="false" onAction="#newAuction" prefHeight="40.0" prefWidth="149.0" styleClass="auction-button" stylesheets="@../Styles.css" text="New Auction" textFill="WHITE">
          <font>
-            <Font name="Century" size="18.0" />
+            <Font name="Century" size="19.0" />
          </font>
       </Button>
-      <TextField layoutX="107.0" layoutY="512.0" prefHeight="37.0" prefWidth="200.0" promptText="Please enter a base price">
+      <TextField fx:id="basePriceTextField" layoutX="105.0" layoutY="504.0" prefHeight="40.0" prefWidth="204.0" promptText="Please enter a base price :" styleClass="auction-textfield" stylesheets="@../Styles.css">
          <font>
             <Font name="Century" size="15.0" />
          </font>
       </TextField>
-      <Button layoutX="173.0" layoutY="592.0" mnemonicParsing="false" text="Create">
+      <Button fx:id="createButton" layoutX="156.0" layoutY="600.0" mnemonicParsing="false" onAction="#createNewAuction" prefHeight="33.0" prefWidth="90.0" styleClass="auction-button" stylesheets="@../Styles.css" text="Create" textFill="WHITE">
          <font>
-            <Font name="Century" size="15.0" />
+            <Font name="Century" size="19.0" />
          </font>
       </Button>
-      <Label alignment="CENTER" layoutX="92.0" layoutY="554.0" prefHeight="28.0" prefWidth="230.0" text="Label">
+      <Label fx:id="errorLabel" alignment="CENTER" layoutX="92.0" layoutY="561.0" prefHeight="28.0" prefWidth="230.0" textFill="#f2ff00">
          <font>
-            <Font name="Century" size="13.0" />
+            <Font name="Berlin Sans FB Demi Bold" size="17.0" />
          </font>
       </Label>
-      <Button layoutX="1147.0" layoutY="8.0" mnemonicParsing="false" onAction="#backToShop" prefHeight="25.0" prefWidth="56.0" text="Back" />
+      <Button layoutX="1147.0" layoutY="8.0" mnemonicParsing="false" onAction="#backToShop" prefHeight="25.0" prefWidth="56.0" styleClass="auction-button" stylesheets="@../Styles.css" text="Back" textFill="WHITE" />
    </children>
 </AnchorPane>
