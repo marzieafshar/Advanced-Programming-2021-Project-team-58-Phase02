@@ -82,24 +82,14 @@ public class LobbyController implements Initializable {
             dataOutputStream.writeUTF("Lobby get tokens" + Controller.getToken());
             dataOutputStream.flush();
             String[] tokens = dataInputStream.readUTF().split("#");
-            for (int i = 0; i < tokens.length; i++)
-                System.out.println(tokens[i]);
 
-            System.out.println(Controller.getToken());
             for (int i = 0; i < tokens.length; i++) {
                 Image image;
                 if (tokens[i] != null && !tokens[i].equals("")) {
                     image = ProfileController.getImage(tokens[i]);
                     allImageViews.get(i).setImage(image);
-                    System.out.println(tokens[i]);
                 }
             }
-
-//            dataOutputStream.writeUTF("Lobby get players nickname");
-//            dataOutputStream.flush();
-//            String result = dataInputStream.readUTF();
-//            String[] playersInLobby = result.split("#");
-
         } catch (IOException e) {
             e.printStackTrace();
         }

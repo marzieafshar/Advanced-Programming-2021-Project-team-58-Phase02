@@ -16,15 +16,14 @@ public class AvatarsController {
         this.myListener = myListener;
     }
 
-    public void click(MouseEvent event){
+    public void click(MouseEvent event) {
         myListener.onClickListener(imageView.getImage());
     }
 
-    public void setImage(Image image , MyListener myListener){
+    public void setImage(Image image, MyListener myListener) {
         imageView.setImage(image);
         setMyListener(myListener);
     }
-
 
 
 }

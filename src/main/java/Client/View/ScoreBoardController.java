@@ -93,7 +93,7 @@ public class ScoreBoardController implements Initializable {
                 super.updateItem(player, empty);
                 if (player == null) {
                     setStyle("-fx-background-color: rgba(239,234,234,0.42)");
-                } else if (player.getNickName().equals(ProfileController.getPlayerInfo("nickname" , Controller.getToken()))) {
+                } else if (player.getNickName().equals(ProfileController.getPlayerInfo("nickname", Controller.getToken()))) {
                     setStyle("-fx-background-color: rgba(234,224,79,0.82); -fx-border-color: #000000");
                 } else {
                     setStyle("-fx-background-color: rgba(239,234,234,0.42)");
@@ -148,7 +148,7 @@ public class ScoreBoardController implements Initializable {
                 fxmlLoader.setLocation(getClass().getResource("/Fxmls/onlinePlayers.fxml"));
                 AnchorPane anchorPane = fxmlLoader.load();
 
-                String nickname = ProfileController.getPlayerInfo("nickname" , onlineToken);
+                String nickname = ProfileController.getPlayerInfo("nickname", onlineToken);
                 Image image = ProfileController.getImage(onlineToken);
                 OnlinePlayersController controller = fxmlLoader.getController();
                 controller.setItem(image, nickname);

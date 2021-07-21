@@ -30,12 +30,13 @@ public class OnlinePlayersInfoController implements Initializable {
     private ImageView playerImageView;
 
     private static Image imagePlayer;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setInfo();
     }
 
-    public void setInfo(){
+    public void setInfo() {
         String message = ChatRoomController.getMessage();
         String[] tmp = message.split("#");
         playerImageView.setImage(imagePlayer);

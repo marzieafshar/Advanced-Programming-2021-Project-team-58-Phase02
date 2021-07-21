@@ -41,7 +41,7 @@ public class CreateDeckController {
         }
     }
 
-    public boolean hasADeckByName(String deckName){
+    public boolean hasADeckByName(String deckName) {
         try {
             Controller.getDataOutputStream().writeUTF("Deck player has deck" + deckName + "#" + Controller.getToken());
             Controller.getDataOutputStream().flush();
@@ -53,7 +53,7 @@ public class CreateDeckController {
         return true;
     }
 
-    public void creatingDeckProcess(String deckName){
+    public void creatingDeckProcess(String deckName) {
         try {
             Controller.getDataOutputStream().writeUTF("Deck create new deck" + deckName + "#" + Controller.getToken());
             Controller.getDataOutputStream().flush();

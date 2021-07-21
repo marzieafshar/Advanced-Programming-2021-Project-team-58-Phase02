@@ -46,9 +46,9 @@ public class DeckMenuController implements Initializable {
     private String selectedCard;
     private static boolean isGameStarted;
 
-//    String str = "Button_Click.mp3";
-//    Media media = new Media(new File(str).toURI().toString());
-//    private MediaPlayer mediaPlayer;
+    String str = "Button_Click.mp3";
+    Media media = new Media(new File(str).toURI().toString());
+    private MediaPlayer mediaPlayer;
 
     private static ArrayList<String> playerAllCards = new ArrayList<>();
     private ArrayList<String> playerAllDecks = new ArrayList<>();
@@ -158,32 +158,10 @@ public class DeckMenuController implements Initializable {
     }
 
     public void back(MouseEvent event) throws IOException {
-//        Media media = new Media(new File(str).toURI().toString());
-//        mediaPlayer = new MediaPlayer(media);
-//        mediaPlayer.setAutoPlay(true);
-//        if (isGameStarted) {
-//            if (logInPlayer.getActiveDeck() == null) {
-//                Alert alert = new Alert(Alert.AlertType.ERROR);
-//                alert.setContentText("You don't have any active deck!");
-//                alert.showAndWait();
-//            } else if (!logInPlayer.getActiveDeck().isValid()) {
-//                Alert alert = new Alert(Alert.AlertType.ERROR);
-//                alert.setContentText("Your active deck is not valid!");
-//                alert.showAndWait();
-//            } else {
-//                setIsGameStarted(false);
-//                DuelMenuController.setFromGame(false);
-//                root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/DuelMenu.fxml")));
-//                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//                scene = new Scene(root);
-//                stage.setScene(scene);
-//            }
-//        } else {
-            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/MainMenu.fxml")));
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-//        }
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/MainMenu.fxml")));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
     }
 
     public void showInfo() {
@@ -211,9 +189,9 @@ public class DeckMenuController implements Initializable {
     }
 
     public void createNewDeck(MouseEvent event) {
-//        Media media = new Media(new File(str).toURI().toString());
-//        mediaPlayer = new MediaPlayer(media);
-//        mediaPlayer.setAutoPlay(true);
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         try {
             Stage thisStage = (Stage) selectedCardImage.getScene().getWindow();
             CreateDeckController.setDeckMenuStage(thisStage);
@@ -230,9 +208,9 @@ public class DeckMenuController implements Initializable {
     }
 
     public void deleteDeck(MouseEvent event) {
-//        Media media = new Media(new File(str).toURI().toString());
-//        mediaPlayer = new MediaPlayer(media);
-//        mediaPlayer.setAutoPlay(true);
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         if (selectedDeck == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("You haven't chosen a deck yet!");
@@ -351,9 +329,9 @@ public class DeckMenuController implements Initializable {
 
 
     public void activateDeck(ActionEvent event) {
-//        Media media = new Media(new File(str).toURI().toString());
-//        mediaPlayer = new MediaPlayer(media);
-//        mediaPlayer.setAutoPlay(true);
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         activateDeckByName(selectedDeck);
         loadPlayerDecks();
         addDecksToMenu();

@@ -28,11 +28,11 @@ public class PlayerCardsController {
     void handleDragDetectionPlayerCards(MouseEvent event) {
         Dragboard db = source.startDragAndDrop(TransferMode.ANY);
         ClipboardContent cb = new ClipboardContent();
-        cb.putString( "player" + index);
+        cb.putString("player" + index);
         db.setContent(cb);
     }
 
-    public void setCard(String cardName, MyListener myListener , int index) {
+    public void setCard(String cardName, MyListener myListener, int index) {
         this.cardName = cardName;
         this.index = index;
         Image image = new Image(getClass().getResourceAsStream(ShopController.getCardInfo(cardName, "imageSrc")));

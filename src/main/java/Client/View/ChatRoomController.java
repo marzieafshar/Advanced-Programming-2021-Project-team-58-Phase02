@@ -16,9 +16,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -70,8 +73,8 @@ public class ChatRoomController implements Initializable {
 
     private MessageController selectedMessage;
 
-    //    String str = "Button_Click.mp3";
-//    private MediaPlayer mediaPlayer;
+    String str = "Button_Click.mp3";
+    private MediaPlayer mediaPlayer;
     private static boolean isFromLobby;
 
     public static String getMessage() {
@@ -88,15 +91,8 @@ public class ChatRoomController implements Initializable {
         setVisibilityMessageIcons(false);
         loadOnlineUsers();
         onlinePlayersNumber.setText(String.valueOf(onlineTokens.size() + 1));
-
-//        try {
-//            Thread.sleep(100);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
         makeServerInputThread();
         loadMessages();
-        //ترتیب مهم
     }
 
     private synchronized void loadOnlineUsers() {
@@ -150,7 +146,7 @@ public class ChatRoomController implements Initializable {
             if (!result.equals("")) {
                 String[] str = result.split("#");
                 for (int i = 0; i < str.length; i++) {
-                    if(!str[i].startsWith("Server load message"))
+                    if (!str[i].startsWith("Server load message"))
                         messages.add(str[i]);
                 }
                 showMessages();
@@ -172,7 +168,6 @@ public class ChatRoomController implements Initializable {
         for (int i = 0; i < messages.size(); i++) {
             try {
                 String[] tmp = messages.get(i).split("@");
-                System.out.println(messages.get(i));
                 String senderName = tmp[0];
                 String messageText = tmp[1];
                 FXMLLoader fxmlLoader = new FXMLLoader();
@@ -224,9 +219,9 @@ public class ChatRoomController implements Initializable {
         messages.clear();
         message = "";
         isInChatRoom = false;
-//        Media media = new Media(new File(str).toURI().toString());
-//        mediaPlayer = new MediaPlayer(media);
-//        mediaPlayer.setAutoPlay(true);
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         isInChatRoom = false;
         Controller.getDataOutputStream().writeUTF("Chat tamoomesh kon");
         Controller.getDataOutputStream().flush();
@@ -238,10 +233,6 @@ public class ChatRoomController implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         isFromLobby = false;
-    }
-
-    public static ChatRoomController getChatRoomController() {
-        return chatRoomController;
     }
 
     public void makeServerInputThread() {
@@ -339,7 +330,7 @@ public class ChatRoomController implements Initializable {
         }
     }
 
-    public void editMessage(MouseEvent event){
+    public void editMessage(MouseEvent event) {
         try {
             EditMessageController.setMessageController(selectedMessage);
             root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/EditMessage.fxml")));

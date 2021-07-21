@@ -1,6 +1,5 @@
 package Client.View;
 
-import Client.Model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -81,10 +80,9 @@ public class ShopController implements Initializable {
     private Stage stage;
     private Scene scene;
     private boolean isAdmin;
-//
-//    String str = "Button_Click.mp3";
-//    private MediaPlayer mediaPlayer;
 
+    String str = "Button_Click.mp3";
+    private MediaPlayer mediaPlayer;
     private ArrayList<String> allCards = new ArrayList<>();
 
     @Override
@@ -169,7 +167,7 @@ public class ShopController implements Initializable {
         selectedCardImage.setEffect(reflection);
 
         int cardPrice = Integer.parseInt(getCardInfo(cardName, "price"));
-        int playerMoney = Integer.parseInt(ProfileController.getPlayerInfo("money" , Controller.getToken()));
+        int playerMoney = Integer.parseInt(ProfileController.getPlayerInfo("money", Controller.getToken()));
         int numberInShop = Integer.parseInt(getNumberOfShopCard(cardName));
         int playerCardNumber = Integer.parseInt(getNumberOfPlayerCard(cardName));
 
@@ -181,13 +179,13 @@ public class ShopController implements Initializable {
 
 
     public void setPlayerMoney() {
-        playerMoney.setText(ProfileController.getPlayerInfo("money" , Controller.getToken()));
+        playerMoney.setText(ProfileController.getPlayerInfo("money", Controller.getToken()));
     }
 
     public void buyCard(ActionEvent actionEvent) {
-//        Media media = new Media(new File(str).toURI().toString());
-//        mediaPlayer = new MediaPlayer(media);
-//        mediaPlayer.setAutoPlay(true);
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         try {
             Controller.getDataOutputStream().writeUTF("Shop buy"
                     + selectedCardName.getText() + "#" + Controller.getToken());
@@ -195,7 +193,7 @@ public class ShopController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        int playerMoney = Integer.parseInt(ProfileController.getPlayerInfo("money" , Controller.getToken()));
+        int playerMoney = Integer.parseInt(ProfileController.getPlayerInfo("money", Controller.getToken()));
         int cardPrice = Integer.parseInt(getCardInfo(selectedCardName.getText(), "price"));
         int numberInShop = Integer.parseInt(getNumberOfShopCard(selectedCardName.getText()));
         int playerCardNumber = Integer.parseInt(getNumberOfPlayerCard(selectedCardName.getText()));
@@ -213,9 +211,9 @@ public class ShopController implements Initializable {
     }
 
     public void sellCard(ActionEvent event) {
-//        Media media = new Media(new File(str).toURI().toString());
-//        mediaPlayer = new MediaPlayer(media);
-//        mediaPlayer.setAutoPlay(true);
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
 
         try {
             Controller.getDataOutputStream().writeUTF("Shop sell" + selectedCardName.getText()
@@ -241,9 +239,9 @@ public class ShopController implements Initializable {
     }
 
     public void showInfo(ActionEvent actionEvent) {
-//        Media media = new Media(new File(str).toURI().toString());
-//        mediaPlayer = new MediaPlayer(media);
-//        mediaPlayer.setAutoPlay(true);
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         try {
             Controller.getDataOutputStream().writeUTF("Shop show info" + selectedCardName.getText());
             Controller.getDataOutputStream().flush();
@@ -259,18 +257,18 @@ public class ShopController implements Initializable {
     }
 
     public void search(ActionEvent e) {
-//        Media media = new Media(new File(str).toURI().toString());
-//        mediaPlayer = new MediaPlayer(media);
-//        mediaPlayer.setAutoPlay(true);
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         String cardName = searchBox.getText();
         if (allCards.contains(cardName))
             setChosenCard(cardName);
     }
 
     public void backToMainMenu(ActionEvent event) throws IOException {
-//        Media media = new Media(new File(str).toURI().toString());
-//        mediaPlayer = new MediaPlayer(media);
-//        mediaPlayer.setAutoPlay(true);
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/MainMenu.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);

@@ -12,11 +12,11 @@ public class MessageController {
     private MyListener myListener;
     private int index;
 
-    public void click(){
+    public void click() {
         myListener.onClickListener(this);
     }
 
-    public void setMessage(String senderName, String messageText , int index , MyListener listener) {
+    public void setMessage(String senderName, String messageText, int index, MyListener listener) {
         this.myListener = listener;
         this.index = index;
         senderNameLabel.setText(senderName);

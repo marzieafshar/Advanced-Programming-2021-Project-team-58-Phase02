@@ -41,8 +41,8 @@ public class Controller {
 
     private static String token;
 
-//    String str = "Button_Click.mp3";
-//    private MediaPlayer mediaPlayer;
+    String str = "Button_Click.mp3";
+    private MediaPlayer mediaPlayer;
 
     private static DataOutputStream dataOutputStream;
     private static DataInputStream dataInputStream;
@@ -70,7 +70,7 @@ public class Controller {
 
     public static void setupConnection() {
         try {
-            socket = new Socket("8.tcp.ngrok.io", 17048);
+            socket = new Socket("localhost", 887);
             dataInputStream = new DataInputStream(socket.getInputStream());
             dataOutputStream = new DataOutputStream(socket.getOutputStream());
         } catch (IOException e) {
@@ -98,9 +98,9 @@ public class Controller {
     }
 
     public void switchToLoginMenu(ActionEvent event) throws IOException {
-//        Media media = new Media(new File(str).toURI().toString());
-//        mediaPlayer = new MediaPlayer(media);
-//        mediaPlayer.setAutoPlay(true);
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Login.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -108,9 +108,9 @@ public class Controller {
     }
 
     public void switchToRegisterMenu(ActionEvent event) throws IOException {
-//        Media media = new Media(new File(str).toURI().toString());
-//        mediaPlayer = new MediaPlayer(media);
-//        mediaPlayer.setAutoPlay(true);
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Register.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -118,9 +118,9 @@ public class Controller {
     }
 
     public void Login(ActionEvent event) throws IOException {
-//        Media media = new Media(new File(str).toURI().toString());
-//        mediaPlayer = new MediaPlayer(media);
-//        mediaPlayer.setAutoPlay(true);
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         String username = usernameLoginField.getText();
         String password = passwordLoginField.getText();
 
@@ -133,7 +133,6 @@ public class Controller {
         String result = dataInputStream.readUTF();
         if (result.startsWith("user logged")) {
             String token = result.substring(27);
-            System.out.println(token);
             setToken(token);
             result = result.substring(0, 27);
         }
@@ -157,9 +156,9 @@ public class Controller {
     }
 
     public void backToWelcomeMenu(ActionEvent event) throws IOException {
-//        Media media = new Media(new File(str).toURI().toString());
-//        mediaPlayer = new MediaPlayer(media);
-//        mediaPlayer.setAutoPlay(true);
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/WelcomeMenu.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -167,9 +166,9 @@ public class Controller {
     }
 
     public void Register(ActionEvent event) throws IOException {
-//        Media media = new Media(new File(str).toURI().toString());
-//        mediaPlayer = new MediaPlayer(media);
-//        mediaPlayer.setAutoPlay(true);
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         String username = usernameRegisterField.getText();
         String password = passwordRegisterField.getText();
         String nickname = nicknameRegisterField.getText();
@@ -179,7 +178,6 @@ public class Controller {
         String message = "Register" + username + "#" + nickname + "#" + password;
         dataOutputStream.writeUTF(message);
         dataOutputStream.flush();
-        System.out.println(1);
 
         String result = dataInputStream.readUTF();
         switch (result){
@@ -206,9 +204,9 @@ public class Controller {
     }
 
     public void Exit(ActionEvent event) {
-//        Media media = new Media(new File(str).toURI().toString());
-//        mediaPlayer = new MediaPlayer(media);
-//        mediaPlayer.setAutoPlay(true);
+        Media media = new Media(new File(str).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
         closeAll();
         System.exit(0);
     }
