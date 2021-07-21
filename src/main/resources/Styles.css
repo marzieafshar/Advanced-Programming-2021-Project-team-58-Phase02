@@ -353,3 +353,8 @@
     -fx-border-width: 2;
     -fx-border-radius: 30;
 }
+
+.auction-background {
+    -fx-background-image: url("/Images/Background/1.jpg");
+    -fx-background-size: stretch;
+}

@@ -3,16 +3,19 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="650.0" prefWidth="1214.0" styleClass="score-board-background" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.ScoreBoardController">
    <children>
-      <TableView fx:id="myTable" layoutX="445.0" layoutY="104.0" prefHeight="525.0" prefWidth="357.0" styleClass="score-board-table" stylesheets="@../Styles.css">
+      <TableView fx:id="myTable" layoutX="445.0" layoutY="104.0" prefHeight="525.0" prefWidth="352.0" styleClass="score-board-table" stylesheets="@../Styles.css">
          <columns>
             <TableColumn fx:id="rankColumn" minWidth="-Infinity" prefWidth="75.0" text="Rank" />
             <TableColumn fx:id="nameColumn" prefWidth="200.0" text="Player Name" />
@@ -24,7 +27,7 @@
             <Image url="@../Images/ScoreBoardItems/Something.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="220.0" layoutY="274.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="79.0" layoutY="264.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/ScoreBoardItems/Key.png" />
          </image>
@@ -65,6 +68,20 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <ScrollPane layoutX="308.0" layoutY="140.0" prefHeight="481.0" prefWidth="80.0" styleClass="transparent" stylesheets="@../Styles.css">
+         <content>
+            <GridPane fx:id="gridPane" prefHeight="12.0" prefWidth="0.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+            </GridPane>
+         </content>
+      </ScrollPane>
+      <Label layoutX="285.0" layoutY="84.0" text="Online Players" textFill="WHITE">
+         <font>
+            <Font name="Arabic Typesetting" size="31.0" />
+         </font>
+      </Label>
    </children>
 
 </AnchorPane>

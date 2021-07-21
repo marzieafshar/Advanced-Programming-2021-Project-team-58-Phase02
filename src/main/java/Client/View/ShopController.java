@@ -389,6 +389,13 @@ public class ShopController implements Initializable {
         }
         numberOfCardInShop.setText(getNumberOfShopCard(selectedCardName.getText()));
     }
+
+    public void goToAuction(MouseEvent event) throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Auction.fxml")));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+    }
 }
 
 

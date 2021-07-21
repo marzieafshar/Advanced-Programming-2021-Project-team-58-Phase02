@@ -15,7 +15,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -25,6 +28,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -32,11 +37,15 @@ public class ScoreBoardController implements Initializable {
 
     private Parent root;
     private Stage stage;
+    @FXML
+    private GridPane gridPane;
+    private ArrayList<String> onlineTokens = new ArrayList<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             loadPage();
+            loadOnlineUsers();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -113,5 +122,42 @@ public class ScoreBoardController implements Initializable {
             if (i <= data.length - 3)
                 players.add(new ScoreBoardPlayer(data[i], data[i + 1], data[i + 2]));
         return players;
+    }
+
+    private void loadOnlineUsers() {
+        try {
+            Controller.getDataOutputStream().writeUTF("Chat get all tokens" + Controller.getToken());
+            Controller.getDataOutputStream().flush();
+
+            String[] tokens = Controller.getDataInputStream().readUTF().split("#");
+            if (!tokens[0].equals("")) {
+                onlineTokens.addAll(Arrays.asList(tokens));
+            }
+            showOnlinePlayers();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void showOnlinePlayers() {
+        gridPane.getChildren().clear();
+        int row = 0;
+        for (String onlineToken : onlineTokens) {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("/Fxmls/onlinePlayers.fxml"));
+                AnchorPane anchorPane = fxmlLoader.load();
+
+                String nickname = ProfileController.getPlayerInfo("nickname" , onlineToken);
+                Image image = ProfileController.getImage(onlineToken);
+                OnlinePlayersController controller = fxmlLoader.getController();
+                controller.setItem(image, nickname);
+
+                gridPane.add(anchorPane, 0, row);
+                row++;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="650.0" prefWidth="1214.0" styleClass="auction-background" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.AuctionController">
+   <children>
+      <Label layoutX="473.0" layoutY="28.0" text="Auction">
+         <font>
+            <Font name="Showcard Gothic" size="60.0" />
+         </font>
+      </Label>
+      <HBox layoutX="33.0" layoutY="108.0" prefHeight="250.0" prefWidth="1149.0">
+         <children>
+            <ScrollPane prefHeight="250.0" prefWidth="1239.0">
+               <content>
+                  <GridPane fx:id="gridPane" prefHeight="12.0" prefWidth="9.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                  </GridPane>
+               </content>
+            </ScrollPane>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
