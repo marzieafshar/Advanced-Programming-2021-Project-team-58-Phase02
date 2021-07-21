@@ -20,7 +20,7 @@ public class DeckIconController {
 
     public void setDeckLabel(String deckNameStr, MyListener myListener) {
 
-        String result = ProfileController.getPlayerInfo("active deck name");
+        String result = ProfileController.getPlayerInfo("active deck name", Controller.getToken());
         if(!result.equals("Not set yet")) {
             if (result.equals(deckNameStr)) {
                 Image image = new Image(getClass().getResourceAsStream("/Images/Monster/activeDeck.jpg"));

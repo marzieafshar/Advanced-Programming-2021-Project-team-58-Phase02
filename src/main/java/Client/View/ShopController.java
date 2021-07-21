@@ -169,7 +169,7 @@ public class ShopController implements Initializable {
         selectedCardImage.setEffect(reflection);
 
         int cardPrice = Integer.parseInt(getCardInfo(cardName, "price"));
-        int playerMoney = Integer.parseInt(ProfileController.getPlayerInfo("money"));
+        int playerMoney = Integer.parseInt(ProfileController.getPlayerInfo("money" , Controller.getToken()));
         int numberInShop = Integer.parseInt(getNumberOfShopCard(cardName));
         int playerCardNumber = Integer.parseInt(getNumberOfPlayerCard(cardName));
 
@@ -181,7 +181,7 @@ public class ShopController implements Initializable {
 
 
     public void setPlayerMoney() {
-        playerMoney.setText(ProfileController.getPlayerInfo("money"));
+        playerMoney.setText(ProfileController.getPlayerInfo("money" , Controller.getToken()));
     }
 
     public void buyCard(ActionEvent actionEvent) {
@@ -195,7 +195,7 @@ public class ShopController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        int playerMoney = Integer.parseInt(ProfileController.getPlayerInfo("money"));
+        int playerMoney = Integer.parseInt(ProfileController.getPlayerInfo("money" , Controller.getToken()));
         int cardPrice = Integer.parseInt(getCardInfo(selectedCardName.getText(), "price"));
         int numberInShop = Integer.parseInt(getNumberOfShopCard(selectedCardName.getText()));
         int playerCardNumber = Integer.parseInt(getNumberOfPlayerCard(selectedCardName.getText()));

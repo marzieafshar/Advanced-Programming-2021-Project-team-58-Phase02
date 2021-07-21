@@ -104,7 +104,7 @@ public class ProfileController implements Initializable {
                     alert2.setContentText("Nickname Changed Successfully !");
                     alert2.showAndWait();
             }
-            nicknameChangeField.setPromptText("Your nickname: " + getPlayerInfo("nickname"));
+            nicknameChangeField.setPromptText("Your nickname: " + getPlayerInfo("nickname", Controller.getToken()));
             nicknameChangeField.setText("");
 //            nicknameChangeField.isFocused();
         } catch (IOException e) {
@@ -207,14 +207,14 @@ public class ProfileController implements Initializable {
     private void setUserInfo() {
         try {
             itemImage.setImage(getImage(Controller.getToken()));
-            username.setText(getPlayerInfo("username"));
-            userMoney.setText(getPlayerInfo("money"));
-            userScore.setText(getPlayerInfo("score"));
-            userActiveDeckName.setText(getPlayerInfo("active deck name"));
-            userNumOfDecks.setText(getPlayerInfo("decks size"));
-            userNumOfWins.setText(getPlayerInfo("win matches"));
-            userNumOfLosses.setText(getPlayerInfo("lose matches"));
-            nicknameChangeField.setPromptText("Your nickname: " + getPlayerInfo("nickname"));
+            username.setText(getPlayerInfo("username", Controller.getToken()));
+            userMoney.setText(getPlayerInfo("money", Controller.getToken()));
+            userScore.setText(getPlayerInfo("score", Controller.getToken()));
+            userActiveDeckName.setText(getPlayerInfo("active deck name", Controller.getToken()));
+            userNumOfDecks.setText(getPlayerInfo("decks size", Controller.getToken()));
+            userNumOfWins.setText(getPlayerInfo("win matches", Controller.getToken()));
+            userNumOfLosses.setText(getPlayerInfo("lose matches", Controller.getToken()));
+            nicknameChangeField.setPromptText("Your nickname: " + getPlayerInfo("nickname" , Controller.getToken()));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -241,9 +241,8 @@ public class ProfileController implements Initializable {
         return null;
     }
 
-    public static String getPlayerInfo(String str) {
+    public static String getPlayerInfo(String str , String token) {
         try {
-            String token = Controller.getToken();
             Controller.getDataOutputStream().writeUTF("Profile " + str + token);
             String result = Controller.getDataInputStream().readUTF();
             return result;

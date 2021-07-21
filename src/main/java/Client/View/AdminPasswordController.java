@@ -23,7 +23,7 @@ public class AdminPasswordController {
 
     @FXML
     void changeToAdmin(ActionEvent event) {
-        String loggedInPlayerPassword = ProfileController.getPlayerInfo("password");
+        String loggedInPlayerPassword = ProfileController.getPlayerInfo("password", Controller.getToken());
         if (passwordTextField.getText().equals("admin")) {
             Image image = new Image(getClass().getResourceAsStream("/Images/Icon/player.png"));
             shopController.adminImageView.setImage(image);

@@ -84,7 +84,7 @@ public class ScoreBoardController implements Initializable {
                 super.updateItem(player, empty);
                 if (player == null) {
                     setStyle("-fx-background-color: rgba(239,234,234,0.42)");
-                } else if (player.getNickName().equals(ProfileController.getPlayerInfo("nickname"))) {
+                } else if (player.getNickName().equals(ProfileController.getPlayerInfo("nickname" , Controller.getToken()))) {
                     setStyle("-fx-background-color: rgba(234,224,79,0.82); -fx-border-color: #000000");
                 } else {
                     setStyle("-fx-background-color: rgba(239,234,234,0.42)");

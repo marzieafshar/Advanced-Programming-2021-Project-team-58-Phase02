@@ -69,13 +69,8 @@ public class Main extends Application {
         if (alert.showAndWait().get() == ButtonType.OK) {
             Controller.getDataOutputStream().writeUTF("Logout" + Controller.getToken());
             Controller.getDataOutputStream().flush();
-
-            String result = Controller.getDataInputStream().readUTF();
-            switch (result) {
-                case "logged out successfully":
-                    Controller.closeAll();
-                    System.exit(0);
-            }
+            Controller.closeAll();
+            System.exit(0);
         }
     }
 }

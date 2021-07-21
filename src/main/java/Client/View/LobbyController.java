@@ -67,8 +67,8 @@ public class LobbyController implements Initializable {
 
     private void setPlayerInfo() {
         userAvatar.setImage(ProfileController.getImage(Controller.getToken()));
-        userNickname.setText("Your Nickname: " + ProfileController.getPlayerInfo("nickname"));
-        userScore.setText("Your Score: " + ProfileController.getPlayerInfo("score"));
+        userNickname.setText("Your Nickname: " + ProfileController.getPlayerInfo("nickname", Controller.getToken()));
+        userScore.setText("Your Score: " + ProfileController.getPlayerInfo("score", Controller.getToken()));
     }
 
     private void setOtherPlayersInfo() {
