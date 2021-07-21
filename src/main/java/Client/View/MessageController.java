@@ -9,8 +9,16 @@ public class MessageController {
     public Label senderNameLabel;
     public Text messageTextBox;
     public HBox messageHBox;
+    private MyListener myListener;
+    private int index;
 
-    public void setMessage(String senderName, String messageText) {
+    public void click(){
+        myListener.onClickListener(this);
+    }
+
+    public void setMessage(String senderName, String messageText , int index , MyListener listener) {
+        this.myListener = listener;
+        this.index = index;
         senderNameLabel.setText(senderName);
         messageTextBox.setText(messageText);
         if (messageText.length() > 30) {
@@ -18,5 +26,9 @@ public class MessageController {
         } else {
             messageTextBox.setWrappingWidth(11 * (messageText.length()));
         }
+    }
+
+    public int getIndex() {
+        return index;
     }
 }

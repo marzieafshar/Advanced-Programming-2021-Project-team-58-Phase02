@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1214.0" styleClass="chatRoom-background" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.ChatRoomController">
    <children>
@@ -20,6 +21,58 @@
          <children>
             <VBox layoutX="-40.0" prefHeight="487.0" prefWidth="458.0" styleClass="vbox-chatRoom" stylesheets="@../Styles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
+                  <HBox alignment="CENTER" prefHeight="127.0" prefWidth="446.0" styleClass="chatRoom-topHBox" stylesheets="@../Styles.css">
+                     <children>
+                        <HBox prefHeight="59.0" prefWidth="417.0">
+                           <children>
+                              <ImageView fx:id="pinnedMessagePic" fitHeight="31.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Images/Icon/pinMessage2.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="3.0" top="3.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Text fx:id="pinnedMessageText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="263.9143981933594">
+                                 <HBox.margin>
+                                    <Insets left="6.0" top="6.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Bookman Old Style" size="16.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="59.0" prefWidth="245.0">
+                           <children>
+                              <ImageView fx:id="deleteIcon" fitHeight="36.0" fitWidth="35.0" onMouseClicked="#deleteMessage" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Images/Icon/removeMessageEdit.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <ImageView fx:id="pinMessage" fitHeight="41.0" fitWidth="48.0" onMouseClicked="#pinMessage" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Images/Icon/pinMessageEdit.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <ImageView fx:id="editIcon" fitHeight="34.0" fitWidth="32.0" onMouseClicked="#editMessage" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Images/Icon/editMessageEdit.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
                   <ScrollPane fx:id="messagesScrollPane" prefHeight="500.0" prefWidth="446.0" styleClass="transparent" stylesheets="@../Styles.css">
                      <content>
                         <GridPane fx:id="gridMessages" alignment="CENTER" prefHeight="0.0" prefWidth="0.0">
@@ -52,18 +105,35 @@
             </VBox>
          </children>
       </AnchorPane>
-      <Button layoutX="35.0" layoutY="586.0" mnemonicParsing="false" onAction="#backToMainMenu" prefHeight="55.0" prefWidth="98.0" styleClass="back-button" stylesheets="@../Styles.css" text="back" textFill="WHITE">
+      <Button layoutX="12.0" layoutY="585.0" mnemonicParsing="false" onAction="#backToMainMenu" prefHeight="45.0" prefWidth="112.0" styleClass="back-button-ChatRoom" stylesheets="@../Styles.css" text="back" textFill="#fffaa3">
          <font>
             <Font name="Berlin Sans FB Demi Bold" size="24.0" />
          </font></Button>
-      <Label layoutX="24.0" layoutY="6.0" text="Chat Room" textFill="WHITE">
+      <Label layoutX="9.0" layoutY="1.0" text="ChatRoom" textFill="#ffef8a">
          <font>
-            <Font name="Matura MT Script Capitals" size="48.0" />
+            <Font name="Matura MT Script Capitals" size="51.0" />
          </font>
       </Label>
-      <VBox layoutX="862.0" layoutY="102.0" prefHeight="449.0" prefWidth="80.0">
+      <VBox layoutX="862.0" layoutY="69.0" prefHeight="538.0" prefWidth="97.0" styleClass="vbox-chatRoom" stylesheets="@../Styles.css">
          <children>
-            <ScrollPane prefHeight="500.0" prefWidth="80.0" styleClass="transparent" stylesheets="@../Styles.css">
+            <HBox alignment="CENTER" prefHeight="77.0" prefWidth="80.0" styleClass="chatRoom-topHBox" stylesheets="@../Styles.css">
+               <children>
+                  <ImageView fitHeight="39.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@../Images/Icon/onlineIcon.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="onlinePlayersNumber" text="20">
+                     <font>
+                        <Font name="Berlin Sans FB" size="22.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <ScrollPane prefHeight="488.0" prefWidth="80.0" styleClass="transparent" stylesheets="@../Styles.css">
                <content>
                   <GridPane fx:id="gridPane" prefHeight="12.0" prefWidth="0.0">
                     <columnConstraints>

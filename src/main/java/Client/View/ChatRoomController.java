@@ -1,29 +1,25 @@
 package Client.View;
 
-import Client.Main;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.io.DataOutputStream;
-import java.io.File;
 import java.io.IOException;
-import java.net.Socket;
 import java.net.URL;
 import java.util.*;
 
@@ -41,6 +37,24 @@ public class ChatRoomController implements Initializable {
     @FXML
     private GridPane gridPane;
 
+    @FXML
+    private ImageView pinnedMessagePic;
+
+    @FXML
+    private Text pinnedMessageText;
+
+    @FXML
+    private ImageView deleteIcon;
+
+    @FXML
+    private ImageView pinMessage;
+
+    @FXML
+    private ImageView editIcon;
+
+    @FXML
+    private Label onlinePlayersNumber;
+
     private ArrayList<String> messages = new ArrayList<>();
 
     private Parent root;
@@ -51,24 +65,39 @@ public class ChatRoomController implements Initializable {
     private static boolean isInChatRoom = false;
     private ArrayList<String> onlineTokens = new ArrayList<>();
 
-    private static String message;
+    private static String message = "";
     private Thread thread;
+
+    private MessageController selectedMessage;
 
     //    String str = "Button_Click.mp3";
 //    private MediaPlayer mediaPlayer;
     private static boolean isFromLobby;
 
+    public static String getMessage() {
+        return message;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         isInChatRoom = true;
         chatRoomController = this;
+        loadPinnedMessage();
+        setVisibilityMessageIcons(false);
         loadOnlineUsers();
+        onlinePlayersNumber.setText(String.valueOf(onlineTokens.size() + 1));
+
+//        try {
+//            Thread.sleep(100);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         makeServerInputThread();
         loadMessages();
         //ترتیب مهم
     }
 
-    private void loadOnlineUsers() {
+    private synchronized void loadOnlineUsers() {
         try {
             Controller.getDataOutputStream().writeUTF("Chat get all tokens" + Controller.getToken());
             Controller.getDataOutputStream().flush();
@@ -92,7 +121,7 @@ public class ChatRoomController implements Initializable {
                 fxmlLoader.setLocation(getClass().getResource("/Fxmls/onlinePlayers.fxml"));
                 AnchorPane anchorPane = fxmlLoader.load();
 
-                String nickname = ProfileController.getPlayerInfo("nickname" , onlineToken);
+                String nickname = ProfileController.getPlayerInfo("nickname", onlineToken);
                 Image image = ProfileController.getImage(onlineToken);
                 OnlinePlayersController controller = fxmlLoader.getController();
                 controller.setItem(image, nickname);
@@ -105,7 +134,7 @@ public class ChatRoomController implements Initializable {
         }
     }
 
-    public void loadMessages() {
+    public synchronized void loadMessages() {
         messages.clear();
         try {
             Controller.getDataOutputStream().writeUTF("Chat get all messages");
@@ -129,6 +158,12 @@ public class ChatRoomController implements Initializable {
     private void showMessages() {
         gridMessages.getChildren().clear();
         int row = 1;
+        MyListener myListener = new MyListener() {
+            @Override
+            public void onClickListener(Object object) {
+                setSelectedMessage((MessageController) object);
+            }
+        };
         for (int i = 0; i < messages.size(); i++) {
             try {
                 String[] tmp = messages.get(i).split("@");
@@ -144,7 +179,7 @@ public class ChatRoomController implements Initializable {
                 AnchorPane hBox = fxmlLoader.load();
 
                 MessageController messageController = fxmlLoader.getController();
-                messageController.setMessage(senderName, messageText);
+                messageController.setMessage(senderName, messageText, i, myListener);
 
                 gridMessages.add(hBox, 0, row);
                 row++;
@@ -213,6 +248,13 @@ public class ChatRoomController implements Initializable {
                                 loadMessages();
                             }
                         });
+                    } else if (message.startsWith("Server pin message")) {
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                visiblePinMessageIcons(message.substring(18));
+                            }
+                        });
                     }
                 }
             } catch (IOException e) {
@@ -225,5 +267,81 @@ public class ChatRoomController implements Initializable {
 
     public static void setIsFromLobby(boolean value) {
         isFromLobby = value;
+    }
+
+    private void setVisibilityMessageIcons(boolean value) {
+        deleteIcon.setVisible(value);
+        editIcon.setVisible(value);
+        pinMessage.setVisible(value);
+    }
+
+    private void invisiblePinMessageIcons() {
+        pinnedMessagePic.setVisible(false);
+        pinnedMessageText.setText("");
+    }
+
+    private void visiblePinMessageIcons(String message) {
+        pinnedMessagePic.setVisible(true);
+        pinnedMessageText.setText(message);
+    }
+
+    private void setSelectedMessage(MessageController object) {
+        if (object.equals(selectedMessage)) {
+            selectedMessage = null;
+            setVisibilityMessageIcons(false);
+        } else {
+            this.selectedMessage = object;
+            setVisibilityMessageIcons(true);
+        }
+    }
+
+    public void pinMessage(MouseEvent event) {
+        try {
+            Controller.getDataOutputStream().writeUTF("Chat pin message"
+                    + selectedMessage.messageTextBox.getText());
+            Controller.getDataOutputStream().flush();
+            setSelectedMessage(selectedMessage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteMessage(MouseEvent event) {
+        try {
+            Controller.getDataOutputStream().writeUTF("Chat delete message index"
+                    + selectedMessage.getIndex());
+            Controller.getDataOutputStream().flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadPinnedMessage() {
+        try {
+            Controller.getDataOutputStream().writeUTF("Chat get pinned message");
+            Controller.getDataOutputStream().flush();
+            String result = Controller.getDataInputStream().readUTF();
+            if (result.equals("@")) {
+                invisiblePinMessageIcons();
+            } else {
+                visiblePinMessageIcons(result);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void editMessage(MouseEvent event){
+        try {
+            EditMessageController.setMessageController(selectedMessage);
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/EditMessage.fxml")));
+            Stage stageEdit = new Stage();
+            scene = new Scene(root);
+            stageEdit.setScene(scene);
+            stageEdit.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }

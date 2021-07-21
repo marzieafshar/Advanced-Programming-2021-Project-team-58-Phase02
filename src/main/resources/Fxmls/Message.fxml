@@ -13,16 +13,16 @@
          <children>
             <HBox alignment="BOTTOM_LEFT" prefHeight="29.0" prefWidth="31.0">
                <children>
-                  <Label fx:id="senderNameLabel" prefHeight="17.0" prefWidth="28.0" text="Label" textFill="WHITE">
+                  <Label fx:id="senderNameLabel" prefHeight="32.0" prefWidth="33.0" text="Label" textFill="WHITE">
                      <font>
-                        <Font name="Matura MT Script Capitals" size="14.0" />
+                        <Font name="Matura MT Script Capitals" size="12.0" />
                      </font></Label>
                </children>
                <HBox.margin>
                   <Insets left="5.0" right="5.0" />
                </HBox.margin>
             </HBox>
-            <HBox fx:id="messageHBox" prefHeight="29.0" prefWidth="51.0" styleClass="ChatRoom-MessageHBox2" stylesheets="@../Styles.css">
+            <HBox fx:id="messageHBox" onMouseClicked="#click" prefHeight="29.0" prefWidth="51.0" styleClass="ChatRoom-MessageHBox2" stylesheets="@../Styles.css">
                <children>
                   <Text fx:id="messageTextBox" strokeType="OUTSIDE" strokeWidth="0.0" text="a" wrappingWidth="350.0">
                      <font>
