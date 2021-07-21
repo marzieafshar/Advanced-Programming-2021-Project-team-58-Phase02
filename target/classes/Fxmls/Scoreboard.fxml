@@ -12,7 +12,7 @@
 
 <AnchorPane prefHeight="650.0" prefWidth="1214.0" styleClass="score-board-background" stylesheets="@../Styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.View.ScoreBoardController">
    <children>
-      <TableView fx:id="myTable" layoutX="445.0" layoutY="104.0" prefHeight="525.0" prefWidth="357.0" styleClass="score-board-table" stylesheets="@../Styles.css">
+      <TableView fx:id="myTable" layoutX="445.0" layoutY="104.0" prefHeight="525.0" prefWidth="352.0" styleClass="score-board-table" stylesheets="@../Styles.css">
          <columns>
             <TableColumn fx:id="rankColumn" minWidth="-Infinity" prefWidth="75.0" text="Rank" />
             <TableColumn fx:id="nameColumn" prefWidth="200.0" text="Player Name" />

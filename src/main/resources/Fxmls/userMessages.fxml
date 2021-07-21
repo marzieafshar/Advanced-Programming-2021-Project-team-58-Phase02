@@ -11,7 +11,7 @@
    <children>
       <HBox alignment="TOP_RIGHT" prefHeight="29.0" prefWidth="458.0">
          <children>
-            <HBox fx:id="messageHBox" alignment="TOP_RIGHT" prefHeight="29.0" prefWidth="46.0" styleClass="ChatRoom-MessageHBox" stylesheets="@../Styles.css">
+            <HBox fx:id="messageHBox" alignment="TOP_RIGHT" onMouseClicked="#click" prefHeight="29.0" prefWidth="46.0" styleClass="ChatRoom-MessageHBox" stylesheets="@../Styles.css">
                <children>
                   <Text fx:id="messageTextBox" blendMode="SRC_ATOP" fill="#242424" strokeType="OUTSIDE" strokeWidth="0.0" text="a" textAlignment="RIGHT" wrappingWidth="12.136703491210938">
                      <font>

@@ -102,7 +102,7 @@ public class MainMenuController {
         try {
             DataOutputStream dataOutputStream = Controller.getDataOutputStream();
             String token = Controller.getToken();
-            dataOutputStream.writeUTF("Lobby enter"+token);
+            dataOutputStream.writeUTF("Lobby enter" + token);
             dataOutputStream.flush();
             root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Lobby.fxml")));
             stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -153,14 +153,10 @@ public class MainMenuController {
         Controller.getDataOutputStream().writeUTF("Logout" + Controller.getToken());
         Controller.getDataOutputStream().flush();
 
-        String result = Controller.getDataInputStream().readUTF();
-        switch (result){
-            case "logged out successfully":
-                root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Login.fxml")));
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-        }
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Fxmls/Login.fxml")));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
     }
 
 }
